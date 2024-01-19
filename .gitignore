@@ -1,0 +1,14 @@
+/back-office-bogotadc
+/cloudservices
+/cloud-services
+/custom-endpoints
+/evento-promo
+/landing-eventos
+/inhouse
+/fonts
+*.log
+css
+*.json
+*img
+*images
+*fonts

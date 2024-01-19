@@ -1,0 +1,119 @@
+.tc-qrs {
+  main {
+    min-height: 100vh;
+    padding-top: 180px;
+    .container {
+      max-width: 900px;
+      h1 {
+        margin-bottom: 15px;
+        color: #333;
+      }
+      .qrs {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px;
+        .qr {
+          display: flex;
+          .left {
+            display: flex;
+            flex-direction: column;
+            .content {
+              border-radius: 0 0 25px 25px;
+              overflow: hidden;
+              padding: 30px;
+              flex: 1;
+              display: flex;
+              background-color: #03152b;
+
+              img {
+                width: 180px;
+                height: 143px;
+                border-radius: 15px;
+                padding: 0 10px;
+                object-fit: cover;
+              }
+              .txt {
+                flex: 1;
+                padding: 0 10px;
+                border-left: 2px solid #fff;
+              }
+            }
+          }
+          .right {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            &::before {
+              content: "";
+              height: 100%;
+              width: 1px;
+              position: absolute;
+              top: 0;
+              left: 0;
+              border-left: 4px dotted #fff;
+            }
+            .content {
+              border-radius: 0 0 25px 25px;
+              background-color: #03152b;
+              overflow: hidden;
+              padding: 30px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+          .left-header {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-radius: 25px 25px 0 0;
+            overflow: hidden;
+            gap: 20px;
+            min-height: 70px;
+            img {
+              width: 30px;
+            }
+          }
+          .right-header {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            align-items: center;
+            border-radius: 25px 25px 0 0;
+            overflow: hidden;
+            flex: 1;
+            min-height: 70px;
+          }
+          &:nth-of-type(1) {
+            .left-header,
+            .right-header {
+              background-color: #ff7c47;
+            }
+            .right {
+              color: #ff7c47;
+            }
+          }
+          &:nth-of-type(2) {
+            .left-header,
+            .right-header {
+              background-color: #6dd194;
+            }
+            .right {
+              color: #6dd194;
+            }
+          }
+          &:nth-of-type(3) {
+            .left-header,
+            .right-header {
+              background-color: #509eff;
+            }
+            .right {
+              color: #509eff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

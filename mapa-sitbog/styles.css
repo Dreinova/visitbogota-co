@@ -1,0 +1,268 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #344998;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.container h1 {
+  color: #FFF;
+  border-bottom: 2px solid #fd8f01;
+  display: inline-block;
+  font-size: 40px;
+}
+.container svg #usaquen,
+.container svg #suba,
+.container svg #engativa,
+.container svg #barriosunidos,
+.container svg #chapinero,
+.container svg #teusaquillo,
+.container svg #fontibon,
+.container svg #santafe,
+.container svg #puentearanda,
+.container svg #martires,
+.container svg #candelaria,
+.container svg #kennedy,
+.container svg #bosa,
+.container svg #antonionarino,
+.container svg #tunjuelito,
+.container svg #ciudadbolivar,
+.container svg #sancristobal,
+.container svg #rafaeluribe,
+.container svg #usme,
+.container svg #sumapaz {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.container svg #usaquen g,
+.container svg #suba g,
+.container svg #engativa g,
+.container svg #barriosunidos g,
+.container svg #chapinero g,
+.container svg #teusaquillo g,
+.container svg #fontibon g,
+.container svg #santafe g,
+.container svg #puentearanda g,
+.container svg #martires g,
+.container svg #candelaria g,
+.container svg #kennedy g,
+.container svg #bosa g,
+.container svg #antonionarino g,
+.container svg #tunjuelito g,
+.container svg #ciudadbolivar g,
+.container svg #sancristobal g,
+.container svg #rafaeluribe g,
+.container svg #usme g,
+.container svg #sumapaz g {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.container svg #usaquen .st0,
+.container svg #suba .st0,
+.container svg #engativa .st0,
+.container svg #barriosunidos .st0,
+.container svg #chapinero .st0,
+.container svg #teusaquillo .st0,
+.container svg #fontibon .st0,
+.container svg #santafe .st0,
+.container svg #puentearanda .st0,
+.container svg #martires .st0,
+.container svg #candelaria .st0,
+.container svg #kennedy .st0,
+.container svg #bosa .st0,
+.container svg #antonionarino .st0,
+.container svg #tunjuelito .st0,
+.container svg #ciudadbolivar .st0,
+.container svg #sancristobal .st0,
+.container svg #rafaeluribe .st0,
+.container svg #usme .st0,
+.container svg #sumapaz .st0 {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  fill: #00a07e;
+}
+.container svg #usaquen .st1,
+.container svg #suba .st1,
+.container svg #engativa .st1,
+.container svg #barriosunidos .st1,
+.container svg #chapinero .st1,
+.container svg #teusaquillo .st1,
+.container svg #fontibon .st1,
+.container svg #santafe .st1,
+.container svg #puentearanda .st1,
+.container svg #martires .st1,
+.container svg #candelaria .st1,
+.container svg #kennedy .st1,
+.container svg #bosa .st1,
+.container svg #antonionarino .st1,
+.container svg #tunjuelito .st1,
+.container svg #ciudadbolivar .st1,
+.container svg #sancristobal .st1,
+.container svg #rafaeluribe .st1,
+.container svg #usme .st1,
+.container svg #sumapaz .st1 {
+  fill: #212952;
+}
+.container svg #usaquen .st2,
+.container svg #suba .st2,
+.container svg #engativa .st2,
+.container svg #barriosunidos .st2,
+.container svg #chapinero .st2,
+.container svg #teusaquillo .st2,
+.container svg #fontibon .st2,
+.container svg #santafe .st2,
+.container svg #puentearanda .st2,
+.container svg #martires .st2,
+.container svg #candelaria .st2,
+.container svg #kennedy .st2,
+.container svg #bosa .st2,
+.container svg #antonionarino .st2,
+.container svg #tunjuelito .st2,
+.container svg #ciudadbolivar .st2,
+.container svg #sancristobal .st2,
+.container svg #rafaeluribe .st2,
+.container svg #usme .st2,
+.container svg #sumapaz .st2 {
+  fill: #fd8f01;
+}
+.container svg #usaquen .st3,
+.container svg #suba .st3,
+.container svg #engativa .st3,
+.container svg #barriosunidos .st3,
+.container svg #chapinero .st3,
+.container svg #teusaquillo .st3,
+.container svg #fontibon .st3,
+.container svg #santafe .st3,
+.container svg #puentearanda .st3,
+.container svg #martires .st3,
+.container svg #candelaria .st3,
+.container svg #kennedy .st3,
+.container svg #bosa .st3,
+.container svg #antonionarino .st3,
+.container svg #tunjuelito .st3,
+.container svg #ciudadbolivar .st3,
+.container svg #sancristobal .st3,
+.container svg #rafaeluribe .st3,
+.container svg #usme .st3,
+.container svg #sumapaz .st3 {
+  enable-background: new;
+}
+.container svg #usaquen .st2,
+.container svg #suba .st2,
+.container svg #engativa .st2,
+.container svg #barriosunidos .st2,
+.container svg #chapinero .st2,
+.container svg #teusaquillo .st2,
+.container svg #fontibon .st2,
+.container svg #santafe .st2,
+.container svg #puentearanda .st2,
+.container svg #martires .st2,
+.container svg #candelaria .st2,
+.container svg #kennedy .st2,
+.container svg #bosa .st2,
+.container svg #antonionarino .st2,
+.container svg #tunjuelito .st2,
+.container svg #ciudadbolivar .st2,
+.container svg #sancristobal .st2,
+.container svg #rafaeluribe .st2,
+.container svg #usme .st2,
+.container svg #sumapaz .st2 {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+.container svg #usaquen:hover .st0,
+.container svg #suba:hover .st0,
+.container svg #engativa:hover .st0,
+.container svg #barriosunidos:hover .st0,
+.container svg #chapinero:hover .st0,
+.container svg #teusaquillo:hover .st0,
+.container svg #fontibon:hover .st0,
+.container svg #santafe:hover .st0,
+.container svg #puentearanda:hover .st0,
+.container svg #martires:hover .st0,
+.container svg #candelaria:hover .st0,
+.container svg #kennedy:hover .st0,
+.container svg #bosa:hover .st0,
+.container svg #antonionarino:hover .st0,
+.container svg #tunjuelito:hover .st0,
+.container svg #ciudadbolivar:hover .st0,
+.container svg #sancristobal:hover .st0,
+.container svg #rafaeluribe:hover .st0,
+.container svg #usme:hover .st0,
+.container svg #sumapaz:hover .st0 {
+  fill: #00876a;
+}
+.container svg #usaquen:hover .st1,
+.container svg #suba:hover .st1,
+.container svg #engativa:hover .st1,
+.container svg #barriosunidos:hover .st1,
+.container svg #chapinero:hover .st1,
+.container svg #teusaquillo:hover .st1,
+.container svg #fontibon:hover .st1,
+.container svg #santafe:hover .st1,
+.container svg #puentearanda:hover .st1,
+.container svg #martires:hover .st1,
+.container svg #candelaria:hover .st1,
+.container svg #kennedy:hover .st1,
+.container svg #bosa:hover .st1,
+.container svg #antonionarino:hover .st1,
+.container svg #tunjuelito:hover .st1,
+.container svg #ciudadbolivar:hover .st1,
+.container svg #sancristobal:hover .st1,
+.container svg #rafaeluribe:hover .st1,
+.container svg #usme:hover .st1,
+.container svg #sumapaz:hover .st1 {
+  fill: #FFF;
+}
+.container svg #usaquen:hover .st2,
+.container svg #suba:hover .st2,
+.container svg #engativa:hover .st2,
+.container svg #barriosunidos:hover .st2,
+.container svg #chapinero:hover .st2,
+.container svg #teusaquillo:hover .st2,
+.container svg #fontibon:hover .st2,
+.container svg #santafe:hover .st2,
+.container svg #puentearanda:hover .st2,
+.container svg #martires:hover .st2,
+.container svg #candelaria:hover .st2,
+.container svg #kennedy:hover .st2,
+.container svg #bosa:hover .st2,
+.container svg #antonionarino:hover .st2,
+.container svg #tunjuelito:hover .st2,
+.container svg #ciudadbolivar:hover .st2,
+.container svg #sancristobal:hover .st2,
+.container svg #rafaeluribe:hover .st2,
+.container svg #usme:hover .st2,
+.container svg #sumapaz:hover .st2 {
+  transform: translateY(-10px);
+}
+.container svg #usaquen:hover g,
+.container svg #suba:hover g,
+.container svg #engativa:hover g,
+.container svg #barriosunidos:hover g,
+.container svg #chapinero:hover g,
+.container svg #teusaquillo:hover g,
+.container svg #fontibon:hover g,
+.container svg #santafe:hover g,
+.container svg #puentearanda:hover g,
+.container svg #martires:hover g,
+.container svg #candelaria:hover g,
+.container svg #kennedy:hover g,
+.container svg #bosa:hover g,
+.container svg #antonionarino:hover g,
+.container svg #tunjuelito:hover g,
+.container svg #ciudadbolivar:hover g,
+.container svg #sancristobal:hover g,
+.container svg #rafaeluribe:hover g,
+.container svg #usme:hover g,
+.container svg #sumapaz:hover g {
+  opacity: 0.5;
+}/*# sourceMappingURL=styles.css.map */

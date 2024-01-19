@@ -1,0 +1,106 @@
+.intern-hotelnew {
+  background: #fff;
+  main {
+    background: #fff;
+    .intro-txt {
+      font-size: 1.9rem;
+      font-family: "MuseoSans-500";
+      color: #636262;
+      max-width: 900px;
+      padding: 0 20px;
+      p {
+        text-align: justify;
+        text-align-last: center;
+        margin-bottom: 10px;
+      }
+    }
+    .info-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      margin: 35px auto;
+      width: 100%;
+      max-width: 280px;
+
+      .address,
+      .phone,
+      .email {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-family: "MuseoSans-900";
+        color: #606060;
+
+        img {
+          width: 27px;
+          margin-right: 8px;
+        }
+      }
+    }
+    .recomendacion {
+      background-color: #ff7c47;
+      display: flex;
+      align-items: center;
+      margin: 50px 0;
+      justify-content: center;
+      padding: 20px;
+      small {
+        max-width: 900px;
+        font-size: 1.1rem;
+        font-family: "MuseoSans-500";
+        color: #fff;
+        text-align: center;
+      }
+    }
+    .gallery {
+      &-container {
+        padding: 55px 20px;
+        background-color: #333333;
+      }
+      &-slider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .splide {
+          max-width: 920px;
+          margin: 0 auto;
+          .splide__arrow--prev {
+            left: -90px;
+          }
+          .splide__arrow--next {
+            right: -90px;
+          }
+          .splide__slide {
+            img {
+              border-radius: 15px;
+              height: 480px;
+              max-width: 920px;
+              object-fit: cover;
+              overflow: hidden;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .banner-internVenue {
+    min-height: 60vh;
+    h1 {
+      font-family: "MuseoSans-700";
+      font-size: 45px;
+      text-align: center;
+      color: #fff;
+      text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+      max-width: 1200px;
+      margin: 0 auto 8px;
+    }
+  }
+}
+
+.splide__arrow {
+  opacity: 1;
+  background: transparent;
+}
