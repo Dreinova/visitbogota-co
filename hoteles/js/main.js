@@ -182,32 +182,17 @@ function useFilters(cattype) {
                     <h1><a class="fw700 uppercase" href="${venueUrl}">` +
             data[i].title +
             `</h1></a>  
-                    <h2>
-                    ${(function fun() {
-                      if (data[i].field_calificacion) {
-                        return "Calificación de otros turistas";
-                      }
-                    })()}
-                    
-                    ${(function fun() {
-                      let iteration = data[i].field_calificacion
-                        ? data[i].field_calificacion
-                        : 0;
-                      let element = `<img src="img/stars.svg" alt="stars"/>`;
-                      let string = "";
-                      for (let index = 0; index < iteration; index++) {
-                        string += element;
-                      }
-                      return string;
-                    })()}
+                    <h2 class="uppercase">
+                    ${data[i].field_zonegroup_1}
+                    ${data[i].field_foodzone_1 ? `, ${data[i].field_foodzone_1}`:``}
                     </h2>
                       <div class="address">
-                        <img src="img/addressnew.svg" alt="address" /><span> ${
+                        <img src="img/ubicacion_icon.svg" alt="address" /><span> ${
                           data[i].field_hadress ? data[i].field_hadress : ""
                         } </span>
                       </div>
                       <div class="phone">
-                        <img src="img/telnew.svg" alt="address" /><span>Tel: ${
+                        <img src="img/tel_icon.svg" alt="address" /><span>Tel: ${
                           data[i].field_htel ? data[i].field_htel : ""
                         } </span>
                       </div>

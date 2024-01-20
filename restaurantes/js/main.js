@@ -153,7 +153,6 @@ function useFilters(cattype) {
     "get/" + cattype + ".php",
     { filters: completefilters },
     function (data) {
-      console.log(data);
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
           let venueUrl = `/${actualLang}/restaurantes/ver/${get_alias(
@@ -454,12 +453,12 @@ function relHotels(type, zone, aforo) {
                         } </span>
                       </div>
                       <div class="address">
-                        <img src="img/address.svg" alt="address" /><span> ${
+                        <img src="img/ubicacion_icon.svg" alt="address" /><span> ${
                           venue.field_hadress ? venue.field_hadress : ""
                         } </span>
                       </div>
                       <div class="phone">
-                        <img src="img/tel.svg" alt="address" /><span>Tel: ${
+                        <img src="img/tel_icon.svg" alt="telefono" /><span>Tel: ${
                           venue.field_htel ? venue.field_htel : ""
                         } </span>
                       </div>

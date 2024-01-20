@@ -90,7 +90,7 @@ $venue = $venue[0];
     </div>
     <div class="relHotels">
       <h2>
-        <img src="/../vacacional/images/hospedajes.svg" alt="hospedajes">
+        <img src="../img/Hoteles_Flag.svg" alt="hospedajes">
         Más Hoteles En Bogotá
       </h2>
       <ul class="grid-hotels"></ul>
