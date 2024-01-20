@@ -378,10 +378,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (document.querySelector("#bogota-cultural")) {
     await getBogotaData("bogota-cultural", 7);
   }
-
-  await getFiltersExperienciasTuristicas(
-    "porcategoria",
-    "categorias_comerciales_pb"
-  );
-  await getFiltersExperienciasTuristicas("porzona", "test_zona");
+  if (document.querySelector("#porcategoria")) {
+    await getFiltersExperienciasTuristicas(
+      "porcategoria",
+      "categorias_comerciales_pb"
+    );
+    await getFiltersExperienciasTuristicas("porzona", "test_zona");
+  }
 });
