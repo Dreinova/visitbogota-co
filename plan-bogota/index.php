@@ -59,7 +59,7 @@
               <a href="/<?=$lang?><?=$project_base?>plan/<?=$pb->get_alias($plan->title)?>-<?=$plan->nid?>" class="recommendation-grid__item">
               <div class="image">
                 <img
-                  src="<?= $plan->field_pb_oferta_img_listado?>"
+                  src="https://bogotadc.travel<?= $plan->field_pb_oferta_img_listado?>"
                   alt="<?= $plan->title?>"
                 />
               </div>

@@ -22,39 +22,30 @@
 		</div>
 	</div>
 	<?php if(count($blogsRel) > 0){ ?>
-		<div class="container_interest">
-			<h2 class="title">También te puede interesar</h2>
+		<div class="container_interest container">
+			<h2 >También te puede interesar</h2>
 			<ul class="blog_rel">
 				<?php 
 				for ($countBlogs=0; $countBlogs < count($blogsRel); $countBlogs++) { 
 					$singleBlog = $blogsRel[$countBlogs];
 					if($singleBlog->nid != $_GET['blogID']){
 						$singleProdNameRel = $b->products(0,$singleBlog->field_prod_rel)->title != "" ? $b->products(0,$singleBlog->field_prod_rel)->title : 'all';
-						$url = "blog/".$b->get_alias($singleProdNameRel)."/".$b->get_alias($singleBlog->title)."-".$singleBlog->field_prod_rel."-".$singleBlog->nid;
+						$url = "/".$lang."/blog/".$b->get_alias($singleProdNameRel)."/".$b->get_alias($singleBlog->title)."-".$singleBlog->field_prod_rel."-".$singleBlog->nid;
 						$image = $singleBlog->field_image != "" ? $urlGlobal.$singleBlog->field_image : "/img/noimg.png";
 						echo "
 							<li>
-							<a
-							href='".$url."'
-							data-aos='flip-left'
-							class='big blog_item'
-							data-productid='".$b->products(0, $singleBlog->field_prod_rel)->nid."'
-							>
-							<div class='img'>
-								<img
-								loading='lazy'
-								data-src='".$image."'
-								alt='".$singleBlog->title."'
-								class='zone_img lazyload'
-								src='https://picsum.photos/20/20'
-								/>
-							</div>
-							<div class='desc'>
-								<h2 class='uppercase'>".$b->products(0, $singleBlog->field_prod_rel)->title."</h2>
-								<h2 class='uppercase'>".$singleBlog->title."</h2>
-								<h2>".$singleBlog->field_date."</h2>
-							</div>
-							</a>
+							<a href='".$url."' data-aos='flip-left blog_item' data-productid='".$b->products(0, $singleBlog->field_prod_rel)->nid."'>
+								  <div class='img'>
+									<img loading='lazy' data-src='".$image."'
+									alt='".$singleBlog->title."'
+									class='zone_img lazyload' src='https://placehold.co/400x400.jpg?text=visitbogota' />
+								  </div>
+								  <div class='desc'>
+								  <small class='tag'>
+								  <img src='images/mdi_tag.svg' alt='tag'/>".$b->products(0, $singleBlog->field_prod_rel)->title."</small>
+									<h2 class='uppercase'>".$singleBlog->title."</h2>
+								  </div>
+								</a>
 							</li>
 						";
 					}

@@ -28,7 +28,9 @@ const validateCheckboxes = () => {
 
 const getProducts = async () => {
   if (document.querySelector(".dtv-home__categories-list")) {
-    const response = await fetch(`g/getProducts/?lang=${actualLang}`);
+    const response = await fetch(
+      `/planifica-tu-viaje/g/getProducts/?lang=${actualLang}`
+    );
     const data = await response.json();
 
     const checkboxesContainer = document.querySelector(
@@ -37,7 +39,7 @@ const getProducts = async () => {
 
     data.forEach(async (item, i) => {
       const subproducts = await fetch(
-        `g/getsubProducts/?lang=${actualLang}&id=${item.nid}`
+        `/planifica-tu-viaje/g/getsubProducts/?lang=${actualLang}&id=${item.nid}`
       )
         .then((res) => res.json())
         .then((subs) => {
@@ -49,7 +51,9 @@ const getProducts = async () => {
         item.nid
       }" class="ms500"><input type="checkbox" name="category" id="${
         item.nid
-      }" value="${item.nid}" /><div class="content"><img src="${
+      }" value="${
+        item.nid
+      }" /><div class="content"><img src="https://bogotadc.travel${
         item.field_icon
       }" alt="${get_alias(item.title)}" />${
         item.title
@@ -67,7 +71,9 @@ const getProducts = async () => {
   }
 };
 const getPara = async () => {
-  const response = await fetch(`g/getPara/?lang=${actualLang}`);
+  const response = await fetch(
+    `/planifica-tu-viaje/g/getPara/?lang=${actualLang}`
+  );
   const data = await response.json();
   if (document.querySelector(".dtv-home .filter-data span select#para")) {
     data.forEach((item) => {

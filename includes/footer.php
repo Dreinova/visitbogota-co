@@ -44,7 +44,7 @@ if (!$planes) {
         <li><a href="/<?=$lang?>/eventos/agenda-empresarial-148">Agenda empresarial</a></li>
         <li><a href="/<?=$lang?>/restaurantes">Restaurantes</a></li>
         <li><a href="/<?=$lang?>/hoteles">Hospedaje</a></li>
-        <li><a href="/<?=$lang?>/blog/">Blog</a></li>
+        <li><a href="/<?=$lang?>/blog">Blog</a></li>
         <li><a href="/<?=$lang?>/banco-imagenes/">Exploraciones visuales</a></li>
       </ul>
     </nav>

@@ -92,19 +92,19 @@ $sliders = $vacacional->getSlidersHome();
           <h5><img src="images/infoUtil.svg" alt="infoUtil">Información Útil</h5>
           <ul>
             <li>
-              <a href="">- Información general</a>
+              <a href="/<?=$lang?>/preguntas-frecuentes">- Información general</a>
             </li>
             <li>
-              <a href="">- ¿Cómo moverse en Bogotá?</a>
+              <a href="/<?=$lang?>/preguntas-frecuentes">- ¿Cómo moverse en Bogotá?</a>
             </li>
             <li>
-              <a href="">- Descargables - Guías, Tips, Catálogos...</a>
+              <a href="/<?=$lang?>/preguntas-frecuentes">- Descargables - Guías, Tips, Catálogos...</a>
             </li>
           </ul>
         </div>
         <div class="catalogos">
-          <a href=""><img src="images/restaurantes.svg" alt="restaurantes">Restaurantes</a>
-          <a href=""><img src="images/hospedajes.svg" alt="hospedajes">Hospedajes</a>
+          <a href="/es/restaurantes"><img src="images/restaurantes.svg" alt="restaurantes">Restaurantes</a>
+          <a href="/es/hoteles"><img src="images/hospedajes.svg" alt="hospedajes">Hospedajes</a>
         </div>
       </div>
 
@@ -113,16 +113,22 @@ $sliders = $vacacional->getSlidersHome();
       <h4><img src="images/mice.svg" alt="descubre">Turismo MICE en Bogotá</h4>
       <div class="mice-articles">
         <article>
-          <img src="images/porqueBog.png" alt="¿Porqué Bogotá?">
-          <span>¿Porqué Bogotá?</span>
+          <a href="/<?=$lang?>/mice/por-que-bogota">
+            <img src="images/porqueBog.png" alt="¿Porqué Bogotá?">
+            <span>¿Porqué Bogotá?</span>
+          </a>
         </article>
         <article>
-          <img src="images/lugar.png" alt="Encuentra un lugar para tu evento">
-          <span>Encuentra un lugar para tu evento</span>
+          <a href="/<?=$lang?>/mice/locaciones">
+            <img src="images/lugar.png" alt="Encuentra un lugar para tu evento">
+            <span>Encuentra un lugar para tu evento</span>
+          </a>
         </article>
         <article>
-          <img src="images/proveedores.png" alt="Encuentra proveedores para tu evento">
-          <span>Encuentra proveedores para tu evento</span>
+          <a href="/<?=$lang?>/mice/proveedores">
+            <img src="images/proveedores.png" alt="Encuentra proveedores para tu evento">
+            <span>Encuentra proveedores para tu evento</span>
+          </a>
         </article>
       </div>
     </section>
@@ -131,13 +137,6 @@ $sliders = $vacacional->getSlidersHome();
     <h2><img src="images/blog.svg" alt="descubre">Blog y Multimedia</h2>
     <h3>Publicaciones recientes</h3>
     <div class="container grid-blogs"></div>
-    <h3>Exploraciones visuales</h3>
-    <section class="splide" id="bi-images" aria-label="Basic Structure Example">
-      <div class="splide__track">
-        <ul class="splide__list">
-        </ul>
-      </div>
-    </section>
   </section>
 </main>
 

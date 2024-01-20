@@ -1893,13 +1893,6 @@ if (document.querySelector("body.portal")) {
           ".portal_list .right .grid-atractivos-item"
         );
         const arrayAtractivos = [...nodeList];
-
-        getOfertasRel(
-          arrayAtractivos.map((el) => el.dataset.id),
-          null,
-          null,
-          null
-        );
       });
   }
   function addFilter(id, type) {
@@ -2241,7 +2234,7 @@ if (document.querySelector("body.portal")) {
               specificFiltersUl.classList.toggle("loading");
               // Realizar la consulta de el producto seleccionado en el droplist
               var filterProduct = fetch(
-                actualLang + "/g/productFilter/?productID=" + selected
+                `/${actualLang}/g/productFilter/?productID=${selected}`
               )
                 .then((response) => response.json())
                 .then((data) => {
@@ -3157,9 +3150,6 @@ if (document.querySelector(".intern_event main .desc a")) {
 }
 let ofertasRelgrid = document.querySelector(".ofertasRel-grid");
 if (ofertasRelgrid) {
-  if (document.querySelector(".hotelesnew")) {
-    getOfertasRel(null, null, null, 132);
-  }
   // Obtener el elemento <main>
   const mainElement = document.querySelector("main");
   // Validar si tiene el atributo data-zoneid definido
@@ -3175,7 +3165,6 @@ if (ofertasRelgrid) {
         "El elemento <main> tiene el atributo data-zoneid, pero no tiene valor."
       );
     } else {
-      getOfertasRel(null, zoneIdValue, null, null);
       console.log(
         "El elemento <main> tiene el atributo data-zoneid definido con valor:",
         zoneIdValue

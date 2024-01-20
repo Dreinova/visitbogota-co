@@ -5,14 +5,12 @@
       padding-top: 0;
     }
     h1 {
-      color: #333;
-      font-family: "MuseoSans-900";
-      font-size: 50px;
-      margin: 20px 0;
-      max-width: 560px;
-      @media only screen and (max-width: 768px) {
-        font-size: 22px;
-      }
+      color: var(--gris, #626262);
+      font-size: 52px;
+      margin-bottom: 15px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
     }
     a {
       display: inline-block;
@@ -76,15 +74,16 @@
     }
     .txt {
       border-right: 1px solid #d5d5d5;
-      color: #606060;
-      font-family: "MuseoSans-700";
-      font-size: 1.8rem;
+      color: var(--gris-oscuro, #373737);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
       height: 380px;
-      line-height: 2.8rem;
+      line-height: normal;
+      margin-right: 100px;
       overflow: hidden;
       padding-right: 80px;
       position: relative;
-      margin-right: 100px;
       @media only screen and (max-width: 768px) {
         margin: 0;
         font-size: 1.4rem;
@@ -100,7 +99,7 @@
         display: block;
         font-size: 1.4rem;
         font-family: "MuseoSans-900";
-        color: #46a6de;
+        color: #e50728;
         left: 0;
         position: absolute;
         bottom: 0;
@@ -141,7 +140,7 @@
         z-index: 0;
       }
       &::after {
-        background-color: rgba($color: #2060af, $alpha: 0.5);
+        background-color: rgba($color: #e50728, $alpha: 0.5);
         border-radius: 50%;
         content: "";
         height: 84px;
@@ -157,7 +156,7 @@
         align-items: center;
         background-color: #ffffff;
         border-radius: 50%;
-        border: 2px solid #46a6de;
+        border: 2px solid #e50728;
         display: flex;
         flex-direction: column;
         height: 84px;
@@ -168,7 +167,7 @@
         width: 84px;
         z-index: 2;
         small {
-          color: #2060af;
+          color: #e50728;
           display: block;
           font-size: 1rem;
           text-align: center;
@@ -201,7 +200,7 @@
     grid-auto-rows: 140px;
     gap: 10px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 30px auto;
     margin-bottom: 15px;
     @media only screen and (max-width: 768px) {
       grid-template-columns: 1fr;

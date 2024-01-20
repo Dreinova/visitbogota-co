@@ -1,8 +1,7 @@
-$fontSizeReal: 8px;
 .home {
   h2 {
     color: var(--gris, #626262);
-    font-size: calc(60px - $fontSizeReal);
+    font-size: calc(60px - var(--fontSizeReal));
     font-style: normal;
     font-weight: 700;
     line-height: 60px;
@@ -23,14 +22,14 @@ $fontSizeReal: 8px;
       }
     }
     @media only screen and (max-width: 768px) {
-      font-size: calc(30px - $fontSizeReal);
+      font-size: calc(30px - var(--fontSizeReal));
     }
   }
   h3 {
     display: flex;
     align-items: flex-end;
     color: var(--gris-oscuro, #373737);
-    font-size: calc(35px - $fontSizeReal);
+    font-size: calc(35px - var(--fontSizeReal));
     font-style: normal;
     font-weight: 700;
     line-height: 35px;
@@ -38,7 +37,7 @@ $fontSizeReal: 8px;
     margin-bottom: 25px;
     gap: 20px;
     @media only screen and (max-width: 768px) {
-      font-size: calc(25px - $fontSizeReal);
+      font-size: calc(25px - var(--fontSizeReal));
       position: relative;
     }
     &::after {
@@ -62,12 +61,12 @@ $fontSizeReal: 8px;
     margin-bottom: 30px;
     position: relative;
     color: var(--blanco, #fff);
-    font-size: calc(60px - $fontSizeReal);
+    font-size: calc(60px - var(--fontSizeReal));
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     @media only screen and (max-width: 768px) {
-      font-size: calc(30px - $fontSizeReal);
+      font-size: calc(30px - var(--fontSizeReal));
     }
     &::after {
       flex: 1;
@@ -99,12 +98,6 @@ $fontSizeReal: 8px;
     }
   }
   main {
-    .splide__arrow {
-      opacity: 1;
-      img {
-        width: 25px;
-      }
-    }
     .bg-noche {
       background-position: bottom;
     }
@@ -117,6 +110,9 @@ $fontSizeReal: 8px;
       background-repeat: no-repeat;
       & > section {
         padding: 60px 20px;
+        &.splide {
+          padding: 0;
+        }
         @media only screen and (max-width: 768px) {
           padding: 20px;
         }
@@ -137,7 +133,7 @@ $fontSizeReal: 8px;
               span {
                 color: var(--gris-oscuro, #373737);
                 text-align: center;
-                font-size: calc(25px - $fontSizeReal);
+                font-size: calc(25px - var(--fontSizeReal));
                 font-style: normal;
                 font-weight: 400;
                 display: block;
@@ -146,107 +142,7 @@ $fontSizeReal: 8px;
             }
           }
         }
-        &.exp {
-          .exp-content {
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0px 0px 16.9px 0px rgba(0, 0, 0, 0.6);
-            display: flex;
-            padding: 30px;
-            justify-content: center;
-            gap: 30px;
-            @media only screen and (max-width: 768px) {
-              flex-direction: column;
-            }
-            article {
-              position: relative;
-              flex: 1;
-              & > img {
-                position: absolute;
-                z-index: 10;
-                top: 30px;
-                @media only screen and (max-width: 768px) {
-                  width: 80%;
-                }
-              }
-              section {
-                .splide__pagination {
-                  .splide__pagination__page {
-                    background: transparent;
-                    border: 1px solid #fff;
-                    opacity: 1;
-                    width: 10px;
-                    height: 10px;
-                    &.is-active,
-                    &:hover {
-                      background-color: #fff;
-                      transform: none;
-                    }
-                  }
-                }
 
-                &.splide {
-                  ul {
-                    li.splide__slide {
-                      overflow: hidden;
-                      height: 755px;
-                      border-radius: 0px 20px 20px 0px;
-                      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-                      @media only screen and (max-width: 768px) {
-                        border-radius: 20px;
-                        height: calc(100vw - 80px);
-                      }
-                      img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                      }
-                      span {
-                        align-items: center;
-                        align-self: stretch;
-                        background: rgba(0, 0, 0, 0.5);
-                        bottom: 0;
-                        color: #fff;
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        flex-shrink: 0;
-                        font-size: calc(30px - $fontSizeReal);
-                        font-style: normal;
-                        font-weight: 600;
-                        gap: 43px;
-                        height: 143px;
-                        justify-content: center;
-                        left: 0;
-                        line-height: normal;
-                        padding: 30px;
-                        position: absolute;
-                        @media only screen and (max-width: 768px) {
-                          height: 80px;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              &:first-of-type {
-                section {
-                  &.splide {
-                    ul {
-                      li.splide__slide {
-                        border-radius: 20px 0px 0px 20px;
-                        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-                        @media only screen and (max-width: 768px) {
-                          border-radius: 20px;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
         &.planifica {
           .planifica-content {
             display: flex;
@@ -267,7 +163,7 @@ $fontSizeReal: 8px;
                 display: flex;
                 gap: 30px;
                 color: #ffb800;
-                font-size: calc(35px - $fontSizeReal);
+                font-size: calc(35px - var(--fontSizeReal));
                 font-style: normal;
                 font-weight: 700;
                 margin-bottom: 40px;
@@ -283,7 +179,7 @@ $fontSizeReal: 8px;
                   margin-bottom: 30px;
                   a {
                     color: var(--blanco, #fff);
-                    font-size: calc(25px - $fontSizeReal);
+                    font-size: calc(25px - var(--fontSizeReal));
                     font-style: normal;
                     font-weight: 400;
                     line-height: normal;
@@ -300,7 +196,7 @@ $fontSizeReal: 8px;
               padding: 20px;
               a {
                 color: var(--blanco, #fff);
-                font-size: calc(30px - $fontSizeReal);
+                font-size: calc(30px - var(--fontSizeReal));
                 font-style: normal;
                 font-weight: 500;
                 display: flex;
@@ -309,7 +205,7 @@ $fontSizeReal: 8px;
                 justify-content: center;
                 line-height: normal;
                 @media only screen and (max-width: 768px) {
-                  font-size: calc(25px - $fontSizeReal);
+                  font-size: calc(25px - var(--fontSizeReal));
                 }
                 img {
                   display: block;
@@ -348,7 +244,7 @@ $fontSizeReal: 8px;
               }
               span {
                 color: #fff;
-                font-size: calc(30px - $fontSizeReal);
+                font-size: calc(30px - var(--fontSizeReal));
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;
@@ -360,7 +256,7 @@ $fontSizeReal: 8px;
                 position: absolute;
                 background-color: rgba($color: #000000, $alpha: 0.8);
                 @media only screen and (max-width: 768px) {
-                  font-size: calc(25px - $fontSizeReal);
+                  font-size: calc(25px - var(--fontSizeReal));
                 }
               }
             }
@@ -414,7 +310,7 @@ $fontSizeReal: 8px;
                 color: var(--blanco, #fff);
                 display: flex;
                 width: fit-content;
-                font-size: calc(20px - $fontSizeReal);
+                font-size: calc(20px - var(--fontSizeReal));
                 font-style: normal;
                 font-weight: 500;
                 line-height: 18px; /* 90% */
@@ -429,7 +325,7 @@ $fontSizeReal: 8px;
               }
               h2 {
                 color: var(--gris-oscuro, #373737);
-                font-size: calc(25px - $fontSizeReal);
+                font-size: calc(25px - var(--fontSizeReal));
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;

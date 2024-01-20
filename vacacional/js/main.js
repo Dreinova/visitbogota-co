@@ -339,9 +339,15 @@ const getFiltersExperienciasTuristicas = async (container, category) => {
         ? "https://bogotadc.travel" + images.field_imagen_zona
         : "https://placehold.co/755x755.jpg?text=visitbogota"
     );
+    console.log(category);
+    let linkUrl = `/${actualLang}/experiencias-turisticas/encuentra-tu-plan?${
+      category == "categorias_comerciales_pb"
+        ? `categories=${images.tid}`
+        : `zones=${images.tid}`
+    }`;
     const template = `
     <li class="splide__slide">
-      <a href="/${actualLang}/banco-imagenes/interna-${images.tid}">
+      <a href="${linkUrl}">
         <img loading="lazy" data-src="${urlImg}" alt="${images.name}" class="zone_img lazyload" src="https://placehold.co/755x755.jpg?text=visitbogota"
           alt="${images.name}" />
           <span>${images.name}</span>  
@@ -365,9 +371,14 @@ const getFiltersExperienciasTuristicas = async (container, category) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Llamadas a la función unificada con los valores específicos
-  await getBogotaData("bogota-natural", 8);
-  await getBogotaData("bogota-cultural", 7);
-  await getBogotaBIImagesVideos();
+
+  if (document.querySelector("#bogota-natural")) {
+    await getBogotaData("bogota-natural", 8);
+  }
+  if (document.querySelector("#bogota-cultural")) {
+    await getBogotaData("bogota-cultural", 7);
+  }
+
   await getFiltersExperienciasTuristicas(
     "porcategoria",
     "categorias_comerciales_pb"

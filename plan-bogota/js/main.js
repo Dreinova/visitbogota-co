@@ -349,9 +349,11 @@ function filtersAll() {
         pb_segments.map((segment) => {
           listCategories.innerHTML += `<li><input type="checkbox" value="${
             segment.tid
-          }" aria-label="cat-${segment.tid}" name="cat-${segment.tid}" id="cat-${
+          }" aria-label="cat-${segment.tid}" name="cat-${
             segment.tid
-          }" onChange="filterPlans(null, null, ${segment.tid},${parseInt(
+          }" id="cat-${segment.tid}" onChange="filterPlans(null, null, ${
+            segment.tid
+          },${parseInt(
             $("#amount")
               .val()
               .replace(/\$|\.|,/g, "")
@@ -855,7 +857,7 @@ if (document.querySelector(".categoriessection .categories")) {
           return el.field_home_view == "1";
         })
         .forEach(({ name, tid, field_format_icon }) => {
-          let template = `<a href="https://www.bogotadc.travel/es/plan-bogota/encuentra-tu-plan?categories=${tid}"><img src="${field_format_icon}" alt="${name}"><small>${name}</small></a>`;
+          let template = `<a href="https://www.bogotadc.travel/es/plan-bogota/encuentra-tu-plan?categories=${tid}"><img src="https://bogotadc.travel${field_format_icon}" alt="${name}"><small>${name}</small></a>`;
           document.querySelector(".categoriessection .categories").innerHTML +=
             template;
         });
