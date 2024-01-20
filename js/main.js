@@ -129,36 +129,26 @@ const getExploraBogota = async () => {
                 .querySelector(".blog_list .repeater")
                 .classList.add("loading");
               document.querySelector(".blog_list .repeater").innerHTML = "";
-              data.forEach((el) => {
+              data.forEach(async(blog) => {
+                let urlImg = await getImageFromCacheOrFetch(
+                  "https://bogotadc.travel" + blog.field_image
+                );
                 let template = `
-                  <a
-                  href="/${actualLang}/blog/all/${get_alias(el.title)}-all-${
-                  el.nid
-                }"
-                  data-aos="flip-left"
-                  class="big blog_item"
-                >
-                  <div class="img">
-                    <img
-                      loading="lazy"
-                      data-src="${urlGlobal}${el.field_cover_image}"
-                      alt="${el.title}"
-                      class="zone_img lazyload"
-                      src="https://picsum.photos/20/20"
-                    />
-                  </div>
-                  <div class="desc">
-                    <h3 class="uppercase">
-                      ${
-                        document.querySelector(
-                          "#categorias_blog .select-selected"
-                        ).textContent
-                      }
-                    </h3>
-                    <h2 class="uppercase">${el.title}</h2>
-                    <small>${el.field_date}</small>
-                  </div>
-                </a>
+                <a href="/${actualLang}/blog/all/${get_alias(
+                  blog.title
+                )}-all-${blog.nid}" data-aos="flip-left blog_item" data-productid="88">
+                    <div class="img">
+                      <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
+                    </div>
+                    <div class="desc">
+                    <small class="tag">
+                    <img src="images/mdi_tag.svg" alt="tag"/>
+                    ${blog.field_prod_rel_1}
+                    </small>
+                      <h2 class="uppercase">${blog.title}</h2>
+                      <small class="date">${blog.field_date}</small>
+                    </div>
+                  </a>
                   `;
                 document.querySelector(".blog_list .repeater").innerHTML +=
                   template;
@@ -2483,7 +2473,6 @@ if (document.querySelector("body.mas_alla")) {
 }
 if (document.querySelector("body.blog")) {
   interestYou();
-  getMoreReadBlogs();
 }
 if (document.querySelector("body.intern_blog")) {
   getBlogsRel();

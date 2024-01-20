@@ -19,7 +19,7 @@ include "includes/head.php"; ?>
 <div class="container">
     <div class="opciones">
         <ul>
-            <li><a href="" class="opcion"><img src="../img/Hospedajes-icon.svg" alt="hospedajes">Hospedajes</a></li>
+            <li><a href="/<?=$lang?>/restaurantes" class="opcion"><img src="../img/Hospedajes-icon.svg" alt="hospedajes">Hospedajes</a></li>
             <li><a href="#" class="opcion active"><img src="../img/Restaurantes_icon.svg" alt="restaurantes">Restaurantes</a></li>
         </ul>
     </div>
@@ -69,4 +69,45 @@ include "includes/head.php"; ?>
         </div>
     </div>
 </div>
+<section class="exp container">
+      <h2><img src="../vacacional/images/exp_tur.svg" alt="descubre">Experiencias Turísticas</h2>
+      <div class="exp-content">
+        <h3>Experiencias turísticas que te pueden interesar</h3>
+        <ul class="grid-experiencias">
+        <?php 
+                  $pbInfo = $mice->getInfoGnrlPB();
+                  $plans = $mice->getRecommendPlans($pbInfo->field_ofertas_recomendadas); 
+                  for ($i=0; $i < 3; $i++) { $plan = $plans[$i]; ?>
+            <li>
+              <a href="/<?=$lang?><?=$project_base?>plan/<?=$mice->get_alias($plan->title)?>-<?=$plan->nid?>"
+                class="plansSplide__item">
+                <!-- <div class="discount ms900">
+                    <?= $plan->field_percent?>% <small class="ms500">DCTO</small>
+                  </div> -->
+                <div class="image">
+                  <img src="https://bogotadc.travel<?= $plan->field_pb_oferta_img_listado?>" alt="<?= $plan->title?>" />
+                  <div class="prices">
+                    <p class="prices-discount ms500">$
+                      <?= number_format($plan->field_pa,0,",",".")?>
+                    </p>
+                    <p class="prices-total ms900">$
+                      <?= number_format($plan->field_pd,0,",",".")?>
+                    </p>
+                  </div>
+                </div>
+                <div class="info">
+                  <strong class="ms900">
+                    <?= $plan->title?>
+                  </strong>
+                  <p class="ms100">
+                    <?= $plan->field_pb_oferta_desc_corta?>
+                  </p>
+                  <small class="ms900 uppercase link"> Ver experiencia </small>
+                </div>
+              </a>
+            </li>
+            <?php }?>
+        </ul>
+      </div>
+    </section>
 <? include 'includes/imports.php' ?>

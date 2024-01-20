@@ -9,7 +9,10 @@ $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
 
 ?>
 <main>
-  <h1 class="uppercase">Blog</h1>
+  <h1 class="uppercase">
+    <img src="images/blog.svg" alt="blog">
+    Blog
+  </h1>
   <div class="container custom-select-container">
     <div class="custom-select" id="categorias_blog"><select ><option value="">CATEGORÍA</option></select></div>
   </div>
@@ -34,11 +37,12 @@ $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
                 />
               </div>
               <div class="desc">
-                <h2 class="uppercase">
-                  <?= $b->products(0, $allBlogs[$i]->field_prod_rel)->title ?>
-                </h2>
-                <h3 class="uppercase"><?= $allBlogs[$i]->title ?></h3>
-                <small><?= $allBlogs[$i]->field_date ?></small>
+                <small class="tag">
+                  <img src="images/mdi_tag.svg" alt="tag"/>
+                  <?=$allBlogs[$i]->field_prod_rel_1 ?>
+                </small>
+                <h2 class="uppercase"><?=$allBlogs[$i]->title?></h2>
+                <small class="date"><?= $allBlogs[$i]->field_date ?></small>
               </div>
             </a>
       <?php } ?>

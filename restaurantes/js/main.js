@@ -153,6 +153,7 @@ function useFilters(cattype) {
     "get/" + cattype + ".php",
     { filters: completefilters },
     function (data) {
+      console.log(data);
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
           let venueUrl = `/${actualLang}/restaurantes/ver/${get_alias(
@@ -184,31 +185,16 @@ function useFilters(cattype) {
             data[i].title +
             `</h1></a>  
                     <h2 class="uppercase">
-                    ${(function fun() {
-                      if (data[i].field_calificacion) {
-                        return "Calificación de otros turistas";
-                      }
-                    })()}
-                    
-                    ${(function fun() {
-                      let iteration = data[i].field_calificacion
-                        ? data[i].field_calificacion
-                        : 0;
-                      let element = `<img src="img/stars.svg" alt="stars"/>`;
-                      let string = "";
-                      for (let index = 0; index < iteration; index++) {
-                        string += element;
-                      }
-                      return string;
-                    })()}
+                    ${data[i].field_zonegroup_1}
+                    ${data[i].field_foodzone_1 ? `, ${data[i].field_foodzone_1}`:``}
                     </h2>
                       <div class="address">
-                        <img src="img/addressnew.svg" alt="address" /><span> ${
+                        <img src="img/ubicacion_icon.svg" alt="address" /><span> ${
                           data[i].field_hadress ? data[i].field_hadress : ""
                         } </span>
                       </div>
                       <div class="phone">
-                        <img src="img/telnew.svg" alt="address" /><span>Tel: ${
+                        <img src="img/tel_icon.svg" alt="telefono" /><span>Tel: ${
                           data[i].field_htel ? data[i].field_htel : ""
                         } </span>
                       </div>
