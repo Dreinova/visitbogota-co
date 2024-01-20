@@ -177,7 +177,9 @@ const getExploraBogota = async () => {
 
 // Función para manejar el desplazamiento suave cuando se carga la página
 document.addEventListener("DOMContentLoaded", async function () {
-  await getExploraBogota();
+  if (document.querySelector("nav li.explora")) {
+    await getExploraBogota();
+  }
   if (window.location.hash) {
     // Obtén el ID del fragmento de la URL (el valor después de '#')
     var targetId = window.location.hash.substring(1);
