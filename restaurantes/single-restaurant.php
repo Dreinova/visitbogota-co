@@ -18,14 +18,14 @@ $venue = $venue[0];
   <div class="info-container">
     <?php if ($venue->field_hadress != '') { ?>
     <div class="address">
-      <img src="img/addressnew.svg" alt="address" /><span>
+      <img src="/../vacacional/images/descubre_icon.svg" alt="address" /><span>
         <?= $venue->field_hadress ?>
       </span>
     </div>
     <?php } ?>
     <?php if ($venue->field_htel != '') { ?>
     <div class="phone">
-      <img src="img/telnew.svg" alt="address" /><span>Tel:
+      <img src="../img/whatsapp.svg" alt="phone" /><span>Tel:
         <?= $venue->field_htel ?>
       </span>
     </div>
@@ -68,7 +68,7 @@ $venue = $venue[0];
               for ($i=0; $i < count($galItems) ; $i++) { 
                 $galItem = $galItems[$i];
               ?>
-              <li class="splide__slide"><img src="<?=$galItem?>" alt=""></li>
+              <li class="splide__slide"><img src="https://bogotadc.travel<?=$galItem?>" alt=""></li>
               <?php 
               }
               ?>
@@ -89,7 +89,10 @@ $venue = $venue[0];
         empresarios y usuarios como partes de la relación comercial.</small>
     </div>
     <div class="relHotels">
-      <h2>Más restaurantes en Bogotá</h2>
+      <h2>
+      <img src="/../vacacional/images/restaurantes.svg" alt="restaurantes">
+        Más Restaurantes En Bogotá
+      </h2>
       <ul class="grid-hotels"></ul>
     </div>
 </main>
