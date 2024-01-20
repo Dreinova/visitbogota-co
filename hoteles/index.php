@@ -28,7 +28,9 @@ include "includes/head.php";?>
             </div>
         </aside>
         <section class="w_75 cards flex loading m_outter">
-            <h1 class="fw700 uppercase center title">DÓNDE DORMIR EN BOGOTÁ</h1>
+            <h1 class="fw700 title">
+            <img src="/../vacacional/images/hospedajes.svg" alt="hospedajes">
+                Dónde Dormir En Bogotá</h1>
             <div class="loader big"></div>
             <div class="content flex"></div>
         </section>

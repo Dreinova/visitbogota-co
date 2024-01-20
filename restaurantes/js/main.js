@@ -10,15 +10,15 @@ $(document).ready(function () {
 });
 
 function setCategory(cattype) {
-  $(".filtergroup").removeClass("open");
+  // $(".filtergroup").removeClass("open");
   $(".filtergroup").addClass("mobile");
   $(".mobilefilterbutton").click(function () {
     $(".filters").toggleClass("open");
   });
 
-  $(".filtergroup h4").click(function () {
-    $(this).parent().toggleClass("open");
-  });
+  // $(".filtergroup h4").click(function () {
+  //   $(this).parent().toggleClass("open");
+  // });
 
   var counter = 0;
   $(".filtergroup.checkboxes").each(function () {
