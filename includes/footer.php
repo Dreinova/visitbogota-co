@@ -1,4 +1,69 @@
 <?php
+if($lang === "es"){
+  $experiencia_turisticas = "Experiencia turísticas";
+  $planifica_tu_viaje = "Planifica tu viaje";
+  $agenda_empresarial = "Agenda empresarial";
+  $restaurantes = "Restaurantes";
+  $hospedaje = "Hospedaje";
+  $blog = "Blog";
+  $exploraciones_visuales = "Exploraciones visuales";
+  $cerros = "Cerros";
+  $biciturismo = "Biciturismo";
+  $gastronomia = "Gastronomía";
+  $museos = "Museos";
+  $musica_y_arte = "Música y arte";
+  $ruta_colonial = "Ruta colonial";
+  $senderismo = "Senderismo";
+  $termales = "Termales";
+  $cómo_moverse_en_Bogotá = "¿Cómo moverse en Bogotá?";
+  $informacion_general = "Información general";
+  $descargables = "Descargables";
+  $recursos_lengua_de_senas = "Recursos lengua de señas";
+  $preguntas_frecuentes = "Preguntas frecuentes";
+  // Español
+  $todos_los_derechos_reservados = "© Todos los derechos reservados por la Oficina de Turismo de Bogotá";
+  $politicas_privacidad_terminos_uso = "Políticas de privacidad y términos de uso";
+  $resolucion_239 = "Resolución 239 del 5 de noviembre de 2021";
+  $marca_ciudad = "Marca ciudad";
+  // Español
+  $bogota = "Bogotá";
+  $descubre_bogota = "Descubre Bogotá";
+  $informacion_util = "Información útil";
+  $contactanos = "Contáctanos";
+}
+else{
+  $experiencia_turisticas = "Tourist Experiences";
+  $planifica_tu_viaje = "Plan Your Trip";
+  $agenda_empresarial = "Business Agenda";
+  $restaurantes = "Restaurants";
+  $hospedaje = "Accommodation";
+  $blog = "Blog";
+  $exploraciones_visuales = "Visual Explorations";
+  $cerros = "Hills";
+  $biciturismo = "Bicycle Tourism";
+  $gastronomia = "Gastronomy";
+  $museos = "Museums";
+  $musica_y_arte = "Music and Art";
+  $ruta_colonial = "Colonial Route";
+  $senderismo = "Hiking";
+  $termales = "Hot Springs";
+  $cómo_moverse_en_Bogotá = "How to Move in Bogotá?";
+  $informacion_general = "General Information";
+  $descargables = "Downloads";
+  $recursos_lengua_de_senas = "Sign Language Resources";
+  $preguntas_frecuentes = "Frequently Asked Questions";
+  // Inglés
+  $all_rights_reserved = "© All rights reserved by Bogotá Tourism Office";
+  $privacy_and_terms = "Privacy Policy and Terms of Use";
+  $resolution_239 = "Resolution 239 of November 5, 2021";
+  $city_brand = "City Brand";
+  // Inglés
+  $bogota = "Bogotá";
+  $discover_bogota = "Discover Bogotá";
+  $useful_information = "Useful Information";
+  $contact_us = "Contact Us";
+
+}
 if (!$banners) {
     $banners = $b->generalInfo->field_field_banners;
     $arrayBanners = explode(",", $banners);
@@ -33,48 +98,44 @@ if (!$planes) {
   </div>
   <div class="menus-footer">
     <nav>
-      <h6>Bogotá</h6>
+      <h6><?=$bogota?></h6>
       <ul>
-      
-
-
-
-        <li><a href="/<?=$lang?>/plan-bogota/">Experiencia turísticas</a></li>
-        <li><a href="/<?=$lang?>/planifica-tu-viaje">Planifica tu viaje</a></li>
-        <li><a href="/<?=$lang?>/eventos/agenda-empresarial-148">Agenda empresarial</a></li>
-        <li><a href="/<?=$lang?>/restaurantes">Restaurantes</a></li>
-        <li><a href="/<?=$lang?>/hoteles">Hospedaje</a></li>
-        <li><a href="/<?=$lang?>/blog">Blog</a></li>
-        <li><a href="/<?=$lang?>/banco-imagenes/">Exploraciones visuales</a></li>
+        <li><a href="/<?=$lang?>/plan-bogota/"><?=$experiencia_turisticas?></a></li>
+        <li><a href="/<?=$lang?>/planifica-tu-viaje"><?=$planifica_tu_viaje?></a></li>
+        <li><a href="/<?=$lang?>/eventos/agenda-empresarial-148"><?=$agenda_empresarial?></a></li>
+        <li><a href="/<?=$lang?>/restaurantes"><?=$restaurantes?></a></li>
+        <li><a href="/<?=$lang?>/hoteles"><?=$hospedaje?></a></li>
+        <li><a href="/<?=$lang?>/blog"><?=$blog?></a></li>
+        <li><a href="/<?=$lang?>/banco-imagenes/"><?=$exploraciones_visuales?></a></li>
       </ul>
     </nav>
     <nav>
-      <h6>Descubre Bogotá</h6>
+      <h6><?=$discover_bogota?></h6>
       <ul>
 
-        <li><a href="/<?=$lang?>/explora/cerros/2572">Cerros</a></li>
-        <li><a href="/<?=$lang?>/explora/biciturismo/62">Biciturismo</a></li>
-        <li><a href="/<?=$lang?>/explora/gastronomia/6">Gastronomía</a></li>
-        <li><a href="/<?=$lang?>/explora/museos/299">Museos</a></li>
-        <li><a href="/<?=$lang?>/explora/musica-arte/88">Música y arte</a></li>
-        <li><a href="/<?=$lang?>/explora/ruta-colonial/456">Ruta colonial</a></li>
-        <li><a href="/<?=$lang?>/explora/senderismo/64">Senderismo</a></li>
-        <li><a href="/<?=$lang?>/explora/termales/112">Termales</a></li>
+        <li><a href="/<?=$lang?>/explora/cerros/2572"><?=$cerros?></a></li>
+        <li><a href="/<?=$lang?>/explora/biciturismo/62"><?=$biciturismo?></a></li>
+        <li><a href="/<?=$lang?>/explora/gastronomia/6"><?=$gastronomia?></a></li>
+        <li><a href="/<?=$lang?>/explora/museos/299"><?=$museos?></a></li>
+        <li><a href="/<?=$lang?>/explora/musica-arte/88"><?=$musica_y_arte?></a></li>
+        <li><a href="/<?=$lang?>/explora/ruta-colonial/456"><?=$ruta_colonial?></a></li>
+        <li><a href="/<?=$lang?>/explora/senderismo/64"><?=$senderismo?></a></li>
+        <li><a href="/<?=$lang?>/explora/termales/112"><?=$termales?></a></li>
       </ul>
     </nav>
     <nav>
-      <h6>Información útil</h6>
+      <h6><?=$useful_information?></h6>
       <ul>
 
-        <li><a href="/<?=$lang?>/preguntas-frecuentes">¿Cómo moverse en Bogotá?</a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes">Información general</a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes">Descargables</a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes">Recursos lengua de señas</a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes">Preguntas frecuentes</a></li>
+        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$cómo_moverse_en_Bogotá?></a></li>
+        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$informacion_general?></a></li>
+        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$descargables?></a></li>
+        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$recursos_lengua_de_senas?></a></li>
+        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$preguntas_frecuentes?></a></li>
       </ul>
     </nav>
     <nav>
-      <h6>Contáctanos</h6>
+      <h6><?=$contact_us?></h6>
       <ul>
       <li>
         <?= $b->generalInfo->field_ciudadano_txt ?> <a href="tel:<?= $b->generalInfo->field_ciudadano ?>"> <?= $b->generalInfo->field_ciudadano ?></a>
@@ -91,11 +152,11 @@ if (!$planes) {
   </div>
 </div>
 <div class="politics">
-<small><?=date("Y") ?> - © Todos los derechos reservados por Bogotá Tourism Office</small>
+<small><?=date("Y") ?> <?=$all_rights_reserved?></small>
 <div class="links">
-  <a href="/<?= $lang ?>/politica-tratamiento-datos-personales">Políticas de privacidad y términos de uso</a>
-  <a target="_blank" href="<?= $b->generalInfo->field_resolucion_239?>">Resolución 239 del 5 de noviembre de 2021</a>
-  <a target="_blank" href="https://www.idt.gov.co/es/marca-ciudad">Marca ciudad</a>
+  <a href="/<?= $lang ?>/politica-tratamiento-datos-personales"><?=$privacy_and_terms?></a>
+  <a target="_blank" href="<?= $b->generalInfo->field_resolucion_239?>"><?=$resolution_239?></a>
+  <a target="_blank" href="https://www.idt.gov.co/es/marca-ciudad"><?=$city_brand?></a>
 </div>
 </footer>
 <!-- SCRIPTS -->

@@ -1,6 +1,6 @@
-<?php
+<?php 
 $bodyClass = 'hotelesnew';
-include "includes/head.php"; ?>
+include "includes/head.php";?>
 <section class="banner" style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2023-08/d68ff673-2fb0-4820-995f-7092f7920053.JPG );">
     <div class="container">
         <div class="intro-txt">
@@ -39,30 +39,64 @@ include "includes/head.php"; ?>
                     <div class="loader"></div>
                     <div class="content"></div>
                 </div>
-                <!-- <div class="filtergroup checkboxes color" data-filterid="rangos_de_precios_hoteles">
+                <div class="filtergroup checkboxes color open" data-filterid="rangos_de_precios_hoteles">
                     <h4 class="fw700"><span class="arrow"></span>Rango de precios</h4>
                     <div class="loader"></div>
                     <div class="content"></div>
-                </div> -->
+                </div>
                 <div class="filtergroup checkboxes color open" data-filterid="test_zona">
                     <h4 class="fw700"><span class="arrow"></span>Zona de la ciudad</h4>
                     <div class="loader"></div>
                     <div class="content"></div>
                 </div>
             </aside>
-            <section class="cards flex loading m_outter">
-                <!-- <h1 class="fw700 title">
-                    <img src="/../vacacional/images/hospedajes.svg" alt="hospedajes">
-                    Dónde Dormir En Bogotá
-                </h1> -->
+            <section class=" cards flex loading m_outter">
                 <hr>
                 <div class="loader big"></div>
                 <div class="content flex"></div>
-                
             </section>
         </div>
     </div>
 </div>
-
-<? include '../templates/ofertasRel.php' ?>
+<section class="exp container">
+    <h2><img src="../vacacional/images/exp_tur.svg" alt="descubre">Experiencias Turísticas</h2>
+    <div class="exp-content">
+        <h3>Experiencias turísticas que te pueden interesar</h3>
+        <ul class="grid-experiencias">
+            <?php
+            $pbInfo = $mice->getInfoGnrlPB();
+            $plans = $mice->getRecommendPlans($pbInfo->field_ofertas_recomendadas);
+            for ($i = 0; $i < 3; $i++) {
+                $plan = $plans[$i]; ?>
+                <li>
+                    <a href="/<?= $lang ?><?= $project_base ?>plan/<?= $mice->get_alias($plan->title) ?>-<?= $plan->nid ?>" class="plansSplide__item">
+                        <!-- <div class="discount ms900">
+                    <?= $plan->field_percent ?>% <small class="ms500">DCTO</small>
+                  </div> -->
+                        <div class="image">
+                            <img src="https://bogotadc.travel<?= $plan->field_pb_oferta_img_listado ?>" alt="<?= $plan->title ?>" />
+                            <div class="prices">
+                                <p class="prices-discount ms500">$
+                                    <?= number_format($plan->field_pa, 0, ",", ".") ?>
+                                </p>
+                                <p class="prices-total ms900">$
+                                    <?= number_format($plan->field_pd, 0, ",", ".") ?>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <strong class="ms900">
+                                <?= $plan->title ?>
+                            </strong>
+                            <p class="ms100">
+                                <?= $plan->field_pb_oferta_desc_corta ?>
+                            </p>
+                            <small class="ms900 uppercase link"> Ver experiencia </small>
+                        </div>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+</section>
 <? include 'includes/imports.php' ?>

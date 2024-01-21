@@ -129,14 +129,14 @@ const getExploraBogota = async () => {
                 .querySelector(".blog_list .repeater")
                 .classList.add("loading");
               document.querySelector(".blog_list .repeater").innerHTML = "";
-              data.forEach(async(blog) => {
+              data.forEach(async (blog) => {
                 let urlImg = await getImageFromCacheOrFetch(
                   "https://bogotadc.travel" + blog.field_image
                 );
                 let template = `
-                <a href="/${actualLang}/blog/all/${get_alias(
-                  blog.title
-                )}-all-${blog.nid}" data-aos="flip-left blog_item" data-productid="88">
+                <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
+                  blog.nid
+                }" data-aos="flip-left blog_item" data-productid="88">
                     <div class="img">
                       <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
                     </div>
@@ -741,10 +741,7 @@ function utilBoxes(id, applink1 = false, applink2 = false) {
               ).innerHTML = singleInfo.title;
               document.querySelector(
                 ".boxes .boxes-container .desc"
-              ).innerHTML = `
-                    ${singleInfo.body}
-                    `;
-              $(".boxes .desc").mCustomScrollbar();
+              ).innerHTML = `<p>${singleInfo.body}</p>`;
               if ("loading" in HTMLImageElement.prototype) {
                 const images = document.querySelectorAll("img.lazyload");
                 images.forEach((img) => {
@@ -796,8 +793,7 @@ function utilBoxes(id, applink1 = false, applink2 = false) {
                   ? singleInfo.field_image
                   : "/img/noimg.png"
               }" src="https://picsum.photos/20/20" alt="Bogotá">
-                    ${singleInfo.body}
-                    `;
+              <p>${singleInfo.body}</p>`;
               if (singleInfo.field_download_file != "") {
                 let langtext = {
                   es: "Descargar",
@@ -812,7 +808,6 @@ function utilBoxes(id, applink1 = false, applink2 = false) {
                     </a>
                       `;
               }
-              $(".boxes .desc").mCustomScrollbar();
               if ("loading" in HTMLImageElement.prototype) {
                 const images = document.querySelectorAll("img.lazyload");
                 images.forEach((img) => {
@@ -879,10 +874,7 @@ function utilBoxes2(id, applink1 = false, applink2 = false) {
               ).innerHTML = singleInfo.title;
               document.querySelector(
                 ".boxes .boxes-container .desc"
-              ).innerHTML = `
-                    ${singleInfo.body}
-                    `;
-              $(".boxes .desc").mCustomScrollbar();
+              ).innerHTML = `<p>${singleInfo.body}</p>`;
               if ("loading" in HTMLImageElement.prototype) {
                 const images = document.querySelectorAll("img.lazyload");
                 images.forEach((img) => {
@@ -926,9 +918,7 @@ function utilBoxes2(id, applink1 = false, applink2 = false) {
                         ? singleInfo.field_image
                         : "/img/noimg.png"
                     }" src="https://picsum.photos/20/20" alt="Bogotá">
-                    ${singleInfo.body}
-                    `;
-              $(".boxes .desc").mCustomScrollbar();
+                    <p>${singleInfo.body}</p>`;
               if ("loading" in HTMLImageElement.prototype) {
                 const images = document.querySelectorAll("img.lazyload");
                 images.forEach((img) => {
@@ -957,13 +947,13 @@ function slidersUtil() {
   if ($(".utilSlide").length) {
     $(".utilSlide").slick({
       prevArrow:
-        '<button type="button" class="slick-prev"><img src="/img/arrow_blue_l.svg" alt="prev"></button>',
+        '<button type="button" class="slick-prev"><img src="images/ep_arrow-left-bold.svg" alt="left"></button>',
       nextArrow:
-        '<button type="button" class="slick-next"><img src="/img/arrow_blue_r.svg" alt="next"></button>',
-      slidesToShow: 4,
+        '<button type="button" class="slick-next"><img src="images/ep_arrow-right-bold.svg" alt="right"></button>',
+      slidesToShow: 5,
       dots: false,
       arrows: true,
-      slidesToScroll: 1,
+      slidesToScroll: 5,
       responsive: [
         {
           breakpoint: 1023,

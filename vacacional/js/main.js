@@ -59,7 +59,7 @@ window.addEventListener("load", function () {
 async function getRecentBlogs() {
   blogContainer.innerHTML = "";
 
-  const response = await fetch("/vacacional/g/lastBlogs/");
+  const response = await fetch(`/vacacional/g/lastBlogs/?lang=${actualLang}`);
   const data = await response.json();
 
   const promises = data.map(async (blog) => {

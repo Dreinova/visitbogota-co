@@ -15,7 +15,7 @@
 
 .title {
   font-size: 6.5em;
-  color: #469bd3;
+  color: #e50728;
   padding: 60px 0;
 }
 .card-list {
@@ -80,13 +80,13 @@
       }
     }
     h3 {
-      color: #469bd3;
+      color: #e50728;
       font-size: 1.8em;
       line-height: 1.3em;
       margin-bottom: 20px;
     }
     .filtergroup {
-      color: #469bd3;
+      color: #e50728;
       max-height: 25px;
       margin-bottom: 30px;
       padding-left: 20px;
@@ -103,7 +103,7 @@
         }
 
         &::before {
-          border: 1px solid #469bd3;
+          border: 1px solid #e50728;
           content: "";
           display: inline-block;
           height: 10px;
@@ -148,7 +148,7 @@
             /* display:block;*/
           }
           input {
-            border: 1px solid #469bd3;
+            border: 1px solid #e50728;
             background: transparent;
             color: var(--maincolor);
             font-family: Arial;
@@ -221,7 +221,7 @@
   .cards {
     flex: 1;
     .noresults {
-      color: #469bd3;
+      color: #e50728;
       font-size: 1.6em;
       padding: 40px 0;
       text-align: center;

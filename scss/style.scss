@@ -59,7 +59,7 @@
 }
 
 .title {
-  color: #469bd3;
+  color: #e50728;
   display: block;
   font-family: "MuseoSans-700";
   font-size: 4.2rem;
@@ -86,7 +86,7 @@ label.error {
   max-width: 1200px;
   margin: 0 auto;
   h2 {
-    color: #469bd3;
+    color: #e50728;
     display: block;
     font-family: "MuseoSans-700";
     font-size: 4.2rem;
@@ -121,7 +121,7 @@ label.error {
         height: 100%;
         flex-direction: column;
         justify-content: space-between;
-        color: #B54ACB; 
+        color: #b54acb;
         text-decoration: underline;
         .number {
           transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -151,7 +151,7 @@ label.error {
             color: #ec582f;
           }
         }
-      
+
         h3 {
           color: #666666;
           font-size: 2.3rem;
@@ -219,7 +219,7 @@ label.error {
     text-align: center;
   }
   .bx-wrapper .bx-pager.bx-default-pager a {
-    background-color: #469bd3;
+    background-color: #e50728;
   }
   .slick-prev.slick-arrow {
     left: 10px;
@@ -255,7 +255,7 @@ label.error {
     transform: translateX(-50%);
     li {
       border-radius: 50%;
-      border: 2px solid #469bd3;
+      border: 2px solid #e50728;
       cursor: pointer;
       height: 15px;
       margin: 0 5px;
@@ -264,7 +264,7 @@ label.error {
       z-index: 2;
       &.slick-active,
       &:hover {
-        background-color: #469bd3;
+        background-color: #e50728;
       }
       button {
         opacity: 0;

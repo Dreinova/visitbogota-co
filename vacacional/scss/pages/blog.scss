@@ -1,6 +1,6 @@
 .blog {
   main {
-    padding-top: 180px;
+    padding: 180px 20px;
   }
   #categorias_blog {
     max-width: 250px;
@@ -34,7 +34,7 @@
     }
   }
   &_list {
-    padding: 0 0 90px !important;
+    padding: 0 20px 90px !important;
     max-width: 100%;
     background-color: #fff;
     z-index: 2;
@@ -58,9 +58,12 @@
       max-width: 1600px;
       margin: 0 auto 120px;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
       gap: 25px;
       min-height: 590px;
+      grid-template-columns: 1fr 1fr 1fr;
+      @media only screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
       a {
         display: block;
         width: 100%;

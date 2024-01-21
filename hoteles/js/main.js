@@ -60,8 +60,6 @@ function setCategory(cattype) {
 
       //useFilters(cattype);
       if (counter == $(".filtergroup.checkboxes").length - 1) {
-        console.log("Termina el set de filtros");
-        console.log(filtersoptions);
         useFilters(cattype);
       }
       counter++;
@@ -126,10 +124,6 @@ function useFilters(cattype) {
 
     completefilters.checkboxes.push(group);
 
-    /*console.log(completefilters.checkboxes);
-    console.log(completefilters.checkboxes[0].filter);
-    console.log(filtersoptions[completefilters.checkboxes[1].filter]);*/
-
     for (var i = 0; i < completefilters.checkboxes.length; i++) {
       if (
         completefilters.checkboxes[i].value.length ==
@@ -151,6 +145,7 @@ function useFilters(cattype) {
     "get/" + cattype + ".php",
     { filters: completefilters },
     function (data) {
+      console.log(data);
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
           venueUrl = `/${actualLang}/hoteles/ver/${get_alias(data[i].title)}-${
@@ -184,7 +179,11 @@ function useFilters(cattype) {
             `</h1></a>  
                     <h2 class="uppercase">
                     ${data[i].field_zonegroup_1}
-                    ${data[i].field_foodzone_1 ? `, ${data[i].field_foodzone_1}`:``}
+                    ${
+                      data[i].field_zone_rel_1
+                        ? `, ${data[i].field_zone_rel_1}`
+                        : ``
+                    }
                     </h2>
                       <div class="address">
                         <img src="img/ubicacion_icon.svg" alt="address" /><span> ${
