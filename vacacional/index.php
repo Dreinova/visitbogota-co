@@ -46,7 +46,7 @@ $sliders = $vacacional->getSlidersHome();
     </section>
   </div>
   <div class="bg-noche" style="background-image: url(images/bog_noche.png);">
-    <section class="exp container">
+    <section class="exp-home container">
       <h2><img src="images/exp_tur.svg" alt="descubre">Experiencias Turísticas</h2>
       <div class="exp-content">
         <article class="category">

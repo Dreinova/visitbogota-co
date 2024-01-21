@@ -217,6 +217,107 @@
             }
           }
         }
+        &.exp-home {
+          .exp-content {
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 0px 16.9px 0px rgba(0, 0, 0, 0.6);
+            display: flex;
+            padding: 30px;
+            justify-content: center;
+            gap: 30px;
+            @media only screen and (max-width: 768px) {
+              flex-direction: column;
+            }
+            article {
+              position: relative;
+              flex: 1;
+              & > img {
+                position: absolute;
+                z-index: 10;
+                top: 30px;
+                @media only screen and (max-width: 768px) {
+                  width: 80%;
+                }
+              }
+              section {
+                .splide__pagination {
+                  .splide__pagination__page {
+                    background: transparent;
+                    border: 1px solid #fff;
+                    opacity: 1;
+                    width: 10px;
+                    height: 10px;
+                    &.is-active,
+                    &:hover {
+                      background-color: #fff;
+                      transform: none;
+                    }
+                  }
+                }
+
+                &.splide {
+                  ul {
+                    li.splide__slide {
+                      overflow: hidden;
+                      height: 755px;
+                      border-radius: 0px 20px 20px 0px;
+                      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+                      @media only screen and (max-width: 768px) {
+                        border-radius: 20px;
+                        height: calc(100vw - 80px);
+                      }
+                      img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                      }
+                      span {
+                        align-items: center;
+                        align-self: stretch;
+                        background: rgba(0, 0, 0, 0.5);
+                        bottom: 0;
+                        color: #fff;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        flex-shrink: 0;
+                        font-size: calc(30px - var(--fontSizeReal));
+                        font-style: normal;
+                        font-weight: 600;
+                        gap: 43px;
+                        height: 143px;
+                        justify-content: center;
+                        left: 0;
+                        line-height: normal;
+                        padding: 30px;
+                        position: absolute;
+                        @media only screen and (max-width: 768px) {
+                          height: 80px;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              &:first-of-type {
+                section {
+                  &.splide {
+                    ul {
+                      li.splide__slide {
+                        border-radius: 20px 0px 0px 20px;
+                        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+                        @media only screen and (max-width: 768px) {
+                          border-radius: 20px;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         &.mice {
           div.mice-articles {
             border-radius: 30px;
@@ -224,7 +325,7 @@
             box-shadow: 0px 0px 16.9px 0px rgba(0, 0, 0, 0.6);
             padding: 30px;
             display: grid;
-            grid-template-columns: repeat(3, 493px);
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             @media only screen and (max-width: 768px) {
               grid-template-columns: repeat(1, calc(100vw - 100px));
