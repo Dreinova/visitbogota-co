@@ -90,7 +90,7 @@ $venue = $venue[0];
     </div>
     <div class="relHotels">
       <h2>
-      <img src="/../vacacional/images/restaurantes.svg" alt="restaurantes">
+      <img src="../img/Restaurantes_Flag.svg" alt="restaurantes">
         Más Restaurantes En Bogotá
       </h2>
       <ul class="grid-hotels"></ul>

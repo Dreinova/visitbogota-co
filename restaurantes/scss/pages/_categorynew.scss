@@ -471,6 +471,9 @@
       ul {
         display: flex;
         gap: 20px;
+        @media only screen and (max-width: 480px) {
+          flex-direction: column;
+        }
         .opcion {
           color: var(--gris-oscuro, #373737);
           padding: 10px 20px;
@@ -712,12 +715,13 @@
       .cards {
         display: flex;
         flex-wrap: wrap;
-        margin: 0 auto;
+        margin: 0;
         flex-direction: column;
-        width: 100%;
+        width: 90%;
         hr {
           border-top: 2px solid var(--Rojo, #e50728);
           margin-bottom: 40px;
+          max-width: 95%;
         }
         @media only screen and (max-width: 1199px) {
           padding: 0 20px;
@@ -752,9 +756,9 @@
         .content {
           width: 100%;
           max-width: 100%;
-          grid-auto-rows: 230px;
+          grid-auto-rows: 210px;
           margin: 0 auto;
-          gap: 22px;
+          gap: 25px;
           padding: 0 0 60px;
           @media only screen and (max-width: 768px) {
             grid-auto-rows: auto;
@@ -763,8 +767,8 @@
         }
         .card-item {
           margin: 0;
-          box-shadow: rgba(98, 98, 98, 0.5) 0 0 20px;
-          border: 1px solid #e50728;
+          background: rgba(255, 255, 255, 0.6);
+          box-shadow: 0px 0px 6.8px 0px rgba(0, 0, 0, 0.5);
           @media only screen and (max-width: 768px) {
             .flex {
               flex-direction: column !important;
@@ -777,7 +781,7 @@
           }
           .address,
           .phone {
-            color: #666666;
+            color: #373737;
             font-size: 2.1rem;
             @media only screen and (max-width: 1199px) {
               font-size: 1.4rem;
@@ -790,16 +794,17 @@
           }
           .card-content {
             padding: 23px;
+            justify-content: space-evenly;
             h1 {
-              color: #333;
-              font-size: 2.6rem;
+              color: #373737;
+              font-size: 2.7rem;
               @media only screen and (max-width: 1199px) {
-                font-size: 2rem;
+                font-size: 1.8rem;
               }
             }
             h2 {
-              font-size: 2.6rem;
-              color: #333;
+              font-size: 1.6rem;
+              color: #626262;
               @media only screen and (max-width: 1199px) {
                 font-size: 1.4rem;
               }

@@ -74,17 +74,29 @@
           background-color: var(--Rojo, #e50728);
         }
       }
-      .grid-hotels{
-        li{
-          a{
-            box-shadow: 4px 4px 6px rgba(98,98,98,.5);
-            border: 1px solid red;
-            &:hover{
-              background: linear-gradient(90deg, rgb(255, 255, 255) 25%, rgb(229, 7, 40) 100%);
-            }
-            .data{
-              *{
-                color:#626262 !important;
+      .grid-hotels {
+        li {
+          a {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0px 0px 6.8px 0px rgba(0, 0, 0, 0.5);
+            .data {
+              justify-content: space-evenly;
+              * {
+                color: #373737 !important;
+              }
+              h1 {
+                font-size: 3rem;
+                @media only screen and (max-width: 1199px) {
+                  font-size: 2rem;
+                }
+              }
+              .address {
+                font-size: 1.8rem;
+                color: #626262;
+                margin-bottom: 10px;
+                @media only screen and (max-width: 1199px) {
+                  font-size: 1.4rem;
+                }
               }
             }
           }
