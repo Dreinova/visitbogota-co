@@ -10,9 +10,9 @@ $blogsRel = $b->blogs("all", ($_GET['productID'] ? $_GET['productID'] : 'all'), 
 <main>
 	<div class="banner" style="background-image:url(<?= ($blog->field_cover_image ? $urlGlobal . $blog->field_cover_image : '/img/noimg.png') ?>)">
 		<div class="txt">
+			<h3 class="uppercase tag"><?= $prodRel ?> </h3>
 			<h1 class="uppercase"><?= $blog->title ?></h1>
 			<div class="intro"><?= $blog->field_intro_blog ?></div>
-			<h3 class="uppercase"><?= $prodRel ?> </h3>
 			<h3 class="uppercase"><?= $blog->field_date ?></h3>
 		</div>
 	</div>
