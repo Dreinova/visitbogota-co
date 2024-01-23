@@ -126,7 +126,45 @@ $isMobile = $detect->isMobile();
                 fbq('init', '425688815109094');
                 fbq('track', 'PageView');
             </script>
-            <!-- Accessibility Code for "www.bogotadc.travel" --> <script> window.interdeal = { "sitekey": "0214a88612f5ed9928aa36969c114364", "Position": "Left", "Menulang": "ES", "domains": { "js": "https://cdn.equalweb.com/", "acc": "https://access.equalweb.com/" }, "btnStyle": { "vPosition": [ "80%", null ], "scale": [ "0.8", "0.8" ], "color": { "main": "#1876c9", "second": "" }, "icon": { "type": 7, "shape": "semicircle", "outline": false } } }; (function(doc, head, body){ var coreCall = doc.createElement('script'); coreCall.src = 'https://cdn.equalweb.com/core/4.3.7/accessibility.js'; coreCall.defer = true; coreCall.integrity = 'sha512-hGa5HZtFkT1M7+tUDtU/cbw6AG0ORz3oblztCoTZ/z2qPyr7dgwH3zoT8qpgj21MgcRsMFLD6NNKePGvVks3Ig=='; coreCall.crossOrigin = 'anonymous'; coreCall.setAttribute('data-cfasync', true ); body? body.appendChild(coreCall) : head.appendChild(coreCall); })(document, document.head, document.body); </script>
+   <!-- Accessibility Code for "visitbogota.co" -->
+<script>
+window.interdeal = {
+    "sitekey": "d8d6acf1eb27744bac5c115295897570",
+    "Position": "left",
+    "Menulang": "ES",
+    "domains": {
+        "js": "https://cdn.equalweb.com/",
+        "acc": "https://access.equalweb.com/"
+    },
+    "btnStyle": {
+        "vPosition": [
+            "80%",
+            null
+        ],
+        "scale": [
+            "0.8",
+            null
+        ],
+        "color": {
+            "main": "#e6051f",
+            "second": "#ffffff"
+        },
+        "icon": {
+            "type": 7,
+            "shape": "semicircle"
+        }
+    }
+};
+(function(doc, head, body){
+    var coreCall             = doc.createElement('script');
+    coreCall.src             = interdeal.domains.js + 'core/4.6.3/accessibility.js';
+    coreCall.defer           = true;
+    coreCall.integrity       = 'sha512-+5lbZsIsOqyfEswqMIHyOrR4jrrBUQ0aVv0KYYoZ6/jTkKsTIqAHwkHgFEoRDM3NbjZ0lOxR0qSslbA3NIXrfw==';
+    coreCall.crossOrigin     = 'anonymous';
+    coreCall.setAttribute('data-cfasync', true );
+    body? body.appendChild(coreCall) : head.appendChild(coreCall);
+})(document, document.head, document.body);
+</script>
         <style>
             .campaign .container .message_campaign::before {
                 content: '<?= $b->generalInfo->field_titulo_lo_ultimo ?>';

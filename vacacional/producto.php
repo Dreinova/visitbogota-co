@@ -17,7 +17,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
         </div>
         </div>
     </section>
-    <h3>Conoce los atractivos turisticos</h3>
+    <h3>Conoce los atractivos turísticos</h3>
     <section class="portal_list">
         <div class="right">
             <div class="grid-atractivos">
@@ -43,7 +43,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
     <section class="banco-imagenes-grid">
         <article style="background-image:url(https://res.cloudinary.com/instituto-turismo-bogota/video/upload/w_1200/v1676572635/videos%20banco%20de%20imagenes/35.opt.idt_mitos_y_leyendas_color_final_1_rpp2sh.jpg);"><a href="<?=$prodTax->field_link_youtube?>"><h4><img src="/banco-imagenes/img/film.png" alt="video"> <?=$pi_bogota[19]?></h4></a></article>
         <article style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2022-03/pexels-photo-7613843.jpeg);"><a href="<?=$prodTax->field_link_bi?>"><h4><img src="/vacacional/images/camera.svg" alt="banco">Banco de imágenes</h4></a></article>
-        <article style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2022-12/169_Ricardo_ygda6m.jpg);"><a href="<?=isset($prodTax->field_link_pla) ? $prodTax->field_link_pla : '/es/plan-bogota/'?>"><h4><img src="/vacacional/images/logo_pb-icon.svg" alt="banco"> <?=$pi_bogota[18]?></h4></a></article>
+        <article style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2022-12/169_Ricardo_ygda6m.jpg);"><a href="<?=isset($prodTax->field_link_pla) ? $prodTax->field_link_pla : '/es/experiencias-turisticas/'?>"><h4><img src="/vacacional/images/logo_pb-icon.svg" alt="banco"> <?=$pi_bogota[18]?></h4></a></article>
     </section>
     <? include 'includes/imports.php'?>
    

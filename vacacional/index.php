@@ -6,11 +6,11 @@ if($lang === "es"){
 
   // Español
   $descubre_bogota = "Descubre Bogotá";
-  $bogota_natural = "Bogotá Natural";
-  $bogota_cultural = "Bogotá Cultural";
-  $experiencias_turisticas = "Experiencias Turísticas";
+  $bogota_natural = "Bogotá natural";
+  $bogota_cultural = "Bogotá cultural";
+  $experiencias_turisticas = "Experiencias turísticas";
   $planifica_tu_viaje = "Planifica tu viaje";
-  $informacion_util = "Información Útil";
+  $informacion_util = "Información al viajero";
   $informacion_general = "Información general";
   $como_moverse_en_bogota = "¿Cómo moverse en Bogotá?";
   $descargables = "Descargables - Guías, Tips, Catálogos...";
@@ -19,6 +19,8 @@ if($lang === "es"){
   $encuentra_un_lugar_para_tu_evento = "Encuentra un lugar para tu evento";
   $encuentra_proveedores_para_tu_evento = "Encuentra proveedores para tu evento";
   $publicaciones_recientes = "Publicaciones recientes";
+  $Porcategoría = "Por categoría";
+  $Porzona = "Por zona";
 }else{
 // Inglés
 $descubre_bogota = "Discover Bogotá";
@@ -35,6 +37,8 @@ $porque_bogota = "Why Bogotá?";
 $encuentra_un_lugar_para_tu_evento = "Find a Place for Your Event";
 $encuentra_proveedores_para_tu_evento = "Find Suppliers for Your Event";
 $publicaciones_recientes = "Recent Publications";
+$Porcategoría = "By category";
+$Porzona = "By area";
 }
 ?>
 
@@ -84,7 +88,10 @@ $publicaciones_recientes = "Recent Publications";
       <h2><img src="images/exp_tur.svg" alt="descubre"><?=$experiencias_turisticas?></h2>
       <div class="exp-content">
         <article class="category">
-          <img src="images/por_cat.svg" alt="Por categoria">
+          <div class="tagFlag">
+          <svg width="543" height="52" viewBox="0 0 543 52" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5C0 2.23858 2.23858 0 5 0H537.185C540.834 0 543.254 3.78219 541.725 7.09529L533.967 23.9047C533.353 25.2342 533.353 26.7658 533.967 28.0953L541.725 44.9047C543.254 48.2178 540.834 52 537.185 52H4.99999C2.23856 52 0 49.7614 0 47V5Z" fill="#E50728"/><path d="M29.375 13.75L32 16.375L37.25 11.125M29.375 26L32 28.625L37.25 23.375M29.375 38.25L32 40.875L37.25 35.625M43.375 26H62.625M43.375 38.25H62.625M43.375 13.75H62.625" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><?=$Porcategoría?></span>
+          </div>
           <section class="splide" id="porcategoria" aria-label="Basic Structure Example">
         <div class="splide__arrows">
           <button class="splide__arrow splide__arrow--prev">
@@ -101,7 +108,10 @@ $publicaciones_recientes = "Recent Publications";
       </section>
         </article>
         <article class="zone">
-          <img src="images/por_zona.svg" alt="Por Zona">
+        <div class="tagFlag">
+          <svg width="543" height="52" viewBox="0 0 543 52" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5C0 2.23858 2.23858 0 5 0H537.185C540.834 0 543.254 3.78219 541.725 7.09529L533.967 23.9047C533.353 25.2342 533.353 26.7658 533.967 28.0953L541.725 44.9047C543.254 48.2178 540.834 52 537.185 52H4.99999C2.23856 52 0 49.7614 0 47V5Z" fill="#E50728"/><path d="M29.375 13.75L32 16.375L37.25 11.125M29.375 26L32 28.625L37.25 23.375M29.375 38.25L32 40.875L37.25 35.625M43.375 26H62.625M43.375 38.25H62.625M43.375 13.75H62.625" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><?=$Porzona?></span>
+          </div>
           <section class="splide" id="porzona" aria-label="Basic Structure Example">
         <div class="splide__arrows">
           <button class="splide__arrow splide__arrow--prev">

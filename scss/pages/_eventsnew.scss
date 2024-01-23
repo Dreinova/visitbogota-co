@@ -10,10 +10,10 @@
     }
   }
 
-  background-color: #e8f1ff;
+  background-color: #fff;
 
   main {
-    background-color: #e8f1ff;
+    background-color: #fff;
   }
   .banner {
     background-attachment: fixed;
@@ -224,7 +224,6 @@
     }
     aside.filters {
       align-items: flex-end;
-      background-color: #e8f1ff;
       display: flex;
       flex-direction: column;
       max-width: 380px;
@@ -478,7 +477,7 @@
           position: relative;
           border-radius: 21px;
           overflow: hidden;
-          border: 1px solid #ff7c47;
+          border: 1px solid #e50728;
           border-radius: 21px;
           height: 100%;
           background: #fff;
@@ -540,7 +539,7 @@
             }
           }
           &_date {
-            background-color: #ff7c47;
+            background-color: #e50728;
             border-radius: 25px;
             color: #fff;
             display: flex;
@@ -731,7 +730,7 @@
 }
 
 .aclaracion {
-  background-color: #ff7c47;
+  background-color: #e50728;
   display: flex;
   align-items: center;
   margin: 50px 0;

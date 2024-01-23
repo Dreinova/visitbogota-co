@@ -199,9 +199,9 @@ const filterPlans = (
         if (data.length > 0) {
           data.forEach((plan) => {
             template = `
-            <a href="/${actualLang}/plan-bogota/plan/${get_alias(plan.title)}-${
-              plan.nid
-            }" class="find_plan-grid__item" 
+            <a href="/${actualLang}/experiencias-turisticas/plan/${get_alias(
+              plan.title
+            )}-${plan.nid}" class="find_plan-grid__item" 
              data-persons="${plan.field_maxpeople}" data-cat="${
               plan.field_categoria_comercial
             }" data-zone="${
@@ -378,8 +378,15 @@ function without(array, what) {
 }
 
 $("#resetfilters").click(function () {
-  history.pushState(null, "", `/${actualLang}/plan-bogota/encuentra-tu-plan`);
-  setCookie("prevUrl", `/${actualLang}/plan-bogota/encuentra-tu-plan`);
+  history.pushState(
+    null,
+    "",
+    `/${actualLang}/experiencias-turisticas/encuentra-tu-plan`
+  );
+  setCookie(
+    "prevUrl",
+    `/${actualLang}/experiencias-turisticas/encuentra-tu-plan`
+  );
   const urlSearchParams = new URLSearchParams(window.location.search);
   const searchParam = urlSearchParams.get("search");
   document
@@ -839,7 +846,9 @@ function absoluteURL(str) {
 if (document.querySelector(".intern .btn-back")) {
   document
     .querySelectorAll(".intern .btn-back")
-    .forEach((el) => (el.href = "/es/plan-bogota/encuentra-tu-plan"));
+    .forEach(
+      (el) => (el.href = "/es/experiencias-turisticas/encuentra-tu-plan")
+    );
 }
 if (document.querySelector(".categoriessection .categories")) {
   fetch(`../mice/get/filter.php?lang=${actualLang}`, {
@@ -857,7 +866,7 @@ if (document.querySelector(".categoriessection .categories")) {
           return el.field_home_view == "1";
         })
         .forEach(({ name, tid, field_format_icon }) => {
-          let template = `<a href="https://www.bogotadc.travel/es/plan-bogota/encuentra-tu-plan?categories=${tid}"><img src="https://bogotadc.travel${field_format_icon}" alt="${name}"><small>${name}</small></a>`;
+          let template = `<a href="https://www.bogotadc.travel/es/experiencias-turisticas/encuentra-tu-plan?categories=${tid}"><img src="https://bogotadc.travel${field_format_icon}" alt="${name}"><small>${name}</small></a>`;
           document.querySelector(".categoriessection .categories").innerHTML +=
             template;
         });

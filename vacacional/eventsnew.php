@@ -30,7 +30,7 @@
 ?>
 <main data-agenda="<?=$_GET['idAgenda']?>">
     <section class="banner"
-        style="background-image:url(<?= isset($agenda->field_banner_principal_agenda) && $agenda->field_banner_principal_agenda != "" ? $agenda->field_banner_principal_agenda : "https://images.pexels.com/photos/2897462/pexels-photo-2897462.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"?>);">
+        style="background-image:url(https://bogotadc.travel<?= isset($agenda->field_banner_principal_agenda) && $agenda->field_banner_principal_agenda != "" ? $agenda->field_banner_principal_agenda : "https://images.pexels.com/photos/2897462/pexels-photo-2897462.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"?>);">
         <?= isset($agenda->field_banner_principal_agenda) && $agenda->field_banner_principal_agenda != "" ? "" : "<h1 class='uppercase'>Eventos</h1>"?>
     </section>
     <section class="agendaInfo">
@@ -57,7 +57,7 @@
                 ?>
                     <li>
                         <a href="<?=$links[$i]?>">
-                            <img loading="lazy" class="lazyload" data-src="<?php echo $imageURL; ?>" src="https://picsum.photos/20/20" alt="Reserva aquí tu viaje al Festival de la igualdad">
+                            <img loading="lazy" class="lazyload" data-src="<?php echo "https://bogotadc.travel" .$imageURL; ?>" src="https://picsum.photos/20/20" alt="Reserva aquí tu viaje al Festival de la igualdad">
                             <small><?=$titles[$i]?></small>
                         </a>
                     </li>

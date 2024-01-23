@@ -5,7 +5,7 @@ include "includes/head.php";
 <main>
     <form action="" id="disenaForm">
         <div class="dtv-home__banner" style="background-image:url(https://res.cloudinary.com/instituto-turismo-bogota/image/upload/w_1200/v1676573583/Banco%20de%20images/PlazadeToros_30112022_RoyVega_16_ffuequ.jpg);">
-            <h1 class="ms900 uppercase">Diseña tu viaje</h1>
+            <h1 class="ms900 uppercase">Planifica tu viaje</h1>
             <div class="dtv-home__categories">
                 <div class="container">
                     <h2>¿QUÉ PODRÍA INTERESARTE EN TU VISITA?</h2>

@@ -137,7 +137,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
           <h3 class="ms700">Buscar</h3>
         </summary>
         <div class="cont">
-          <form action="/<?=$lang?>/plan-bogota/encuentra-tu-plan" method="GET" onsubmit="return validateForm(event)"
+          <form action="/<?=$lang?>/experiencias-turisticas/encuentra-tu-plan" method="GET" onsubmit="return validateForm(event)"
             id="searchForm" autocomplete="off">
             <span>
               <div class="input">

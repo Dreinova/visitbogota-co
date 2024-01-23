@@ -3021,7 +3021,6 @@ function useFilters(cattype) {
         let event = data[i];
         var thumbnail = data[i].field_cover_image;
         //Campo calificacion ->  data[i].field_calificacion
-
         const dateStart = new Date(event.field_date);
         const optionsdateStart = {
           month: "short",
@@ -3047,7 +3046,7 @@ function useFilters(cattype) {
           event.nid
         }" class="single_event">
                     <div class="single_event_img">
-                        <img loading="lazy" data-src="${thumbnail}" src="https://picsum.photos/20/20"
+                        <img loading="lazy" data-src="https://bogotadc.travel${thumbnail}" src="https://picsum.photos/20/20"
                             alt="evento" class="lazyload">
                     </div>
                     <div class="info">
@@ -3198,9 +3197,9 @@ async function getOfertasRel(atractivo, localidad, zona, alojamiento) {
         for (let index = 0; index < limite; index++) {
           const plan = data[index];
           const template = `
-            <a href="/${actualLang}/plan-bogota/plan/${get_alias(plan.title)}-${
-            plan.nid
-          }" class="ofertasRel-grid__item" 
+            <a href="/${actualLang}/experiencias-turisticas/plan/${get_alias(
+            plan.title
+          )}-${plan.nid}" class="ofertasRel-grid__item" 
                data-persons="${plan.field_maxpeople}" data-cat="${
             plan.field_categoria_comercial
           }" data-zone="${plan.field_pb_oferta_zona}">

@@ -151,7 +151,7 @@
     <p class="prices-total ms900">$<?=number_format($plan->field_pd,0,",",".")?></p>
     <div class="discount ms900">- <?=$plan->field_percent?>%</div>
   </div>
-  <form action="/plan-bogota/set/restPost.php" method="POST" id="planForm">
+  <form action="/experiencias-turisticas/set/restPost.php" method="POST" id="planForm">
     <input type="text" placeholder="Nombre" class="ms500" id="uname" name="uname"  />
     <input type="email" placeholder="Correo" class="ms500" id="uemail" name="uemail" />
     <input type="tel" placeholder="Celular" class="ms500" id="uphone" name="uphone" />
@@ -176,7 +176,7 @@
       <span class="politics_checkbox_mark"></span>
       <label for="politics"
         >Acepto los
-        <a href="/<?=$lang?>/plan-bogota/politica-tratamiento-datos-personales" target="_blank">términos y condiciones.</a></label
+        <a href="/<?=$lang?>/experiencias-turisticas/politica-tratamiento-datos-personales" target="_blank">términos y condiciones.</a></label
       >
     </div>
     <button type="submit" class="ms900">RESERVA GRATIS AHORA</button>

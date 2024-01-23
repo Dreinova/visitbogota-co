@@ -3,7 +3,7 @@
     include 'includes/head.php';
     $event = $b->events($_GET["id"] , "all", "all", "all");
 ?>
-<main style="background-image: url(<?=$event->field_cover_image?>);" data-eventid="<?=$_GET[" id"]?>">
+<main style="background-image: url(https://bogotadc.travel<?=$event->field_cover_image?>);" data-eventid="<?=$_GET[" id"]?>">
     <div class="container">
         <h1 class="uppercase"><?=$event->title?></h1>
         <?php 

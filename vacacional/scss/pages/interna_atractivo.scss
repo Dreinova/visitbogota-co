@@ -27,7 +27,7 @@
     }
     .details {
       display: grid;
-      grid-template-columns: auto auto 450px auto;
+      grid-template-columns: 1fr;
       gap: 20px;
       border-bottom: 1px solid #d5d5d5;
       padding-bottom: 60px;
@@ -38,6 +38,7 @@
         align-items: center;
         display: flex;
         width: 100%;
+        gap: 15px;
         span,
         .fxcol,
         a {

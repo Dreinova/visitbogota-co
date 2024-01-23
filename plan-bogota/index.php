@@ -8,7 +8,7 @@
         "
       >
         <div class="container">
-          <form action="/<?=$lang?>/plan-bogota/encuentra-tu-plan" method="GET" onsubmit="return validateForm()" id="searchForm" autocomplete="off">
+          <form action="/<?=$lang?>/experiencias-turisticas/encuentra-tu-plan" method="GET" onsubmit="return validateForm()" id="searchForm" autocomplete="off">
             <img src="images/logo_pb.svg" alt="plan_bogota" />
             <h2 class="ms900"><?=$pb->generalInfo->field_ui_1?></h2>
             <span>

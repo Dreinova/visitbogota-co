@@ -53,11 +53,11 @@ const getProducts = async () => {
         item.nid
       }" value="${
         item.nid
-      }" /><div class="content"><img src="https://bogotadc.travel${
+      }" /><div class="content"><div class="img"><img src="https://bogotadc.travel${
         item.field_icon
-      }" alt="${get_alias(item.title)}" />${
+      }" alt="${get_alias(item.title)}" /></div><span>${
         item.title
-      }</div></label><input name="subproducts-${
+      }</span></div></label><input name="subproducts-${
         item.nid
       }" type="hidden" id="subproducts-${item.nid}" value="${subproducts
         .map((sub) => sub.nid)
@@ -150,9 +150,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       allCats.push(document.querySelector(`#subproducts-${cat}`).value);
     });
     fetch(
-      `g/getAtractivos/?category=${allCats.join("+")}&para=${
-        getFormValues().para
-      }`
+      `/planifica-tu-viaje/g/getAtractivos/?category=${allCats.join(
+        "+"
+      )}&para=${getFormValues().para}`
     )
       .then((res) => res.json())
       .then(async (data) => {
