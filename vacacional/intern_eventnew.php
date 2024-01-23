@@ -3,7 +3,7 @@
     include 'includes/head.php';
     $event = $b->events($_GET["id"] , "all", "all", "all");
 ?>
-<main style="background-image: url(https://bogotadc.travel<?=$event->field_cover_image?>);" data-eventid="<?=$_GET[" id"]?>">
+<main style="background-image: url(https://files.visitbogota.co<?=$event->field_cover_image?>);" data-eventid="<?=$_GET[" id"]?>">
     <div class="container">
         <h1 class="uppercase"><?=$event->title?></h1>
         <?php 
@@ -89,7 +89,7 @@
             </div>
         <?php } ?>
         <a href="http://maps.google.com/maps?q=<?=$event->field_location?>" class="map">
-            <div class="map_lupa"><img src="/img/lupa_blue.svg"
+            <div class="map_lupa"><img src="/img/lupa_gray.svg"
                     alt="lupa"><small><?=$b->generalInfo->field_texto_como_llegar?></small></div>
             <img src="/img/map.jpg" alt="map">
         </a>

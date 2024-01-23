@@ -91,6 +91,34 @@
           background-color: var(--Rojo, #e50728);
         }
       }
+      .grid-hotels {
+        li {
+          a {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0px 0px 6.8px 0px rgba(0, 0, 0, 0.5);
+            .data {
+              justify-content: space-evenly;
+              * {
+                color: #373737 !important;
+              }
+              h1 {
+                font-size: 3rem;
+                @media only screen and (max-width: 1199px) {
+                  font-size: 2rem;
+                }
+              }
+              .address {
+                font-size: 1.8rem;
+                color: #626262;
+                margin-bottom: 10px;
+                @media only screen and (max-width: 1199px) {
+                  font-size: 1.4rem;
+                }
+              }
+            }
+          }
+        }
+      }
     }
     .gallery {
       &-container {

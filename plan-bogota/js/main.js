@@ -210,7 +210,7 @@ const filterPlans = (
               plan.field_destacar_en_categoria
             }">
              <div class="image">
-             <img loading="lazy" class="lazyload" data-src="${
+             <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co${
                plan.field_pb_oferta_img_listado
              }" src="https://via.placeholder.com/330x240" alt="${plan.title}"/>
              </div>
@@ -838,7 +838,7 @@ if (document.querySelector(".faqs .accordion")) {
 
 function absoluteURL(str) {
   if (str.indexOf("https") == -1) {
-    return "https://bogotadc.travel" + str.replace(/\s/g, "");
+    return "https://files.visitbogota.co" + str.replace(/\s/g, "");
   } else {
     return str;
   }
@@ -866,7 +866,7 @@ if (document.querySelector(".categoriessection .categories")) {
           return el.field_home_view == "1";
         })
         .forEach(({ name, tid, field_format_icon }) => {
-          let template = `<a href="https://www.bogotadc.travel/es/experiencias-turisticas/encuentra-tu-plan?categories=${tid}"><img src="https://bogotadc.travel${field_format_icon}" alt="${name}"><small>${name}</small></a>`;
+          let template = `<a href="/${actualLang}/experiencias-turisticas/encuentra-tu-plan?categories=${tid}"><img src="https://files.visitbogota.co${field_format_icon}" alt="${name}"><small>${name}</small></a>`;
           document.querySelector(".categoriessection .categories").innerHTML +=
             template;
         });

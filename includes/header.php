@@ -70,10 +70,11 @@ const shareWeb = async () => {
       <div class="right">
 
         <?php
-          $json = file_get_contents("menu.json");
-          $json_data = json_decode($json, true);
+          
   
           if (isset($project_folder) && file_exists("menu.json")) {
+            $json = file_get_contents("menu.json");
+          $json_data = json_decode($json, true);
           ?>
               <nav>
                   <ul>
@@ -100,7 +101,10 @@ const shareWeb = async () => {
   
                   </ul>
               </nav>
-          <?php } else { ?>
+          <?php } else {
+             $json = file_get_contents("../menu.json");
+             $json_data = json_decode($json, true);
+            ?>
               <nav>
                   <ul>
                       <?php

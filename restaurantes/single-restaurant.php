@@ -68,7 +68,7 @@ $venue = $venue[0];
               for ($i=0; $i < count($galItems) ; $i++) { 
                 $galItem = $galItems[$i];
               ?>
-              <li class="splide__slide"><img src="https://bogotadc.travel<?=$galItem?>" alt=""></li>
+              <li class="splide__slide"><img src="https://files.visitbogota.co<?=$galItem?>" alt=""></li>
               <?php 
               }
               ?>
@@ -80,13 +80,7 @@ $venue = $venue[0];
     <?php } ?>
 
     <div class="recomendacion">
-      <small>El contenido de este sitio web es de carácter informativo, su propósito es integrar las
-        diferentes ofertas, tanto de locaciones como de proveedores relacionados con turismo de eventos y reuniones
-        (MICE)
-        En Bogotá. Los trámites relacionados con compras, reservas, cancelaciones y cualquier negociación en general son
-        adelantados directamente entre usuarios y empresarios sin intervención de la entidad. Las solicitudes y quejas
-        relacionadas con los productos y servicios publicados en esta plataforma, son responsabilidad exclusiva de los
-        empresarios y usuarios como partes de la relación comercial.</small>
+      <small>El contenido de este sitio web es de carácter informativo, su propósito es integrar las diferentes ofertas, tanto hoteles como restaurantes en Bogotá. Los trámites relacionados con compras, reservas, cancelaciones y cualquier negociación en general son adelantados directamente entre usuarios y empresarios sin intervención de la entidad. Las solicitudes y quejas relacionadas con los productos y servicios publicados en esta plataforma, son responsabilidad exclusiva de los empresarios y usuarios como partes de la relación comercial.</small>
     </div>
     <div class="relHotels">
       <h2>

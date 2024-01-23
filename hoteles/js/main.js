@@ -231,7 +231,7 @@ function useFilters(cattype) {
 
 function absoluteURL(str) {
   if (str.indexOf("https") == -1) {
-    return "https://bogotadc.travel" + str.replace(/\s/g, "");
+    return "https://files.visitbogota.co" + str.replace(/\s/g, "");
   } else {
     return str;
   }
@@ -406,39 +406,44 @@ function relHotels(type, zone, aforo) {
             }
             var template =
               `
-            <li>
-            <a href="${venueUrl}">
-             <figure class="column w_30 basic_bg" style="background-image:url(` +
+              <li>
+              <a href="${venueUrl}">
+               <figure class="column w_30 basic_bg" style="background-image:url(` +
               absoluteURL(thumbnail) +
               `">
-                    <img src="` +
+                      <img src="` +
               absoluteURL(thumbnail) +
               `" alt="` +
               venue.title +
               `" />
-                </figure>
-              <div class="data">
-                 <h1>
-            ${venue.title}
-            </h1>
-                      <div class="address">
-                        <img src="img/address.svg" alt="address" /><span> ${
-                          venue.field_hadress ? venue.field_hadress : ""
-                        } </span>
-                      </div>
-                      <div class="phone">
-                        <img src="img/tel.svg" alt="address" /><span>Tel: ${
-                          venue.field_htel ? venue.field_htel : ""
-                        } </span>
-                      </div>
-                      <div class="email">
+                  </figure>
+                <div class="data">
+                   <h1>
+              ${venue.title}
+              </h1>
+                        <div class="address">
                           <span> ${
-                            venue.fild_hweb ? venue.fild_hweb : ""
+                            venue.field_foodzone_1 ? venue.field_foodzone_1 : ""
                           } </span>
-                      </div>
-              </div>
-            </a>
-          </li>`;
+                        </div>
+                        <div class="address">
+                          <img src="img/ubicacion_icon.svg" alt="address" /><span> ${
+                            venue.field_hadress ? venue.field_hadress : ""
+                          } </span>
+                        </div>
+                        <div class="phone">
+                          <img src="img/tel_icon.svg" alt="telefono" /><span>Tel: ${
+                            venue.field_htel ? venue.field_htel : ""
+                          } </span>
+                        </div>
+                        <div class="email">
+                            <span> ${
+                              venue.fild_hweb ? venue.fild_hweb : ""
+                            } </span>
+                        </div>
+                </div>
+              </a>
+            </li>`;
             containerGridVenues.innerHTML += template;
           }
         }

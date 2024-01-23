@@ -1,12 +1,12 @@
-<?php $bodyClass="intern"; include "includes/head.php"; $plan = $pb->getPlans($_GET["planid"]); $company =  $pb->getCompany($plan->field_pb_oferta_empresa); var_dump($plan->field_pb_oferta_empresa); ?>
+<?php $bodyClass="intern"; include "includes/head.php"; $plan = $pb->getPlans($_GET["planid"]); $company =  $pb->getCompany($plan->field_pb_oferta_empresa); ?>
 <body class="intern">
   <main>
-    <img src="<?=$plan->field_img != "" ? $plan->field_img : $plan->field_pb_oferta_img_listado?>" alt="Imagen Banner" id="mi-imagen" style="display:none;">
+    <img src="https://files.visitbogota.co<?=$plan->field_img != "" ? $plan->field_img : $plan->field_pb_oferta_img_listado?>" alt="Imagen Banner" id="mi-imagen" style="display:none;">
     <div
     id="container"
       class="intern-banner"
       style="
-        background-image: url(<?=$plan->field_img != "" ? $plan->field_img : $plan->field_pb_oferta_img_listado?>);
+        background-image: url(https://files.visitbogota.co<?=$plan->field_img != "" ? $plan->field_img : $plan->field_pb_oferta_img_listado?>);
       "
     >
       <div class="content">
@@ -36,7 +36,7 @@
           <img
             loading="lazy"
             src="https://picsum.photos/20/20"
-            data-src="<?=$plan->field_gal_1 ? $plan->field_gal_1 : $plan->field_gal_2?>"
+            data-src="https://files.visitbogota.co<?=$plan->field_gal_1 ? $plan->field_gal_1 : $plan->field_gal_2?>"
             alt="gallery"
             class="lazyload"
             id="principal_img"
@@ -47,7 +47,7 @@
                 <img
                   loading="lazy"
                   src="https://picsum.photos/20/20"
-                  data-src="<?=$plan->{"field_gal_". $i}?>"
+                  data-src="https://files.visitbogota.co<?=$plan->{"field_gal_". $i}?>"
                   alt="gallery"
                   class="lazyload"
                 />
@@ -136,7 +136,7 @@
       <div
       class="right"
       style="
-      background-image: url(<?=$plan->field_img != "" ? $plan->field_img : $plan->field_pb_oferta_img_listado?>);
+      background-image: url(https://files.visitbogota.co<?=$plan->field_img != "" ? $plan->field_img : $plan->field_pb_oferta_img_listado?>);
     "
   >
 </div>

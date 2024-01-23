@@ -93,6 +93,9 @@ section {
       margin-bottom: 30px;
       padding: 20px 0;
       li {
+        &:hover {
+          opacity: 0.5;
+        }
         img {
           width: 100%;
           border-radius: 10px;

@@ -25,7 +25,7 @@
     }
     h2 {
       color: var(--blanco, #fff);
-      font-size: 60px;
+      font-size: calc(60px - var(--fontSizeReal));
       font-style: normal;
       font-weight: 700;
       line-height: normal;
@@ -152,7 +152,7 @@
       }
       h3 {
         color: var(--gris-oscuro, #373737);
-        font-size: 35px;
+        font-size: calc(35px - var(--fontSizeReal));
         font-style: normal;
         font-weight: 700;
         line-height: normal;
@@ -211,7 +211,7 @@
 
         h4 {
           color: var(--gris-oscuro, #373737);
-          font-size: 25px;
+          font-size: calc(25px - var(--fontSizeReal));
           font-style: normal;
           font-weight: 600;
           line-height: normal;
@@ -357,7 +357,7 @@
             }
           }
           span {
-            color: #fff;
+            color: var(--gris-oscuro, #373737);
             text-align: center;
             font-size: 12px;
             font-style: normal;

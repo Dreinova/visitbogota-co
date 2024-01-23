@@ -17,7 +17,7 @@ $result3 = $tarjetaCiudad->getCardOferta('3110');
                         <h2 class="ms900 uppercase">Tiquete electrónico</h2>
                     </div>
                     <div class="content">
-                        <img src="https://bogotadc.travel<?=$result1[0]->field_pb_oferta_img_listado?>"
+                        <img src="https://files.visitbogota.co<?=$result1[0]->field_pb_oferta_img_listado?>"
                             alt="<?=$result1[0]->title?>">
                         <div class="txt">
                             <h3 class="ms900"><?=$result1[0]->title?></h3>
@@ -309,7 +309,7 @@ $result3 = $tarjetaCiudad->getCardOferta('3110');
                         <h2 class="ms900 uppercase">Tiquete electrónico</h2>
                     </div>
                     <div class="content">
-                        <img src="https://bogotadc.travel<?=$result2[0]->field_pb_oferta_img_listado?>"
+                        <img src="https://files.visitbogota.co<?=$result2[0]->field_pb_oferta_img_listado?>"
                             alt="<?=$result2[0]->title?>">
                         <div class="txt">
                             <h3 class="ms900"><?=$result2[0]->title?></h3>
@@ -601,7 +601,7 @@ $result3 = $tarjetaCiudad->getCardOferta('3110');
                         <h2 class="ms900 uppercase">Tiquete electrónico</h2>
                     </div>
                     <div class="content">
-                        <img src="https://bogotadc.travel<?=$result3[0]->field_pb_oferta_img_listado?>"
+                        <img src="https://files.visitbogota.co<?=$result3[0]->field_pb_oferta_img_listado?>"
                             alt="<?=$result3[0]->title?>">
                         <div class="txt">
                             <h3 class="ms900"><?=$result3[0]->title?></h3>

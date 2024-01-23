@@ -185,7 +185,11 @@ function useFilters(cattype) {
             `</h1></a>  
                     <h2 class="uppercase">
                     ${data[i].field_zonegroup_1}
-                    ${data[i].field_foodzone_1 ? `, ${data[i].field_foodzone_1}`:``}
+                    ${
+                      data[i].field_foodzone_1
+                        ? `, ${data[i].field_foodzone_1}`
+                        : ``
+                    }
                     </h2>
                       <div class="address">
                         <img src="img/ubicacion_icon.svg" alt="address" /><span> ${
@@ -233,7 +237,7 @@ function useFilters(cattype) {
 
 function absoluteURL(str) {
   if (str.indexOf("https") == -1) {
-    return "https://bogotadc.travel" + str.replace(/\s/g, "");
+    return "https://files.visitbogota.co" + str.replace(/\s/g, "");
   } else {
     return str;
   }

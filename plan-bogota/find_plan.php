@@ -38,7 +38,6 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
       <h1 class="ms900">Encuentra tu plan en Bogotá</h1>
       <?php } ?>
     </div>
-    <img src="<?=$project_base?>images/logo_pb.svg" alt="logopb" />
   </div>
   <main>
     <aside class="left filters">

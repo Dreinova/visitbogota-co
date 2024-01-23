@@ -77,7 +77,7 @@ async function getRecentBlogs() {
         <img src="images/mdi_tag.svg" alt="tag"/>
         ${blog.field_prod_rel_1}
         </small>
-          <h2 class="uppercase">${blog.title}</h2>
+          <h2>${blog.title}</h2>
         </div>
       </a>`;
     blogContainer.innerHTML += template;

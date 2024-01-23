@@ -56,14 +56,14 @@ include "includes/head.php";
     
                 </ul>
             </div>
-            <section class="start">
+            <!-- <section class="start">
                 <div class="container">
                     <h3 class="ms700">¡Conoce las ofertas y adquiere tu</h3>
                     <h4 class="ms900">TARJETA CIUDAD</h4>
                     <h5 class="ms700">antes de empezar tu viaje!</h5>
                 </div>
                 <a href="/<?=$lang?>/tarjeta-ciudad" class="btn ms900">¡Adquiérela aquí!</a>
-            </section>
+            </section> -->
         </div>
     </form>
 </main>

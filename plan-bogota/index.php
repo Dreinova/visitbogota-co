@@ -9,7 +9,6 @@
       >
         <div class="container">
           <form action="/<?=$lang?>/experiencias-turisticas/encuentra-tu-plan" method="GET" onsubmit="return validateForm()" id="searchForm" autocomplete="off">
-            <img src="images/logo_pb.svg" alt="plan_bogota" />
             <h2 class="ms900"><?=$pb->generalInfo->field_ui_1?></h2>
             <span>
               <div class="left">
@@ -56,10 +55,10 @@
           <h3 class="ms900"><?=$pb->generalInfo->field_ui_3?></h3>
           <div class="recommendation-grid">
             <?php for ($i=0; $i < count($plans); $i++) { $plan = $plans[$i]; ?>
-              <a href="/<?=$lang?><?=$project_base?>plan/<?=$pb->get_alias($plan->title)?>-<?=$plan->nid?>" class="recommendation-grid__item">
+              <a href="/<?=$lang?>/experiencias-turisticas/plan/<?=$pb->get_alias($plan->title)?>-<?=$plan->nid?>" class="recommendation-grid__item">
               <div class="image">
                 <img
-                  src="https://bogotadc.travel<?= $plan->field_pb_oferta_img_listado?>"
+                  src="https://files.visitbogota.co<?= $plan->field_pb_oferta_img_listado?>"
                   alt="<?= $plan->title?>"
                 />
               </div>
@@ -83,7 +82,7 @@
               </a>
             <?php } ?>
           </div>
-          <a href="/<?=$lang?><?=$project_base?>encuentra-tu-plan" class="btn alloffers uppercase ms900"
+          <a href="/<?=$lang?>/experiencias-turisticas/encuentra-tu-plan" class="btn alloffers uppercase ms900"
             ><?=$pb->generalInfo->field_ui_4?></a
           >
         </div>

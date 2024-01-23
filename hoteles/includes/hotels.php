@@ -42,12 +42,9 @@ class hotels extends bogota
         }
         return $gnrl;
     }
-    public function getHotels($zones,$id="all",$tipos_de_hotel,$servicios_de_hoteles,$rangos_de_precios_hoteles )
-    {
-       $querystr = "webhotels/".$id."/".$zones."/".$tipos_de_hotel."/".$servicios_de_hoteles."/".$rangos_de_precios_hoteles;
+    public function getHotels($zones="all",$id="all",$tipos_de_hotel="all",$servicios_de_hoteles="all",$rangos_de_precios_hoteles="all" ){
+        $querystr = "webhotels/".$id."/".$zones."/".$tipos_de_hotel."/".$servicios_de_hoteles."/".$rangos_de_precios_hoteles;
         $firstqueryfilter = true;
-
-        //echo $querystr;
         $result = $this->query($querystr);
         return $result;
     }

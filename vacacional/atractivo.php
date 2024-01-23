@@ -42,7 +42,7 @@ if($galItems[0] != ''){
     for ($i = 0; $i < count($galItems); $i++) {
         $galItem = $galItems[$i];
         ?>
-        <li class="gallery-grid__item"><a data-fancybox="gallery" data-src="https://bogotadc.travel<?=trim($galItem," ")?>"><img src="https://bogotadc.travel<?=trim($galItem," ")?>" alt="https://bogotadc.travel<?=trim($galItem," ")?>"></a></li>
+        <li class="gallery-grid__item"><a data-fancybox="gallery" data-src="https://files.visitbogota.co<?=trim($galItem," ")?>"><img src="https://files.visitbogota.co<?=trim($galItem," ")?>" alt="https://files.visitbogota.co<?=trim($galItem," ")?>"></a></li>
         <?php 
         // Agregar una condición para repetir la cuadrícula cada 6 elementos
         if (($i + 1) % 6 == 0 && $i != count($galItems) - 1) {
