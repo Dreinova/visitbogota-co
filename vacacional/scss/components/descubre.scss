@@ -117,6 +117,11 @@ section {
     }
   }
   &.exp {
+    & > h2 {
+      @media only screen and (max-width: 768px) {
+        align-items: center !important;
+      }
+    }
     .exp-content {
       border-radius: 30px;
       background: rgba(255, 255, 255, 0.9);
@@ -127,6 +132,20 @@ section {
       gap: 30px;
       @media only screen and (max-width: 768px) {
         flex-direction: column;
+      }
+      @media only screen and (max-width: 480px) {
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      h3{
+        @media only screen and (max-width: 480px) {
+          display: none !important;
+        }
+      }
+      .info{
+        .ms100{
+          display: none !important;
+        }
       }
       article {
         position: relative;
