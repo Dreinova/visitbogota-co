@@ -30,7 +30,9 @@ if($lang === "es"){
   $discover_bogota = "Descubre Bogotá";
   $useful_information = "Información al viajero";
   $contact_us = "Contáctanos";
+  $turista = "Atención al turista";
 }
+
 else{
   $experiencia_turisticas = "Tourist Experiences";
   $planifica_tu_viaje = "Plan Your Trip";
@@ -62,6 +64,8 @@ else{
   $discover_bogota = "Discover Bogotá";
   $useful_information = "Traveler information";
   $contact_us = "Contact Us";
+
+$turista = "Tourist Assistance";
 
 }
 if (!$banners) {
@@ -146,7 +150,7 @@ if (!$planes) {
         <?= $b->generalInfo->field_turista_txt ?> <a href="tel:<?= $b->generalInfo->field_turista ?>"> <?= $b->generalInfo->field_turista ?></a>
         </li>
         <li>
-        <a href="https://wa.me/<?= $b->generalInfo->field_whatsapp ?>" class="whatsapp" target="_blank" rel="noopener"> Atención al turista</a>
+        <a href="https://wa.me/<?= $b->generalInfo->field_whatsapp ?>" class="whatsapp" target="_blank" rel="noopener"><?=$turista?></a>
         </li>
       </ul>
     </nav>

@@ -85,7 +85,7 @@ class vacacional extends bogota{
             return $result;
         }
         function getDescargables($prod){
-            $res = $this->query("tripinfo/3/" . $prod,"",true); 
+            $res = $this->query("tripinfoapp/3/" . $prod,"",true); 
             return $res;
         }
         function getbi_imagenes_home(){

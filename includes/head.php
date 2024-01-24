@@ -27,7 +27,7 @@ $isMobile = $detect->isMobile();
         <link rel="stylesheet" href="<?=$include_level?>css/style.css?v=<?=time();?>">
     </head>
     <script>
-        var actualLang = "<?= $_GET['lang'] ? $_GET['lang'] : 'es' ?>";
+        var actualLang = "<?= isset($_GET['lang']) ? $_GET['lang'] : 'es' ?>";
         var messageError = "<?= $b->generalInfo->field_sub_txt ?>";
         var aforoMin = "<?= $b->MICEgeneralInfo->field_minaforo ?>";
         var aforoMax = "<?= $b->MICEgeneralInfo->field_maxaforo ?>";
@@ -126,7 +126,7 @@ $isMobile = $detect->isMobile();
                 fbq('init', '425688815109094');
                 fbq('track', 'PageView');
             </script>
-   <!-- Accessibility Code for "visitbogota.co" -->
+<!-- Accessibility Code for "visitbogota.co" -->
 <script>
 window.interdeal = {
     "sitekey": "d8d6acf1eb27744bac5c115295897570",
@@ -138,7 +138,7 @@ window.interdeal = {
     },
     "btnStyle": {
         "vPosition": [
-            "80%",
+            "50%",
             null
         ],
         "scale": [

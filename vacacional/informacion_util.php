@@ -25,7 +25,7 @@ function filter_callback($element) {
     <div class="container  fade" >
         <?php
         $icons = array("map_toilet","gis_map-route","recorridos_guiados","puntos_info");
-        $customOrder = array("2","3", "1" );
+        $customOrder = array("2","3","1");
         function cmp($a, $b) {
             global $customOrder;
             $posA = array_search($a->tid, $customOrder);

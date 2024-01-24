@@ -616,7 +616,6 @@ class bogota
         }else{
            $thequery = "events/all/". $zones. "/" . $cats . "/" .  $agenda;
            $result = $this->query($thequery);
-
            return $result;
 
        }

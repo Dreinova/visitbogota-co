@@ -61,10 +61,10 @@ RewriteRule ^([a-zA-Z0-9_-]+)/vuelos$ vacacional/vuelos.php?lang=$1 [L,QSA]
 
 #RLD
 RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/videos/([a-zA-Z0-9_-]+)$ downloads/rld-videos/$1.mp4 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/intro$ rld/rld_index.php?lang=es [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/inicio$ rld/rld_home.php?lang=es [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/ruta/([a-zA-Z0-9_-]+)-([0-9]+)$ rld/rld_route.php?lang=es&row=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/aprende/$ rld/rld_blog.php?lang=es&type=aprende [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/intro$ rld/rld_index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/inicio$ rld/rld_home.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/ruta/([a-zA-Z0-9_-]+)-([0-9]+)$ rld/rld_route.php?lang=$1&row=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/aprende/$ rld/rld_blog.php?lang=$1&type=aprende [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/imperdibles/$ rld/rld_blog.php?lang=es&type=imperdibles [L,QSA]
 
 #BANCO IMAGENES
@@ -116,7 +116,7 @@ RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad/compra-aprobada$ tarjeta-ciudad/apr
 RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad/qrs$ tarjeta-ciudad/qrs.php?lang=es [L,QSA]
 
 # DISEÑA TU VIAJE URL's
-RewriteRule ^([a-zA-Z0-9_-]+)/planifica-tu-viaje$ disena-tu-viaje/index.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/planifica-tu-viaje$ disena-tu-viaje/index.php?lang=$1 [L,QSA]
 
 # PLAN BOGOTA URL's
 RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas$ plan-bogota/index.php?lang=$1 [L,QSA]

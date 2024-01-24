@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 : "/img/noimg.png"
             }`
           );
-          let template = `<a href="${actualLang}/atractivo/all/${get_alias(
+          let template = `<a href="/${actualLang}/atractivo/all/${get_alias(
             element.title
           )}-all-${element.nid}" class="wait" data-id="${
             element.nid
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ].text;
         document.querySelector(
           ".dtv-home .info-user .content .right .tipoviaje p"
-        ).innerHTML = `Viajo ${
+        ).innerHTML = `${
           document.querySelector("select#para").options[
             document.querySelector("select#para").selectedIndex
           ].text

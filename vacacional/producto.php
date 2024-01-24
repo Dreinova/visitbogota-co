@@ -17,7 +17,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
         </div>
         </div>
     </section>
-    <h3>Conoce los atractivos turísticos</h3>
+    <h3><?= $lang == "es" ? "Conoce los atractivos turísticos" : "Find new places"?></h3>
     <section class="portal_list">
         <div class="right">
             <div class="grid-atractivos">
@@ -33,7 +33,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
             </div>
         </div>
     </section>
-    <h3>Descargables</h3>
+    <h3><?= $lang == "es" ? "Descargables" : "Downloads"?></h3>
     <div class="descargables">
     <?php for ($i=0; $i < count($descargables); $i++) { $descar = $descargables[$i]; ?>
         <a href="<?=$descar->field_download_file?>" target="_blank" class="descargables-item">
@@ -42,7 +42,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
     </div>
     <section class="banco-imagenes-grid">
         <article style="background-image:url(https://res.cloudinary.com/instituto-turismo-bogota/video/upload/w_1200/v1676572635/videos%20banco%20de%20imagenes/35.opt.idt_mitos_y_leyendas_color_final_1_rpp2sh.jpg);"><a target="_blank" href="<?=$prodTax->field_link_youtube?>"><h4><img src="/banco-imagenes/img/film.png" alt="video"> <?=$pi_bogota[19]?></h4></a></article>
-        <article style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2022-03/pexels-photo-7613843.jpeg);"><a target="_blank" href="<?=$prodTax->field_link_bi?>"><h4><img src="/vacacional/images/camera.svg" alt="banco">Banco de imágenes</h4></a></article>
+        <article style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2022-03/pexels-photo-7613843.jpeg);"><a target="_blank" href="<?=$prodTax->field_link_bi?>"><h4><img src="/vacacional/images/camera.svg" alt="banco"><?= $lang == "es" ? "Banco de imágenes" : "Multimedia bank"?></h4></a></article>
         <article style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2022-12/169_Ricardo_ygda6m.jpg);"><a target="_blank" href="<?=isset($prodTax->field_link_pla) ? $prodTax->field_link_pla : '/es/experiencias-turisticas/'?>"><h4><?=$pi_bogota[18]?></h4></a></article>
     </section>
     <? include 'includes/imports.php'?>

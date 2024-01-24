@@ -68,27 +68,27 @@
     </section>
     <div class="events_list">
         <aside class="filters">
-            <div class="container-switch">
+            <!-- <div class="container-switch">
                 <label class="switch" for="closeMe">
                     <input type="checkbox" id="closeMe">
                     <span class="slider round"></span>
                 </label>
                 <small>Cerca de mí</small>
-            </div>
-            <h2 class="ms900">Prográmate con los eventos más destacados</h2>
+            </div> -->
+            <h2 class="ms900"><?=$lang == "es" ? "Prográmate con los eventos más destacados":"Find your favorite events"?></h2>
             <div class="filtergroup checkboxes color open" data-filterid="categorias_eventos">
-                <span class="ms700"><span class="arrow"></span>Categoría de Evento</span>
+                <span class="ms700"><span class="arrow"></span><?=$lang == "es" ? "Categoría de Evento":"Event Category"?></span>
                 <div class="content"></div>
             </div>
             <div class="filtergroup checkboxes color open" data-filterid="test_zona">
-                <span class="ms700"><span class="arrow"></span>Zona de la ciudad</span>
+                <span class="ms700"><span class="arrow"></span><?=$lang == "es" ? "Zona de la ciudad":"city area"?></span>
                 <div class="content"></div>
             </div>
         </aside>
         <ul class="events_list_grid"></ul>
         <?php if($_GET['idAgenda'] == '149'){ ?>
             <div class="aclaracion">
-                <p>El IDT no es el organizador de los eventos aquí publicados.</p>
+                <p><?=$lang == "es" ? "El IDT no es el organizador de los eventos aquí publicados.":"The IDT is not the organizer of the events published here."?></p>
             </div>
         <?php } ?>
     </div>

@@ -7,8 +7,7 @@
             width="20" height="20"></a>
     <div class="accordions">
         <?php
-if(isset($project_folder) && file_exists("menu.json")){
-$json = file_get_contents("menu.json");
+$json = file_get_contents("../menu.json");
 $json_data = json_decode($json,true);
 ?>
 
@@ -36,7 +35,6 @@ $json_data = json_decode($json,true);
         </a>
         <? } ?>
         <?php }?>
-        <?}?>
     </div>
     <ul class="socials_mob">
         <li><a href=""><img src="<?=$include_level?>img/facebook_mob.svg" alt="facebook" width="30" height="30"></a>

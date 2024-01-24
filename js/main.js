@@ -95,9 +95,15 @@ const getExploraBogota = async () => {
     url: `/${actualLang}/explora/${get_alias(prod.title)}/${prod.nid}`,
   }));
   document.querySelector("nav li.explora ul").innerHTML = "";
+  let bogotaNatural = "";
+  if (actualLang == "es") {
+    bogotaNatural = "Bogotá Natural";
+  } else {
+    bogotaNatural = "Natural Bogotá";
+  }
   document.querySelector(
     "nav li.explora ul"
-  ).innerHTML += `<li><a href="/${actualLang}/producto/naturaleza-8" class="wait ms700">Bogotá Natural</a></li>`;
+  ).innerHTML += `<li><a href="/${actualLang}/producto/naturaleza-8" class="wait ms700">${bogotaNatural}</a></li>`;
   productos.forEach((producto) => {
     document.querySelector(
       "nav li.explora ul"
@@ -2484,19 +2490,21 @@ if (document.querySelector("body.informacion_util")) {
           .then((res) => res.json())
           .then((singleFaq) => {
             if (singleFaq.length > 0) {
-              document.querySelector(
-                ".faqs-container .faq"
-              ).innerHTML += `<h3 class="uppercase cat-${cat.tid}">${cat.name}</h3>`;
-              var accorddion = document.createElement("div");
-              accorddion.classList.add("accordion");
-              accorddion.classList.add(classColor[i]);
-              singleFaq.forEach((qa) => {
-                document
-                  .querySelector(".faqs-container .faq")
-                  .appendChild(accorddion);
-                var templateCat = `<h4 class="uppercase">${qa.title}</h4><div>${qa.body}</div>`;
-                accorddion.innerHTML += templateCat;
-              });
+              if (document.querySelector(".faqs-container .faq")) {
+                document.querySelector(
+                  ".faqs-container .faq"
+                ).innerHTML += `<h3 class="uppercase cat-${cat.tid}">${cat.name}</h3>`;
+                var accorddion = document.createElement("div");
+                accorddion.classList.add("accordion");
+                accorddion.classList.add(classColor[i]);
+                singleFaq.forEach((qa) => {
+                  document
+                    .querySelector(".faqs-container .faq")
+                    .appendChild(accorddion);
+                  var templateCat = `<h4 class="uppercase">${qa.title}</h4><div>${qa.body}</div>`;
+                  accorddion.innerHTML += templateCat;
+                });
+              }
             }
             colorNumb++;
           })
@@ -2894,68 +2902,72 @@ function setCategory(cattype) {
     var itscontent = $(this).find(".content");
     var filterid = $(this).data("filterid");
 
-    $.post("/hoteles/g/filter/", { filter: filterid }, function (data) {
-      data = JSON.parse(data);
-      if (!filtersoptions[filterid]) {
-        filtersoptions[filterid] = data;
+    $.post(
+      "/hoteles/g/filter/?lang=" + actualLang,
+      { filter: filterid },
+      function (data) {
+        data = JSON.parse(data);
+        if (!filtersoptions[filterid]) {
+          filtersoptions[filterid] = data;
+        }
+        for (var i = 0; i < data.length; i++) {
+          var complement = "";
+          if (group.hasClass("color")) {
+            complement =
+              '<b style="background:#' + data[i].field_color + ';"></b>';
+          }
+          let strtemplate;
+          if (filterid == "rangos_de_precio") {
+            strtemplate = `<p class="filtercheck fw500" data-filter="${
+              data[i].tid
+            }">${(function price() {
+              let text = "";
+              for (let index = 0; index < parseInt(data[i].name, 10); index++) {
+                text += "$";
+              }
+              return text;
+            })()}<input type="checkbox" value="${
+              data[i].tid
+            }" name="${filterid}" /></p>`;
+          } else {
+            strtemplate = `<p class="filtercheck fw500" data-filter="${data[i].tid}">${data[i].name} ${complement}<input type="checkbox" value="${data[i].tid}" name="${filterid}" /></p>`;
+          }
+
+          itscontent.append(strtemplate);
+        }
+
+        //useFilters(cattype);
+        if (counter == $(".filtergroup.checkboxes").length - 1) {
+          useFilters(cattype);
+        }
+        counter++;
+        //
+        group.removeClass("loading");
+
+        $("#resetfilters").click(function () {
+          for (var i = 0; i < sliderobjects.length; i++) {
+            sliderobjects[i].slider("option", "value", minfilters);
+          }
+
+          $(".filtercheck").removeClass("active");
+          for (var i = 0; i < $(".filtercheck").find("input").length; i++) {
+            $(".filtercheck").find("input")[i].checked = false;
+          }
+          useFilters(cattype);
+        });
+
+        group.find(".filtercheck").click(function () {
+          $(this).toggleClass("active");
+          var input = $(this).find("input");
+          if (input[0].checked == true) {
+            input[0].checked = false;
+          } else {
+            input[0].checked = true;
+          }
+          useFilters(cattype);
+        });
       }
-      for (var i = 0; i < data.length; i++) {
-        var complement = "";
-        if (group.hasClass("color")) {
-          complement =
-            '<b style="background:#' + data[i].field_color + ';"></b>';
-        }
-        let strtemplate;
-        if (filterid == "rangos_de_precio") {
-          strtemplate = `<p class="filtercheck fw500" data-filter="${
-            data[i].tid
-          }">${(function price() {
-            let text = "";
-            for (let index = 0; index < parseInt(data[i].name, 10); index++) {
-              text += "$";
-            }
-            return text;
-          })()}<input type="checkbox" value="${
-            data[i].tid
-          }" name="${filterid}" /></p>`;
-        } else {
-          strtemplate = `<p class="filtercheck fw500" data-filter="${data[i].tid}">${data[i].name} ${complement}<input type="checkbox" value="${data[i].tid}" name="${filterid}" /></p>`;
-        }
-
-        itscontent.append(strtemplate);
-      }
-
-      //useFilters(cattype);
-      if (counter == $(".filtergroup.checkboxes").length - 1) {
-        useFilters(cattype);
-      }
-      counter++;
-      //
-      group.removeClass("loading");
-
-      $("#resetfilters").click(function () {
-        for (var i = 0; i < sliderobjects.length; i++) {
-          sliderobjects[i].slider("option", "value", minfilters);
-        }
-
-        $(".filtercheck").removeClass("active");
-        for (var i = 0; i < $(".filtercheck").find("input").length; i++) {
-          $(".filtercheck").find("input")[i].checked = false;
-        }
-        useFilters(cattype);
-      });
-
-      group.find(".filtercheck").click(function () {
-        $(this).toggleClass("active");
-        var input = $(this).find("input");
-        if (input[0].checked == true) {
-          input[0].checked = false;
-        } else {
-          input[0].checked = true;
-        }
-        useFilters(cattype);
-      });
-    });
+    );
   });
 }
 
@@ -3011,9 +3023,9 @@ function useFilters(cattype) {
   if (cattype == "events") {
     urlPost = `/g/${cattype}/?agenda=${
       document.querySelector("main").dataset.agenda
-    }`;
+    }&lang=${actualLang}`;
   } else {
-    urlPost = `/g/${cattype}/`;
+    urlPost = `/g/${cattype}/?lang=${actualLang}`;
   }
   $.post(urlPost, { filters: completefilters }, function (data) {
     if (data.length > 0) {
@@ -3091,7 +3103,11 @@ function useFilters(cattype) {
                                 <h6 class="single_event_place ms500">${
                                   event.field_place
                                 }</h4>
-                                    <div class="btn event-view uppercase ms900">VER EVENTO</div>
+                                    <div class="btn event-view uppercase ms900">${
+                                      actualLang == "es"
+                                        ? "Ver evento"
+                                        : "View EVENT"
+                                    }</div>
                         </div>
                     </div>
                 </a>
@@ -3120,7 +3136,9 @@ function useFilters(cattype) {
 }
 if (document.querySelector(".intern_event main .desc a")) {
   document.querySelector(".intern_event main .desc a").innerHTML =
-    "Más información sobre el evento aquí";
+    actualLang == "es"
+      ? "Más información sobre el evento aquí"
+      : "View more about this event";
   document
     .querySelector(".intern_event main .desc a")
     .classList.add("linkEvent");
