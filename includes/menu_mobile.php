@@ -37,11 +37,11 @@ $json_data = json_decode($json,true);
         <?php }?>
     </div>
     <ul class="socials_mob">
-        <li><a href=""><img src="<?=$include_level?>img/facebook_mob.svg" alt="facebook" width="30" height="30"></a>
-        </li>
-        <li><a href=""><img src="<?=$include_level?>img/youtube_mob.svg" alt="youtube" width="30" height="30"></a></li>
-        <li><a href=""><img src="<?=$include_level?>img/ins_mob.svg" alt="instagram" width="30" height="30"></a></li>
-        <li><a href=""><img src="<?=$include_level?>img/twitter_mob.svg" alt="twitter" width="30" height="30"></a></li>
+        <li><a href="https://www.facebook.com/visitbogota.co/"><img src="<?=$include_level?>img/facebook_mob.svg" alt="facebook" width="30" height="30"></a></li>
+        <li><a href="https://www.youtube.com/channel/UC_qgv3BFpK3EhqBPL0iR2IQ"><img src="<?=$include_level?>img/youtube_mob.svg" alt="youtube" width="30" height="30"></a></li>
+        <li><a href="https://www.instagram.com/visitbogota.co"><img src="<?=$include_level?>img/ins_mob.svg" alt="instagram" width="30" height="30"></a></li>
+        <li><a href="https://twitter.com/visitbogotaco"><img src="<?=$include_level?>img/twitter_mob.svg" alt="twitter" width="30" height="30"></a></li>
+        <li><a href="https://www.threads.net/@visitbogota.co"><img src="<?=$include_level?>img/threads_mob.svg" alt="threads" width="30" height="30"></a></li>
     </ul>
 </div>
 </div>

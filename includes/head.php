@@ -42,7 +42,7 @@ $isMobile = $detect->isMobile();
         <head>
         <link rel="manifest" href="/manifest.webmanifest?v=<?=time();?>">
             <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-            <meta name="theme-color" content="#6dc184">
+            <meta name="theme-color" content="#df2f4a">
             <meta name="google-site-verification" content="gmbhhlorLRNzSxm4RE99kBoX0x-W_gMvjxqRGWTeLS0" />
             <base href="<?=$project_base?>">
             <?= $b->create_metas($_GET['seo']) ?>
