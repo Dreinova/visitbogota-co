@@ -809,7 +809,7 @@ function utilBoxes(id, applink1 = false, applink2 = false) {
                 document.querySelector(
                   ".boxes .boxes-container .desc"
                 ).innerHTML += `
-                      <a href="${singleInfo.field_download_file}" download>
+                      <a href="https://files.visitbogota.co${singleInfo.field_download_file}" download>
                       ${langtext[actualLang]} ${singleInfo.title}
                     </a>
                       `;
@@ -964,9 +964,10 @@ function slidersUtil() {
         {
           breakpoint: 1023,
           settings: {
-            arrows: false,
-            dots: true,
-            slidesToShow: 2,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: false,
+            slidesToShow: 1,
           },
         },
       ],

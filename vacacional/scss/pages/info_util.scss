@@ -179,7 +179,7 @@
               max-width: 284px;
               position: relative;
               @media screen and (max-width: 1023px) {
-                max-width: calc(50vw - 60px);
+                max-width: 70vw;
               }
               .img {
                 border-radius: 15px;
@@ -188,7 +188,7 @@
                 overflow: hidden;
                 width: 100%;
                 @media screen and (max-width: 1023px) {
-                  height: calc(50vw - 60px);
+                  height: 70vw;
                 }
                 img {
                   height: 100%;
@@ -278,6 +278,10 @@
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 60px 15px;
+          @media only screen and (max-width: 768px) {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 15px;
+          }
           li {
             width: 100%;
             a {
@@ -293,6 +297,9 @@
                 );
                 box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
                 height: 285px;
+                @media only screen and (max-width: 768px) {
+                  height: calc(100vw / 16 * 9 - 40px);
+                }
                 img {
                   width: 100%;
                   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
