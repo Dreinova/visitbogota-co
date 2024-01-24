@@ -73,6 +73,13 @@
           height: 2px;
           background-color: var(--Rojo, #e50728);
         }
+        @media only screen and (max-width: 480px) {
+          font-size: 38px;
+          align-items: center;
+          &::after{
+            display: none;
+          }
+        }
       }
       .grid-hotels {
         li {

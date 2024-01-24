@@ -443,6 +443,9 @@
             align-items: center;
             margin-bottom: 30px;
             gap: 14px;
+            @media only screen and (max-width: 480px) {
+              font-size: 38px;
+            }
           }
           hr {
             border: 0 none;

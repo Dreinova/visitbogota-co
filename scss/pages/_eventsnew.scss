@@ -181,7 +181,9 @@
       display: grid;
       grid-template-columns: 1fr;
     }
-
+    @media only screen and (max-width: 480px) {
+      padding: 0;
+    }
     .custom-select {
       margin: 0 auto 50px;
     }
@@ -438,6 +440,9 @@
         justify-content: center;
         width: 100%;
         margin: 0 auto;
+      }
+      @media only screen and (max-width: 480px) {
+        max-width: 380px;
       }
       &_item {
         height: 100%;

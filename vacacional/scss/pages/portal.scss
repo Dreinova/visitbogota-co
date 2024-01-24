@@ -303,6 +303,9 @@
         gap: 30px;
         grid-template-columns: repeat(auto-fill, 266px);
         grid-auto-rows: auto;
+        @media only screen and (max-width: 480px) {
+          grid-template-columns: repeat(auto-fill, 100%);
+        }
         p.noResults {
           align-content: center;
           align-items: center;
