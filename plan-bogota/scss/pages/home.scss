@@ -315,6 +315,9 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
+            @media only screen and (max-width: 480px) {
+              display: none;
+            }
           }
           small.link {
             align-items: center;
@@ -397,6 +400,11 @@
       @media only screen and (max-width: 768px) {
         margin-top: 310px;
       }
+      @media only screen and (max-width: 480px) {
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: none !important;
+      }
       h3 {
         color: var(--gris, #626262);
         font-size: 35px;
@@ -410,6 +418,9 @@
         gap: 20px;
         @media only screen and (max-width: 768px) {
           align-items: center;
+        }
+        @media only screen and (max-width: 480px) {
+          display: none;
         }
         &::after {
           flex: 1;
@@ -448,8 +459,8 @@
   .categoriessection {
     padding: 50px 20px;
     position: relative;
-    background: rgba(255,255,255,.9);
-    box-shadow: 0px 0px 16.9px 0px rgba(0,0,0,.6);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 0px 16.9px 0px rgba(0, 0, 0, 0.6);
     padding: 30px;
     &::before {
       background-repeat: no-repeat;

@@ -16,6 +16,9 @@
       @media only screen and (max-width: 768px) {
         padding: 15px;
       }
+      @media only screen and (max-width: 480px) {
+        padding: 0;
+      }
     }
   }
   main {
@@ -130,6 +133,10 @@
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       padding: 15px;
     }
+    @media only screen and (max-width: 480px) {
+      padding: 0;
+      grid-template-columns: repeat(auto-fill, 100%);
+    }
     li {
       width: 100%;
       height: 100%;
@@ -223,6 +230,9 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
+            @media only screen and (max-width: 480px) {
+              display: none;
+            }
           }
           & > small {
             align-items: center;
@@ -471,7 +481,7 @@
       }
       &.active {
         top: 20px;
-        background-color: rgba(255,255,255,.85);
+        background-color: rgba(255,255,255);
         &::before {
           content: "Filtros ▼";
           position: absolute;
