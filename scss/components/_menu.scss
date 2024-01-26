@@ -149,6 +149,11 @@
   }
   .accordions {
     position: relative;
+    h3{
+      .ui-icon{
+        display: none;
+      }
+    }
     h3,
     & > a {
       text-align: center;

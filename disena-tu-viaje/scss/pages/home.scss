@@ -157,6 +157,9 @@
       gap: 50px;
       justify-content: space-between;
       padding: 90px 20px;
+      @media only screen and (max-width: 480px) {
+       flex-direction: column;
+      }
       .left {
         flex: 1;
         h3 {
@@ -202,6 +205,9 @@
       grid-auto-rows: auto;
       max-width: 1600px;
       margin: 0 auto;
+      @media only screen and (max-width: 480px) {
+        grid-template-columns: repeat(auto-fill, 100%);
+       }
       a {
         height: 100%;
         width: 100%;
