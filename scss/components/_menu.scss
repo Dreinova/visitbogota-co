@@ -160,6 +160,7 @@
       border: 0;
       text-transform: uppercase;
       font-family: "MuseoSans-700";
+      position: relative;
       &::after {
         background-image: url(../img/plus_gray.svg);
         background-position: center center;
