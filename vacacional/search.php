@@ -20,19 +20,19 @@ if ($b->searchContent($_GET['search'])) {
                     switch ($busqueda[$i]->type) {
                         case 'Atractivos':
                             $type = 'Atractivo';
-                            $link = $lang . "/atractivo/all/".$value."-all-".$ID_blog;
+                            $link = "/".$lang . "/atractivo/all/".$value."-all-".$ID_blog;
                             break;
                         case 'Alrededor':
                             $type = 'Más allá de Bogota';
-                            $link = "alrededor/" . $value . "/" . $ID_blog;
+                            $link = "/"."alrededor/" . $value . "/" . $ID_blog;
                             break;
                         case 'Artículo':
                             $type = 'Blog';
-                            $link = $lang . "/blog/all/".$b->get_alias($value)."-".$ID_blog;
+                            $link = "/".$lang . "/blog/all/".$b->get_alias($value)."-".$ID_blog;
                             break;
                         case 'Eventos':
                             $type = 'Evento';
-                            $link = $lang . "/evento/".$b->get_alias($value)."-".$ID_blog;
+                            $link = "/".$lang . "/evento/".$b->get_alias($value)."-".$ID_blog;
                         break;
                     }
                 ?>

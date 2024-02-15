@@ -25,18 +25,18 @@
 <div class="boxes thanks">
     <div class="boxes__cnt">
         <h2 class="ms900">
-            ¡El plan que soñaste es casi una realidad!
+            ¡La experiencia que soñaste es casi una realidad!
         </h2>
         <p>
             Hemos generado una reserva para ti.
         </p>
         <h3 class="ms900">
-            Código de tu reserva en Plan Bogotá:
+            Código de tu reserva:
         </h3>
         <h4 class="ms900">
             <?=$_GET["serial"]?>
         </h4>
-        <p class="uoferta"><strong>Oferta reservada:</strong><span></span></p>
+        <p class="uoferta"><strong>Experiencia reservada:</strong><span></span></p>
         <p class="ucompanyname"><strong>Empresa responsable:</strong><span></span></p>
         <p class="ucompanyemail"><strong>Correo de contacto:</strong><span></span></p>
         <p class="ucompanyphone"><strong>Teléfono de contacto:</strong><span></span></p>

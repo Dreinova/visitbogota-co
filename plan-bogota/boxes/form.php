@@ -5,11 +5,11 @@
     <p class="ms700">
       Solo quedan dos reservas con este precio ¡Apúrate a reservar!
     </p>
-    <div class="prices">
+    <!-- <div class="prices">
       <p class="prices-discount ms500">$500.000</p>
       <p class="prices-total ms900">$250.000</p>
       <div class="discount ms900">- 50%</div>
-    </div>
+    </div> -->
     <form action="" method="POST">
       <input type="text" placeholder="Nombre" class="ms500" />
       <input type="email" placeholder="Correo" class="ms500" />
@@ -22,7 +22,7 @@
           <a href="" target="_blank">términos y condiciones.</a></label
         >
       </div>
-      <button type="submit" class="ms900">RESERVA GRATIS AHORA</button>
+      <button type="submit" class="ms900">RESERVA AHORA</button>
     </form>
   </div>
   <div
