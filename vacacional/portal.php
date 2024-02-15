@@ -35,7 +35,7 @@ if ($_GET['zoneID']) {
                 echo '<h2 class="uppercase"><img src="images/bog_natural.svg" alt="nature" />' . $product->title . '</h2>';
             } else if ($_GET['zoneID']) {
                 echo '<h3 class="uppercase">' . $b->generalInfo->field_titulo_bogota_por_zonas . '</h3>';
-                echo '<h2 class="uppercase"><img  src="images/bog_natural.svg" alt="nature"/>>' . $singleZone->title . '</h2>';
+                echo '<h2 class="uppercase"><img  src="images/bog_natural.svg" alt="nature"/>' . $singleZone->title . '</h2>';
             } else if ($_GET['planID']) {
                 echo '<h3 class="uppercase">' . $singlePara->title . '</h3>';
                 echo '<h2 class="uppercase">' . $b->generalInfo->field_dlaciudad . '</h2>';
