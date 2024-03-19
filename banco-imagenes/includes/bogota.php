@@ -1261,6 +1261,17 @@ function fixbiurl($prefix, $url, $author=''){
     }
     return $url_explode;
 }
+function replaceSpecialCharactersWithUnderscores($text) {
+    // Define a list of characters to replace
+    $charactersToReplace = array(' ', 'ñ', 'á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ü', '(', ')');
+    
+    // Replace each special character with an underscore
+    foreach ($charactersToReplace as $char) {
+        $text = str_replace($char, '_', $text);
+    }
+    
+    return $text;
+}
 function getInfo($url){
     $url = $this->fixbiurl('fl_getinfo', $url);
     $curl = curl_init();

@@ -17,7 +17,8 @@ if($_GET['type']=="aprende")
 
 <section class="rld_body">
     <?php include "includes/rld_header.php"; ?>
-    <div class="outter rld_banner basic_background" style="background-image: url(<?=$banner?>);">
+
+    <div class="outter rld_banner basic_background" style="background-image: url(<?=$urlGlobal?><?=$banner?>);">
         </video>
         <div class="container left bottom goldborder aprendeBanner" style="height:50vh">
             <aside class="aux1"></aside>
@@ -39,7 +40,7 @@ if($_GET['type']=="aprende")
                 ?>
                 <div class="singleAprende">
                     <section class="right top goldborder singleAprende__title"
-                        style="position:relative;min-height: 15vh;background-image: url(<?=$list[$i]->field_ejbanner?>);">
+                        style="position:relative;min-height: 15vh;background-image: url(<?=$urlGlobal?><?=$list[$i]->field_ejbanner?>);">
                         <aside class="aux1"></aside>
                         <aside class="aux2"></aside>
                         <h1 class="landingTitle uppercase blue bold "><?=$list[$i]->title?></h1>
@@ -48,7 +49,7 @@ if($_GET['type']=="aprende")
                         <aside class="aux1"></aside>
                         <aside class="aux2"></aside>
                         <?if($list[$i]->field_ej_pic != ''){?>
-                        <img src="<?=$list[$i]->field_ej_pic?>" class="outter" />
+                        <img src="<?=$urlGlobal?><?=$list[$i]->field_ej_pic?>" class="outter" />
                         <?}?>
                         <?=$list[$i]->body?>
                     </section>
@@ -58,7 +59,7 @@ if($_GET['type']=="aprende")
 
                 <div class="singleAprende">
                     <section class="right top goldborder singleAprende__title"
-                        style="position:relative;min-height: 15vh;background-image: url(<?=$list[$i]->field_imp_banner?>);">
+                        style="position:relative;min-height: 15vh;background-image: url(<?=$urlGlobal?><?=$list[$i]->field_imp_banner?>);">
                         <aside class="aux1"></aside>
                         <aside class="aux2"></aside>
                         <h1 class="landingTitle uppercase blue bold "><?=$list[$i]->title?></h1>
@@ -67,7 +68,7 @@ if($_GET['type']=="aprende")
                         <aside class="aux1"></aside>
                         <aside class="aux2"></aside>
                         <?if($list[$i]->field_imp_pic != ''){?>
-                        <img src="<?=$list[$i]->field_imp_pic?>" class="outter" />
+                        <img src="<?=$urlGlobal?><?=$list[$i]->field_imp_pic?>" class="outter" />
                         <?}?>
                         <?=$list[$i]->body?>
                     </section>
@@ -79,7 +80,7 @@ if($_GET['type']=="aprende")
         <section class="bg_right">
             <div class="singleCharacter container">
                 <section class="right top goldborder singleCharacter__title"
-                    style="position:relative;min-height: 15vh;background-image: url(<?=$banner?>);">
+                    style="position:relative;min-height: 15vh;background-image: url(<?=$urlGlobal?><?=$banner?>);">
                     <aside class="aux1"></aside>
                     <aside class="aux2"></aside>
                     <h1 class="landingTitle uppercase blue bold "><?=$b->RLDgeneralInfo->field_rld_uiword9?></h1>
@@ -96,7 +97,7 @@ if($_GET['type']=="aprende")
                                             ?>
                                 <div class="clear">
                                     <div class="col1 w_40 m_outter bigcolumn">
-                                        <img class="outter" src="<?=$chars[$i]->field_car_pic?>" alt="bochica" />
+                                        <img class="outter" src="<?=$urlGlobal?><?=$chars[$i]->field_car_pic?>" alt="bochica" />
                                     </div>
                                     <div class="col2 w_60 m_outter bigcolumn">
                                         <h1 class="landingTitle uppercase orange bold "><?=$chars[$i]->title?></h1>

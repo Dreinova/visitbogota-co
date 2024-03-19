@@ -770,7 +770,7 @@ class bogota
         return $result;
     }
 
-    function query($url, $body = "", $nv=false, $cache=true)
+    function query($url, $body = "", $nv=false, $cache=false)
     {
         $cacheAbsoluteRoute = "/home/bogotas/public_html/dev2024/cache/";
         if($nv){
@@ -1088,21 +1088,35 @@ class bogota
 
         return ($String);
     }
-    function create_metas($seoId)
+    function create_metas($seoId, $type=NULL)
     {
+        global $metas, $urlMap, $seo;
         $canonicalURL = "http://".$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI];
         if ($seoId == '') {
             $seoId = 4;
         }
-        $seo = $this->query("seo/" . $seoId);
-        $seo = $seo[0];
-        global $metas, $urlMap;
         
         $ret = '';
-        $metas['title'] = $seo->field_seo_title;
-        $metas['desc'] = $seo->field_seo_desc;
-        $metas['words'] = $seo->field_seo_keys;
-        $metas['img'] = "https://www.bogotadc.travel" . $seo->field_seo_img;
+        if(!isset($type)){
+            $seo = $this->query("seo/" . $seoId);
+            $seo = $seo[0];
+            $metas['words'] = $seo->field_seo_keys;
+            $metas['title'] = $seo->field_seo_title;
+            $metas['desc'] = $seo->field_seo_desc;
+            $metas['words'] = $seo->field_seo_keys;
+            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_seo_img;
+        }else{
+            $seo = $this->query("agenda_taxseo/" . $seoId);
+            $seo = $seo[0];
+            $metas['words'] = $seo->field_clave_seo;
+            $metas['title'] = $seo->field_titulo_seo;
+            $metas['desc'] = $seo->field_descripcion_seo;
+            $metas['words'] = $seo->field_seo_keys;
+            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_imagen_seo;
+
+        }
+       
+        
 
         // list($width, $height, $type, $attr) = getimagesize("https://www.bogotadc.travel" . $seo->field_seo_img);
 

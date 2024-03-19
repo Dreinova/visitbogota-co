@@ -38,7 +38,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
       <?php if (isset($_GET["search"])) {
         echo '<h1 class="ms900">' . $_GET["search"] . '</h1>';
       } else { ?>
-        <h1 class="ms900">Encuentra tu plan en Bogotá</h1>
+        <h1 class="ms900"><?=$pb->pb_experiencias[40]?></h1>
       <?php } ?>
     </div>
   </div>
@@ -46,23 +46,23 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
     <div class="container">
       <div class="grid">
         <aside class="left filters">
-          <button class="fw500" id="resetfilters">Limpiar filtros</button>
+          <button class="fw500" id="resetfilters"><?=$pb->pb_experiencias[44]?></button>
           <h3 class="fw900">
             <img src="../vacacional/images/lets-icons_filter.svg" alt="filtros">
-            Filtros
+            <?=$pb->pb_experiencias[60]?>
           </h3>
           <!-- <h2 class="ms900">Personaliza tu busqueda</h2> -->
           <div class="open filtergroup" id="persons">
             <!-- <summary><img src="<?= $project_base ?>images/arrowDown.svg" alt="ArrowDown" />
             </summary> -->
-            <h4 class="ms700">Cantidad de personas</h4>
+            <h4 class="ms700"><?=$pb->pb_experiencias[46]?></h4>
             <ul>
               <li>
                 <input type="checkbox" onChange="filterPlans(null, 1, null, null, '<?php echo isset($_GET[" search"]) ?
                                                                                       $_GET["search"] : "null"; ?>',
                 <?= isset($_GET["plan"]) && $_GET["plan"] != "" ? $_GET["plan"] : 'null' ?>)" value="1" name="persons-1" id="persons-1" />
                 <label class="filtercheck" for="persons-1" class="ms500">
-                  1 persona
+                  <?=$pb->pb_experiencias[3]?>
                 </label>
               </li>
               <li>
@@ -70,7 +70,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
                                                                                       $_GET["search"] : "null"; ?>',
                 <?= isset($_GET["plan"]) && $_GET["plan"] != "" ? $_GET["plan"] : 'null' ?>)" value="2" name="persons-2" id="persons-2" />
                 <label class="filtercheck" for="persons-2" class="ms500">
-                  2 personas
+                  <?=$pb->pb_experiencias[4]?>
                 </label>
               </li>
               <li>
@@ -78,7 +78,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
                                                                                       $_GET["search"] : "null"; ?>',
                 <?= isset($_GET["plan"]) && $_GET["plan"] != "" ? $_GET["plan"] : 'null' ?>)" value="3" name="persons-3" id="persons-3" />
                 <label class="filtercheck" for="persons-3" class="ms500">
-                  3 personas
+                  <?=$pb->pb_experiencias[5]?>
                 </label>
               </li>
               <li>
@@ -86,7 +86,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
                                                                                       $_GET["search"] : "null"; ?>',
                 <?= isset($_GET["plan"]) && $_GET["plan"] != "" ? $_GET["plan"] : 'null' ?>)" value="4" name="persons-4" id="persons-4" />
                 <label class="filtercheck" for="persons-4" class="ms500">
-                  4 personas
+                  <?=$pb->pb_experiencias[6]?>
                 </label>
               </li>
               <li>
@@ -94,7 +94,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
                                                                                       $_GET["search"] : "null"; ?>',
                 <?= isset($_GET["plan"]) && $_GET["plan"] != "" ? $_GET["plan"] : 'null' ?>)" value="all" name="persons-all" id="persons-all" />
                 <label class="filtercheck" for="persons-all" class="ms500">
-                  Grupos
+                <?=$pb->pb_experiencias[47]?>
                 </label>
               </li>
             </ul>
@@ -102,7 +102,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
           <div class="open filtergroup" id="categories">
             <!-- <summary><img src="<?= $project_base ?>images/arrowDown.svg" alt="ArrowDown" />
             </summary> -->
-            <h4 class="ms700">Por categoría</h4>
+            <h4 class="ms700"> <?=$pb->pb_experiencias[48]?></h4>
             <ul>
     
             </ul>
@@ -110,7 +110,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
           <div class="open filtergroup" id="zones">
             <!-- <summary><img src="<?= $project_base ?>images/arrowDown.svg" alt="ArrowDown" />
             </summary> -->
-            <h4 class="ms700">Por Zona</h4>
+            <h4 class="ms700"> <?=$pb->pb_experiencias[49]?></h4>
             <ul>
     
             </ul>
@@ -118,7 +118,7 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
           <div class="open filtergroup" id="prices">
             <!-- <summary><img src="<?= $project_base ?>images/arrowDown.svg" alt="ArrowDown" />
             </summary> -->
-            <h4 class="ms700">Por precio no superior a</h4>
+            <h4 class="ms700"> <?=$pb->pb_experiencias[55]?></h4>
             <div class="cont">
               <div id="slider-range-max">
                 <input type="range" aria-label="price-slider" id="price-slider" min="<?= $min ?>" max="<?= $max ?>" step="1000" value="<?= $min ?>">
@@ -137,12 +137,12 @@ $min = calc_attribute_in_array($plans, 'field_pd', 'min');
           <div class="open filtergroup" id="search">
             <!-- <summary><img src="<?= $project_base ?>images/arrowDown.svg" alt="ArrowDown" />
             </summary> -->
-            <h4 class="ms700">Buscar</h4>
+            <h4 class="ms700"> <?=$pb->pb_experiencias[1]?></h4>
             <div class="cont">
               <form action="/<?= $lang ?>/experiencias-turisticas/encuentra-tu-plan" method="GET" onsubmit="return validateForm(event)" id="searchForm" autocomplete="off">
                 <span>
                   <div class="input">
-                    <input onfocus="this.value=''" type="search" name="search" id="searchInput" value="<?= $_GET[" search"] ?>" placeholder="<?= $pb->generalInfo->field_ui_2 ?>" />
+                    <input onfocus="this.value=''" type="search" name="search" id="searchInput" value="<?= $_GET[" search"] ?>" placeholder="<?=$pb->pb_experiencias[1]?>" />
                   </div>
                 </span>
               </form>

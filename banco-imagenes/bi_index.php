@@ -3,7 +3,7 @@
 <main>
   <section
     class="banner"
-    style="background-image: url(<?=$infoGnrl->field_bi_imagen_banner?>)"
+    style="background-image: url(https://bogotadc.travel<?=$infoGnrl->field_bi_imagen_banner?>)"
   >
     <div class="search-form">
       <?=$infoGnrl->field_bi_texto_banner?>
@@ -70,7 +70,7 @@
             <li class="splide__slide">
               <a href="/<?=$lang?>/banco-imagenes/interna-<?=$images[$i]->nid?>">
                 <img
-                  src="<?=$b->fixbiurl('c_fit,h_640,w_640/f_webp', $images[$i]->field_bi_imagen)?>"
+                  src="/banco-imagenes/download/500/<?=$b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename)?>.jpg"
                   alt="<?=$images[$i]->title?>"
                 />
               </a>
@@ -91,7 +91,7 @@
             <li class="splide__slide">
               <a href="/<?=$lang?>/banco-imagenes/interna-<?=$images[$i]->nid?>">
                 <img
-                  src="<?=$b->fixbiurl('c_fit,h_640,w_640/f_webp', $images[$i]->field_bi_imagen)?>"
+                  src="/banco-imagenes/download/500/<?=$b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename)?>.jpg"
                   alt="<?=$images[$i]->title?>"
                 />
               </a>

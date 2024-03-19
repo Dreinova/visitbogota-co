@@ -10,6 +10,5 @@ for($i=0;$i<count($_POST['filters']['checkboxes']);$i++)
     if($_POST['filters']['checkboxes'][$i]['filter']=="test_zona"){    $zones = implode("+",$_POST['filters']['checkboxes'][$i]['value']); };
 }
 
-//echo $type."-".$certs."-".$zones;
 $formatosVenues = $b->events("", $zones != "" ? $zones : "all" , $categories != "" ? $categories : "all" , $agenda);
 echo json_encode($formatosVenues);

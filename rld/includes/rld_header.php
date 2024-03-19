@@ -20,7 +20,7 @@
 <!-- End Facebook Pixel Code -->
 <div class="rld_header gbackground ">
 <div class="outter bg_left">    
-       <h1> <a href="" class="logo replaced_text">Ruta Leyenda El Dorado</a></h1>
+       <h1> <a href="/<?=$lang?>/ruta-leyenda-el-dorado/inicio" class="logo replaced_text">Ruta Leyenda El Dorado</a></h1>
             <nav>
                 <ul class="bold">
                     <li><a href="/<?=$lang?>/ruta-leyenda-el-dorado/inicio" class="home replaced_text">Inicio</a></li>
@@ -42,4 +42,4 @@
             </nav>
 </div>
     </div>
-    <a href="https://bogotadc.travel/es/plan-bogota" target="_BLANK" class="global-btn bold uppercase fixedBtn"><?=$b->RLDgeneralInfo->field_rld_uiword8?></a>
+    <a href="/es/experiencias-turisticas/encuentra-tu-plan?categories=126" target="_BLANK" class="global-btn bold uppercase fixedBtn"><?=$b->RLDgeneralInfo->field_rld_uiword8?></a>

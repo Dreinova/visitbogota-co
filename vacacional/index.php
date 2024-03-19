@@ -47,6 +47,10 @@ $sliders = $vacacional->getSlidersHome();
     </section>
   </div>
   <div class="bg-noche" style="background-image: url(images/bog_noche.png);">
+  <section class="evento container">
+    <h2><img src="images/eventos.svg" alt="descubre"><?=$eventos?><a href="/<?=$lang?>/eventos/agenda-general-148" class="wait all"><?=$ver_eventos?></a></h2>
+    <div class="container grid-eventos"></div>
+  </section>
   <?php if($lang == "es"){?>
     <section class="exp-home container">
       <h2><img src="images/exp_tur.svg" alt="descubre"><?=$experiencias_turisticas?></h2>
@@ -101,19 +105,19 @@ $sliders = $vacacional->getSlidersHome();
           <h5><img src="images/infoUtil.svg" alt="infoUtil"><?=$informacion_util?></h5>
           <ul>
             <li>
-              <a href="/<?=$lang?>/preguntas-frecuentes#informacion-general">- <?=$informacion_general?></a>
+              <a href="/<?=$lang?>/informacion-al-viajero#informacion-general">- <?=$informacion_general?></a>
             </li>
             <li>
-              <a href="/<?=$lang?>/preguntas-frecuentes#como-moverse-en-bogota">- <?=$como_moverse_en_bogota?></a>
+              <a href="/<?=$lang?>/informacion-al-viajero#como-moverse-en-bogota">- <?=$como_moverse_en_bogota?></a>
             </li>
             <li>
-              <a href="/<?=$lang?>/preguntas-frecuentes#descargables">- <?=$descargables?></a>
+              <a href="/<?=$lang?>/informacion-al-viajero#descargables">- <?=$descargables?></a>
             </li>
           </ul>
         </div>
         <div class="catalogos">
-          <a href="/es/restaurantes"><img src="images/restaurantes.svg" alt="restaurantes"><?=$restaurantes?></a>
-          <a href="/es/hoteles"><img src="images/hospedajes.svg" alt="hospedajes"><?=$hospedajes?></a>
+          <a href="/<?=$lang?>/donde-comer"><img src="images/restaurantes.svg" alt="restaurantes"><?=$restaurantes?></a>
+          <a href="/<?=$lang?>/hoteles"><img src="images/hospedajes.svg" alt="hospedajes"><?=$hospedajes?></a>
         </div>
       </div>
 
@@ -144,7 +148,7 @@ $sliders = $vacacional->getSlidersHome();
   </div>
   <section class="blog container">
     <h2><img src="images/blog.svg" alt="descubre"><?=$blog_y_multimedia?></h2>
-    <h3><?=$publicaciones_recientes?></h3>
+    <h3><?=$publicaciones_recientes?> <a href="/<?=$lang?>/blog" class="wait all"><?=$ver_blog?></a></h3>
     <div class="container grid-blogs"></div>
   </section>
 </main>

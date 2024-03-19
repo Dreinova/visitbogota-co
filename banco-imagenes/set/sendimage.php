@@ -4,9 +4,8 @@
     //Client Message
     extract($_POST);
     $to = $email;
-    $urlImage = "https://www.bogotadc.travel/es/banco-imagenes/descarga-".$imageID."?size=".$size;
-    $params = "{\"BILINK\":\"$urlImage\"}";
-    $emailSended = $b->setFirstImage($to, $params, $urlImage);
+    $params = "{\"BILINK\":\"$size\"}";
+    $emailSended = $b->setFirstImage($to, $params, $size);
     $array['emailSended'] = $emailSended;
     $array['message'] = 1;
     echo json_encode($array);

@@ -54,13 +54,7 @@
         width: 100%;
         display: flex;
         padding: 6px;
-        background-image: linear-gradient(
-          to bottom,
-          #ff7c47,
-          #ff8033,
-          #cf4c1f,
-          #b0411a
-        );
+        background-color: #e50728;
         input {
           padding: 13px 20px;
           background-color: #fff;
@@ -70,6 +64,49 @@
           margin-right: 15px;
           @media only screen and (max-width: 768px) {
             width: 50%;
+          }
+        }
+        .autocompleteForm {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          .autocomplete {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            input {
+              width: 100%;
+            }
+            button {
+              position: absolute;
+              right: 30px;
+            }
+          }
+          .types-checks {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 0 8px;
+            .politics_checkbox {
+              display: flex;
+              margin: 0;
+              input {
+                position: absolute;
+                opacity: 0;
+                display: block;
+                width: 100%;
+              }
+            }
+            label {
+              color: #fff;
+            }
+            span.politics_checkbox_mark {
+              border-color: #fff;
+            }
+            span.politics_checkbox_mark::after {
+              background-color: #fff;
+            }
           }
         }
         button {

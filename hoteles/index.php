@@ -18,7 +18,7 @@ include "includes/head.php";?>
     <div class="opciones">
         <ul>
             <li><a href="#" class="opcion active"><img src="../img/Hoteles_icon_white.svg" alt="hospedajes">Hospedajes</a></li>
-            <li><a href="/<?= $lang ?>/restaurantes" class="opcion"><img src="../img/Restaurantes_icon_black.svg" alt="restaurantes">Restaurantes</a></li>
+            <li><a href="/<?= $lang ?>/donde-comer" class="opcion"><img src="../img/Restaurantes_icon_black.svg" alt="restaurantes">Restaurantes</a></li>
         </ul>
     </div>
     <div class="card-list providers graybg font1">

@@ -37,4 +37,7 @@ if (file_exists("includes/bogota.php")) {
         <link rel="canonical" href="url" />
     <meta name="description" content="description" /><script>
     </script>
+    <script>
+      let pb_experiencias = <?=json_encode($pb->pb_experiencias)?>;
+    </script>
     </head>

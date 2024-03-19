@@ -34,6 +34,7 @@ async function seleccionarImagenAlAzar(imagenes, element) {
   }
 }
 let blogContainer = document.querySelector(".grid-blogs");
+let eventosContainer = document.querySelector(".grid-eventos");
 
 // Llamar a la función para cada arreglo de imágenes
 window.addEventListener("load", function () {
@@ -53,6 +54,9 @@ window.addEventListener("load", function () {
   }
   if (blogContainer) {
     getRecentBlogs();
+  }
+  if (eventosContainer) {
+    getRecentEventos();
   }
 });
 
@@ -81,6 +85,56 @@ async function getRecentBlogs() {
         </div>
       </a>`;
     blogContainer.innerHTML += template;
+  });
+
+  await Promise.all(promises);
+
+  lazyImages();
+}
+async function getRecentEventos() {
+  eventosContainer.innerHTML = "";
+
+  const response = await fetch(`/vacacional/g/lastEvents/?lang=${actualLang}`);
+  const data = await response.json();
+  // Función para comparar fechas
+  function compareDates(a, b) {
+    const dateA = new Date(a.field_date);
+    const dateB = new Date(b.field_date);
+    return dateA - dateB;
+  }
+
+  // Ordenar el arreglo por la fecha inicial
+  data.sort(compareDates);
+
+  const promises = data.map(async (evento) => {
+    const dateStart = new Date(evento.field_date);
+    const optionsdateStart = {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+    const dateFormatteddateStart = dateStart.toLocaleDateString(
+      "en-US",
+      optionsdateStart
+    );
+    let urlImg = await getImageFromCacheOrFetch(
+      "https://bogotadc.travel" + evento.field_cover_image
+    );
+    let template = `<a href="/${actualLang}/evento/${get_alias(evento.title)}-${
+      evento.nid
+    }" data-aos="flip-left blog_item" data-productid="88">
+        <div class="img">
+          <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
+        </div>
+        <div class="desc">
+        <small class="tag">
+        <img src="images/eventosIcono.svg" alt="tag"/>
+        ${dateFormatteddateStart}
+        </small>
+          <h2>${evento.title}</h2>
+        </div>
+      </a>`;
+    eventosContainer.innerHTML += template;
   });
 
   await Promise.all(promises);
@@ -224,6 +278,7 @@ const getBogotaData = async (containerId, category) => {
     `/g/products/?lang=${actualLang}&category=${category}`
   );
   const data = await response.json();
+  console.log(`getBogotaData`, data);
 
   const promises = data.map(async (item) => {
     let urlImg = await getImageFromCacheOrFetch(

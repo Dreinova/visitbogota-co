@@ -67,9 +67,7 @@ $content2 = json_encode($content);
 </script>
   <main>
     <section class="titleResult">
-      <h2><?=$infoGnrl->field_bi_ui_06?> <b> “<?=$_GET["search"] ? $_GET["search"] : $product->title?>”</b></h2>
-      <h3><?=$infoGnrl->field_bi_ui_07?>: <?=$images ? count($images) : '0'?></h3>
-     
+      <h2><?=$infoGnrl->field_bi_ui_06?> <b> “<?=$_GET["search"] ? $_GET["search"] : $product->title?>”</b></h2>     
     </section>
     <section class="portal_list">
       <div class="left">
@@ -159,18 +157,41 @@ $content2 = json_encode($content);
         </div>
       </div>
       <div class="right">
-        <?if($images){?>
+        <?
+        if($images){?>
           <ul class="grid-imagenes">
             <? 
-            for ($i=0; $i < count($images); $i++) { 
+              $imagePath = "";
+            for ($i=0; $i < count($images); $i++) {
+              if($images[$i]->field_is_video){
+                $imagePath = "/banco-imagenes/download/video/" . $images[$i]->field_bifilename .".mp4";
+              }else{
+                $imagePath = "/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename).'.jpg';
+              }
+              if (file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
            ?>
-            <li data-image="<?= $images[$i]->field_is_video == '1' ? strtolower(str_replace('.mp4', '.jpg', $images[$i]->field_bi_imagen)): $images[$i]->field_bi_imagen?>">
+            <li data-image="<?= $imagePath ?>">
             
               <a href="/<?=$lang?>/banco-imagenes/interna-<?=$images[$i]->nid?>"
-                ><img
-                  src="<?=$b->fixbiurl('w_640',$images[$i]->field_is_video == '1' ? strtolower(str_replace('.mp4', '.jpg', $images[$i]->field_bi_imagen)): $images[$i]->field_bi_imagen)?>"
+                >
+                <? 
+                if($images[$i]->field_is_video){ ?>
+                <video
+                autobuffer
+                autoplay
+                muted
+                preload="metadata"
+                loop
+                src="<?=$imagePath?>"
+                >
+                <source src="<?=$imagePath?>" />
+                </video>
+                <? }else{ ?>
+                  <img
+                  src="<?=$imagePath?>"
                   alt="<?=$images[$i]->title?>"
-                />
+                  />
+                  <? } ?>
                 <div class="info">
                   <div class="green-btn"><?= $images[$i]->field_is_video == '1' ? "Ver video" : "Ver Imagen" ?></div>
                   <small></small>
@@ -181,7 +202,7 @@ $content2 = json_encode($content);
                 </a
               >
             </li>
-            <?}?>
+            <?}}?>
           </ul>
         <?}?>
       </div>
@@ -215,19 +236,19 @@ $content2 = json_encode($content);
                       if ($field_image) {
                       ?>
                           <div class="img">
-                              <img loading="lazy" class="lazyload" data-src="<?= $field_image ?>" src="https://picsum.photos/20/20" alt="Bogotá">
+                              <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_image ?>" src="https://picsum.photos/20/20" alt="Bogotá">
                           </div>
                       <?php
                       } else if ($field_cover) {
                       ?>
                           <div class="img">
-                              <img loading="lazy" class="lazyload" data-src="<?= $field_cover ?>" src="https://picsum.photos/20/20" alt="Bogotá">
+                              <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_cover ?>" src="https://picsum.photos/20/20" alt="Bogotá">
                           </div>
                       <?php
                       } else if ($field_bi_imagen) {
                       ?>
                           <div class="img">
-                              <img loading="lazy" class="lazyload" data-src="<?= $field_bi_imagen ?>" src="https://picsum.photos/20/20" alt="Bogotá">
+                              <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_bi_imagen ?>" src="https://picsum.photos/20/20" alt="Bogotá">
                           </div>
                       <?php } else { ?>
                           <div class="img">
@@ -246,19 +267,19 @@ $content2 = json_encode($content);
             <a class="size1" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[0]->nid?>"
               ><strong class="uppercase"><?=$products[0]->title?></strong
               ><img
-                src="<?=$products[0]->field_cover_image?>"
+                src="https://bogotadc.travel<?=$products[0]->field_cover_image?>"
                 alt="resultados"
             /></a>
             <a class="size2" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[1]->nid?>"
               ><strong class="uppercase"><?=$products[1]->title?></strong
               ><img
-                src="<?=$products[1]->field_cover_image?>"
+                src="https://bogotadc.travel<?=$products[1]->field_cover_image?>"
                 alt="resultados"
             /></a>
             <a class="size1" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[2]->nid?>"
               ><strong class="uppercase"><?=$products[2]->title?></strong
               ><img
-                src="<?=$products[2]->field_cover_image?>"
+                src="https://bogotadc.travel<?=$products[2]->field_cover_image?>"
                 alt="resultados"
             /></a>
           </div>
@@ -268,19 +289,19 @@ $content2 = json_encode($content);
                 <a class="size3" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[3]->nid?>"
                   ><strong class="uppercase"><?=$products[3]->title?></strong
                   ><img
-                    src="<?=$products[3]->field_cover_image?>"
+                    src="https://bogotadc.travel<?=$products[3]->field_cover_image?>"
                     alt="resultados"
                 /></a>
                 <a class="size4" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[4]->nid?>"
                   ><strong class="uppercase"><?=$products[4]->title?></strong
                   ><img
-                    src="<?=$products[4]->field_cover_image?>"
+                    src="https://bogotadc.travel<?=$products[4]->field_cover_image?>"
                     alt="resultados"
                 /></a>
                 <a class="size4" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[6]->nid?>"
                   ><strong class="uppercase"><?=$products[6]->title?></strong
                   ><img
-                    src="<?=$products[6]->field_cover_image?>"
+                    src="https://bogotadc.travel<?=$products[6]->field_cover_image?>"
                     alt="resultados"
                 /></a>
               </div>
@@ -288,13 +309,13 @@ $content2 = json_encode($content);
                 <a href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[7]->nid?>"
                   ><strong class="uppercase"><?=$products[7]->title?></strong
                   ><img
-                    src="<?=$products[7]->field_cover_image?>"
+                    src="https://bogotadc.travel<?=$products[7]->field_cover_image?>"
                     alt="resultados"
                 /></a>
                 <a href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[8]->nid?>"
                   ><strong class="uppercase"><?=$products[8]->title?></strong
                   ><img
-                    src="<?=$products[8]->field_cover_image?>"
+                    src="https://bogotadc.travel<?=$products[8]->field_cover_image?>"
                     alt="resultados"
                 /></a>
               </div>
@@ -303,13 +324,13 @@ $content2 = json_encode($content);
               <a class="size5" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[9]->nid?>"
                 ><strong class="uppercase"><?=$products[9]->title?></strong
                 ><img
-                  src="<?=$products[9]->field_cover_image?>"
+                  src="https://bogotadc.travel<?=$products[9]->field_cover_image?>"
                   alt="resultados"
               /></a>
               <a class="size5" href="/<?=$lang?>/banco-imagenes/resultados/?productid=<?=$products[11]->nid?>"
                 ><strong class="uppercase"><?=$products[11]->title?></strong
                 ><img
-                  src="<?=$products[11]->field_cover_image?>"
+                  src="https://bogotadc.travel<?=$products[11]->field_cover_image?>"
                   alt="resultados"
               /></a>
             </div>

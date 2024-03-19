@@ -2,7 +2,7 @@
 <main>
   <div class="container">
     <a href="/<?=$_GET['lang']?><?=$project_base?>encuentra-tu-plan" class="ms900 uppercase btn-back btn"><img
-        src="<?=$project_base?>images/arrow_back_green.svg" alt="arrow_back" /> Volver
+        src="<?=$project_base?>images/arrow_back_green.svg" alt="arrow_back" /> <?=$pb->pb_experiencias[23]?>
     </a>
     <section class="faq">
       <div class="accordion">

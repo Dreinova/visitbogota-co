@@ -58,6 +58,9 @@
                     <small><?=$event->field_phone?></small>
                 </div>
             </div>
+            <div class="disclaimer">
+                <p><?=$pi_bogota[99]?></p>
+            </div>
         </section>
         <?php if($venue->field_galery != ""){ ?>
             <div class="gallery">

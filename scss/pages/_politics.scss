@@ -231,8 +231,21 @@
         }
         h2 {
           font-size: 2.2rem;
-          color: #666666;
+          color: #666;
           margin-bottom: 15px;
+          font-weight: bold;
+        }
+        h3 {
+          font-size: 2rem;
+          color: #666;
+          margin-bottom: 15px;
+          font-weight: bold;
+        }
+        h4 {
+          font-size: 1.6rem;
+          color: #666;
+          margin-bottom: 15px;
+          font-weight: bold;
         }
         p {
           font-size: 1.4rem;
@@ -240,6 +253,17 @@
           text-align: justify;
           padding-bottom: 30px;
           line-height: 2.2rem;
+        }
+        ul {
+          list-style: disc;
+          padding-left: 25px;
+          li {
+            font-size: 1.4rem;
+            color: #666;
+            text-align: justify;
+            padding-bottom: 30px;
+            line-height: 2.2rem;
+          }
         }
         a {
           text-decoration: underline;

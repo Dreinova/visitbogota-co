@@ -23,7 +23,7 @@ $isMobile = $detect->isMobile();
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <meta name="theme-color" content="#ff7c47">
         <base href="<?=$project_base?>">
-        <?= $b->create_metas($_GET['seo']) ?>
+        <?= $b->create_metas($_GET['seo'],$_GET['seoType']) ?>
         <link rel="stylesheet" href="<?=$include_level?>css/style.css?v=<?=time();?>">
     </head>
     <script>
@@ -45,7 +45,7 @@ $isMobile = $detect->isMobile();
             <meta name="theme-color" content="#df2f4a">
             <meta name="google-site-verification" content="gmbhhlorLRNzSxm4RE99kBoX0x-W_gMvjxqRGWTeLS0" />
             <base href="<?=$project_base?>">
-            <?= $b->create_metas($_GET['seo']) ?>
+            <?= $b->create_metas($_GET['seo'],$_GET['seoType']) ?>
             <!-- STYLES -->
             <link rel="icon" href="<?=$include_level?>favicon.png" type="image/png">
             <link rel="stylesheet" href="<?=$include_level?>css/slick.min.css">

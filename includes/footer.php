@@ -109,7 +109,7 @@ if (!$planes) {
         <li><a href="/<?=$lang?>/experiencias-turisticas/"><?=$experiencia_turisticas?></a></li>
         <li><a href="/<?=$lang?>/planifica-tu-viaje"><?=$planifica_tu_viaje?></a></li>
         <li><a href="/<?=$lang?>/eventos/agenda-empresarial-148"><?=$agenda_empresarial?></a></li>
-        <li><a href="/<?=$lang?>/restaurantes"><?=$restaurantes?></a></li>
+        <li><a href="/<?=$lang?>/donde-comer"><?=$restaurantes?></a></li>
         <li><a href="/<?=$lang?>/hoteles"><?=$hospedaje?></a></li>
         <li><a href="/<?=$lang?>/blog"><?=$blog?></a></li>
         <li><a href="/<?=$lang?>/banco-imagenes/"><?=$exploraciones_visuales?></a></li>
@@ -133,15 +133,15 @@ if (!$planes) {
       <h6><?=$useful_information?></h6>
       <ul>
 
-        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$cómo_moverse_en_Bogotá?></a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$informacion_general?></a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$descargables?></a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$recursos_lengua_de_senas?></a></li>
-        <li><a href="/<?=$lang?>/preguntas-frecuentes"><?=$preguntas_frecuentes?></a></li>
+        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$cómo_moverse_en_Bogotá?></a></li>
+        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$informacion_general?></a></li>
+        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$descargables?></a></li>
+        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$recursos_lengua_de_senas?></a></li>
+        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$preguntas_frecuentes?></a></li>
       </ul>
     </nav>
     <nav>
-      <h6><?=$contact_us?></h6>
+      <h6><?=$contact_us?></h6> 
       <ul>
       <li>
         <?= $b->generalInfo->field_ciudadano_txt ?> <a href="tel:<?= $b->generalInfo->field_ciudadano ?>"> <?= $b->generalInfo->field_ciudadano ?></a>

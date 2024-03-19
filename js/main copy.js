@@ -281,9 +281,6 @@ if (document.querySelector(".slide_explora_item")) {
     })
     .then(() => {
       lazyImages();
-      $(".wait").click(function () {
-        $("#preloader").fadeIn();
-      });
     });
 }
 
@@ -382,9 +379,6 @@ $(document).ready(function () {
         behavior: "smooth",
       });
     });
-  });
-  $(".wait").click(function () {
-    $("#preloader").fadeIn();
   });
   $("#preloader").fadeOut("slow");
 
@@ -1197,10 +1191,6 @@ async function createZonesHome(zoneData, zonesTax) {
         document.querySelector(`.zoneTax_cards`).classList.add("selected");
       });
     });
-
-    $(".wait").click(function () {
-      $("#preloader").fadeIn();
-    });
     lazyImages();
   }
 }
@@ -1226,10 +1216,6 @@ function createNearbyHome(nearbyData) {
         "</h3></a></div>";
       nearbyPlacesContainer.innerHTML += template;
     }
-
-    $(".wait").click(function () {
-      $("#preloader").fadeIn();
-    });
   }
 }
 
@@ -1375,8 +1361,6 @@ function geoFindMe() {
         event_label: "bogota",
         value: 0,
       });
-    } else {
-      console.log("No estoy en TS");
     }
     //   output.appendChild(img);
     // if (
@@ -1565,9 +1549,6 @@ function getBlogsRel(prodId, prodName) {
     .then(function () {
       sliderPosts();
       lazyImages();
-      $(".wait").click(function () {
-        $("#preloader").fadeIn();
-      });
     });
 }
 // Te puede interesar
@@ -1610,9 +1591,6 @@ function interestYou(prodId) {
         })
         .then(function () {
           lazyImages();
-          $(".wait").click(function () {
-            $("#preloader").fadeIn();
-          });
         });
     }
   } else {
@@ -1760,7 +1738,6 @@ if (document.querySelector("body.portal")) {
         });
         listOfZones = listOfZones.filter(onlyUnique);
         // GET FILTROS ZONAS
-
         if (
           places.length > 0 &&
           document.querySelectorAll("ul.filters_especificos li").length > 0
@@ -1840,9 +1817,6 @@ if (document.querySelector("body.portal")) {
             ).offsetTop;
           });
         }
-        $(".wait").click(function () {
-          $("#preloader").fadeIn();
-        });
         if (!data_product) {
           document
             .querySelectorAll("ul.filters_especificos li")
@@ -2020,7 +1994,6 @@ if (document.querySelector("body.portal")) {
   var url;
   var fetchID;
   var productName = document.querySelector("#mainPortal").dataset.productname;
-
   if (data_product) {
     fetchID = data_product;
     filts = [
@@ -2079,7 +2052,6 @@ if (document.querySelector("body.portal")) {
     ];
     url = `/${actualLang}/g/zonas/?zoneID=${fetchID}`;
   }
-
   getBlogsRel(data_product, productName);
   interestYou(data_product);
   var filtersContainer;
@@ -3015,7 +2987,6 @@ function useFilters(cattype) {
       }
     }
   });
-
   $("#disabler").show();
   $(".events_list_grid").addClass("loading");
   var itscontent = $(".events_list_grid");
@@ -3029,15 +3000,18 @@ function useFilters(cattype) {
     urlPost = `/g/${cattype}/?lang=${actualLang}`;
   }
   $.post(urlPost, { filters: completefilters }, function (data) {
-    // Sorting the array based on the 'field_date' property
-    data.sort((a, b) => new Date(a.field_date) - new Date(b.field_date));
+    // Función de comparación para ordenar por fecha
+    function compararFechas(a, b) {
+      return new Date(a.field_date) - new Date(b.field_date);
+    }
 
+    // Ordenar el arreglo por fecha
+    data.sort(compararFechas);
     if (data.length > 0) {
       for (var i = 0; i < data.length; i++) {
         let event = data[i];
         var thumbnail = data[i].field_cover_image;
         //Campo calificacion ->  data[i].field_calificacion
-        console.log(event.field_date);
         const dateStart = new Date(event.field_date);
         const optionsdateStart = {
           month: "short",
@@ -3053,71 +3027,41 @@ function useFilters(cattype) {
         const dayStart = dateFormatteddateStart.substring(4, 6);
         const yearStart = dateFormatteddateStart.substring(7);
 
-        console.log(dateFormatteddateStart);
         if (thumbnail == "") {
           thumbnail =
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
         }
-        var strtemplate = `
-          <li class="events_list_grid_item">
-                <a href="/${actualLang}/evento/${get_alias(event.title)}-${
-          event.nid
-        }" class="single_event">
-                    <div class="single_event_img">
-                        <img loading="lazy" data-src="https://bogotadc.travel${thumbnail}" src="https://picsum.photos/20/20"
-                            alt="evento" class="lazyload">
-                    </div>
-                    <div class="info">
-                        <div class="single_event_date ${
-                          event.field_end_date != "" ? " big" : ""
-                        }">
-                            <div>
-                                <h3 className="uppercase">${monthStart}</h3>
-                                <h4>${dayStart}</h4>
-                                <h3>${yearStart}</h3>
-                              
-                            </div>
-                            ${(function ifDateEnd() {
-                              if (event.field_end_date != "") {
-                                const dateEnd = new Date(event.field_end_date);
-                                const options = {
-                                  month: "short",
-                                  day: "numeric",
-                                  year: "numeric",
-                                };
-                                const dateFormatted =
-                                  dateEnd.toLocaleDateString("en-US", options);
 
-                                const month = dateFormatted.substring(0, 3);
-                                const day = dateFormatted.substring(4, 6);
-                                const year = dateFormatted.substring(7);
-                                return `<div>
-                                <h3 className="uppercase">${month}</h3>
-                                <h4>${day}</h4>
-                                <h3>${year}</h3>
-                                </div>`;
-                              } else {
-                                return "";
-                              }
-                            })()}
-                            
-                        </div>
-                        <div class="txt">
-                            <h5 class="single_event_title ms700 uppercase">${
-                              event.title
-                            }</h3>
-                                <h6 class="single_event_place ms500">${
-                                  event.field_place
-                                }</h4>
-                                    <div class="btn event-view uppercase ms900">${
-                                      actualLang == "es"
-                                        ? "Ver evento"
-                                        : "View EVENT"
-                                    }</div>
-                        </div>
-                    </div>
-                </a>
-            </li>`;
+        var strtemplate = ` <li class="events_list_grid_item">
+        <article class="single_event">
+            <div class="left">
+                <ul class="categoryTags">
+                    <li>${event.field_categoria_evento_1}</li>
+                </ul>
+                <div class="image">
+                    <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel${
+                      event.field_imagen_listado_events
+                    }" src="https://via.placeholder.com/330x240" alt="${
+          event.title
+        }">
+                </div>
+                <span class="dates">
+                    <time datetime="${event.field_date}">28/02/2024</time> ${
+          event.field_end_date
+            ? `  – <time datetime="${event.field_end_date}">12/05/2024</time>`
+            : ""
+        }
+                </span>
+            </div>
+            <div class="right">
+                <h2>${event.title}</h2>
+                <p>${event.body_2}</p>
+                <div class="readmore">
+                    Ver Evento
+                </div>
+            </div>
+        </article>
+    </li>`;
         itscontent.append(strtemplate);
       }
     } else {
@@ -3160,24 +3104,6 @@ if (ofertasRelgrid) {
   if (mainElement.hasAttribute("data-zoneid")) {
     // Verificar si el valor del atributo es null, undefined o una cadena vacía
     const zoneIdValue = mainElement.getAttribute("data-zoneid");
-    if (
-      zoneIdValue === null ||
-      zoneIdValue === undefined ||
-      zoneIdValue === ""
-    ) {
-      console.log(
-        "El elemento <main> tiene el atributo data-zoneid, pero no tiene valor."
-      );
-    } else {
-      console.log(
-        "El elemento <main> tiene el atributo data-zoneid definido con valor:",
-        zoneIdValue
-      );
-    }
-  } else {
-    console.log(
-      "El elemento <main> no tiene el atributo data-zoneid definido."
-    );
   }
   if (document.querySelector(".interna_atractivo")) {
     getOfertasRel(
@@ -3271,10 +3197,8 @@ async function getOfertasRel(atractivo, localidad, zona, alojamiento) {
             </a>`;
           ofertasRelgrid.innerHTML += template;
         }
-        console.log(data);
         lazyImages();
       } else {
-        console.log("SON 0");
         document.querySelector(".ofertasRel").style.display = "none";
       }
     })

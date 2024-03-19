@@ -206,9 +206,7 @@ Array.prototype.min = function () {
 function getVenues() {
   fetch(actualLang + "/g/getVenues/")
     .then((res) => res.json())
-    .then((venues) => {
-      console.log(venues);
-    });
+    .then((venues) => {});
 }
 
 if (document.querySelector(".internprovider-body")) {
@@ -298,7 +296,6 @@ if (document.querySelector(".internVenue-body")) {
 
   salonesImages
     .then((data) => {
-      console.log(data.length);
       if (data.length > 0) {
         document.querySelector("#salas .left ul").innerHTML = "";
         const salonGalleryUlContainer = document.querySelector(
@@ -781,7 +778,6 @@ if (document.querySelector(".internStorie")) {
       );
       const principalImage = document.querySelector("#principal_img");
       principalImage.innerHTML = data[0];
-      console.log(data);
       galleryUlContainer.innerHTML = "";
       data.forEach((image, i) => {
         let templateImages = `<li class="${i == 0 && "active"}">${image}</li>`;
@@ -810,7 +806,6 @@ if (document.querySelector(".gridimperdibles")) {
   fetch(url)
     .then((response) => response.json())
     .then((places) => {
-      console.log(places);
       places.forEach((place) => {
         let subproductRelInfo = subproductsArray.filter(
           (sub) => sub.nid == place.field_subp.split(",")[0]
@@ -845,7 +840,6 @@ function getMICEData() {
     return Promise.all(allRequests);
   };
   fetchMICEData().then((arrayOfResponses) => {
-    console.log(arrayOfResponses);
     //   ZONE ELEMENTS MICE
     const formatos = arrayOfResponses[0];
     document.querySelector("#filter1 .options.formatos").innerHTML = "";

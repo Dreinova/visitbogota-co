@@ -8,7 +8,7 @@ $thepars = explode("/*-",$b->RLDgeneralInfo->field_rdl_introps);
     <?php include "includes/rld_header.php"; ?>
     <div class="outter rld_banner basic_background">
         <video muted autoplay loop>
-            <source src="<?=$b->RLDgeneralInfo->field_rld_mainvideo?>" type="video/mp4">
+            <source src="<?=$urlGlobal?><?=$b->RLDgeneralInfo->field_rld_mainvideo?>" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         </video>
@@ -33,7 +33,7 @@ $thepars = explode("/*-",$b->RLDgeneralInfo->field_rdl_introps);
                 </div>
             </div>
             <div class="container  basic_background"
-                style="background-image:url(<?=$b->RLDgeneralInfo->field_rdl_promoimg1?>); background-position:center top; height:50vh;">
+                style="background-image:url(<?=$urlGlobal?><?=$b->RLDgeneralInfo->field_rdl_promoimg1?>); background-position:center top; height:50vh;">
                 <div class="content outter titlebanner">
                     <h1 class="landingTitle uppercase carambola"><?=$b->RLDgeneralInfo->field_rld_promotext1?></h1>
 
@@ -52,7 +52,7 @@ $thepars = explode("/*-",$b->RLDgeneralInfo->field_rdl_introps);
         </section>
         <section>
             <div class="container  basic_background"
-                style="background-image:url(<?=$b->RLDgeneralInfo->field_rdl_promoimg2?>); height:50vh; background-position:center top !important;">
+                style="background-image:url(<?=$urlGlobal?><?=$b->RLDgeneralInfo->field_rdl_promoimg2?>); height:50vh; background-position:center top !important;">
                 <div class="content outter titlebanner">
                     <h1 class="landingTitle uppercase carambola"><?=$b->RLDgeneralInfo->field_rld_promotext2?></h1>
                 </div>
@@ -81,7 +81,7 @@ $thepars = explode("/*-",$b->RLDgeneralInfo->field_rdl_introps);
                         <div class="clear">
                             <?if($rldplaces[$i]->field_imp_pic != ''){?>
                             <div class="col1 w_40 bigcolumn m_outter">
-                                <img class="outter" src="<?=$rldplaces[$i]->field_imp_pic?>"
+                                <img class="outter" src="<?=$urlGlobal?><?=$rldplaces[$i]->field_imp_pic?>"
                                     alt="<?=$rldplaces[$i]->title?>" />
                             </div>
                             <?}?>

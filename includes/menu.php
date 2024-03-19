@@ -88,7 +88,7 @@ else{
                 <?php } ?>
             </ul>
         </div>
-        <a href="<?= $lang ?>/preguntas-frecuentes" class="wait"><?= $b->generalInfo->field_info_txt ?></a>
+        <a href="<?= $lang ?>/informacion-al-viajero" class="wait"><?= $b->generalInfo->field_info_txt ?></a>
         <a href="<?= $lang ?>/blog" class="wait">Blog</a>
         <a href="<?= $lang ?>/mice" class="wait">Turismo de reuniones - MICE</a>
         <a href="<?= $lang ?>/ruta-leyenda-el-dorado/inicio" class="wait">Ruta leyenda el dorado</a>

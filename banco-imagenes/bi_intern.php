@@ -9,6 +9,12 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
   $explode2 = explode(", ", $image->field_bi_zona_rel); 
   $imagesRel= $b->getImages($explode1, $explode2); 
 } 
+if($image->field_is_video){
+  $imagePath = "/banco-imagenes/download/video/" . $image->field_bifilename .'.mp4';
+}else{
+  $imagePath = "/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . '.jpg';
+
+}
 ?>
 <main>
   <section class="fullImage">
@@ -29,13 +35,13 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
           muted
           preload="auto"
           loop
-          src="<?=$image->field_bi_imagen?>"
+          src="<?=$imagePath?>"
         >
-          <source src="<?=$image->field_bi_imagen?>" />
+          <source src="<?=$imagePath?>" />
         </video>
         <? }else{ ?>
         <img
-          src="<?=$b->fixbiurl('w_900', $image->field_bi_imagen)?>"
+          src="<?=$imagePath?>"
           alt="<?=$image->title?>"
         />
         <? } ?>
@@ -81,10 +87,14 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
   <section class="rel">
     <h3> Imágenes / videos relacionados</h3>
     <div class="grid-rela">
-      <? for ($i=0; $i < count($imagesRel); $i++) { ?>
+      <? for ($i=0; $i < count($imagesRel); $i++) { 
+         $imagePath = "/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename) . ($images[$i]->field_is_video == '1' ? '.mp4' : '.jpg');
+         if (file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
+
+        ?>
       <a href="/<?=$lang?>/banco-imagenes/interna-<?=$imagesRel[$i]->nid?>">
         <img
-          src="<?=$b->fixbiurl('w_640',$imagesRel[$i]->field_is_video == '1' ? strtolower(str_replace('.mp4', '.jpg', $imagesRel[$i]->field_bi_imagen)): $imagesRel[$i]->field_bi_imagen)?>"
+          src="<?=$imagePath?>"
           alt="<?=$imagesRel[$i]->title?>"
         />
         <? if($imagesRel[$i]->field_is_video == '1'){ ?>
@@ -94,7 +104,7 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
       <? } ?>
     </div>
   </section>
-  <? } ?>
+  <? }} ?>
 </main>
 
 <div
@@ -115,22 +125,22 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
         >
           <option value="">Elige un tamaño de la imagen</option>
           <option
-            value="<?=$b->fixbiurl('', $image->field_bi_imagen,$image->field_bi_autor)?>"
+            value="<?="/banco-imagenes/download/impresion/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Formato impresión
           </option>
           <option
-            value="<?=$b->fixbiurl('w_2000', $image->field_bi_imagen,$image->field_bi_autor)?>"
+            value="<?="/banco-imagenes/download/2000/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Formato web grande - 2000px
           </option>
           <option
-            value="<?=$b->fixbiurl('w_1200', $image->field_bi_imagen,$image->field_bi_autor)?>"
+            value="<?="/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Formato web pequeño - 1200px
           </option>
           <option
-            value="<?=$b->fixbiurl('w_500', $image->field_bi_imagen,$image->field_bi_autor)?>"
+            value="<?="/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Miniatura - 500px
           </option>
@@ -138,8 +148,16 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
         <div class="c-arrow"></div>
       </div>
     <? } ?>
+    <?php
+      $imagePathDown = "";
+    if($image->field_is_video){
+      $imagePathDown = "/banco-imagenes/download/video/" . $image->field_bifilename .'.mp4';
+    }else{
+      $imagePathDown = "/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . '.jpg';
+    }
+    ?>
     <a
-      href="<?=$image->field_is_video == '1' ?  $b->fixbiurl('', $image->field_bi_imagen) :  $b->fixbiurl('w_640', $image->field_bi_imagen)?>"
+      href="<?=$imagePathDown?>"
       download
       target="_blank"
       id="downloadbi"
@@ -168,10 +186,10 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
       <div class="c-select">
         <select name="size" id="size">
           <option value="">Elige un tamaño de la imagen</option>
-          <option value="100">Formato impresión</option>
-          <option value="w_2000">Formato web grande - 2000px</option>
-          <option value="w_1200">Formato web pequeño - 1200px</option>
-          <option value="w_500">Miniatura - 500px</option>
+          <option value="<?="/banco-imagenes/download/impresion/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato impresión</option>
+          <option value="<?="/banco-imagenes/download/2000/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato web grande - 2000px</option>
+          <option value="<?="/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato web pequeño - 1200px</option>
+          <option value="<?="/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Miniatura - 500px</option>
         </select>
         <div class="c-arrow"></div>
       </div>
@@ -205,9 +223,9 @@ if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != "
       >
     </div>
     <div class="politics_checkbox">
-      <input type="checkbox" name="politics" id="politics_" checked />
+      <input type="checkbox" name="politics2" id="politics2" checked />
       <span class="politics_checkbox_mark"></span>
-      <label for="politics"
+      <label for="politics2"
         ><strong>He leído y acepto</strong> las condiciones de uso de la imagen.
         <a
           href="<?= $b->generalInfo->field_resolucion_239?>"

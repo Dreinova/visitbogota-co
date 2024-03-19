@@ -1,4 +1,4 @@
-<section class="outter basic_background" style="background-image:url(<?=$b->RLDgeneralInfo->field_rld_routesbg?>)">
+<section class="outter basic_background" style="background-image:<?=$urlGlobal?><?=$b->RLDgeneralInfo->field_rld_routesbg?>)">
     <div class="container">
         <div class="content outter bigtitle">
             <?php if ($singleRoute != 1) { ?>
@@ -22,7 +22,7 @@
     
                                 ?>
                 <li class="total_link uppercase basic_background"
-                    style="background-image:url(<?=$routes[$i]->field__exp_smallbg?>)">
+                    style="background-image:url(<?=$urlGlobal?><?=$routes[$i]->field__exp_smallbg?>)">
                     <a href="/<?=$lang?>/ruta-leyenda-el-dorado/ruta/<?=$thealias?>-<?=$routes[$i]->nid?>">
                         <div class="text">
                             <h1 class="carambola uppercase">

@@ -155,7 +155,7 @@ function useFilters(cattype) {
     function (data) {
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-          let venueUrl = `/${actualLang}/restaurantes/ver/${get_alias(
+          let venueUrl = `/${actualLang}/donde-comer/ver/${get_alias(
             data[i].title
           )}-${data[i].nid}`;
 
@@ -424,7 +424,7 @@ function relHotels(type, zone, aforo) {
         for (let index = 0; index < 6 && index < venues.length; index++) {
           const venue = venues[index];
           if (venue.nid != idSingleVenue) {
-            let venueUrl = `/${actualLang}/restaurantes/ver/${get_alias(
+            let venueUrl = `/${actualLang}/donde-comer/ver/${get_alias(
               venue.title
             )}-${venue.nid}`;
 

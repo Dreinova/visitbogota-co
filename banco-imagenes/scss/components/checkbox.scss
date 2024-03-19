@@ -24,7 +24,10 @@
     z-index: 2;
     opacity: 0;
   }
-  #politics:checked + span.politics_checkbox_mark {
+  input {
+    display: none;
+  }
+  input:checked + span.politics_checkbox_mark {
     &::after {
       opacity: 1;
     }

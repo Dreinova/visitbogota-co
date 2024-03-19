@@ -4,7 +4,7 @@ include 'includes/head.php';
 <section class="rld_body">
     <?php include "includes/rld_header.php"; ?>
     <!--<div class="outter videobanner ">
-        <div class="container clear basic_background" style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2020-09/_MG_9555.jpg)">
+        <div class="container clear basic_background" style="background-image:url(<?=$urlGlobal?>/drpl/sites/default/files/2020-09/_MG_9555.jpg)">
             <section class="col1 bigcolumn w_45">
                 <h1 class=" uppercase">Mitos y leyendas</h1>
                 <p>Este es uno de los ejes temáticos más representativos, ya que muchas de las tradiciones de la cultura Muisca está basadas desde sus mitos, leyendas y su tradición oral, ya que en ellos hay inmersos discursos con contenido social y político, a través de los cuales intentaron explicar el origen del cosmos, del mundo y de la sociedad, de las costumbres y, posiblemente, el origen de todo lo que ocurría en su cotidianidad. A continuación, se presentan algunos de los relatos más importantes

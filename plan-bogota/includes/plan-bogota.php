@@ -13,6 +13,7 @@ class planbogota extends bogota
     
     public $domain = "https://www.bogotadc.travel/drpl/es/api/v1";
     public $generalInfo = array();
+    public $pb_experiencias = array();
     public $language = "";
     public $production = true;
 
@@ -27,6 +28,7 @@ class planbogota extends bogota
             $this->production = false;
         }
         $this->generalInfo = $this->getInfoGnrl();
+        $this->pb_experiencias = $this->getPlabrasInterfazPB();
     }
     function absoluteURL($str) //Enviar a bogota SDK
     {
@@ -59,6 +61,11 @@ class planbogota extends bogota
     }
     return $gnrl;
     }
+    function getPlabrasInterfazPB(){
+        $result = $this->query("palabras_interfaz/3224", "", true);
+        $expoleWords = explode("|", $result[0]->field_palabras); 
+        return $expoleWords;
+    }
     
     function getZonesPB(){
         $result = $this->query("zones/all");
@@ -78,7 +85,15 @@ class planbogota extends bogota
     }
     
     function filterPlans($zones, $persons, $segments, $price, $term,$quant ){
-        $result = $this->query("ofertas_filtradas/" . str_replace(" ","+",$zones) . "/" . str_replace(" ","+",$persons) . "/" . str_replace(" ","+",$segments) . "/" . $term . $price . $quant);
+        // Realiza los reemplazos necesarios y valida si están vacíos
+        $zonesFormatted = !empty($zones) ? str_replace(" ", "+", $zones) : "all";
+        $personsFormatted = !empty($persons) ? str_replace(" ", "+", $persons) : "all";
+        $segmentsFormatted = !empty($segments) ? str_replace(" ", "+", $segments) : "all";
+        $termSelected = !empty($term) ? $term : "all";
+
+        // Concatena los valores formateados
+        $url = "ofertas_filtradas/" . $zonesFormatted . "/" . $personsFormatted . "/" . $segmentsFormatted . "/" . $termSelected . $price . $quant;
+        $result = $this->query($url);
         return $result;
     }
 

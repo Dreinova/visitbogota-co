@@ -74,10 +74,10 @@ if($responsebq != ""){
   $thetime = $date->format('d/m/Y - H:i:s');
 
 
-  $emailSended = campaignMonitorEmail($uemail,"Tu reserva para: ".$uoferta . " te está esperando", "ebb8f839-4a4b-481f-9e90-c1eee295c9f4", "{\"PBSERIAL\":\"$ID\",\"PBCOMPANY\":\"$ucompanyname\",\"PBOFFER\":\"$uoferta\",\"PBMAIL\":\"$ucompanyemail\",\"PBTEL\":\"$ucompanyphone\",\"PBLINK\":\"$ucompanylink\"}");
-  $emailSended2 = campaignMonitorEmail("planbogota@idt.gov.co","Tu reserva para: ".$uoferta . " te está esperando", "ebb8f839-4a4b-481f-9e90-c1eee295c9f4", "{\"PBSERIAL\":\"$ID\",\"PBCOMPANY\":\"$ucompanyname\",\"PBOFFER\":\"$uoferta\",\"PBMAIL\":\"$ucompanyemail\",\"PBTEL\":\"$ucompanyphone\",\"PBLINK\":\"$ucompanylink\"}");
+  $emailSended = campaignMonitorEmail($uemail,"Tu reserva en VisitBogotá está esperándote", "ebb8f839-4a4b-481f-9e90-c1eee295c9f4", "{\"PBSERIAL\":\"$ID\",\"PBCOMPANY\":\"$ucompanyname\",\"PBOFFER\":\"$uoferta\",\"PBMAIL\":\"$ucompanyemail\",\"PBTEL\":\"$ucompanyphone\",\"PBLINK\":\"$ucompanylink\"}");
+  $emailSended2 = campaignMonitorEmail("experienciasturisticas@idt.gov.co","Tu reserva en VisitBogotá está esperándote.", "ebb8f839-4a4b-481f-9e90-c1eee295c9f4", "{\"PBSERIAL\":\"$ID\",\"PBCOMPANY\":\"$ucompanyname\",\"PBOFFER\":\"$uoferta\",\"PBMAIL\":\"$ucompanyemail\",\"PBTEL\":\"$ucompanyphone\",\"PBLINK\":\"$ucompanylink\"}");
   $emailSended3 = campaignMonitorEmail($ucompanyemail,"", "01a8972d-c482-45c7-b1df-0102df04082e", "{\"PBSERIAL\":\"$ID\",\"USERN\":\"$uname\",\"USERPHONE\":\"$uphone\",\"USERMAIL\":\"$uemail\",\"PBOFFER\":\"$uoferta\"}");
-  $emailSended4 = campaignMonitorEmail("dreinovcorp@gmail.com","", "01a8972d-c482-45c7-b1df-0102df04082e", "{\"PBSERIAL\":\"$ID\",\"USERN\":\"$uname\",\"USERPHONE\":\"$uphone\",\"USERMAIL\":\"$uemail\",\"PBOFFER\":\"$uoferta\"}");
+
 
   $array['message'] = 1;
   $array['serial'] = $ID;
