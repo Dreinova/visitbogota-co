@@ -80,7 +80,7 @@ if (!$planes) {
 }
 ?>
 <div id="preloader">
-    <div class="image"><img src="<?=$include_level?>img/preloader.gif" alt="preloader"></div>
+    <div class="image"><img src="<?=$include_level?>img/preloader.gif" alt="preloader"><h2>Sitio Web en mantenimiento</h2></div>
 </div>
 <footer>
 <div class="container">
@@ -110,7 +110,7 @@ if (!$planes) {
         <li><a href="/<?=$lang?>/planifica-tu-viaje"><?=$planifica_tu_viaje?></a></li>
         <li><a href="/<?=$lang?>/eventos/agenda-empresarial-148"><?=$agenda_empresarial?></a></li>
         <li><a href="/<?=$lang?>/donde-comer"><?=$restaurantes?></a></li>
-        <li><a href="/<?=$lang?>/hoteles"><?=$hospedaje?></a></li>
+        <li><a href="/<?=$lang?>/donde-dormir"><?=$hospedaje?></a></li>
         <li><a href="/<?=$lang?>/blog"><?=$blog?></a></li>
         <li><a href="/<?=$lang?>/banco-imagenes/"><?=$exploraciones_visuales?></a></li>
       </ul>

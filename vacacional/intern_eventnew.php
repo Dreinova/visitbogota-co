@@ -30,8 +30,14 @@
         }
         $date = new DateTime($event->field_date);
         $dateString = strftime('%B %d DE %Y', $date->getTimestamp());
-        
-        echo '<h2 class="uppercase">' . $dateString . '</h2>'; // JULIO
+        if(!$event->field_end_date){
+            echo '<h2 class="uppercase">' . $dateString . '</h2>'; // JULIO
+        }else{
+            $dateEnd = new DateTime($event->field_end_date);
+            $dateStringEnd = strftime('%B %d DE %Y', $dateEnd->getTimestamp());
+            echo '<h2 class="uppercase">Desde ' . $dateString . ' - '.$dateStringEnd.'</h2>'; // JULIO
+
+        }
         ?>
 
         <section>

@@ -17,7 +17,7 @@ include "includes/head.php"; ?>
 <div class="container">
     <div class="opciones">
         <ul>
-            <li><a href="/<?= $lang ?>/hoteles" class="opcion"><img src="../img/Hospedajes-icon.svg" alt="hospedajes">Hospedajes</a></li>
+            <li><a href="/<?= $lang ?>/donde-dormir" class="opcion"><img src="../img/Hospedajes-icon.svg" alt="hospedajes">Hospedajes</a></li>
             <li><a href="#" class="opcion active"><img src="../img/Restaurantes_icon.svg" alt="restaurantes">Restaurantes</a></li>
         </ul>
     </div>

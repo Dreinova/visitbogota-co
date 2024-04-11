@@ -1,10 +1,11 @@
+let maxAllowedSelections = 4; // Límite de selecciones permitidas
+
 const validateCheckboxes = () => {
-  const maxAllowedSelections = 4; // Límite de selecciones permitidas
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   const checkboxForm = document.getElementById("disenaForm");
 
   checkboxForm.addEventListener("change", () => {
-    let checkedCount = 0;
+    let checkedCount = 0; // Contador de checkboxes seleccionados
 
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
@@ -13,12 +14,14 @@ const validateCheckboxes = () => {
     });
 
     if (checkedCount >= maxAllowedSelections) {
+      // Si se alcanza el límite, deshabilitar los checkboxes no seleccionados
       checkboxes.forEach((checkbox) => {
         if (!checkbox.checked) {
           checkbox.disabled = true;
         }
       });
     } else {
+      // Si no se alcanza el límite, habilitar todos los checkboxes
       checkboxes.forEach((checkbox) => {
         checkbox.disabled = false;
       });
@@ -105,18 +108,16 @@ function getFormValues() {
   // Iterate over the form data and store the values
   for (const [key, value] of formData.entries()) {
     if (!formValues[key]) {
-      formValues[key] = value;
+      formValues[key] = [value]; // Always store the value in an array
     } else {
-      // If the value already exists (e.g., multiple checkboxes with the same name), make it an array
-      if (!Array.isArray(formValues[key])) {
-        formValues[key] = [formValues[key]];
-      }
+      // If the value already exists (e.g., multiple checkboxes with the same name), push the new value to the array
       formValues[key].push(value);
     }
   }
 
   return formValues;
 }
+
 function obtenerTextosSeleccionados() {
   // Obtén todos los checkboxes con el nombre "category"
   var checkboxes = document.getElementsByName("category");
@@ -142,64 +143,76 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("disenaForm").addEventListener("submit", (e) => {
     e.preventDefault();
-    document.querySelector(".dtv-home .filter-data button").innerHTML =
-      "Generando...";
-
     let allCats = [];
-    getFormValues().category.forEach((cat) => {
-      allCats.push(document.querySelector(`#subproducts-${cat}`).value);
-    });
-    fetch(
-      `/planifica-tu-viaje/g/getAtractivos/?category=${allCats.join(
-        "+"
-      )}&para=${getFormValues().para}`
-    )
-      .then((res) => res.json())
-      .then(async (data) => {
-        for (let index = 0; index < getFormValues().time * 2; index++) {
-          const element = data[index];
-          let image = await getImageFromCacheOrFetch(
-            `${urlGlobal}${
-              element.field_cover_image
-                ? element.field_cover_image
-                : "/img/noimg.png"
-            }`
-          );
-          let template = `<a href="/${actualLang}/atractivo/all/${get_alias(
-            element.title
-          )}-all-${element.nid}" class="wait" data-id="${
-            element.nid
-          }"><div class="site_img"><img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${
-            element.title
-          }" class="lazyload"></div><span>${element.title}</span></a>`;
+    if (
+      document.querySelectorAll('input[type="checkbox"]:checked').length > 0 &&
+      document.querySelector("#time").value != "" &&
+      document.querySelector("#para").value != ""
+    ) {
+      document.querySelector(".dtv-home .filter-data button").innerHTML =
+        "Generando...";
+
+      getFormValues().category.forEach((cat) => {
+        allCats.push(document.querySelector(`#subproducts-${cat}`).value);
+      });
+      fetch(
+        `/planifica-tu-viaje/g/getAtractivos/?category=${allCats.join(
+          "+"
+        )}&para=${getFormValues().para}`
+      )
+        .then((res) => res.json())
+        .then(async (data) => {
           document.querySelector(
             ".dtv-home .imperdibles .grid-imperdibles"
-          ).innerHTML += template;
-        }
-      })
-      .finally(() => {
-        document.querySelector(".dtv-home .filter-data button").innerHTML =
-          "DISEÑA TU VIAJE";
-        document.querySelector(
-          ".dtv-home .info-user .content .right .time p"
-        ).innerHTML =
-          document.querySelector("select#time").options[
-            document.querySelector("select#time").selectedIndex
-          ].text;
-        document.querySelector(
-          ".dtv-home .info-user .content .right .tipoviaje p"
-        ).innerHTML = `${
-          document.querySelector("select#para").options[
-            document.querySelector("select#para").selectedIndex
-          ].text
-        }`;
-        document.querySelector(
-          ".dtv-home .info-user .content .right .interes p"
-        ).innerHTML = obtenerTextosSeleccionados();
-        var revealElement = document.getElementById("reveal");
-        revealElement.style.height = revealElement.scrollHeight + "px";
-        scrollToElement(revealElement);
-        lazyImages();
-      });
+          ).innerHTML = "";
+          for (let index = 0; index < getFormValues().time * 2; index++) {
+            const element = data[index];
+            let image = await getImageFromCacheOrFetch(
+              `${urlGlobal}${
+                element.field_cover_image
+                  ? element.field_cover_image
+                  : "/img/noimg.png"
+              }`
+            );
+            let template = `<a href="/${actualLang}/atractivo/all/${get_alias(
+              element.title
+            )}-all-${element.nid}" class="wait" data-id="${
+              element.nid
+            }"><div class="site_img"><img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${
+              element.title
+            }" class="lazyload"></div><span>${element.title}</span></a>`;
+            document.querySelector(
+              ".dtv-home .imperdibles .grid-imperdibles"
+            ).innerHTML += template;
+          }
+        })
+        .finally(() => {
+          document.querySelector(".dtv-home .filter-data button").innerHTML =
+            "DISEÑA TU VIAJE";
+          document.querySelector(
+            ".dtv-home .info-user .content .right .time p"
+          ).innerHTML =
+            document.querySelector("select#time").options[
+              document.querySelector("select#time").selectedIndex
+            ].text;
+          document.querySelector(
+            ".dtv-home .info-user .content .right .tipoviaje p"
+          ).innerHTML = `${
+            document.querySelector("select#para").options[
+              document.querySelector("select#para").selectedIndex
+            ].text
+          }`;
+          document.querySelector(
+            ".dtv-home .info-user .content .right .interes p"
+          ).innerHTML = obtenerTextosSeleccionados();
+          var revealElement = document.getElementById("reveal");
+          revealElement.style.height = revealElement.scrollHeight + "px";
+          scrollToElement(revealElement);
+          lazyImages();
+        });
+    } else {
+      console.error("No hay categorias seleccionadas!");
+      Fancybox.show([{ src: "#dialog-content", type: "inline" }]);
+    }
   });
 });

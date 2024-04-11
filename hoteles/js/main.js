@@ -148,9 +148,9 @@ function useFilters(cattype) {
       console.log(data);
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-          venueUrl = `/${actualLang}/hoteles/ver/${get_alias(data[i].title)}-${
-            data[i].nid
-          }`;
+          venueUrl = `/${actualLang}/donde-dormir/ver/${get_alias(
+            data[i].title
+          )}-${data[i].nid}`;
 
           //console.log(data[i].nid);
           var thumbnail = data[i].field_img;
@@ -395,9 +395,9 @@ function relHotels(type, zone, aforo) {
         for (let index = 0; index < 4 && index < venues.length; index++) {
           const venue = venues[index];
           if (venue.nid != idSingleVenue) {
-            venueUrl = `/${actualLang}/hoteles/ver/${get_alias(venue.title)}-${
-              venue.nid
-            }`;
+            venueUrl = `/${actualLang}/donde-dormir/ver/${get_alias(
+              venue.title
+            )}-${venue.nid}`;
             var thumbnail = venue.field_img;
 
             if (thumbnail == "") {

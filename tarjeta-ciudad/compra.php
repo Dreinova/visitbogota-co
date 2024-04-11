@@ -3,7 +3,6 @@ $bodyClass = 'tc-compra';
 include "includes/head.php";
 $emailSended2 = $tarjetaCiudad->campaignMonitorEmail("julian.delgado@idt.gov.co","Tickets Tarjeta ciudad", "52033e72-80d7-4957-b291-fa647e724a6e", "{'PBLINK':'https://bogotadc.travel/es/tarjeta-ciudad/qrs'}");
 $emailSended2 = $tarjetaCiudad->campaignMonitorEmail("nestor@idt.gov.co","Tickets Tarjeta ciudad", "52033e72-80d7-4957-b291-fa647e724a6e", "{'PBLINK':'https://bogotadc.travel/es/tarjeta-ciudad/qrs'}");
-var_dump($emailSended2)
 ?>
     <style>
         .tc-compra main{

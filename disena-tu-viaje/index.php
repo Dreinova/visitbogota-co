@@ -21,6 +21,8 @@ if($lang == "es"){
     $intereses = "INTERESES";
     $restaurantes = "Restaurantes";
     $atractivos_recomendados = "ESTOS SON LOS ATRACTIVOS QUE TE RECOMENDAMOS PARA TU VIAJE";
+    $errormessage = "Debes seleccionar la duración de tu estancia, con quién viajas y al menos un interés para ayudarte a planificar tu viaje.";
+    $errorButon = "Vuelve a intentarlo";
     
 }else{
     $planifica_viaje = "Plan Your Trip";
@@ -42,6 +44,8 @@ if($lang == "es"){
     $intereses = "INTERESTS";
     $restaurantes = "Restaurants";
     $atractivos_recomendados = "Try these places. Enjoy your trip!";
+    $errormessage = "You must select the duration of your stay, who you are traveling with, and at least one interest to help you plan your trip.";
+    $errorButon = "Please try again";
 
 }
 ?>
@@ -111,3 +115,10 @@ if($lang == "es"){
     </form>
 </main>
 <? include 'includes/imports.php'?>
+
+<div id="dialog-content" style="display:none;max-width: 500px;background: #FFF !important;border-radius: 10px;padding: 50px 20px;">
+  <h2 style="text-align: center;margin-bottom: 15px;color:#e50728;">¡Oops!</h2>
+  <p style="text-align: justify;margin-bottom: 15px;"><?=$errormessage?></p>
+  <button data-fancybox-close type="button" class="btn uppercase ms900" style="background-color: #e50728;color: #fff;font-size: 14px;display: flex;align-items: center;justify-content: center;border-radius: 8px;padding: 10px 30px;"><?=$errorButon?></button>
+
+</div>

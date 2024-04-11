@@ -117,7 +117,7 @@ $sliders = $vacacional->getSlidersHome();
         </div>
         <div class="catalogos">
           <a href="/<?=$lang?>/donde-comer"><img src="images/restaurantes.svg" alt="restaurantes"><?=$restaurantes?></a>
-          <a href="/<?=$lang?>/hoteles"><img src="images/hospedajes.svg" alt="hospedajes"><?=$hospedajes?></a>
+          <a href="/<?=$lang?>/donde-dormir"><img src="images/hospedajes.svg" alt="hospedajes"><?=$hospedajes?></a>
         </div>
       </div>
 

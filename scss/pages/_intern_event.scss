@@ -52,10 +52,10 @@
     h1 {
       color: #fff;
       font-family: "MuseoSans-900";
-      font-size: 76px;
-      line-height: 9rem;
+      font-size: 50px;
+      line-height: 5.7rem;
       margin-bottom: 5px;
-      margin: 0 auto 10px;
+      margin: 0 auto 20px;
       max-width: 700px;
       text-align: center;
       text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
@@ -67,7 +67,7 @@
     }
     h2 {
       font-family: "MuseoSans-700";
-      font-size: 47px;
+      font-size: 40px;
       text-align: center;
       letter-spacing: 0.1em;
       color: #fff;
@@ -95,11 +95,12 @@
     }
     .desc {
       color: #fff;
-      font-size: 2rem;
-      line-height: 2.2rem;
+      font-size: 1.6rem;
+      line-height: 2.5rem;
       margin: 70px auto;
       max-width: 700px;
-      text-align: center;
+      font-weight: normal;
+      text-align: justify;
       width: 100%;
       word-wrap: break-word;
       @media only screen and (max-width: 768px) {
@@ -107,7 +108,7 @@
         line-height: 1.8rem;
       }
       a {
-        display: block;
+        display: inline-block;
         color: #fff;
         text-decoration: underline;
         margin: 8px auto;

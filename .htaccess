@@ -6,6 +6,7 @@ RewriteBase /
 RewriteRule ^$ /es [R=301,L]
 RewriteRule ^([a-zA-Z0-9_-]+)/preguntas-frecuentes$ /$1/informacion-al-viajero [R=301,L]
 RewriteRule ^([a-zA-Z0-9_-]+)/restaurantes$ /$1/donde-comer [R=301,L]
+RewriteRule ^([a-zA-Z0-9_-]+)/hoteles$ /$1/donde-dormir [R=301,L]
 #ESPAÑOL
 RewriteRule ^s/([^/]*)/$ set/$1.php?lang=es [L,QSA]
 RewriteRule ^g/([^/]*)/$ get/$1.php?lang=es [L,QSA]
@@ -95,6 +96,9 @@ RewriteRule ^([a-zA-Z0-9_-]+)/mice/seguridad-([0-9]+)$ mice/landing.php?lang=$1&
 RewriteRule ^([a-zA-Z0-9_-]+)/hoteles$ hoteles/index.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/hoteles/$ hoteles/index.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/hoteles/ver/([a-zA-Z0-9_-]+)-([0-9]+)$ hoteles/single-hotelnew.php?lang=$1&hotelid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-dormir$ hoteles/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-dormir/$ hoteles/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-dormir/ver/([a-zA-Z0-9_-]+)-([0-9]+)$ hoteles/single-hotelnew.php?lang=$1&hotelid=$3&seo=$3 [L,QSA]
 
 # RESTAURANTES URL's
 RewriteRule ^([a-zA-Z0-9_-]+)/restaurantes/$ restaurantes/index.php?lang=$1 [L,QSA]
