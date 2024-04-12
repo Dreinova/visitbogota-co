@@ -281,9 +281,6 @@ if (document.querySelector(".slide_explora_item")) {
     })
     .then(() => {
       lazyImages();
-      $(".wait").click(function () {
-        $("#preloader").fadeIn();
-      });
     });
 }
 
@@ -382,9 +379,6 @@ $(document).ready(function () {
         behavior: "smooth",
       });
     });
-  });
-  $(".wait").click(function () {
-    $("#preloader").fadeIn();
   });
   $("#preloader").fadeOut("slow");
 
@@ -1197,10 +1191,6 @@ async function createZonesHome(zoneData, zonesTax) {
         document.querySelector(`.zoneTax_cards`).classList.add("selected");
       });
     });
-
-    $(".wait").click(function () {
-      $("#preloader").fadeIn();
-    });
     lazyImages();
   }
 }
@@ -1226,10 +1216,6 @@ function createNearbyHome(nearbyData) {
         "</h3></a></div>";
       nearbyPlacesContainer.innerHTML += template;
     }
-
-    $(".wait").click(function () {
-      $("#preloader").fadeIn();
-    });
   }
 }
 
@@ -1375,8 +1361,6 @@ function geoFindMe() {
         event_label: "bogota",
         value: 0,
       });
-    } else {
-      console.log("No estoy en TS");
     }
     //   output.appendChild(img);
     // if (
@@ -1498,76 +1482,76 @@ function getBlogsRel(prodId, prodName) {
   fetch(url)
     .then((response) => response.json())
     .then((blogs) => {
-      shuffle(blogs);
-      var containerBlogs;
-      var sliderBlogs = document.querySelector("#slider_posts");
-      var articlesRelGrid = document.querySelector(
-        ".articles_rel_grid.container"
-      );
-      if (sliderBlogs) {
-        if (blogs.length < 1) {
-          $(".top-articles").hide();
-          $(".portal_list").addClass("noevents");
-          $(".rel").addClass("noevents");
-        }
-        for (let i = 0; i < blogs.length; i++) {
-          if (i % 2 == 0) {
-            containerBlogs = document.createElement("div");
-            containerBlogs.classList.add("slider_posts_item");
-            sliderBlogs.appendChild(containerBlogs);
+      if(blogs){
+        shuffle(blogs);
+        var containerBlogs;
+        var sliderBlogs = document.querySelector("#slider_posts");
+        var articlesRelGrid = document.querySelector(
+          ".articles_rel_grid.container"
+        );
+        if (sliderBlogs) {
+          if (blogs.length < 1) {
+            $(".top-articles").hide();
+            $(".portal_list").addClass("noevents");
+            $(".rel").addClass("noevents");
           }
-          var templateBlog = `
-                <a href="${actualLang}/blog/${
-            prodName ? get_alias(prodName) : "all"
-          }/${get_alias(blogs[i].title)}-${prodId ? prodId : "all"}-${
-            blogs[i].nid
-          }" class="single_post wait">
-                    <div class="single_post_img"><img loading="lazy" src="https://picsum.photos/20/20" data-src="${
-                      blogs[i].field_image
-                        ? urlGlobal + blogs[i].field_image
-                        : "/img/noimg.png"
-                    }" alt="${blogs[i].title}" class="lazyload"></div>
-                    <h3 class="single_post_title">${blogs[i].title}</h3>
-                </a>
-                `;
-          containerBlogs.innerHTML += templateBlog;
-        }
-      } else if (articlesRelGrid) {
-        if (blogs.length < 1) {
-          $(".interna_atractivo .articles_rel").hide();
-        }
-        var blogURL;
-        articlesRelGrid.innerHTML = "";
-        for (let i = 0; i < blogs.length; i++) {
-          if (prodName) {
-            blogURL = `${actualLang}/blog/${get_alias(prodName)}/${get_alias(
-              blogs[i].title
-            )}-${prodId}-${blogs[i].nid}`;
-          } else {
-            blogURL = `blog/all/${get_alias(blogs[i].title)}-all-${
-              blogs[i].nid
-            }`;
-          }
-          if (i < 4) {
+          for (let i = 0; i < blogs.length; i++) {
+            if (i % 2 == 0) {
+              containerBlogs = document.createElement("div");
+              containerBlogs.classList.add("slider_posts_item");
+              sliderBlogs.appendChild(containerBlogs);
+            }
             var templateBlog = `
-                    <a href="${blogURL}" class="single_article wait">
-                        <img loading="lazy" src="https://picsum.photos/20/20" data-src="${urlGlobal}${
-              blogs[i].field_image ? blogs[i].field_image : "/img/noimg.png"
-            }" class="lazyload" alt="BogotaDC.travel">
-                        <h3>${blogs[i].title}</h3>
-                    </a>
-                    `;
-            articlesRelGrid.innerHTML += templateBlog;
+                  <a href="${actualLang}/blog/${
+              prodName ? get_alias(prodName) : "all"
+            }/${get_alias(blogs[i].title)}-${prodId ? prodId : "all"}-${
+              blogs[i].nid
+            }" class="single_post wait">
+                      <div class="single_post_img"><img loading="lazy" src="https://picsum.photos/20/20" data-src="${
+                        blogs[i].field_image
+                          ? urlGlobal + blogs[i].field_image
+                          : "/img/noimg.png"
+                      }" alt="${blogs[i].title}" class="lazyload"></div>
+                      <h3 class="single_post_title">${blogs[i].title}</h3>
+                  </a>
+                  `;
+            containerBlogs.innerHTML += templateBlog;
+          }
+        } else if (articlesRelGrid) {
+          if (blogs.length < 1) {
+            $(".interna_atractivo .articles_rel").hide();
+          }
+          var blogURL;
+          articlesRelGrid.innerHTML = "";
+          for (let i = 0; i < blogs.length; i++) {
+            if (prodName) {
+              blogURL = `${actualLang}/blog/${get_alias(prodName)}/${get_alias(
+                blogs[i].title
+              )}-${prodId}-${blogs[i].nid}`;
+            } else {
+              blogURL = `blog/all/${get_alias(blogs[i].title)}-all-${
+                blogs[i].nid
+              }`;
+            }
+            if (i < 4) {
+              var templateBlog = `
+                      <a href="${blogURL}" class="single_article wait">
+                          <img loading="lazy" src="https://picsum.photos/20/20" data-src="${urlGlobal}${
+                blogs[i].field_image ? blogs[i].field_image : "/img/noimg.png"
+              }" class="lazyload" alt="BogotaDC.travel">
+                          <h3>${blogs[i].title}</h3>
+                      </a>
+                      `;
+              articlesRelGrid.innerHTML += templateBlog;
+            }
           }
         }
+
       }
     })
     .then(function () {
       sliderPosts();
       lazyImages();
-      $(".wait").click(function () {
-        $("#preloader").fadeIn();
-      });
     });
 }
 // Te puede interesar
@@ -1610,9 +1594,6 @@ function interestYou(prodId) {
         })
         .then(function () {
           lazyImages();
-          $(".wait").click(function () {
-            $("#preloader").fadeIn();
-          });
         });
     }
   } else {
@@ -1760,7 +1741,6 @@ if (document.querySelector("body.portal")) {
         });
         listOfZones = listOfZones.filter(onlyUnique);
         // GET FILTROS ZONAS
-
         if (
           places.length > 0 &&
           document.querySelectorAll("ul.filters_especificos li").length > 0
@@ -1840,9 +1820,6 @@ if (document.querySelector("body.portal")) {
             ).offsetTop;
           });
         }
-        $(".wait").click(function () {
-          $("#preloader").fadeIn();
-        });
         if (!data_product) {
           document
             .querySelectorAll("ul.filters_especificos li")
@@ -2020,7 +1997,6 @@ if (document.querySelector("body.portal")) {
   var url;
   var fetchID;
   var productName = document.querySelector("#mainPortal").dataset.productname;
-
   if (data_product) {
     fetchID = data_product;
     filts = [
@@ -2079,7 +2055,6 @@ if (document.querySelector("body.portal")) {
     ];
     url = `/${actualLang}/g/zonas/?zoneID=${fetchID}`;
   }
-
   getBlogsRel(data_product, productName);
   interestYou(data_product);
   var filtersContainer;
@@ -3015,7 +2990,6 @@ function useFilters(cattype) {
       }
     }
   });
-
   $("#disabler").show();
   $(".events_list_grid").addClass("loading");
   var itscontent = $(".events_list_grid");
@@ -3029,15 +3003,18 @@ function useFilters(cattype) {
     urlPost = `/g/${cattype}/?lang=${actualLang}`;
   }
   $.post(urlPost, { filters: completefilters }, function (data) {
-    // Sorting the array based on the 'field_date' property
-    data.sort((a, b) => new Date(a.field_date) - new Date(b.field_date));
+    // Función de comparación para ordenar por fecha
+    function compararFechas(a, b) {
+      return new Date(a.field_date) - new Date(b.field_date);
+    }
 
+    // Ordenar el arreglo por fecha
+    data.sort(compararFechas);
     if (data.length > 0) {
       for (var i = 0; i < data.length; i++) {
         let event = data[i];
         var thumbnail = data[i].field_cover_image;
         //Campo calificacion ->  data[i].field_calificacion
-        console.log(event.field_date);
         const dateStart = new Date(event.field_date);
         const optionsdateStart = {
           month: "short",
@@ -3053,71 +3030,43 @@ function useFilters(cattype) {
         const dayStart = dateFormatteddateStart.substring(4, 6);
         const yearStart = dateFormatteddateStart.substring(7);
 
-        console.log(dateFormatteddateStart);
         if (thumbnail == "") {
           thumbnail =
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
         }
-        var strtemplate = `
-          <li class="events_list_grid_item">
-                <a href="/${actualLang}/evento/${get_alias(event.title)}-${
-          event.nid
-        }" class="single_event">
-                    <div class="single_event_img">
-                        <img loading="lazy" data-src="https://bogotadc.travel${thumbnail}" src="https://picsum.photos/20/20"
-                            alt="evento" class="lazyload">
-                    </div>
-                    <div class="info">
-                        <div class="single_event_date ${
-                          event.field_end_date != "" ? " big" : ""
-                        }">
-                            <div>
-                                <h3 className="uppercase">${monthStart}</h3>
-                                <h4>${dayStart}</h4>
-                                <h3>${yearStart}</h3>
-                              
-                            </div>
-                            ${(function ifDateEnd() {
-                              if (event.field_end_date != "") {
-                                const dateEnd = new Date(event.field_end_date);
-                                const options = {
-                                  month: "short",
-                                  day: "numeric",
-                                  year: "numeric",
-                                };
-                                const dateFormatted =
-                                  dateEnd.toLocaleDateString("en-US", options);
 
-                                const month = dateFormatted.substring(0, 3);
-                                const day = dateFormatted.substring(4, 6);
-                                const year = dateFormatted.substring(7);
-                                return `<div>
-                                <h3 className="uppercase">${month}</h3>
-                                <h4>${day}</h4>
-                                <h3>${year}</h3>
-                                </div>`;
-                              } else {
-                                return "";
-                              }
-                            })()}
-                            
-                        </div>
-                        <div class="txt">
-                            <h5 class="single_event_title ms700 uppercase">${
-                              event.title
-                            }</h3>
-                                <h6 class="single_event_place ms500">${
-                                  event.field_place
-                                }</h4>
-                                    <div class="btn event-view uppercase ms900">${
-                                      actualLang == "es"
-                                        ? "Ver evento"
-                                        : "View EVENT"
-                                    }</div>
-                        </div>
-                    </div>
-                </a>
-            </li>`;
+        var strtemplate = ` <li class="events_list_grid_item">
+        <a href="/${actualLang}/evento/${get_alias(event.title)}-${event.nid}">
+        <article class="single_event">
+            <div class="left">
+                <ul class="categoryTags">
+                    <li>${event.field_categoria_evento_1}</li>
+                </ul>
+                <div class="image">
+                    <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel${
+                      event.field_imagen_listado_events
+                    }" src="https://via.placeholder.com/330x240" alt="${
+          event.title
+        }">
+                </div>
+                <span class="dates">
+                    <time datetime="${event.field_date}">28/02/2024</time> ${
+          event.field_end_date
+            ? `  – <time datetime="${event.field_end_date}">12/05/2024</time>`
+            : ""
+        }
+                </span>
+            </div>
+            <div class="right">
+                <h2>${event.title}</h2>
+                <p>${event.body_2}</p>
+                <div class="readmore">
+                    Ver Evento
+                </div>
+            </div>
+        </article>
+        </a>
+    </li>`;
         itscontent.append(strtemplate);
       }
     } else {
@@ -3160,24 +3109,6 @@ if (ofertasRelgrid) {
   if (mainElement.hasAttribute("data-zoneid")) {
     // Verificar si el valor del atributo es null, undefined o una cadena vacía
     const zoneIdValue = mainElement.getAttribute("data-zoneid");
-    if (
-      zoneIdValue === null ||
-      zoneIdValue === undefined ||
-      zoneIdValue === ""
-    ) {
-      console.log(
-        "El elemento <main> tiene el atributo data-zoneid, pero no tiene valor."
-      );
-    } else {
-      console.log(
-        "El elemento <main> tiene el atributo data-zoneid definido con valor:",
-        zoneIdValue
-      );
-    }
-  } else {
-    console.log(
-      "El elemento <main> no tiene el atributo data-zoneid definido."
-    );
   }
   if (document.querySelector(".interna_atractivo")) {
     getOfertasRel(
@@ -3215,60 +3146,64 @@ async function getOfertasRel(atractivo, localidad, zona, alojamiento) {
   await fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      const limite = data.length < 3 ? data.length : 3;
-      data = shuffleArray(data);
-      if (data.length > 0) {
+      if (data) {
+        const limite = data.length < 3 ? data.length : 3;
+        data = shuffleArray(data);
         for (let index = 0; index < limite; index++) {
           const plan = data[index];
-          let link = `/${actualLang}/experiencias-turisticas/plan/${get_alias(
+          const template = `
+            <a href="/${actualLang}/experiencias-turisticas/plan/${get_alias(
             plan.title
-          )}-${plan.nid}`;
-          let template = `
-          <a href="${link}" class="ofertasRel-grid__item" 
-           data-persons="${plan.field_maxpeople}" data-cat="${
+          )}-${plan.nid}" class="ofertasRel-grid__item" 
+               data-persons="${plan.field_maxpeople}" data-cat="${
             plan.field_categoria_comercial
-          }" data-zone="${
-            plan.field_pb_oferta_zona
-          }" data-field_destacar_en_categoria="${
-            plan.field_destacar_en_categoria
-          }">
-         <div class="discount ms900">
-                  <svg width="296" height="52" viewBox="0 0 296 52" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5C0 2.23858 2.23858 0 5 0H290.587C293.842 0 296.23 3.06214 295.436 6.2196L290.767 24.7804C290.566 25.581 290.566 26.419 290.767 27.2196L295.436 45.7804C296.23 48.9379 293.842 52 290.587 52H5C2.23858 52 0 49.7614 0 47V5Z" fill="#E50728"/><path d="M58.8991 23.3351L44.6491 9.08508C44.0791 8.51508 43.2875 8.16675 42.4166 8.16675H31.3333C29.5916 8.16675 28.1666 9.59175 28.1666 11.3334V22.4167C28.1666 23.2876 28.515 24.0792 29.1008 24.6651L43.3508 38.9151C43.9208 39.4851 44.7125 39.8334 45.5833 39.8334C46.4541 39.8334 47.2458 39.4851 47.8158 38.8992L58.8991 27.8159C59.485 27.2459 59.8333 26.4542 59.8333 25.5834C59.8333 24.7126 59.4691 23.9051 58.8991 23.3351ZM45.5833 36.6826L31.3333 22.4167V11.3334H42.4166V11.3176L56.6666 25.5676L45.5833 36.6826Z" fill="white"/><path d="M35.2916 17.6667C36.6033 17.6667 37.6666 16.6034 37.6666 15.2917C37.6666 13.9801 36.6033 12.9167 35.2916 12.9167C33.9799 12.9167 32.9166 13.9801 32.9166 15.2917C32.9166 16.6034 33.9799 17.6667 35.2916 17.6667Z" fill="white"/></svg>
-                    <span>
-                    ${plan.field_percent}% <small class="ms500">DCTO</small>
-                      </span>
-                  </div>
-           <div class="image">
-           <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co${
-             plan.field_pb_oferta_img_listado
-           }" src="https://via.placeholder.com/330x240" alt="${plan.title}"/>
-          <div class="prices">
-                      <p class="prices-discount ms500">$ ${number_format(
-                        plan.field_pa,
-                        0,
-                        ".",
-                        "."
-                      )}</p>
-                      <p class="prices-total ms900">$ ${number_format(
-                        plan.field_pd,
-                        0,
-                        ".",
-                        "."
-                      )}</p>
-                    </div>
-           </div>
-          <div class="info">
-            <strong class="ms900">${plan.title}</strong>
-            <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
-            <small class="link ms900 uppercase">Ver experiencia</small>
-          </div>
-        </a>`;
+          }" data-zone="${plan.field_pb_oferta_zona}">
+              <div class="image">
+                <img loading="lazy" class="lazyload" data-src="${
+                  plan.field_pb_oferta_img_listado
+                }" src="https://via.placeholder.com/330x240" alt="${
+            plan.title
+          }"/>
+              </div>
+              <div class="info">
+                <div class="lines">
+                  <div class="line1"></div>
+                  <div class="line2"></div>
+                </div>
+                ${
+                  plan.field_percent === 0
+                    ? ""
+                    : `<div class="discount ms900">
+                        ${plan.field_percent}% <small class="ms500">DCTO</small>
+                      </div>`
+                }
+                <div class="prices">
+                  ${
+                    plan.field_pa
+                      ? `<p class="prices-discount ms500">$${number_format(
+                          plan.field_pa,
+                          0,
+                          ".",
+                          "."
+                        )}</p>`
+                      : ""
+                  }
+                  <p class="prices-total ms900">$${number_format(
+                    plan.field_pd,
+                    0,
+                    ".",
+                    "."
+                  )}</p>
+                </div>
+                <strong class="ms900">${plan.title}</strong>
+                <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
+                <small class="link ms900 uppercase">Ver oferta</small>
+              </div>
+            </a>`;
           ofertasRelgrid.innerHTML += template;
         }
-        console.log(data);
         lazyImages();
       } else {
-        console.log("SON 0");
         document.querySelector(".ofertasRel").style.display = "none";
       }
     })
@@ -3313,13 +3248,3 @@ function addExternalLinkIcon() {
 }
 
 document.addEventListener("DOMContentLoaded", addExternalLinkIcon);
-if (document.querySelector("#toggleFiltersEvents")) {
-  document
-    .querySelector("#toggleFiltersEvents")
-    .addEventListener("click", () => {
-      document.querySelector(".filters").classList.toggle("active");
-    });
-  document.querySelector("#closeFilters").addEventListener("click", () => {
-    document.querySelector(".filters").classList.toggle("active");
-  });
-}

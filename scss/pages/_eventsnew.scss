@@ -323,7 +323,7 @@
         box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
         border-radius: 15px;
         cursor: pointer;
-        article.single_event {
+        .single_event {
           display: flex;
           @media only screen and (max-width: 1024px) {
             flex-direction: column;
