@@ -246,7 +246,6 @@ async function getBannersCuadrados() {
   await fetch("g/banners_cuadrados/")
     .then((res) => res.json())
     .then(async (data) => {
-      console.log(data);
       for (const [index, banner] of data.entries()) {
         let urlImg = await getImageFromCacheOrFetch(
           `https://bogotadc.travel${banner.field_image}`
@@ -278,7 +277,6 @@ const getBogotaData = async (containerId, category) => {
     `/g/products/?lang=${actualLang}&category=${category}`
   );
   const data = await response.json();
-  console.log(`getBogotaData`, data);
 
   const promises = data.map(async (item) => {
     let urlImg = await getImageFromCacheOrFetch(
@@ -441,3 +439,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     await getFiltersExperienciasTuristicas("porzona", "test_zona");
   }
 });
+
+async function getRT() {
+  const resp = await fetch(`g/getRT/`);
+  const rutas = await resp.json();
+  console.log(rutas);
+  let template = ``;
+  document.querySelector(".listRT").innerHTML += template;
+}

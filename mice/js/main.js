@@ -89,7 +89,6 @@ function setCategory(cattype) {
     data = JSON.parse(data);
     maxfilters = parseInt(data.field_maxaforo);
     minfilters = parseInt(data.field_minaforo);
-    console.log({ data });
 
     if ($(".capacityfilter").length > 0) {
       $(".capacityfilter").each(function () {
@@ -317,7 +316,7 @@ function useFilters(cattype) {
   $(".cards").addClass("loading");
   var itscontent = $(".cards").find(".content");
   itscontent.html("");
-  console.log({ completefilters });
+
   $.post(
     "get/" + cattype + ".php?lang=" + actualLang,
     { filters: completefilters },
@@ -728,7 +727,6 @@ if (document.querySelector(".internVenue-body")) {
                   }
                   break;
               }
-              console.log(infoSalon);
               document.querySelector(
                 ".area .metroscuadrados"
               ).innerHTML = `${infoSalon.field_capacidad_metros} m2`;
