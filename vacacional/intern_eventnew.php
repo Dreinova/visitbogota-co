@@ -59,10 +59,16 @@
                     <img src="/img/place_event.svg" alt="lugar del evento">
                     <small><?=$event->field_place?></small>
                 </div>
+                <?php 
+                if($event->field_phone){
+                ?>
                 <div class="phone">
                     <img src="/img/phone_event.svg" alt="Teléfono del evento">
                     <small><?=$event->field_phone?></small>
                 </div>
+                <?php 
+                }
+                ?>
             </div>
             <div class="disclaimer">
                 <p><?=$pi_bogota[99]?></p>

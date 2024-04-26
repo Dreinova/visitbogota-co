@@ -203,25 +203,15 @@ const filterPlans = (
             )}-${plan.nid}`;
             template = `
             <li><a href="${link}" class="find_plan-grid__item" 
-             data-persons="${plan.field_maxpeople}" data-cat="${
-              plan.field_categoria_comercial
-            }" data-zone="${
-              plan.field_pb_oferta_zona
-            }" data-field_destacar_en_categoria="${
-              plan.field_destacar_en_categoria
-            }">
+             data-persons="${plan.field_maxpeople}" data-cat="${plan.field_categoria_comercial}" data-zone="${plan.field_pb_oferta_zona}" data-field_destacar_en_categoria="${plan.field_destacar_en_categoria}">
              <div class="image">
-             <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co${
-               plan.field_pb_oferta_img_listado
-             }" src="https://via.placeholder.com/330x240" alt="${plan.title}"/>
+             <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co${plan.field_pb_oferta_img_listado}" src="https://via.placeholder.com/330x240" alt="${plan.title}"/>
             
              </div>
             <div class="info">
               <strong class="ms900">${plan.title}</strong>
               <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
-              <small class="link ms900 uppercase"> ${
-                pb_experiencias[14]
-              } </small>
+              <small class="link ms900 uppercase"> ${pb_experiencias[14]} </small>
             </div>
           </a></li>`;
             grid.innerHTML += template;
@@ -695,13 +685,13 @@ function validateForm(e) {
   return true;
 }
 
-let btnReserva = document.querySelector(".btn-reserva");
+// let btnReserva = document.querySelector(".btn-reserva");
 
-if (btnReserva) {
-  btnReserva.addEventListener("click", () => {
-    document.querySelector("#reservar").classList.add("active");
-  });
-}
+// if (btnReserva) {
+//   btnReserva.addEventListener("click", () => {
+//     document.querySelector("#reservar").classList.add("active");
+//   });
+// }
 
 if (document.querySelector(".texto")) {
   var texto = document.querySelector(".texto");

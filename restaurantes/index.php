@@ -1,7 +1,7 @@
 <?php
 $bodyClass = 'hotelesnew';
 include "includes/head.php"; ?>
-<section class="banner" style="background-image:url(https://bogotadc.travel/drpl/sites/default/files/2023-08/d68ff673-2fb0-4820-995f-7092f7920053.JPG );">
+<section class="banner" style="background-image:url(https://files.visitbogota.co/drpl/sites/default/files/2023-08/d68ff673-2fb0-4820-995f-7092f7920053.JPG );">
     <div class="container">
         <div class="intro-txt">
             <h3 class="uppercase">¿Dónde comer en Bogotá?</h3>

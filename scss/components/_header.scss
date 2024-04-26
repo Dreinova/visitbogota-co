@@ -368,7 +368,8 @@ header {
       }
     }
     @media only screen and (max-width: 768px) {
-      font-size: 30px;
+      font-size: calc(30px - var(--fontSizeReal));
+      line-height: 25px;
     }
   }
   .exp-content {

@@ -60,60 +60,99 @@ window.onload = function () {
   bogotaApp.SetCookie("lang_redirect", ln);
 
   // if (ln.substring(0, 2) == "en") {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/${newLang}`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else if (ln.substring(0, 2) == "es") {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/${newLang}`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else if (ln.substring(0, 2) == "pt") {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/${newLang}`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/en`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/en`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/en`);
   //   }
   // }
 };
+const getBogotaData = async (containerId, data) => {
+  const bogotaContainer = document.querySelector(`#${containerId} ul`);
+  bogotaContainer.innerHTML = "";
+  const promises = data.map(async (item) => {
+    let urlImg = item.field_banner_prod
+      ? await getImageFromCacheOrFetch(
+          "https://files.visitbogota.co" + item.field_banner_prod
+        )
+      : "https://placehold.co/400x400.jpg?text=visitbogota";
+    let urlSite = `/${actualLang}/explora/${get_alias(item.name)}/${item.tid}`;
+    let template = `
+      <li class="splide__slide">
+        <a href="${urlSite}">
+          <img loading="lazy" data-src="${urlImg}" alt="${item.name}" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota">
+          <span>${item.name}</span>
+        </a>
+      </li>`;
+    bogotaContainer.innerHTML += template;
+  });
 
+  await Promise.all(promises);
+
+  new Splide(`#${containerId}`, {
+    perPage: 5,
+    gap: 15,
+    type: "loop",
+    pagination: false,
+    lazyLoad: "nearby",
+    breakpoints: {
+      768: {
+        perPage: 1,
+      },
+    },
+  }).mount();
+
+  lazyImages();
+};
 const getExploraBogota = async () => {
-  const response = await fetch(`/g/products/?lang=${actualLang}`);
+  const bogotaContainerFooter = document.querySelector(`#footerDescubre ul`);
+  const bogotaContainerMenuMobile = document.querySelector(`.explora`);
+  const response = await fetch(`/g/getMenuCategories/?lang=${actualLang}`);
   const data = await response.json();
   let productos = data.map((prod) => ({
-    id: prod.nid,
-    title: prod.title,
-    url: `/${actualLang}/explora/${get_alias(prod.title)}/${prod.nid}`,
+    id: prod.tid,
+    title: prod.name,
+    url: `/${actualLang}/explora/${get_alias(prod.name)}/${prod.tid}`,
   }));
+  bogotaContainerFooter.innerHTML = "";
+  bogotaContainerMenuMobile.innerHTML = "";
   document.querySelector("nav li.explora ul").innerHTML = "";
-  let bogotaNatural = "";
-  if (actualLang == "es") {
-    bogotaNatural = "Bogotá Natural";
-  } else {
-    bogotaNatural = "Natural Bogotá";
-  }
-  document.querySelector(
-    "nav li.explora ul"
-  ).innerHTML += `<li><a href="/${actualLang}/producto/naturaleza-8" class="wait ms700">${bogotaNatural}</a></li>`;
+
   productos.forEach((producto) => {
     document.querySelector(
       "nav li.explora ul"
     ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
+    bogotaContainerFooter.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
+    bogotaContainerMenuMobile.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
+    console.log(bogotaContainerMenuMobile);
     if (document.querySelector("#categorias_blog select")) {
       document.querySelector(
         "#categorias_blog select"
       ).innerHTML += `<option value="${producto.id}">${producto.title}</option>`;
     }
   });
+
+  if (document.querySelector("#bogota-natural")) {
+    await getBogotaData("bogota-natural", data);
+  }
   if (document.querySelectorAll("#categorias_blog").length > 0) {
     customSelect();
   }
@@ -137,7 +176,7 @@ const getExploraBogota = async () => {
               document.querySelector(".blog_list .repeater").innerHTML = "";
               data.forEach(async (blog) => {
                 let urlImg = await getImageFromCacheOrFetch(
-                  "https://bogotadc.travel" + blog.field_image
+                  "https://files.visitbogota.co" + blog.field_image
                 );
                 let template = `
                 <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
@@ -223,7 +262,7 @@ function number_format(number, decimals, dec_point, thousands_point) {
 
   return number;
 }
-const urlGlobal = "https://bogotadc.travel";
+const urlGlobal = "https://files.visitbogota.co";
 const imageCache = {};
 const getImageFromCacheOrFetch = async (url) => {
   return url;
@@ -1482,7 +1521,7 @@ function getBlogsRel(prodId, prodName) {
   fetch(url)
     .then((response) => response.json())
     .then((blogs) => {
-      if(blogs){
+      if (blogs) {
         shuffle(blogs);
         var containerBlogs;
         var sliderBlogs = document.querySelector("#slider_posts");
@@ -1546,7 +1585,6 @@ function getBlogsRel(prodId, prodName) {
             }
           }
         }
-
       }
     })
     .then(function () {
@@ -1628,658 +1666,7 @@ function interestYou(prodId) {
     }
   }
 }
-if (document.querySelector("body.portal")) {
-  if (document.querySelector(".filterContainer")) {
-    if (
-      document.querySelector(".filterContainer").offsetHeight >=
-      window.innerHeight
-    ) {
-      document.querySelector(".filterContainer").style.position = "static";
-    }
-  }
-  $(".filterContainer").toggleClass("loading");
-  var firstTime = 0;
-  // Offset Top
-  var listOfSubs = [];
-  var listOfZones = [];
-  var initial_filters_zonas = [];
-  var initial_filters_especificos = [];
-  var initial_filters_plan = [];
-  // ARRAY FILTERS
-  var filters_zonas = [];
-  var filters_especificos = [];
-  var filters_plan = [];
-  var filters_sub = [];
-  // Container places
-  var containerGrid = document.querySelector(".grid-atractivos");
 
-  function applyFiltersFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    if (urlParams.has("filters_zonas")) {
-      const filterSetZonas = urlParams.get("filters_zonas");
-      filters_zonas = filterSetZonas.split(",").map((id) => parseInt(id, 10));
-    } else {
-      filters_zonas = [];
-    }
-
-    if (urlParams.has("filters_especificos")) {
-      const filterSetEspecificos = urlParams.get("filters_especificos");
-      filters_especificos = filterSetEspecificos
-        .split(",")
-        .map((id) => parseInt(id, 10));
-    } else {
-      filters_especificos = [];
-    }
-
-    if (urlParams.has("filters_plan")) {
-      const filterSetPlan = urlParams.get("filters_plan");
-      filters_plan = filterSetPlan.split(",").map((id) => parseInt(id, 10));
-    } else {
-      filters_plan = [];
-    }
-
-    // Marcar los checkboxes de cada filtro según los arreglos correspondientes
-    const checkboxesZonas = document.querySelectorAll(
-      '.filters_zonas input[type="checkbox"]'
-    );
-    checkboxesZonas.forEach((checkbox) => {
-      const paramValue = parseInt(checkbox.getAttribute("id"), 10);
-      checkbox.checked = filters_zonas.includes(paramValue);
-    });
-
-    const checkboxesEspecificos = document.querySelectorAll(
-      '.filters_especificos input[type="checkbox"]'
-    );
-    checkboxesEspecificos.forEach((checkbox) => {
-      const paramValue = parseInt(checkbox.getAttribute("id"), 10);
-      checkbox.checked = filters_especificos.includes(paramValue);
-    });
-
-    const checkboxesPlan = document.querySelectorAll(
-      '.filters_plan input[type="checkbox"]'
-    );
-    checkboxesPlan.forEach((checkbox) => {
-      const paramValue = parseInt(checkbox.getAttribute("id"), 10);
-      checkbox.checked = filters_plan.includes(paramValue);
-    });
-  }
-  function filterPortal(para, subproduct, zone, closeto, page = 0, q = 16) {
-    $(".portal_list .right").toggleClass("loading");
-    // Clean Container places
-    containerGrid.innerHTML = "";
-    // Create URL to FETCH
-    var url = "/" + actualLang + "/g/filterPortal/?filter=1";
-    if (para) url += "&para=" + para.toString();
-    if (subproduct) url += "&subproduct=" + subproduct.toString();
-    if (zone) url += "&zone=" + zone.toString();
-    if (closeto) url += "&closeto=" + closeto;
-    if (page) url += "&page=" + page;
-    if (q) url += "&q=" + q;
-
-    // Fetch final URL
-    fetch(url)
-      .then((response) => response.json())
-      .then(async (places) => {
-        // GET FILTROS ESPECIFICOS
-        var result = places.map(({ field_subp }) => field_subp);
-        result.forEach((res) => {
-          res.split(",").forEach((newEl) => {
-            listOfSubs.push(newEl);
-          });
-        });
-        listOfSubs = listOfSubs.filter(onlyUnique);
-        // GET FILTROS ESPECIFICOS
-        // GET FILTROS ZONAS
-        var resultZones = places.map(({ field_zone_rel }) => field_zone_rel);
-        resultZones.forEach((res) => {
-          res.split(",").forEach((newEl) => {
-            if (newEl != "") {
-              listOfZones.push(newEl);
-            }
-          });
-        });
-        listOfZones = listOfZones.filter(onlyUnique);
-        // GET FILTROS ZONAS
-        if (
-          places.length > 0 &&
-          document.querySelectorAll("ul.filters_especificos li").length > 0
-        ) {
-          for (let index = 0; index < places.length; index++) {
-            const place = places[index];
-            let subproductRelInfo = subproductsArray.filter(
-              (sub) => sub.nid == place.field_subp.split(",")[0]
-            );
-
-            var productName = subproductRelInfo[0]
-              ? subproductRelInfo[0].field_prod_rel_1
-              : "all";
-            var placeUrl = `/${actualLang}/atractivo/${get_alias(
-              productName
-            )}/${get_alias(place.title)}-${
-              subproductRelInfo[0] ? subproductRelInfo[0].field_prod_rel : "all"
-            }-${place.nid}`;
-            let image = await getImageFromCacheOrFetch(
-              `${urlGlobal}${
-                place.field_cover_image
-                  ? place.field_cover_image
-                  : "/img/noimg.png"
-              }`
-            );
-            var template = `
-                    <a href="${placeUrl}" class="grid-atractivos-item wait" data-id="${place.nid}">
-                        <div class="site_img">
-                            <img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${place.title}" class="lazyload">
-                        </div>
-                        <span>${place.title}</span>
-                    </a>
-                    `;
-            containerGrid.innerHTML += template;
-          }
-          if (places.length >= 17) {
-            containerGrid.innerHTML += `<button type="button" class="moreItems"><img src="img/more_items.svg" alt="more"></button>`;
-          }
-          $(".grid-atractivos-item:hidden").slice(0, 16).show();
-          if (document.querySelector(".portal .moreItems")) {
-          }
-        } else {
-          let messages = {
-            es: `<p class="noResults">No se encontraron resultados para tu búsqueda.</p>`,
-            en: `<p class="noResults">No results for your search.</p>`,
-            pt: `<p class="noResults">Nenhum resultado para a sua pesquisa.</p>`,
-          };
-          let restart = {
-            es: `<p class="noResults">No se encontraron resultados para tu búsqueda.<a href="javascript:backFilters();">Reiniciar</a></p>`,
-            en: `<p class="noResults">There are no results for your search.<a href="javascript:backFilters();">Restart</a></p>`,
-            pt: `<p class="noResults">Não há resultados para a sua pesquisa.<a href="javascript:backFilters();">Reiniciar</a></p>`,
-          };
-          if (firstTime === 0) {
-            containerGrid.innerHTML = messages[actualLang];
-          } else {
-            containerGrid.innerHTML = restart[actualLang];
-            firstTime === 1;
-          }
-        }
-      })
-      .then(function () {
-        lazyImages();
-        $(".portal_list .right").toggleClass("loading");
-        if (document.querySelector(".portal .moreItems")) {
-          var offsetTopBtn = document.querySelector(
-            ".portal_list .right button.moreItems"
-          ).offsetTop;
-          $(".portal .moreItems").on("click", function (e) {
-            e.preventDefault();
-            $(".grid-atractivos-item:hidden").slice(0, 16).slideDown();
-            if ($(".grid-atractivos-item:hidden").length == 0) {
-              $(".portal .moreItems").fadeOut("slow");
-            }
-            document.querySelector("html, body").scrollTop = offsetTopBtn;
-            offsetTopBtn = document.querySelector(
-              ".portal_list .right button.moreItems"
-            ).offsetTop;
-          });
-        }
-        if (!data_product) {
-          document
-            .querySelectorAll("ul.filters_especificos li")
-            .forEach((input) => {
-              input.style.display = "none";
-            });
-          listOfSubs.forEach((listEl) => {
-            document.querySelector(
-              "ul.filters_especificos li input[id='" + listEl + "']"
-            ).parentElement.style.display = "block";
-          });
-        }
-        if (listOfSubs.length == 0) {
-          document.querySelector("ul.filters_especificos").style.display =
-            "none";
-          document.querySelector(
-            "ul.filters_especificos"
-          ).previousSibling.style.display = "none";
-        }
-        document.querySelectorAll("ul.filters_zonas li").forEach((input) => {
-          input.style.display = "none";
-        });
-        if (listOfZones && document.querySelector("ul.filters_zonas")) {
-          listOfZones.forEach((listEl) => {
-            document.querySelector(
-              "ul.filters_zonas li input[id='" + listEl + "']"
-            ).parentElement.style.display = "block";
-          });
-        }
-        if (listOfZones.length == 0) {
-          document.querySelector("ul.filters_zonas").style.display = "none";
-          document.querySelector(
-            "ul.filters_zonas"
-          ).previousSibling.style.display = "none";
-        }
-        const nodeList = document.querySelectorAll(
-          ".portal_list .right .grid-atractivos-item"
-        );
-        const arrayAtractivos = [...nodeList];
-      });
-  }
-  function addFilter(id, type) {
-    if (type == "filters_especificos") {
-      if (window.innerWidth > 1023) {
-        if (
-          document.querySelectorAll(
-            ".filters ul.filters_especificos li input:checked"
-          ).length > 0
-        ) {
-          filters_especificos = [];
-          document
-            .querySelectorAll(
-              ".filters ul.filters_especificos li input:checked"
-            )
-            .forEach((element) => {
-              filters_especificos.push(element.id);
-            });
-
-          filterPortal(filters_plan, filters_especificos, filters_zonas, false);
-        } else {
-          filterPortal(
-            filters_plan,
-            initial_filters_especificos,
-            filters_zonas,
-            false
-          );
-        }
-      } else {
-        if (
-          document.querySelectorAll(
-            ".filterMobile .list_filters ul.filters_especificos li input:checked"
-          ).length > 0
-        ) {
-          document
-            .querySelectorAll(
-              ".filterMobile .list_filters ul.filters_especificos li input:checked"
-            )
-            .forEach((element) => {
-              filters_especificos.push(element.id);
-            });
-
-          filterPortal(filters_plan, filters_especificos, filters_zonas, false);
-        } else {
-          filterPortal(
-            filters_plan,
-            initial_filters_especificos,
-            filters_zonas,
-            false
-          );
-        }
-      }
-    } else {
-      var getIndexOf = function (idPlace) {
-        for (var i = 0; i < window[type].length; i++) {
-          if (window[type][i] == idPlace) {
-            return i;
-          }
-        }
-        return -1;
-      };
-      if (window[type].length > 0) {
-        var index = getIndexOf(id);
-        if (index > -1) {
-          Array.prototype.splice.call(window[type], index, 1);
-        } else {
-          window[type].push(id);
-        }
-      } else {
-        window[type].push(id);
-      }
-      if (filters_especificos.length > 0) {
-        filterPortal(filters_plan, filters_especificos, filters_zonas, false);
-      } else {
-        filterPortal(
-          filters_plan,
-          initial_filters_especificos,
-          filters_zonas,
-          false
-        );
-      }
-    }
-    const checkboxes = document.querySelectorAll(
-      `.${type} input[type="checkbox"]`
-    );
-    const filters = [];
-
-    checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-        const paramValue = checkbox.getAttribute("id");
-        filters.push(paramValue);
-      }
-    });
-
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set(type, filters.join(","));
-
-    const newURL = `${window.location.pathname}?${decodeURIComponent(
-      urlParams.toString()
-    )}`;
-
-    history.pushState(null, "", newURL);
-  }
-  function backFilters() {
-    // Llama a esta función cuando se cargue la página o cuando sea necesario aplicar los filtros desde la URL.
-    if (latitude && longitude) {
-      filterPortal(
-        initial_filters_plan,
-        initial_filters_especificos,
-        initial_filters_zonas,
-        [latitude, longitude]
-      );
-    } else {
-      filterPortal(
-        initial_filters_plan,
-        initial_filters_especificos,
-        initial_filters_zonas,
-        false
-      );
-    }
-    $(`.filters ul.filters_plan li input`).prop("checked", false);
-    initial_filters_especificos.forEach((filter) => {
-      $(`.filters ul.filters_especificos li input[id="${filter}"]`).prop(
-        "checked",
-        true
-      );
-    });
-    $(`.filters ul.filters_zonas li input`).prop("checked", false);
-  }
-  // Data con IDs de producto, plan o zona
-  var data_product = document.querySelector("#mainPortal").dataset.productid;
-  var data_plan = document.querySelector("#mainPortal").dataset.planid;
-  var data_zone = document.querySelector("#mainPortal").dataset.zoneid;
-
-  var filts = [];
-  var url;
-  var fetchID;
-  var productName = document.querySelector("#mainPortal").dataset.productname;
-  if (data_product) {
-    fetchID = data_product;
-    filts = [
-      {
-        es: { title: "Búsqueda específica", class: "filters_especificos" },
-        en: { title: "Specific search", class: "filters_especificos" },
-        pt: { title: "Pesquisa específica", class: "filters_especificos" },
-        fr: { title: "Recherche spécifique", class: "filters_especificos" },
-      },
-      {
-        es: { title: "Búsqueda por zona", class: "filters_zonas" },
-        en: { title: "Search by zone", class: "filters_zonas" },
-        pt: { title: "Pesquisa por zona", class: "filters_zonas" },
-        fr: { title: "Pesquisa por zona", class: "filters_zonas" },
-      },
-      {
-        es: { title: "Búsqueda por plan (para)", class: "filters_plan" },
-        en: { title: "Search by plan (for)", class: "filters_plan" },
-        pt: { title: "Procurar por plano (para)", class: "filters_plan" },
-        fr: { title: "Recherche par plan (pour)", class: "filters_plan" },
-      },
-    ];
-    url = `/${actualLang}/g/singleProduct/?productID=${fetchID}`;
-  } else if (data_plan) {
-    fetchID = data_plan;
-    filts = [
-      {
-        es: { title: "Búsqueda específica", class: "filters_especificos" },
-        en: { title: "Specific search", class: "filters_especificos" },
-        pt: { title: "Pesquisa específica", class: "filters_especificos" },
-        fr: { title: "Recherche spécifique", class: "filters_especificos" },
-      },
-      {
-        es: { title: "Búsqueda por zona", class: "filters_zonas" },
-        en: { title: "Search by zone", class: "filters_zonas" },
-        pt: { title: "Pesquisa por zona", class: "filters_zonas" },
-        fr: { title: "Pesquisa por zona", class: "filters_zonas" },
-      },
-    ];
-    url = `/${actualLang}/g/plans/?planID=${fetchID}`;
-  } else if (data_zone) {
-    fetchID = data_zone;
-    filts = [
-      {
-        es: { title: "Búsqueda por plan (para)", class: "filters_plan" },
-        en: { title: "Search by plan (for)", class: "filters_plan" },
-        pt: { title: "Procurar por plano (para)", class: "filters_plan" },
-        fr: { title: "Recherche par plan (pour)", class: "filters_plan" },
-      },
-      {
-        es: { title: "Búsqueda específica", class: "filters_especificos" },
-        en: { title: "Specific search", class: "filters_especificos" },
-        pt: { title: "Pesquisa específica", class: "filters_especificos" },
-        fr: { title: "Recherche spécifique", class: "filters_especificos" },
-      },
-    ];
-    url = `/${actualLang}/g/zonas/?zoneID=${fetchID}`;
-  }
-  getBlogsRel(data_product, productName);
-  interestYou(data_product);
-  var filtersContainer;
-  fetch(url)
-    .then((response) => response.json())
-    .then((singleProd) => {
-      singleProd.filters.droplist.forEach((option) => {
-        var optionTemplate = `<option value="${option.nid}" ${
-          option.nid == fetchID ? "selected" : ""
-        }>${option.title}</option>`;
-        document.querySelector(".custom-select select").innerHTML +=
-          optionTemplate;
-        document.querySelector(
-          ".filterMobile .custom-select select"
-        ).innerHTML += optionTemplate;
-      });
-      if (window.innerWidth > 1023) {
-        filtersContainer = document.querySelector(".filters");
-      } else {
-        filtersContainer = document.querySelector(
-          ".filterMobile .list_filters"
-        );
-      }
-      for (let index = 0; index < filts.length; index++) {
-        // Create list title
-        var listTitle = document.createElement("h4");
-        listTitle.innerText = filts[index][actualLang].title;
-        filtersContainer.appendChild(listTitle);
-        // Create list tags
-        var list = document.createElement("ul");
-        list.classList.add(filts[index][actualLang].class);
-        filtersContainer.appendChild(list);
-        // Create tags
-        singleProd.filters[`filter${index + 1}`].forEach((tag) => {
-          var tagTemplate;
-          if (window.innerWidth > 1023) {
-            tagTemplate = `<li><input type="checkbox" name="${tag.title}" id="${tag.nid}" hidden onchange="addFilter(${tag.nid},'${filts[index][actualLang].class}')"><label for="${tag.nid}">${tag.title}</label></li>`;
-          } else {
-            tagTemplate = `<li><input type="checkbox" name="${tag.title}" id="${tag.nid}" hidden><label for="${tag.nid}">${tag.title}</label></li>`;
-          }
-          list.innerHTML += tagTemplate;
-        });
-      }
-      if (window.innerWidth < 768) {
-        filtersContainer.innerHTML +=
-          '<button type="button" onclick="filterPortalMobile()">Aplicar</button>';
-      }
-    })
-
-    .then(() => applyFiltersFromURL())
-    .then(function () {
-      if (window.innerWidth > 1023) {
-        document
-          .querySelectorAll(".filters ul.filters_especificos li input")
-          .forEach((element) => {
-            filters_especificos.push(element.id);
-            initial_filters_especificos.push(element.id);
-          });
-      } else {
-        document
-          .querySelectorAll(
-            ".filterMobile .list_filters ul.filters_especificos li input"
-          )
-          .forEach((element) => {
-            filters_especificos.push(element.id);
-            initial_filters_especificos.push(element.id);
-          });
-      }
-      $(".filterContainer").toggleClass("loading");
-      customSelect();
-    })
-    .then(function () {
-      // Filtros especificos Producto
-      var specificFiltersUl;
-      var selected;
-      if (window.innerWidth > 1023) {
-        specificFiltersUl = document.querySelector(
-          ".filters ul.filters_especificos"
-        );
-        selected = document.querySelector(".custom-select select").value;
-      } else {
-        specificFiltersUl = document.querySelector(
-          ".filterMobile .list_filters ul.filters_especificos"
-        );
-        selected = document.querySelector(
-          ".filterMobile .custom-select select"
-        ).value;
-      }
-
-      if (data_product) {
-        if (!$(".portal .container-switch .switch").hasClass("active")) {
-          filterPortal(filters_plan, filters_especificos, filters_zonas, false);
-        } else {
-          filterPortal(filters_plan, filters_especificos, filters_zonas, [
-            latitude,
-            longitude,
-          ]);
-        }
-      } else if (data_plan) {
-        filters_plan = [];
-        filters_plan.push(data_plan);
-        initial_filters_plan.push(data_plan);
-        if (!$(".portal .container-switch .switch").hasClass("active")) {
-          filterPortal(data_plan, filters_especificos, filters_zonas, false);
-        } else {
-          filterPortal(data_plan, filters_especificos, filters_zonas, [
-            latitude,
-            longitude,
-          ]);
-        }
-      } else if (data_zone) {
-        filters_zonas = [];
-        filters_zonas.push(data_zone);
-        initial_filters_zonas.push(data_zone);
-        if (!$(".portal .container-switch .switch").hasClass("active")) {
-          filterPortal(filters_plan, filters_especificos, data_zone, false);
-        } else {
-          filterPortal(filters_plan, filters_especificos, data_zone, [
-            latitude,
-            longitude,
-          ]);
-        }
-      }
-      document
-        .querySelectorAll(".custom-select .select-items")
-        .forEach((select) => {
-          select.addEventListener("click", function () {
-            if (window.innerWidth > 1023) {
-              selected = document.querySelector(".custom-select select").value;
-            } else {
-              selected = document.querySelector(
-                ".filterMobile .custom-select select"
-              ).value;
-            }
-            // Eliminar todos los atractivos que se muestran actualmente
-            containerGrid.innerHTML = "";
-            // Guardar valor del select
-            if (data_product) {
-              // Si titene filtros especificos se eliminan
-              specificFiltersUl.innerHTML = "";
-              specificFiltersUl.classList.toggle("loading");
-              // Realizar la consulta de el producto seleccionado en el droplist
-              var filterProduct = fetch(
-                `/${actualLang}/g/productFilter/?productID=${selected}`
-              )
-                .then((response) => response.json())
-                .then((data) => {
-                  data.filter1.forEach((tag) => {
-                    var templateDroplistLi = `<li><input type="checkbox" name="${tag.nid}" id="${tag.nid}" onchange="addFilter(${tag.nid},'filters_especificos')" checked><label for="${tag.nid}">${tag.title}</label></li>`;
-                    specificFiltersUl.innerHTML += templateDroplistLi;
-                  });
-                });
-              filterProduct.then(function () {
-                filters_especificos = [];
-                if (window.innerWidth > 1023) {
-                  document
-                    .querySelectorAll(".filters ul li input:checked")
-                    .forEach((element) => {
-                      filters_especificos.push(element.id);
-                    });
-                } else {
-                  document
-                    .querySelectorAll(
-                      ".filterMobile .list_filters ul.filters_especificos li input:checked"
-                    )
-                    .forEach((element) => {
-                      filters_especificos.push(element.id);
-                    });
-                }
-                if (
-                  !$(".portal .container-switch .switch").hasClass("active")
-                ) {
-                  filterPortal(
-                    filters_plan,
-                    filters_especificos,
-                    filters_zonas,
-                    false
-                  );
-                } else {
-                  filterPortal(
-                    filters_plan,
-                    filters_especificos,
-                    filters_zonas,
-                    [latitude, longitude]
-                  );
-                }
-                specificFiltersUl.classList.toggle("loading");
-              });
-            } else if (data_plan) {
-              filters_plan = [];
-              filters_plan.push(selected);
-              if (!$(".portal .container-switch .switch").hasClass("active")) {
-                filterPortal(
-                  selected,
-                  filters_especificos,
-                  filters_zonas,
-                  false
-                );
-              } else {
-                filterPortal(selected, filters_especificos, filters_zonas, [
-                  latitude,
-                  longitude,
-                ]);
-              }
-            } else if (data_zone) {
-              filters_zonas = [];
-              filters_zonas.push(selected);
-              if (!$(".portal .container-switch .switch").hasClass("active")) {
-                filterPortal(
-                  filters_plan,
-                  filters_especificos,
-                  selected,
-                  false
-                );
-              } else {
-                filterPortal(filters_plan, filters_especificos, selected, [
-                  latitude,
-                  longitude,
-                ]);
-              }
-            }
-          });
-        });
-    });
-}
 if (document.querySelector("body.interna_atractivo")) {
   var data_product =
     document.querySelector("#mainInternPlace").dataset.productid;
@@ -2786,7 +2173,7 @@ function count_duplicate(a) {
 }
 
 async function getSingleSign(id) {
-  const sign = await fetch("https://bogotadc.travel/g/signlang/?id=" + id)
+  const sign = await fetch("https://files.visitbogota.co/g/signlang/?id=" + id)
     .then((res) => res.json())
     .then((data) => ({
       title: data.title,
@@ -3030,43 +2417,71 @@ function useFilters(cattype) {
         const dayStart = dateFormatteddateStart.substring(4, 6);
         const yearStart = dateFormatteddateStart.substring(7);
 
+        console.log(dateFormatteddateStart);
         if (thumbnail == "") {
           thumbnail =
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
         }
+        var strtemplate = `
+          <li class="events_list_grid_item">
+                <a href="/${actualLang}/evento/${get_alias(event.title)}-${
+          event.nid
+        }" class="single_event">
+                    <div class="single_event_img">
+                        <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
+                            alt="evento" class="lazyload">
+                    </div>
+                    <div class="info">
+                        <div class="single_event_date ${
+                          event.field_end_date != "" ? " big" : ""
+                        }">
+                            <div>
+                                <h3 className="uppercase">${monthStart}</h3>
+                                <h4>${dayStart}</h4>
+                                <h3>${yearStart}</h3>
+                              
+                            </div>
+                            ${(function ifDateEnd() {
+                              if (event.field_end_date != "") {
+                                const dateEnd = new Date(event.field_end_date);
+                                dateEnd.setDate(dateEnd.getDate() + 1);
+                                const month = dateEnd.toLocaleString("en-US", {
+                                  month: "long",
+                                });
+                                const day = dateEnd.getDate();
+                                const year = dateEnd.getFullYear();
+                                const formattedDate = `<h3 className="uppercase">${month}</h3> <h4>${day}</h4> <h3>${year}</h3>`;
 
-        var strtemplate = ` <li class="events_list_grid_item">
-        <a href="/${actualLang}/evento/${get_alias(event.title)}-${event.nid}">
-        <article class="single_event">
-            <div class="left">
-                <ul class="categoryTags">
-                    <li>${event.field_categoria_evento_1}</li>
-                </ul>
-                <div class="image">
-                    <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel${
-                      event.field_imagen_listado_events
-                    }" src="https://via.placeholder.com/330x240" alt="${
-          event.title
-        }">
-                </div>
-                <span class="dates">
-                    <time datetime="${event.field_date}">28/02/2024</time> ${
-          event.field_end_date
-            ? `  – <time datetime="${event.field_end_date}">12/05/2024</time>`
-            : ""
-        }
-                </span>
-            </div>
-            <div class="right">
-                <h2>${event.title}</h2>
-                <p>${event.body_2}</p>
-                <div class="readmore">
-                    Ver Evento
-                </div>
-            </div>
-        </article>
-        </a>
-    </li>`;
+                                // Logueamos la fecha formateada para debug
+                                console.log({
+                                  event: event.title,
+                                  field_end_date: event.field_end_date,
+                                  formattedDate,
+                                });
+
+                                return `<div>${formattedDate}</div>`;
+                              } else {
+                                return "";
+                              }
+                            })()}
+                            
+                        </div>
+                        <div class="txt">
+                            <h5 class="single_event_title ms700 uppercase">${
+                              event.title
+                            }</h3>
+                                <h6 class="single_event_place ms500">${
+                                  event.field_place
+                                }</h4>
+                                    <div class="btn event-view uppercase ms900">${
+                                      actualLang == "es"
+                                        ? "Ver evento"
+                                        : "View EVENT"
+                                    }</div>
+                        </div>
+                    </div>
+                </a>
+            </li>`;
         itscontent.append(strtemplate);
       }
     } else {
@@ -3248,3 +2663,14 @@ function addExternalLinkIcon() {
 }
 
 document.addEventListener("DOMContentLoaded", addExternalLinkIcon);
+
+if (document.querySelector("#toggleFiltersEvents")) {
+  document
+    .querySelector("#toggleFiltersEvents")
+    .addEventListener("click", () => {
+      document.querySelector(".filters").classList.toggle("active");
+    });
+  document.querySelector("#closeFilters").addEventListener("click", () => {
+    document.querySelector(".filters").classList.toggle("active");
+  });
+}

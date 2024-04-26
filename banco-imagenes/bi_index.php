@@ -1,9 +1,15 @@
-<? $bodyClass='home';include 'includes/header.php';$products = $b->products();shuffle($products);$infoGnrl
-= $b->BIgeneralInfo; $images = $b->getImages();?>
+<?php
+  $bodyClass='home';
+  include "includes/head.php";
+  $products = $bi->products();
+  shuffle($products);
+  $infoGnrl = $bi->BIgeneralInfo; 
+  $images = $bi->getImages();
+?>
 <main>
   <section
     class="banner"
-    style="background-image: url(https://bogotadc.travel<?=$infoGnrl->field_bi_imagen_banner?>)"
+    style="background-image: url(https://files.visitbogota.co<?=$infoGnrl->field_bi_imagen_banner?>)"
   >
     <div class="search-form">
       <?=$infoGnrl->field_bi_texto_banner?>
@@ -70,7 +76,7 @@
             <li class="splide__slide">
               <a href="/<?=$lang?>/banco-imagenes/interna-<?=$images[$i]->nid?>">
                 <img
-                  src="/banco-imagenes/download/500/<?=$b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename)?>.jpg"
+                  src="/banco-imagenes/download/500/<?=$bi->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename)?>.jpg"
                   alt="<?=$images[$i]->title?>"
                 />
               </a>
@@ -91,7 +97,7 @@
             <li class="splide__slide">
               <a href="/<?=$lang?>/banco-imagenes/interna-<?=$images[$i]->nid?>">
                 <img
-                  src="/banco-imagenes/download/500/<?=$b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename)?>.jpg"
+                  src="/banco-imagenes/download/500/<?=$bi->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename)?>.jpg"
                   alt="<?=$images[$i]->title?>"
                 />
               </a>
@@ -103,17 +109,23 @@
     </div>
   </section>
 </main>
-<?include 'includes/footer.php' ?>
+
+
+
+<?php include 'includes/imports.php'?>
 <script>
-  const load = () => {
+  document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("0101")) {
-      animate(text1, 0, <?=$infoGnrl->field_bi_numero_fotos?>, 2000);
-    }
-    if (document.getElementById("0102")) {
-      animate(text2, 0, <?=$infoGnrl->field_bi_numero_categorias?>, 2000);
-    }
-    if (document.getElementById("0103")) {
-      animate(text3, 0, <?=$infoGnrl->field_bi_numero_atractivos?>, 2000);
-    }
-  };
+       animate(text1, 0, <?=$infoGnrl->field_bi_numero_fotos?>, 2000);
+     }
+     if (document.getElementById("0102")) {
+       animate(text2, 0, <?=$infoGnrl->field_bi_numero_categorias?>, 2000);
+     }
+     if (document.getElementById("0103")) {
+       animate(text3, 0, <?=$infoGnrl->field_bi_numero_atractivos?>, 2000);
+     }
+});
 </script>
+</body>
+
+</html>

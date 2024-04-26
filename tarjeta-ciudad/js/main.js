@@ -100,7 +100,7 @@ const getSections = async () => {
   cards.forEach((card, i) => {
     document.querySelector(".tc-home .cards").innerHTML += `
     <article class="cards-item">
-      <img src="https://bogotadc.travel${card.field_image}" alt="${card.title}">
+      <img src="https://files.visitbogota.co${card.field_image}" alt="${card.title}">
       <div class="txt">
           <h2 class="ms900">${card.title}</h2>
           <div class="ms700">
@@ -124,7 +124,7 @@ const getPlanesCard = async () => {
     const data = await response.json();
     let template = `
       <li>
-        <img src="https://bogotadc.travel${data[0].field_pb_oferta_img_listado}" alt="${data[0].title}">
+        <img src="https://files.visitbogota.co${data[0].field_pb_oferta_img_listado}" alt="${data[0].title}">
         <div class="txt">
             <h3>${data[0].title}</h3>
             <p>${data[0].field_pb_oferta_desc_corta}</p>

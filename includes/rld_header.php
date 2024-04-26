@@ -42,4 +42,4 @@
             </nav>
 </div>
     </div>
-    <a href="https://bogotadc.travel/es/plan-bogota" target="_BLANK" class="global-btn bold uppercase fixedBtn"><?=$b->RLDgeneralInfo->field_rld_uiword8?></a>
+    <a href="https://files.visitbogota.co/es/plan-bogota" target="_BLANK" class="global-btn bold uppercase fixedBtn"><?=$b->RLDgeneralInfo->field_rld_uiword8?></a>

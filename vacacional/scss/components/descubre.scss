@@ -30,6 +30,7 @@ section {
     }
     @media only screen and (max-width: 768px) {
       font-size: calc(30px - var(--fontSizeReal));
+      line-height: 25px;
     }
   }
   & > h3 {

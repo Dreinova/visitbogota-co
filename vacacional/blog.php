@@ -13,9 +13,9 @@ $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
     <img src="images/blog.svg" alt="blog">
     Blog
   </h1>
-  <div class="container custom-select-container">
+  <!-- <div class="container custom-select-container">
     <div class="custom-select" id="categorias_blog"><select ><option value="">CATEGORÍA</option></select></div>
-  </div>
+  </div> -->
   <section class="blog_list container">
     <?php if (count($allBlogs) >
     0) { ?>
@@ -37,10 +37,10 @@ $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
                 />
               </div>
               <div class="desc">
-                <small class="tag">
+                <!-- <small class="tag">
                   <img src="images/mdi_tag.svg" alt="tag"/>
                   <?=$allBlogs[$i]->field_prod_rel_1 ?>
-                </small>
+                </small> -->
                 <h2 class="uppercase"><?=$allBlogs[$i]->title?></h2>
                 <small class="date"><?= $allBlogs[$i]->field_date ?></small>
               </div>

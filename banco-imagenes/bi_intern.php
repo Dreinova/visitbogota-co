@@ -1,18 +1,18 @@
 <?php
 $bodyClass='intern';
 $header2 =1; 
-include 'includes/header.php';
-$infoGnrl = $b->BIgeneralInfo;
-$image = $b->getImages(false, false, $_GET["id"]);
+include "includes/head.php";
+$infoGnrl = $bi->BIgeneralInfo;
+$image = $bi->getImages(false, false, $_GET["id"]);
 if($image->field_bi_producto_relacionado != "" && $image->field_bi_zona_rel != ""){ 
   $explode1 = explode(", ", $image->field_bi_producto_relacionado);
   $explode2 = explode(", ", $image->field_bi_zona_rel); 
-  $imagesRel= $b->getImages($explode1, $explode2); 
+  $imagesRel= $bi->getImages($explode1, $explode2); 
 } 
 if($image->field_is_video){
   $imagePath = "/banco-imagenes/download/video/" . $image->field_bifilename .'.mp4';
 }else{
-  $imagePath = "/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . '.jpg';
+  $imagePath = "/banco-imagenes/download/1200/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . '.jpg';
 
 }
 ?>
@@ -54,14 +54,20 @@ if($image->field_is_video){
         </div>
       </div>
       <div class="imageinfo">
+        <?php 
+        if(isset($image->field_bi_atractivo_relacionado_1) && $image->field_bi_atractivo_relacionado_1 != ""){
+        ?>
         <span class="title">
           ATRACTIVO:
           <a target="_blank" rel="noopener noreferrer"
-            href="https://bogotadc.travel/es/atractivo/all/<?=$b->get_alias($image->field_bi_atractivo_relacionado_1)?>-all-<?=$image->field_bi_atractivo_relacionado?>"
+            href="https://files.visitbogota.co/es/atractivo/all/<?=$bi->get_alias($image->field_bi_atractivo_relacionado_1)?>-all-<?=$image->field_bi_atractivo_relacionado?>"
             aria-label="Ver detalles del atractivo <?=$image->field_bi_atractivo_relacionado_1?>"
            >
             <?=$image->field_bi_atractivo_relacionado_1?></a>
             </span>
+        <?php 
+        }
+        ?>
         <div class="rules">
           <?=$infoGnrl->field_bi_texto_descarga?>
           <p style="margin-top: 20px">
@@ -88,7 +94,7 @@ if($image->field_is_video){
     <h3> Imágenes / videos relacionados</h3>
     <div class="grid-rela">
       <? for ($i=0; $i < count($imagesRel); $i++) { 
-         $imagePath = "/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename) . ($images[$i]->field_is_video == '1' ? '.mp4' : '.jpg');
+         $imagePath = "/banco-imagenes/download/500/" . $bi->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename) . ($images[$i]->field_is_video == '1' ? '.mp4' : '.jpg');
          if (file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
 
         ?>
@@ -125,22 +131,22 @@ if($image->field_is_video){
         >
           <option value="">Elige un tamaño de la imagen</option>
           <option
-            value="<?="/banco-imagenes/download/impresion/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
+            value="<?="/banco-imagenes/download/impresion/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Formato impresión
           </option>
           <option
-            value="<?="/banco-imagenes/download/2000/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
+            value="<?="/banco-imagenes/download/2000/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Formato web grande - 2000px
           </option>
           <option
-            value="<?="/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
+            value="<?="/banco-imagenes/download/1200/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Formato web pequeño - 1200px
           </option>
           <option
-            value="<?="/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
+            value="<?="/banco-imagenes/download/500/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>"
           >
             Miniatura - 500px
           </option>
@@ -153,7 +159,7 @@ if($image->field_is_video){
     if($image->field_is_video){
       $imagePathDown = "/banco-imagenes/download/video/" . $image->field_bifilename .'.mp4';
     }else{
-      $imagePathDown = "/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . '.jpg';
+      $imagePathDown = "/banco-imagenes/download/1200/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . '.jpg';
     }
     ?>
     <a
@@ -186,10 +192,10 @@ if($image->field_is_video){
       <div class="c-select">
         <select name="size" id="size">
           <option value="">Elige un tamaño de la imagen</option>
-          <option value="<?="/banco-imagenes/download/impresion/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato impresión</option>
-          <option value="<?="/banco-imagenes/download/2000/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato web grande - 2000px</option>
-          <option value="<?="/banco-imagenes/download/1200/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato web pequeño - 1200px</option>
-          <option value="<?="/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Miniatura - 500px</option>
+          <option value="<?="/banco-imagenes/download/impresion/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato impresión</option>
+          <option value="<?="/banco-imagenes/download/2000/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato web grande - 2000px</option>
+          <option value="<?="/banco-imagenes/download/1200/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Formato web pequeño - 1200px</option>
+          <option value="<?="/banco-imagenes/download/500/" . $bi->replaceSpecialCharactersWithUnderscores($image->field_bifilename) . ($image->field_is_video == '1' ? '.mp4' : '.jpg')?>">Miniatura - 500px</option>
         </select>
         <div class="c-arrow"></div>
       </div>
@@ -228,7 +234,7 @@ if($image->field_is_video){
       <label for="politics2"
         ><strong>He leído y acepto</strong> las condiciones de uso de la imagen.
         <a
-          href="<?= $b->generalInfo->field_resolucion_239?>"
+          href="<?= $bi->generalInfo->field_resolucion_239?>"
           target="_blank"
           rel="noopener"
           >Resolución 239 del 5 de noviembre de 2021</a
@@ -266,4 +272,8 @@ if($image->field_is_video){
     >Descargar <?= $image->field_is_video == '1' ? "video" : "foto" ?></a
   >
 </div>
-<?include 'includes/footer.php' ?>
+<?php include 'includes/imports.php'?>
+
+</body>
+
+</html>

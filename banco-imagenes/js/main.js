@@ -316,19 +316,19 @@ async function getAllCategoriesWithImages() {
       <a class="size1" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[0].nid}"
         ><strong class="uppercase">${allCategories[0].title}</strong
         ><img
-          src="https://bogotadc.travel${allCategories[0].field_cover_image}"
+          src="https://files.visitbogota.co${allCategories[0].field_cover_image}"
           alt="results"
       /></a>
       <a class="size2" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[1].nid}"
         ><strong class="uppercase">${allCategories[1].title}</strong
         ><img
-          src="https://bogotadc.travel${allCategories[1].field_cover_image}"
+          src="https://files.visitbogota.co${allCategories[1].field_cover_image}"
           alt="results"
       /></a>
       <a class="size1" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[2].nid}"
         ><strong class="uppercase">${allCategories[2].title}</strong
         ><img
-          src="https://bogotadc.travel${allCategories[2].field_cover_image}"
+          src="https://files.visitbogota.co${allCategories[2].field_cover_image}"
           alt="results"
       /></a>
     </div>
@@ -338,19 +338,19 @@ async function getAllCategoriesWithImages() {
           <a class="size3" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[3].nid}"
             ><strong class="uppercase">${allCategories[3].title}</strong
             ><img
-              src="https://bogotadc.travel${allCategories[3].field_cover_image}"
+              src="https://files.visitbogota.co${allCategories[3].field_cover_image}"
               alt="results"
           /></a>
           <a class="size4" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[4].nid}"
             ><strong class="uppercase">${allCategories[4].title}</strong
             ><img
-              src="https://bogotadc.travel${allCategories[4].field_cover_image}"
+              src="https://files.visitbogota.co${allCategories[4].field_cover_image}"
               alt="results"
           /></a>
           <a class="size4" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[6].nid}"
             ><strong class="uppercase">${allCategories[6].title}</strong
             ><img
-              src="https://bogotadc.travel${allCategories[6].field_cover_image}"
+              src="https://files.visitbogota.co${allCategories[6].field_cover_image}"
               alt="results"
           /></a>
         </div>
@@ -358,13 +358,13 @@ async function getAllCategoriesWithImages() {
           <a href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[7].nid}"
             ><strong class="uppercase">${allCategories[7].title}</strong
             ><img
-              src="https://bogotadc.travel${allCategories[7].field_cover_image}"
+              src="https://files.visitbogota.co${allCategories[7].field_cover_image}"
               alt="results"
           /></a>
           <a href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[8].nid}"
             ><strong class="uppercase">${allCategories[8].title}</strong
             ><img
-              src="https://bogotadc.travel${allCategories[8].field_cover_image}"
+              src="https://files.visitbogota.co${allCategories[8].field_cover_image}"
               alt="results"
           /></a>
         </div>
@@ -373,13 +373,13 @@ async function getAllCategoriesWithImages() {
         <a class="size5" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[9].nid}"
           ><strong class="uppercase">${allCategories[9].title}</strong
           ><img
-            src="https://bogotadc.travel${allCategories[9].field_cover_image}"
+            src="https://files.visitbogota.co${allCategories[9].field_cover_image}"
             alt="results"
         /></a>
         <a class="size5" href="/${actualLang}/banco-imagenes/resultados/?productid=${allCategories[11].nid}"
           ><strong class="uppercase">${allCategories[11].title}</strong
           ><img
-            src="https://bogotadc.travel${allCategories[11].field_cover_image}"
+            src="https://files.visitbogota.co${allCategories[11].field_cover_image}"
             alt="results"
         /></a>
       </div>

@@ -97,20 +97,6 @@
           </div>
         </div>
       </div>
-      <section class="stepssection">
-        <h3 class="ms900"><?=$pb->pb_experiencias[15]?></h3>
-        <div class="steps">
-        <?php 
-        $textos = explode('|', $pb->generalInfo->field_textos_como_reservar);
-        for ($i=0; $i < count($textos); $i++) { 
-          $texto = $textos[$i];
-          ?>
-          <article><?=$texto?></article>
-          <?php
-        }
-        ?>
-        </div>
-      </section>
     </main>
     <?php include 'includes/imports.php'?>
   </body>
