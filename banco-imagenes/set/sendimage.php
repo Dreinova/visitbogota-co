@@ -5,7 +5,7 @@
     extract($_POST);
     $to = $email;
     $params = "{\"BILINK\":\"$size\"}";
-    $emailSended = $b->setFirstImage($to, $params, $size);
+    $emailSended = $bi->setFirstImage($to, $params, $size);
     $array['emailSended'] = $emailSended;
     $array['message'] = 1;
     echo json_encode($array);

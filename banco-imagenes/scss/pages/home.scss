@@ -31,6 +31,7 @@
       h2 {
         font-size: 45px;
         margin-bottom: 10px;
+        line-height: 50px;
         @media only screen and (max-width: 768px) {
           font-size: 30px;
           margin-bottom: 10px;
@@ -128,6 +129,7 @@
       color: #333333;
       font-size: 40px;
       margin-bottom: 15px;
+      line-height: 50px;
       @media only screen and (max-width: 768px) {
         color: #333;
         font-size: 30px;
@@ -373,4 +375,54 @@
       }
     }
   }
+  // /* Estilos para las imágenes de tamaño 1 */
+  // .size1 {
+  //   grid-column: span 2; /* Ocupa dos columnas */
+  //   grid-row: span 1; /* Ocupa dos filas */
+  // }
+
+  // /* Estilos para las imágenes de tamaño 2 */
+  // .size2 {
+  //   grid-column: span 2; /* Ocupa tres columnas */
+  //   grid-row: span 1; /* Ocupa una fila */
+  // }
+
+  // /* Estilos para las imágenes de tamaño 3 */
+  // .size3 {
+  //   grid-column: span 1; /* Ocupa una columna */
+  //   grid-row: span 1; /* Ocupa tres filas */
+  // }
+
+  // /* Ajustes generales */
+  // .grid-layout {
+  //   display: grid;
+  //   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  //   grid-gap: 10px;
+  //   justify-content: center;
+  //   grid-auto-rows: 200px;
+  //   max-width: 1080px;
+  //   margin: 0 auto;
+  //   a {
+  //     position: relative;
+  //   }
+  //   img {
+  //     width: 100%; /* Ajustar tamaño de imagen */
+  //     height: 100%; /* Mantener la proporción */
+  //     object-fit: cover;
+  //     transition: transform 0.3s ease; /* Animación de transición */
+  //   }
+  //   strong {
+  //     background-color: rgba(0, 0, 0, 0.7);
+  //     bottom: 0;
+  //     color: #fff;
+  //     font-size: 14px;
+  //     left: 0;
+  //     margin: 0;
+  //     padding: 5px 10px;
+  //     position: absolute;
+  //     text-align: center;
+  //     text-transform: uppercase;
+  //     width: 100%;
+  //   }
+  // }
 }

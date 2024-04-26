@@ -44,13 +44,13 @@ if ($b->searchContent($_GET['search'])) {
                         if ($field_image) {
                         ?>
                             <div class="img">
-                                <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_image ?>" src="https://picsum.photos/20/20" alt="Bogotá">
+                                <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co<?= $field_image ?>" src="https://picsum.photos/20/20" alt="Bogotá">
                             </div>
                         <?php
                         } else if ($field_cover) {
                         ?>
                             <div class="img">
-                                <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_cover ?>" src="https://picsum.photos/20/20" alt="Bogotá">
+                                <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co<?= $field_cover ?>" src="https://picsum.photos/20/20" alt="Bogotá">
                             </div>
                         <?php } else { ?>
                             <div class="img">

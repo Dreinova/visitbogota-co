@@ -56,7 +56,7 @@ const getProducts = async () => {
         item.nid
       }" value="${
         item.nid
-      }" /><div class="content"><div class="img"><img src="https://bogotadc.travel${
+      }" /><div class="content"><div class="img"><img src="https://files.visitbogota.co${
         item.field_icon
       }" alt="${get_alias(item.title)}" /></div><span>${
         item.title

@@ -130,7 +130,7 @@ class mice extends bogota
     }
     function absoluteURL($str) //Enviar a bogota SDK
     {
-     if(strpos($str,"https")==false){ return "https://bogotadc.travel".$str; }else{ return $str; }
+     if(strpos($str,"https")==false){ return "https://files.visitbogota.co".$str; }else{ return $str; }
     
     }
     function get_mice_single_provider($id)

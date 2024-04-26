@@ -39,7 +39,7 @@ function deleteDirectory($dir) {
 
 <body>
     <h2>La cache ha sido eliminada correctamente</h2>
-    <a href="https://bogotadc.travel/drpl/es/admin/content">Volver al administrador</a>
+    <a href="https://files.visitbogota.co/drpl/es/admin/content">Volver al administrador</a>
 </body>
 
 </html>

@@ -80,7 +80,7 @@ if (!$planes) {
 }
 ?>
 <div id="preloader">
-    <div class="image"><img src="<?=$include_level?>img/preloader.gif" alt="preloader"><h2>Sitio Web en mantenimiento</h2></div>
+    <div class="image"><img src="<?=$include_level?>img/preloader.gif" alt="preloader"></div>
 </div>
 <footer>
 <div class="container">
@@ -106,38 +106,25 @@ if (!$planes) {
     <nav>
       <h6><?=$bogota?></h6>
       <ul>
-        <li><a href="/<?=$lang?>/experiencias-turisticas/"><?=$experiencia_turisticas?></a></li>
-        <li><a href="/<?=$lang?>/planifica-tu-viaje"><?=$planifica_tu_viaje?></a></li>
+        <!-- <li><a href="/<?=$lang?>/experiencias-turisticas/"><?=$experiencia_turisticas?></a></li> -->
         <li><a href="/<?=$lang?>/eventos/agenda-empresarial-148"><?=$agenda_empresarial?></a></li>
-        <li><a href="/<?=$lang?>/donde-comer"><?=$restaurantes?></a></li>
-        <li><a href="/<?=$lang?>/donde-dormir"><?=$hospedaje?></a></li>
         <li><a href="/<?=$lang?>/blog"><?=$blog?></a></li>
         <li><a href="/<?=$lang?>/banco-imagenes/"><?=$exploraciones_visuales?></a></li>
       </ul>
     </nav>
-    <nav>
+    <nav id="footerDescubre">
       <h6><?=$discover_bogota?></h6>
       <ul>
-
-        <li><a href="/<?=$lang?>/explora/cerros/2572"><?=$cerros?></a></li>
-        <li><a href="/<?=$lang?>/explora/biciturismo/62"><?=$biciturismo?></a></li>
-        <li><a href="/<?=$lang?>/explora/gastronomia/6"><?=$gastronomia?></a></li>
-        <li><a href="/<?=$lang?>/explora/museos/299"><?=$museos?></a></li>
-        <li><a href="/<?=$lang?>/explora/musica-arte/88"><?=$musica_y_arte?></a></li>
-        <li><a href="/<?=$lang?>/explora/ruta-colonial/456"><?=$ruta_colonial?></a></li>
-        <li><a href="/<?=$lang?>/explora/senderismo/64"><?=$senderismo?></a></li>
-        <li><a href="/<?=$lang?>/explora/termales/112"><?=$termales?></a></li>
       </ul>
     </nav>
     <nav>
       <h6><?=$useful_information?></h6>
       <ul>
-
         <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$cómo_moverse_en_Bogotá?></a></li>
         <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$informacion_general?></a></li>
         <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$descargables?></a></li>
-        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$recursos_lengua_de_senas?></a></li>
-        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$preguntas_frecuentes?></a></li>
+        <!-- <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$recursos_lengua_de_senas?></a></li>
+        <li><a href="/<?=$lang?>/informacion-al-viajero"><?=$preguntas_frecuentes?></a></li> -->
       </ul>
     </nav>
     <nav>

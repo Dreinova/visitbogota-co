@@ -958,7 +958,7 @@ function findVenues() {
     });
   venueType = venueTypeArray.toString();
   formatos = formatosArray.toString();
-  window.location.href = `https://bogotadc.travel/${actualLang}/mice/venues?type=${venueType}&format=${formatos}&aforo=${
+  window.location.href = `https://files.visitbogota.co/${actualLang}/mice/venues?type=${venueType}&format=${formatos}&aforo=${
     document.querySelector(".options.aforo input:checked").value
   }`;
 }
@@ -972,7 +972,7 @@ function findProviders() {
       providerTypeArray.push(tipoProveedor.value);
     });
   providerType = providerTypeArray.toString();
-  window.location.href = `https://bogotadc.travel/${actualLang}/mice/proveedores?type=${providerType}`;
+  window.location.href = `https://files.visitbogota.co/${actualLang}/mice/proveedores?type=${providerType}`;
 }
 var containerGridVenues = document.querySelector(
   ".venuesList-body .grid-venues"

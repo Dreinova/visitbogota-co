@@ -1,5 +1,5 @@
 <?php
-$urlGlobal = 'https://bogotadc.travel';
+$urlGlobal = 'https://files.visitbogota.co';
 
 if(!isset($include_level)){
     $include_level = "";
@@ -55,7 +55,7 @@ $isMobile = $detect->isMobile();
             <link rel="stylesheet" href="<?=$include_level?>css/jquery.mCustomScrollbar.min.css">
             <link rel="preload" href="<?=$include_level?>css/style.css?v=<?=time();?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
             <link rel="stylesheet" href="<?=$include_level?>css/style.css?v=<?=time();?>">
-            <!-- Smartsupp Live Chat script -->
+            <!-- Smartsupp Live Chat script
             <script type="text/javascript">
                 var _smartsupp = _smartsupp || {};
                 _smartsupp.key = 'b19a945a21df50ed6d8060bfd666c57560c2e12e';
@@ -72,7 +72,7 @@ $isMobile = $detect->isMobile();
                     c.src = 'https://www.smartsuppchat.com/loader.js?';
                     s.parentNode.insertBefore(c, s);
                 })(document);
-            </script>
+            </script> -->
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA172814268-1"></script>
             <script>

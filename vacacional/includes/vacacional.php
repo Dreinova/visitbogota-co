@@ -47,7 +47,10 @@ class vacacional extends bogota{
     public function getOfertasRel($id_atractivo){
         $result = $this->query("ofertas/".$id_atractivo, "", true);
         return $result;
-
+    }
+    public function get_atractivos($id="all",$category ="all"){
+        $result = $this->query("atractivos/$id/$category", "", true);
+        return $result;
     }
     function getInfoGnrlPB(){
         if (isset($_SESSION['pbinfo'][$this->language])) {

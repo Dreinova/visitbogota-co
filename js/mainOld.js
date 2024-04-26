@@ -60,26 +60,26 @@ window.onload = function () {
   bogotaApp.SetCookie("lang_redirect", ln);
 
   // if (ln.substring(0, 2) == "en") {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/${newLang}`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else if (ln.substring(0, 2) == "es") {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/${newLang}`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else if (ln.substring(0, 2) == "pt") {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/${newLang}`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else {
-  //   if (location.href === "https://bogotadc.travel/") {
-  //     location.href = `https://bogotadc.travel/en`;
+  //   if (location.href === "https://files.visitbogota.co/") {
+  //     location.href = `https://files.visitbogota.co/en`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/en`);
   //   }
@@ -137,7 +137,7 @@ const getExploraBogota = async () => {
               document.querySelector(".blog_list .repeater").innerHTML = "";
               data.forEach(async (blog) => {
                 let urlImg = await getImageFromCacheOrFetch(
-                  "https://bogotadc.travel" + blog.field_image
+                  "https://files.visitbogota.co" + blog.field_image
                 );
                 let template = `
                 <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
@@ -223,7 +223,7 @@ function number_format(number, decimals, dec_point, thousands_point) {
 
   return number;
 }
-const urlGlobal = "https://bogotadc.travel";
+const urlGlobal = "https://files.visitbogota.co";
 const imageCache = {};
 const getImageFromCacheOrFetch = async (url) => {
   return url;
@@ -2811,7 +2811,7 @@ function count_duplicate(a) {
 }
 
 async function getSingleSign(id) {
-  const sign = await fetch("https://bogotadc.travel/g/signlang/?id=" + id)
+  const sign = await fetch("https://files.visitbogota.co/g/signlang/?id=" + id)
     .then((res) => res.json())
     .then((data) => ({
       title: data.title,
@@ -3064,7 +3064,7 @@ function useFilters(cattype) {
           event.nid
         }" class="single_event">
                     <div class="single_event_img">
-                        <img loading="lazy" data-src="https://bogotadc.travel${thumbnail}" src="https://picsum.photos/20/20"
+                        <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
                             alt="evento" class="lazyload">
                     </div>
                     <div class="info">

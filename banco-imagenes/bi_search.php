@@ -1,38 +1,43 @@
-  <? $bodyClass='search';$header2 =1; include 'includes/header.php';$infoGnrl = $b->BIgeneralInfo; $products = $b->products();  ?>
+  <? 
+  $bodyClass='search';
+  $header2 =1; 
+  include "includes/head.php";
+  $infoGnrl = $bi->BIgeneralInfo; 
+  $products = $bogota->products();  ?>
   <?
   $searchWord = $_GET['search'];
   $searchWord = str_replace(' ', '+', $searchWord);
   function atractivos($var){return $var->type == 'Atractivos';}
   if( isset($searchWord) && !isset($_GET['imagenes']) && !isset($_GET['videos'])){
-    $images = $b->searchByWord($searchWord);
+    $images = $bi->searchByWord($searchWord);
   }
   else if( isset($searchWord) && isset($_GET['imagenes']) && isset($_GET['videos'])){
-    $busqueda = $b->searchContent($searchWord);
+    $busqueda = $bi->searchContent($searchWord);
     $filterBusqueda = array_filter($busqueda, "atractivos");
-    $images = $b->searchByWord($searchWord);
+    $images = $bi->searchByWord($searchWord);
   }else if(isset($_GET['imagenes'])){
-    $images = $b->searchByWord($searchWord, true, false);
+    $images = $bi->searchByWord($searchWord, true, false);
   }else if(isset($_GET['videos'])){
-    $images = $b->searchByWord($searchWord, false, true);
+    $images = $bi->searchByWord($searchWord, false, true);
   }
   if(isset($_GET['productid'])){
-    $images = $b->getImages(array($_GET['productid']));
-    $product = $b->products(0,$_GET['productid']);
-    $busqueda = $b->searchContent($product->title);
+    $images = $bi->getImages(array($_GET['productid']));
+    $product = $bogota->products(0,$_GET['productid']);
+    $busqueda = $bi->searchContent($product->title);
     $filterBusqueda = array_filter($busqueda, "atractivos");
   }
 ?>
 <? 
-if(isset($searchWord) && count($images) > 0){
-  $fileToOpen = "search.json";
-  $myfile = fopen($fileToOpen , "r") or die("Unable to open file!");
-	$content = json_decode(fread($myfile, filesize($fileToOpen)));
-		array_push($content, $_GET['search']);
-$content2 = json_encode($content);
-	$myfile2 = fopen($fileToOpen , "w") or die("Unable to open file!");
-	fwrite($myfile2, $content2);
-	fclose($myfile2);
-}
+// if(isset($searchWord) && count($images) > 0){
+//   $fileToOpen = "search.json";
+//   $myfile = fopen($fileToOpen , "r") or die("Unable to open file!");
+// 	$content = json_decode(fread($myfile, filesize($fileToOpen)));
+// 		array_push($content, $_GET['search']);
+// $content2 = json_encode($content);
+// 	$myfile2 = fopen($fileToOpen , "w") or die("Unable to open file!");
+// 	fwrite($myfile2, $content2);
+// 	fclose($myfile2);
+// }
 ?>
 <script>
   async function getInfo(url){
@@ -166,7 +171,7 @@ $content2 = json_encode($content);
               if($images[$i]->field_is_video){
                 $imagePath = "/banco-imagenes/download/video/" . $images[$i]->field_bifilename .".mp4";
               }else{
-                $imagePath = "/banco-imagenes/download/500/" . $b->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename).'.jpg';
+                $imagePath = "/banco-imagenes/download/500/" . $bi->replaceSpecialCharactersWithUnderscores($images[$i]->field_bifilename).'.jpg';
               }
               if (file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
            ?>
@@ -207,59 +212,7 @@ $content2 = json_encode($content);
         <?}?>
       </div>
     </section>
-    <? if(count($filterBusqueda) > 0){?>
-      <section class="atractivos">
-        <h2><?=$infoGnrl->field_bi_ui_08?> <strong>“<?=$_GET["search"] ? $_GET["search"] : $product->title?>”</strong></h2>
-        <h3> <?=$infoGnrl->field_bi_ui_09?> </h3>
-        <div class="grid-atractivos">
-        <?php for ($i = 0; $i < count($filterBusqueda); $i++) {
-          if($filterBusqueda[$i]->type == 'Atractivos') {
-                  $value =  $b->get_alias($filterBusqueda[$i]->title);
-                  $ID_blog = $filterBusqueda[$i]->nid;
-                  $subID = explode(",", $filterBusqueda[$i]->field_subp)[0];
-                  $type = 'atractivo';
-                  if ($subID != "") {
-                      foreach ($b->subproducts as $element) {
-                          if ($subID == $element->nid) {
-                              $link = "/".$lang. "/atractivo/" . $b->get_alias($element->field_prod_rel_1) . "/" . $value . "-" . $element->field_prod_rel . "-" . $ID_blog;
-                          }
-                      }
-                  }
-              ?>
-            <a href="<?= $link ?>" target="_blank"
-              ><strong class="uppercase"><?= $filterBusqueda[$i]->title ?></strong
-              >
-              <?php
-                      $field_image = $filterBusqueda[$i]->field_imagen;
-                      $field_bi_imagen = $b->fixbiurl('w_640',$filterBusqueda[$i]->field_bi_imagen);
-                      $field_cover = $filterBusqueda[$i]->field_cover_image;
-                      if ($field_image) {
-                      ?>
-                          <div class="img">
-                              <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_image ?>" src="https://picsum.photos/20/20" alt="Bogotá">
-                          </div>
-                      <?php
-                      } else if ($field_cover) {
-                      ?>
-                          <div class="img">
-                              <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_cover ?>" src="https://picsum.photos/20/20" alt="Bogotá">
-                          </div>
-                      <?php
-                      } else if ($field_bi_imagen) {
-                      ?>
-                          <div class="img">
-                              <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel<?= $field_bi_imagen ?>" src="https://picsum.photos/20/20" alt="Bogotá">
-                          </div>
-                      <?php } else { ?>
-                          <div class="img">
-                              <img loading="lazy" class="lazyload" data-src="/img/noimg.png" src="https://picsum.photos/20/20" alt="Bogotá">
-                          </div>
-                      <? } ?>
-            </a>
-          <?}  }?>
-        </div>
-      </section>
-    <?}?>
+
     <section class="grid">
       <h3><?=$infoGnrl->field_bi_ui_10?> </h3>
       <div class="grid-layout">
@@ -339,4 +292,8 @@ $content2 = json_encode($content);
       <!-- <a href="" class="blue-btn uppercase"><?=$infoGnrl->field_bi_texto_vertodas?></a> -->
     </section>
   </main>
-  <?include 'includes/footer.php' ?>
+  <?php include 'includes/imports.php'?>
+
+</body>
+
+</html>

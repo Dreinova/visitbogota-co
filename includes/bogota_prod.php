@@ -12,7 +12,7 @@ Basic PHP functions for Bogota Tourism Website
 
 class bogota{
     
-    public $domain = "https://bogotadc.travel/drpl/es/api/v1";
+    public $domain = "https://files.visitbogota.co/drpl/es/api/v1";
     public $generalInfo = array();
     public $language = "";
     public $production=true;
@@ -391,7 +391,7 @@ class bogota{
            $result = $this->query("tripinfo/".$category."/".$id);
        }
         
-          return $result;  //https://bogotadc.travel/drpl/es/api/v1/es/tripinfo/all/18
+          return $result;  //https://files.visitbogota.co/drpl/es/api/v1/es/tripinfo/all/18
     }
     function tripinfoCats($cat)//cat_help_info, product, faq
     {
@@ -559,7 +559,7 @@ class bogota{
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-              CURLOPT_URL => "https://bogotadc.travel/drpl/entity/user",
+              CURLOPT_URL => "https://files.visitbogota.co/drpl/entity/user",
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_ENCODING => "",
               CURLOPT_MAXREDIRS => 10,
@@ -732,9 +732,9 @@ class bogota{
         $metas['title'] = $seo->field_seo_title;
         $metas['desc'] = $seo->field_seo_desc;
         $metas['words'] = $seo->field_seo_keys;
-        $metas['img'] = "https://bogotadc.travel" . $seo->field_seo_img;
+        $metas['img'] = "https://files.visitbogota.co" . $seo->field_seo_img;
     
-        list($width, $height, $type, $attr) = getimagesize("https://bogotadc.travel" . $seo->field_seo_img); 
+        list($width, $height, $type, $attr) = getimagesize("https://files.visitbogota.co" . $seo->field_seo_img); 
     
         $ret = '<meta charset="utf-8">'.PHP_EOL;
         $ret .= '<link rel="canonical" href="'.$_GET['canon'].'">'.PHP_EOL;
@@ -750,7 +750,7 @@ class bogota{
         $ret .= '<meta name="twitter:description" content="'.$metas['desc'].'">'.PHP_EOL;
         $ret .= '<meta name="twitter:image" content="'.$metas['img'].'">'.PHP_EOL;
         //$ret .= '<meta property="fb:app_id" content="865245646889167">'.PHP_EOL;
-        $ret .= '<meta property="og:url" content="https://bogotadc.travel/'.$_GET['canon'].'">'.PHP_EOL;
+        $ret .= '<meta property="og:url" content="https://files.visitbogota.co/'.$_GET['canon'].'">'.PHP_EOL;
         $ret .= '<meta property="og:type" content="website">'.PHP_EOL;
         $ret .= '<meta property="og:title" content="'.$metas['title'].'">'.PHP_EOL;
         $ret .= '<meta property="og:site_name" content="'.$metas['title'].'">'.PHP_EOL;

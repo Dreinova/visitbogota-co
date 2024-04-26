@@ -423,7 +423,7 @@ function useFilters(cattype) {
 
 function absoluteURL(str) {
   if (str.indexOf("https") == -1) {
-    return "https://bogotadc.travel" + str.replace(/\s/g, "");
+    return "https://files.visitbogota.co" + str.replace(/\s/g, "");
   } else {
     return str;
   }
@@ -629,7 +629,7 @@ if (document.querySelector(".internVenue-body")) {
                       <div class="image">
                       ${formato.field_format_icon.replace(
                         'src="/drpl',
-                        'src="https://bogotadc.travel/drpl'
+                        'src="https://files.visitbogota.co/drpl'
                       )}
                       </div>
                         <span class="namedis">${formato.name}</span>
@@ -650,7 +650,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">${formato.name}</span>
@@ -671,7 +671,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">${formato.name}</span>
@@ -692,7 +692,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">${formato.name}</span>
@@ -713,7 +713,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">${formato.name}</span>
@@ -834,7 +834,7 @@ if (document.querySelector(".internVenue-body")) {
                       <div class="image">
                       ${formato.field_format_icon.replace(
                         'src="/drpl',
-                        'src="https://bogotadc.travel/drpl'
+                        'src="https://files.visitbogota.co/drpl'
                       )}
                       </div>
                         <span class="namedis">Auditorio</span>
@@ -855,7 +855,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">Aula</span>
@@ -876,7 +876,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">U</span>
@@ -898,7 +898,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">Coctel</span>
@@ -919,7 +919,7 @@ if (document.querySelector(".internVenue-body")) {
                         <div class="image">
                         ${formato.field_format_icon.replace(
                           'src="/drpl',
-                          'src="https://bogotadc.travel/drpl'
+                          'src="https://files.visitbogota.co/drpl'
                         )}
                         </div>
                           <span class="namedis">Banquete</span>

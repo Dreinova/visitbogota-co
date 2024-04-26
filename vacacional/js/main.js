@@ -68,7 +68,7 @@ async function getRecentBlogs() {
 
   const promises = data.map(async (blog) => {
     let urlImg = await getImageFromCacheOrFetch(
-      "https://bogotadc.travel" + blog.field_image
+      "https://files.visitbogota.co" + blog.field_image
     );
     let template = `<a href="/${actualLang}/blog/all/${get_alias(
       blog.title
@@ -118,7 +118,7 @@ async function getRecentEventos() {
       optionsdateStart
     );
     let urlImg = await getImageFromCacheOrFetch(
-      "https://bogotadc.travel" + evento.field_cover_image
+      "https://files.visitbogota.co" + evento.field_cover_image
     );
     let template = `<a href="/${actualLang}/evento/${get_alias(evento.title)}-${
       evento.nid
@@ -152,7 +152,7 @@ async function getZonesHome() {
           template = `
           <li class="splide__slide" data-index="${index}" data-zone="${zona.tid}">
           <div class="zone-card">
-            <img src="https://bogotadc.travel${zona.field_imagen_zona}" alt="zona"${zona.name} />
+            <img src="https://files.visitbogota.co${zona.field_imagen_zona}" alt="zona"${zona.name} />
             <div class="info">
               <h1 class="uppercase ms900">${zona.name}</h1>
               <a href="/${actualLang}/alrededores-de-bogota" class="uppercase ms900 btn wait">VISITAR</a>
@@ -165,7 +165,7 @@ async function getZonesHome() {
           template = `
           <li class="splide__slide" data-index="${index}" data-zone="${zona.tid}">
           <div class="zone-card">
-            <img src="https://bogotadc.travel${zona.field_imagen_zona}" alt="zona"${zona.name} />
+            <img src="https://files.visitbogota.co${zona.field_imagen_zona}" alt="zona"${zona.name} />
             <div class="info">
               <h2 class="uppercase ms900">${zona.name}</h2>
               <ul class="localidades">
@@ -230,7 +230,7 @@ async function getZonesHome() {
 async function localidades(zonaId) {
   let text = "";
   const localidadesData = await fetch(
-    `https://bogotadc.travel/drpl/es/api/v1/es/zones/all/${zonaId}`
+    `https://files.visitbogota.co/drpl/es/api/v1/es/zones/all/${zonaId}`
   ).then((res) => res.json());
 
   localidadesData.forEach((localidad) => {
@@ -249,7 +249,7 @@ async function getBannersCuadrados() {
       console.log(data);
       for (const [index, banner] of data.entries()) {
         let urlImg = await getImageFromCacheOrFetch(
-          `https://bogotadc.travel${banner.field_image}`
+          `https://files.visitbogota.co${banner.field_image}`
         );
         let template = `<a href="${banner.field_link}" target="_blank" class="city-card"><img src="${urlImg}" alt="${banner.title}" /><span class="uppercase ms700">${banner.title}</span></a>`;
         document.querySelector(".cards").innerHTML += template;
@@ -269,49 +269,6 @@ function shorter(text, chars_limit = 35) {
   }
   return text;
 }
-
-const getBogotaData = async (containerId, category) => {
-  const bogotaContainer = document.querySelector(`#${containerId} ul`);
-  bogotaContainer.innerHTML = "";
-
-  const response = await fetch(
-    `/g/products/?lang=${actualLang}&category=${category}`
-  );
-  const data = await response.json();
-  console.log(`getBogotaData`, data);
-
-  const promises = data.map(async (item) => {
-    let urlImg = await getImageFromCacheOrFetch(
-      "https://bogotadc.travel" + item.field_cover_image
-    );
-    let urlSite = `/${actualLang}/explora/${get_alias(item.title)}/${item.nid}`;
-    let template = `
-      <li class="splide__slide">
-        <a href="${urlSite}">
-          <img loading="lazy" data-src="${urlImg}" alt="${item.title}" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota">
-          <span>${item.title}</span>
-        </a>
-      </li>`;
-    bogotaContainer.innerHTML += template;
-  });
-
-  await Promise.all(promises);
-
-  new Splide(`#${containerId}`, {
-    perPage: 5,
-    gap: 15,
-    type: "loop",
-    pagination: false,
-    lazyLoad: "nearby",
-    breakpoints: {
-      768: {
-        perPage: 1,
-      },
-    },
-  }).mount();
-
-  lazyImages();
-};
 function fixbiurl(prefix, url, author = "") {
   const urlParts = url.split("/upload/");
   let modifiedUrl;
@@ -391,7 +348,7 @@ const getFiltersExperienciasTuristicas = async (container, category) => {
   const promises = data.map(async (images) => {
     let urlImg = await getImageFromCacheOrFetch(
       images.field_imagen_zona != ""
-        ? "https://bogotadc.travel" + images.field_imagen_zona
+        ? "https://files.visitbogota.co" + images.field_imagen_zona
         : "https://placehold.co/755x755.jpg?text=visitbogota"
     );
     console.log(category);
@@ -426,13 +383,6 @@ const getFiltersExperienciasTuristicas = async (container, category) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Llamadas a la función unificada con los valores específicos
-
-  if (document.querySelector("#bogota-natural")) {
-    await getBogotaData("bogota-natural", 8);
-  }
-  if (document.querySelector("#bogota-cultural")) {
-    await getBogotaData("bogota-cultural", 7);
-  }
   if (document.querySelector("#porcategoria")) {
     await getFiltersExperienciasTuristicas(
       "porcategoria",
@@ -441,3 +391,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     await getFiltersExperienciasTuristicas("porzona", "test_zona");
   }
 });
+
+// GET ATRACTIVOS PORTAL
+async function filterPortal(termID = "all", termName = "") {
+  const response = await fetch(`g/getAtractivos/?termID=${termID}`);
+  const atractivos = await response.json();
+  for (let index = 0; index < atractivos.length; index++) {
+    const place = atractivos[index];
+    var placeUrl = `/${actualLang}/atractivo/${get_alias(termName)}/${get_alias(
+      place.title
+    )}-all-${place.nid}`;
+    let image = await getImageFromCacheOrFetch(
+      `${urlGlobal}${
+        place.field_cover_image ? place.field_cover_image : "/img/noimg.png"
+      }`
+    );
+    var template = `
+            <a href="${placeUrl}" class="grid-atractivos-item wait" data-id="${place.nid}">
+                <div class="site_img">
+                    <img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${place.title}" class="lazyload">
+                </div>
+                <span>${place.title}</span>
+            </a>
+            `;
+    containerGrid.innerHTML += template;
+  }
+  lazyImages();
+}
+if (document.querySelector("body.portal")) {
+  var containerGrid = document.querySelector(".grid-atractivos");
+  var dataCatId = document.querySelector("#mainPortal").dataset.productid;
+  var catName = document.querySelector("#mainPortal").dataset.productname;
+  if (dataCatId) {
+    filterPortal(dataCatId, catName);
+  }
+}

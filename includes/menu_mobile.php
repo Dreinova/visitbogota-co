@@ -14,12 +14,12 @@ $json_data = json_decode($json,true);
         <?php for ($i=0; $i < count($json_data["menuItems"]); $i++) { 
     ?>
 
-        <? if(count($json_data["menuItems"][$i]["children"]) > 0 && is_array($json_data["menuItems"][$i]["children"])){ ?>
+        <? if(is_array($json_data["menuItems"][$i]["children"]) && count($json_data["menuItems"][$i]["children"]) > 0){ ?>
         <h3>
             <?=$json_data["menuItems"][$i][$lang]["title"]?>
         </h3>
         <div>
-            <ul>
+            <ul class="<?= $json_data["menuItems"][$i]["class"] ?>">
                 <?php for ($menuCount = 0; $menuCount < count($json_data["menuItems"][$i]["children"]); $menuCount++) { ?>
                 <li>
                     <a href="<?=$json_data["menuItems"][$i]["children"][$menuCount][$lang]["link"]?>" class="wait">

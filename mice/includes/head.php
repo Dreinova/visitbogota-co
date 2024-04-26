@@ -1,4 +1,6 @@
 <?php 
+header('Location: /');
+exit;
 
 if (file_exists("includes/bogota.php")) { 
     include "includes/bogota.php";

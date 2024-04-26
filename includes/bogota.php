@@ -354,8 +354,7 @@ class bogota
         $result = $this->query("section_home");
         return $result;
     }
-    function products($category = 0, $id = 0, $wFilters = false)
-    {
+    function products($category = 0, $id = 0, $wFilters = false) {
         if ($id == 0 && $category == 0) { //All products
             if (isset($_SESSION['products'][$this->language])) {
                 $result = $_SESSION['products'][$this->language];
@@ -404,6 +403,10 @@ class bogota
             }
         }
 
+        return $result;
+    }
+    function getMenuTaxCategories($id="all"){
+        $result = $this->query("categorias_atractivos/$id", "", true);
         return $result;
     }
     function otherProducts($ID, $quantity = 5)
@@ -1090,23 +1093,34 @@ class bogota
     }
     function create_metas($seoId, $type=NULL)
     {
+        $host = $_SERVER['HTTP_HOST'];
+        $request_uri = $_SERVER['REQUEST_URI'];
         global $metas, $urlMap, $seo;
-        $canonicalURL = "http://".$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI];
+        $canonicalURL = "http://$host$request_uri";
         if ($seoId == '') {
             $seoId = 4;
         }
         
         $ret = '';
         if(!isset($type)){
-            $seo = $this->query("seo/" . $seoId);
+            $seo = $this->query("seo/$seoId");
             $seo = $seo[0];
             $metas['words'] = $seo->field_seo_keys;
             $metas['title'] = $seo->field_seo_title;
             $metas['desc'] = $seo->field_seo_desc;
             $metas['words'] = $seo->field_seo_keys;
             $metas['img'] = "https://www.bogotadc.travel" . $seo->field_seo_img;
-        }else{
-            $seo = $this->query("agenda_taxseo/" . $seoId);
+        }else if($type == 1){
+            $seo = $this->query("agenda_taxseo/$seoId");
+            $seo = $seo[0];
+            $metas['words'] = $seo->field_clave_seo;
+            $metas['title'] = $seo->field_titulo_seo;
+            $metas['desc'] = $seo->field_descripcion_seo;
+            $metas['words'] = $seo->field_seo_keys;
+            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_imagen_seo;
+            
+        }else if($type == 2){
+            $seo = $this->query("categorias_atractivos/$seoId/","", true);
             $seo = $seo[0];
             $metas['words'] = $seo->field_clave_seo;
             $metas['title'] = $seo->field_titulo_seo;

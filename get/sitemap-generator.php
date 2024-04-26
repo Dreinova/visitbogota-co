@@ -14,7 +14,7 @@
 
 	// Set the start URL. Here is http used, use https:// for 
 	// SSL websites.
-	$start_url = "https://bogotadc.travel/es";       
+	$start_url = "https://files.visitbogota.co/es";       
 
 	// Set true or false to define how the script is used.
 	// true:  As CLI script.
@@ -26,8 +26,8 @@
 	// Example: "http://iprodev.com/print" will also skip
 	// http://iprodev.com/print/bootmanager.html
 	$skip = array (
-					"https://bogotadc.travel/g/",
-					"https://bogotadc.travel/s/"
+					"https://files.visitbogota.co/g/",
+					"https://files.visitbogota.co/s/"
 				  );
 
 	// Define what file types should be scanned.
