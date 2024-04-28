@@ -63,6 +63,7 @@ RewriteRule ^([a-zA-Z0-9_-]+)/cerca-de-mi$ vacacional/closetome.php?lang=$1&clea
 RewriteRule ^([a-zA-Z0-9_-]+)/cerca-de-mi/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/closetomeplace.php?lang=$1&placenearid=$3&clean=1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/vuelos$ vacacional/vuelos.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas$ vacacional/rutas.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/ruta_intern.php?lang=$1&id=$3 [L,QSA]
 
 #RLD
 RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/videos/([a-zA-Z0-9_-]+)$ downloads/rld-videos/$1.mp4 [L,QSA]

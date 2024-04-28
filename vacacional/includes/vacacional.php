@@ -40,8 +40,8 @@ class vacacional extends bogota{
         $result = $this->query("banners_cuadrados", "", true);
         return $result;
     }
-    public function getRutasTuristicas(){
-        $result = $this->query("rt", "", true);
+    public function getRutasTuristicas($id="all"){
+        $result = $this->query("rt/$id", "", true);
         return $result;
     }
     public function getSlidersHome(){

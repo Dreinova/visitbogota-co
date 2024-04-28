@@ -90,7 +90,7 @@
           <p class="address ms900">
             <img src="<?=$project_base?>images/map.svg" alt="map" /><?=$plan->field_pb_oferta_direccion?>
           </p>
-          <div class="ranking">
+          <!-- <div class="ranking">
             <span> <?=$pb->pb_experiencias[59]?></span>
             <ul>
               <li class="ranking-val1"></li>
@@ -99,8 +99,13 @@
               <li class="ranking-val4"></li>
               <li class="ranking-val5 active"></li>
             </ul>
-          </div>
+          </div> -->
           <div class="texto">
+            <p>
+              <?=$plan->field_pb_oferta_desc_corta?>
+            </p>
+          <br />
+          <br />
           <?=$plan->body?>
         </div>
           <!-- <p class="persons"><span>578</span>  <?=$pb->pb_experiencias[25]?></p>

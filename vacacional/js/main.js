@@ -379,7 +379,35 @@ const getFiltersExperienciasTuristicas = async (container, category) => {
 
   lazyImages();
 };
-
+function absoluteURL(str) {
+  if (str.indexOf("https") == -1) {
+    return "https://files.visitbogota.co" + str.replace(/\s/g, "");
+  } else {
+    return str;
+  }
+}
+async function getRT() {
+  const resp = await fetch(`g/getRT/`);
+  const rutas = await resp.json();
+  console.log(rutas);
+  rutas.forEach((ruta) => {
+    let {
+      nid,
+      title,
+      field_descripcion_corta,
+      field_thumbnail,
+      field_categor,
+      field_categor_1,
+    } = ruta;
+    let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(title)}-${nid}`;
+    let template = `<article title="${title}"><a href="${urlRuta}">
+    <div class="image">
+    <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
+    </div>
+    <div class="desc"><h3>${title}</h3><div class="shortdesc">${field_descripcion_corta}</div><span class="btn">Ver más</span></div></a></article>`;
+    document.querySelector(".listRT").innerHTML += template;
+  });
+}
 document.addEventListener("DOMContentLoaded", async () => {
   // Llamadas a la función unificada con los valores específicos
   if (document.querySelector("#porcategoria")) {
@@ -389,6 +417,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
     await getFiltersExperienciasTuristicas("porzona", "test_zona");
   }
+  getRT();
 });
 
 // GET ATRACTIVOS PORTAL
@@ -425,13 +454,3 @@ if (document.querySelector("body.portal")) {
     filterPortal(dataCatId, catName);
   }
 }
-
-async function getRT() {
-  const resp = await fetch(`g/getRT/`);
-  const rutas = await resp.json();
-  console.log(rutas);
-  let template = ``;
-  document.querySelector(".listRT").innerHTML += template;
-}
-
-getRT();
