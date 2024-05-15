@@ -142,7 +142,6 @@ const getExploraBogota = async () => {
     ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
     bogotaContainerFooter.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
     bogotaContainerMenuMobile.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
-    console.log(bogotaContainerMenuMobile);
     if (document.querySelector("#categorias_blog select")) {
       document.querySelector(
         "#categorias_blog select"
@@ -1144,6 +1143,8 @@ function get_alias(str) {
   str = str.replace("“", "", str);
   str = str.replace("”", "", str);
   str = str.replace("+", "", str);
+  str = str.replace("&", "", str);
+  str = str.replace("amp;", "", str);
 
   //Mayusculas
   str = str.toLowerCase();
@@ -2403,21 +2404,14 @@ function useFilters(cattype) {
         var thumbnail = data[i].field_cover_image;
         //Campo calificacion ->  data[i].field_calificacion
         const dateStart = new Date(event.field_date);
-        const optionsdateStart = {
+        dateStart.setDate(dateStart.getDate());
+        const month = dateStart.toLocaleString("es-ES", {
           month: "short",
-          day: "numeric",
-          year: "numeric",
-        };
-        const dateFormatteddateStart = dateStart.toLocaleDateString(
-          "en-US",
-          optionsdateStart
-        );
+        });
+        const day = dateStart.getDate();
+        const year = dateStart.getFullYear();
+        const formattedDate = `<h3 className="uppercase">${month}</h3> <h4>${day}</h4> <h3>${year}</h3>`;
 
-        const monthStart = dateFormatteddateStart.substring(0, 3);
-        const dayStart = dateFormatteddateStart.substring(4, 6);
-        const yearStart = dateFormatteddateStart.substring(7);
-
-        console.log(dateFormatteddateStart);
         if (thumbnail == "") {
           thumbnail =
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
@@ -2436,17 +2430,15 @@ function useFilters(cattype) {
                           event.field_end_date != "" ? " big" : ""
                         }">
                             <div>
-                                <h3 className="uppercase">${monthStart}</h3>
-                                <h4>${dayStart}</h4>
-                                <h3>${yearStart}</h3>
+                               ${formattedDate}
                               
                             </div>
                             ${(function ifDateEnd() {
                               if (event.field_end_date != "") {
                                 const dateEnd = new Date(event.field_end_date);
                                 dateEnd.setDate(dateEnd.getDate() + 1);
-                                const month = dateEnd.toLocaleString("en-US", {
-                                  month: "long",
+                                const month = dateEnd.toLocaleString("es-ES", {
+                                  month: "short",
                                 });
                                 const day = dateEnd.getDate();
                                 const year = dateEnd.getFullYear();

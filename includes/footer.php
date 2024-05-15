@@ -21,7 +21,7 @@ if($lang === "es"){
   $recursos_lengua_de_senas = "Recursos lengua de señas";
   $preguntas_frecuentes = "Preguntas frecuentes";
   // Español
-  $all_rights_reserved = "© Todos los derechos reservados por la Oficina de Turismo de Bogotá";
+  $all_rights_reserved = "© Todos los derechos reservados por el Instituto Distrital de Turismo de Bogotá";
   $privacy_and_terms = "Políticas de privacidad y términos de uso";
   $resolution_239 = "Resolución 239 del 5 de noviembre de 2021";
   $city_brand = "Marca ciudad";
@@ -55,7 +55,7 @@ else{
   $recursos_lengua_de_senas = "Sign Language Resources";
   $preguntas_frecuentes = "Frequently Asked Questions";
   // Inglés
-  $all_rights_reserved = "© All rights reserved by Bogotá Tourism Office";
+  $all_rights_reserved = "© All rights reserved by Instituto Distrital de Turismo de Bogotá";
   $privacy_and_terms = "Privacy Policy and Terms of Use";
   $resolution_239 = "Resolution 239 of November 5, 2021";
   $city_brand = "City Brand";
@@ -148,7 +148,7 @@ if (!$planes) {
 <small><?=date("Y") ?> <?=$all_rights_reserved?></small>
 <div class="links">
   <a href="/<?= $lang ?>/politica-tratamiento-datos-personales"><?=$privacy_and_terms?></a>
-  <a target="_blank" href="<?= $b->generalInfo->field_resolucion_239?>"><?=$resolution_239?></a>
+  <a target="_blank" href="<?=$urlGlobal?><?= $b->generalInfo->field_resolucion_239?>"><?=$resolution_239?></a>
   <a target="_blank" href="https://www.idt.gov.co/es/marca-ciudad"><?=$city_brand?></a>
 </div>
 </footer>

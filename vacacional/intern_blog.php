@@ -30,7 +30,7 @@ $blogsRel = $b->blogs("all", ($_GET['productID'] ? $_GET['productID'] : 'all'), 
 					$singleBlog = $blogsRel[$countBlogs];
 					if ($singleBlog->nid != $_GET['blogID']) {
 						$singleProdNameRel = $b->products(0, $singleBlog->field_prod_rel)->title != "" ? $b->products(0, $singleBlog->field_prod_rel)->title : 'all';
-						$url = "/" . $lang . "/blog/" . $b->get_alias($singleProdNameRel) . "/" . $b->get_alias($singleBlog->title) . "-" . $singleBlog->field_prod_rel . "-" . $singleBlog->nid;
+						$url = "/" . $lang . "/blog/" . $b->get_alias($singleProdNameRel) . "/" . $b->get_alias($singleBlog->title) . "-all-" . $singleBlog->nid;
 						$image = $singleBlog->field_image != "" ? $urlGlobal . $singleBlog->field_image : "/img/noimg.png";
 						echo "
 							<li>

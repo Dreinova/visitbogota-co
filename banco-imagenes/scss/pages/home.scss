@@ -104,6 +104,7 @@
             }
             span.politics_checkbox_mark {
               border-color: #fff;
+              pointer-events: none;
             }
             span.politics_checkbox_mark::after {
               background-color: #fff;

@@ -212,6 +212,7 @@ if($image->field_is_video){
     />
 
     <input type="hidden" name="imageID" id="imageID" value="<?=$_GET["id"]?>" />
+    <input type="hidden" name="size" id="size" value="<?="/banco-imagenes/download/video/" . $image->field_bifilename .'.mp4'?>" />
     <input type="hidden" name="link" id="link"
     value="https://www.bogotadc.travel/es/banco-imagenes/descarga-<?=$_GET["id"]?>"
     />

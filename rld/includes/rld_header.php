@@ -42,4 +42,3 @@
             </nav>
 </div>
     </div>
-    <a href="/es/experiencias-turisticas/encuentra-tu-plan?categories=126" target="_BLANK" class="global-btn bold uppercase fixedBtn"><?=$b->RLDgeneralInfo->field_rld_uiword8?></a>

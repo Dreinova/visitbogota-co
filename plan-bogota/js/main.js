@@ -233,8 +233,11 @@ if ($(".gallery_dot").length) {
     $(".gallery_dot li.active").removeClass("active");
     $(e.target).addClass("active");
     var src = $($(e.target).children("img")).data("src");
+    var alt = $($(e.target).children("img")).attr("alt");;
     $(".gallery #principal_img").attr("src", src);
-  });
+    $(".gallery #principal_img").attr("alt", alt);
+      document.querySelector('span.alt-text').textContent = document.querySelector(".gallery #principal_img").alt;
+    });
 }
 
 function getRandomNumberBetween200And1000() {

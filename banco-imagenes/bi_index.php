@@ -18,9 +18,9 @@
           <div class="autocomplete">
             <input
               type="search"
-              aria-label="search"
-              name="search"
-              id="search"
+              aria-label="searchbi"
+              name="searchbi"
+              id="searchbi"
               autocomplete="off"
               placeholder="<?=$infoGnrl->field_bi_placesearch?>"
               onkeydown="if(event.keyCode == 13) document.getElementById('searchForm').submit()"

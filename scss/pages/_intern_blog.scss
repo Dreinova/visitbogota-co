@@ -166,7 +166,6 @@
       margin: 0 auto;
       max-width: 768px;
       position: relative;
-
       width: 100%;
       z-index: 2;
       @media screen and (max-width: 1023px) {
@@ -181,6 +180,25 @@
           padding: 0 40px;
         }
       }
+      .image{
+        position: relative;
+        margin: 50px 0;
+        @media screen and (max-width: 1023px) {
+          margin: 30px 0;
+        }
+        img {
+          width: 100%;
+        }
+        span{
+          position: absolute;
+          font-size: 12px;
+          bottom: 10px;
+          left: 0;
+          color: #FFF;
+          background-color: rgba($color: #000000, $alpha: .8);
+          padding: 5px;
+        }
+      }
       a {
         color: #46a4dc;
         text-decoration: underline;
@@ -193,13 +211,7 @@
           font-size: 3.9rem;
         }
       }
-      img {
-        width: 100%;
-        margin: 50px 0;
-        @media screen and (max-width: 1023px) {
-          margin: 30px 0;
-        }
-      }
+      
       p,
       ul {
         margin-bottom: 30px;

@@ -5,7 +5,7 @@
   $infoGnrl = $bi->BIgeneralInfo; 
   $products = $bogota->products();  ?>
   <?
-  $searchWord = $_GET['search'];
+  $searchWord = $_GET['searchbi'];
   $searchWord = str_replace(' ', '+', $searchWord);
   function atractivos($var){return $var->type == 'Atractivos';}
   if( isset($searchWord) && !isset($_GET['imagenes']) && !isset($_GET['videos'])){
@@ -72,7 +72,7 @@
 </script>
   <main>
     <section class="titleResult">
-      <h2><?=$infoGnrl->field_bi_ui_06?> <b> “<?=$_GET["search"] ? $_GET["search"] : $product->title?>”</b></h2>     
+      <h2><?=$infoGnrl->field_bi_ui_06?> <b> “<?=$_GET["searchbi"] ? $_GET["searchbi"] : $product->title?>”</b></h2>     
     </section>
     <section class="portal_list">
       <div class="left">

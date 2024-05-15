@@ -1,20 +1,36 @@
 .rutas {
   main {
     padding-top: 180px;
+    @media only screen and (max-width: 768px){
+      padding-top: 0;
+        
+    }
     .container {
       h2 {
-        color: var(--gris, #626262);
         font-size: calc(60px - var(--fontSizeReal));
         font-style: normal;
+        color: var(--gris-oscuro, #373737);
         font-weight: 700;
         line-height: 60px;
         position: relative;
+        max-width: 1600px;
         display: flex;
-        margin-bottom: 60px;
+        margin: 0 auto 60px;
         align-items: flex-end;
         gap: 20px;
+        &::after {
+          flex: 1;
+          content: "";
+          display: block;
+          width: 100%;
+          height: 2px;
+          background-color: var(--Rojo, #e50728);
+          @media only screen and (max-width: 768px) {
+            content: none;
+          }
+        }
         img {
-          width: 100px;
+          width: 63px;
         }
         &::after {
           flex: 1;
@@ -25,11 +41,28 @@
           background-color: var(--Rojo, #e50728);
         }
       }
+      h3{
+        grid-column: span 3;
+        color: #e50728;
+        margin-bottom: 8px;
+        &::after{
+          content: none;
+        }
+        @media only screen and (max-width: 768px){
+          grid-column: span 1;
+            
+        }
+      }
       .listRT {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
-        padding: 30px 20px 180px;
+        padding: 30px 20px;
+        @media only screen and (max-width: 1024px){
+          grid-template-columns: repeat(1, 1fr);
+          padding: 0 0 180px;
+            
+        }
         article {
           overflow: hidden;
           width: 100%;

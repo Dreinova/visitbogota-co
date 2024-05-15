@@ -773,7 +773,7 @@ class bogota
         return $result;
     }
 
-    function query($url, $body = "", $nv=false, $cache=false)
+    function query($url, $body = "", $nv=false, $cache=true)
     {
         $cacheAbsoluteRoute = "/home/bogotas/public_html/dev2024/cache/";
         if($nv){
@@ -1287,11 +1287,6 @@ class bogota
     } else {
         return $response;
     }
-}
-
-function setFirstImage($to, $params, $link){
-    $emailSended = $this->sendNotificationimage($to, $params);
-    return  $emailSended;
 }
 
 function searchByWord($word, $onlyImages = false, $onlyVideos = false){

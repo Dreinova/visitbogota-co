@@ -39,7 +39,7 @@ class planbogota extends bogota
     function getPlans($id = "all"){
         $result = $this->query("ofertas/".$id);
         if($id == "all"){
-            return $result;
+            return $this->unifyPlaces($result);
             
         }else{
             return $result[0];
@@ -94,7 +94,7 @@ class planbogota extends bogota
         // Concatena los valores formateados
         $url = "ofertas_filtradas/" . $zonesFormatted . "/" . $personsFormatted . "/" . $segmentsFormatted . "/" . $termSelected . $price . $quant;
         $result = $this->query($url);
-        return $result;
+        return $this->unifyPlaces($result);
     }
 
     function getRecommendPlans($ids){

@@ -114,8 +114,18 @@ async function getRecentEventos() {
       year: "numeric",
     };
     const dateFormatteddateStart = dateStart.toLocaleDateString(
-      "en-US",
+      "es-ES",
       optionsdateStart
+    );
+    const dateEnd = new Date(evento.field_end_date);
+    const optionsdateEnd = {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+    const dateFormatteddateEnd = dateEnd.toLocaleDateString(
+      "es-ES",
+      optionsdateEnd
     );
     let urlImg = await getImageFromCacheOrFetch(
       "https://files.visitbogota.co" + evento.field_cover_image
@@ -129,7 +139,7 @@ async function getRecentEventos() {
         <div class="desc">
         <small class="tag">
         <img src="images/eventosIcono.svg" alt="tag"/>
-        ${dateFormatteddateStart}
+        ${dateFormatteddateStart} -  ${dateFormatteddateEnd}
         </small>
           <h2>${evento.title}</h2>
         </div>
@@ -387,26 +397,148 @@ function absoluteURL(str) {
   }
 }
 async function getRT() {
-  const resp = await fetch(`g/getRT/`);
-  const rutas = await resp.json();
-  console.log(rutas);
-  rutas.forEach((ruta) => {
-    let {
-      nid,
-      title,
-      field_descripcion_corta,
-      field_thumbnail,
-      field_categor,
-      field_categor_1,
-    } = ruta;
-    let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(title)}-${nid}`;
-    let template = `<article title="${title}"><a href="${urlRuta}">
-    <div class="image">
-    <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
-    </div>
-    <div class="desc"><h3>${title}</h3><div class="shortdesc">${field_descripcion_corta}</div><span class="btn">Ver más</span></div></a></article>`;
-    document.querySelector(".listRT").innerHTML += template;
-  });
+  if (document.querySelector(".listRT")) {
+    const resp = await fetch(`g/getRT/`);
+    const rutas = await resp.json();
+    const rutasAgrupadas = rutas.reduce((agrupado, ruta) => {
+      // Extraer el campo por el que se va a agrupar
+      const campo = ruta.field_categor;
+
+      // Si no existe la clave para este campo, crearla con un array vacío
+      if (!agrupado[campo]) {
+        agrupado[campo] = [];
+      }
+
+      // Agregar la ruta al array correspondiente
+      agrupado[campo].push(ruta);
+
+      return agrupado;
+    }, {});
+    // Iterar sobre las claves (nombres de categoría) del objeto rutasAgrupadas
+    Object.keys(rutasAgrupadas).forEach((categoria) => {
+      // Iterar sobre las rutas dentro de esta categoría
+      // Mostrar el template
+      document.querySelector(".listRT").innerHTML += `<h3>${categoria}</h3>`;
+      rutasAgrupadas[categoria].forEach((ruta) => {
+        let {
+          nid,
+          title,
+          field_descripcion_corta,
+          field_thumbnail,
+          field_categor,
+          field_categor_1,
+        } = ruta;
+
+        let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(
+          title
+        )}-${nid}`;
+
+        // Crear el template para la ruta
+        let template = `<article title="${title}">
+          <a href="${urlRuta}">
+              <div class="image">
+                  <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
+              </div>
+              <div class="desc">
+                  <h3>${title}</h3>
+                  <div class="shortdesc">${field_descripcion_corta}</div>
+                  <span class="btn">Ver más</span>
+              </div>
+          </a>
+      </article>`;
+
+        // Mostrar el template
+        document.querySelector(".listRT").innerHTML += template;
+      });
+    });
+  }
+}
+async function getRTRel(field_category) {
+  if (field_category) {
+    const resp = await fetch(`g/getRT/`);
+    const rutas = await resp.json();
+    const rutasAgrupadas = rutas.reduce((agrupado, ruta) => {
+      // Extraer el campo por el que se va a agrupar
+      const campo = ruta.field_categor;
+
+      // Si no existe la clave para este campo, crearla con un array vacío
+      if (!agrupado[campo]) {
+        agrupado[campo] = [];
+      }
+
+      // Agregar la ruta al array correspondiente
+      agrupado[campo].push(ruta);
+
+      return agrupado;
+    }, {});
+    // Iterar sobre las claves (nombres de categoría) del objeto rutasAgrupadas
+    Object.keys(rutasAgrupadas).forEach((categoria) => {
+      // Iterar sobre las rutas dentro de esta categoría
+      // Mostrar el template
+      if(field_category == categoria){
+        rutasAgrupadas[categoria].forEach((ruta) => {
+          if(document.querySelector("main").dataset.rutaid != ruta.nid){
+            let {
+              nid,
+              title,
+              field_descripcion_corta,
+              field_thumbnail,
+              field_categor,
+              field_categor_1,
+            } = ruta;
+    
+            let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(
+              title
+            )}-${nid}`;
+    
+            // Crear el template para la ruta
+            let template = `<article title="${title}">
+              <a href="${urlRuta}">
+                  <div class="image">
+                      <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
+                  </div>
+                  <div class="desc">
+                      <h3>${title}</h3>
+                      <div class="shortdesc">${field_descripcion_corta}</div>
+                      <span class="btn">Ver más</span>
+                  </div>
+              </a>
+          </article>`;
+    
+            // Mostrar el template
+            document.querySelector(".listRTRel").innerHTML += template;
+          }
+        });
+      }
+
+    });
+  }
+}
+
+async function getHomeRT() {
+  if (document.querySelector(".grid-rutas")) {
+    const resp = await fetch(`g/getRT/`);
+    const rutas = await resp.json();
+    rutas.forEach((ruta) => {
+      let {
+        nid,
+        title,
+        field_descripcion_corta,
+        field_thumbnail,
+        field_categor,
+        field_categor_1,
+      } = ruta;
+      let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(
+        title
+      )}-${nid}`;
+      let template = `<article title="${title}"><a href="${urlRuta}">
+      <div class="image">
+      <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
+      </div>
+      <div class="desc"><h3>${title}</h3><div class="shortdesc">${field_descripcion_corta}</div><span class="btn">Ver más</span></div></a></article>`;
+      document.querySelector(".grid-rutas").innerHTML += template;
+    });
+  }
 }
 document.addEventListener("DOMContentLoaded", async () => {
   // Llamadas a la función unificada con los valores específicos
@@ -418,6 +550,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     await getFiltersExperienciasTuristicas("porzona", "test_zona");
   }
   getRT();
+  getHomeRT();
+  getRTRel(document.querySelector("main").dataset.cat)
 });
 
 // GET ATRACTIVOS PORTAL
@@ -453,4 +587,66 @@ if (document.querySelector("body.portal")) {
   if (dataCatId) {
     filterPortal(dataCatId, catName);
   }
+}
+
+if (
+  document.querySelectorAll(".interna_atractivo .gallery-grid li img").length >
+  0
+) {
+  // Get all images
+  const images = document.querySelectorAll(
+    ".interna_atractivo .gallery-grid li img"
+  );
+  // Loop through each image
+  images.forEach((image) => {
+    // Create a new element for displaying alt text
+    const altElement = document.createElement("span");
+    altElement.classList.add("alt-text");
+    // Set the text content of the alt element to the alt attribute of the image
+    altElement.textContent = image.alt;
+    // Insert the new element after the image
+    image.parentNode.insertBefore(altElement, image.nextSibling);
+  });
+}
+
+if (document.querySelectorAll(".ruta_intern .gallery-grid li img").length > 0) {
+  // Get all images
+  const images = document.querySelectorAll(".ruta_intern .gallery-grid li img");
+  // Loop through each image
+  images.forEach((image) => {
+    // Create a new element for displaying alt text
+    const altElement = document.createElement("span");
+    altElement.classList.add("alt-text");
+    // Set the text content of the alt element to the alt attribute of the image
+    altElement.textContent = image.alt;
+    // Insert the new element after the image
+    image.parentNode.insertBefore(altElement, image.nextSibling);
+  });
+}
+if (document.querySelector(".blog_content")) {
+  // Obtén todas las imágenes dentro del contenedor .blog_content
+  var images = document.querySelectorAll(".blog_content img");
+
+  // Itera sobre cada imagen encontrada
+  images.forEach(function (img) {
+    // Crea un nuevo contenedor <div> con la clase "image"
+    var imageContainer = document.createElement("div");
+    imageContainer.classList.add("image");
+
+    // Crea un nuevo elemento <span>
+    var span = document.createElement("span");
+
+    // Crea una nueva imagen con los atributos alt y src de la imagen original
+    var newImg = document.createElement("img");
+    newImg.alt = img.alt;
+    newImg.src = img.src;
+    span.innerText = img.alt;
+
+    // Agrega la nueva imagen y el span al contenedor .image
+    imageContainer.appendChild(newImg);
+    imageContainer.appendChild(span);
+
+    // Reemplaza la imagen original con el nuevo contenedor .image
+    img.parentNode.replaceChild(imageContainer, img);
+  });
 }

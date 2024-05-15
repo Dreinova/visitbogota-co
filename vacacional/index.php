@@ -31,6 +31,10 @@ $sliders = $vacacional->getSlidersHome();
     </section>
   </div>
   <div class="bg-noche" style="background-image: url(images/bog_noche.png);">
+  <section class="rutas container">
+  <h2 ><img src="images/rutaicon.svg" alt="RT">Rutas turísticas<a href="/<?=$lang?>/rutas-turisticas" class="wait all"><?=$ver_rutas?></a></h2>
+    <div class="container grid-rutas"></div>
+  </section>
   <section class="evento container">
     <h2><img src="images/eventos.svg" alt="descubre"><?=$eventos?><a href="/<?=$lang?>/eventos/agenda-general-148" class="wait all"><?=$ver_eventos?></a></h2>
     <div class="container grid-eventos"></div>

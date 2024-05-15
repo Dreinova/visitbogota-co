@@ -264,10 +264,15 @@ $("#firstdown").validate({
         console.log(data);
         if (data.message == 1) {
           Fancybox.close();
+          $.fancybox.close()
           $("#firstdown button").text("enviado");
-          document.querySelector("a#linkdown").href = `${
-            document.querySelector("#size").value
-          }`;
+          if(document.querySelector("#size").value){
+            document.querySelector("a#linkdown").href = `${
+              document.querySelector("#size").value
+            }`;
+          }else{
+            document.querySelector("a#linkdown").href = `${document.querySelector("#videoLink").value}`;
+          }
           Fancybox.show([{ src: "#dialog-content-2", type: "inline" }]);
           form.reset();
           setCookie("firstdownload", "1", 365);
@@ -481,5 +486,5 @@ fetch("search.json")
   .then((data) => {
     let x = (names) => names.filter((v, i) => names.indexOf(v) === i);
     words = x(data).filter(Boolean);
-    autocomplete(document.getElementById("search"), words);
+    autocomplete(document.getElementById("searchbi"), words);
   });

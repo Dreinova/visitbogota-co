@@ -1,6 +1,6 @@
 .blog {
   main {
-    padding: 180px 20px;
+    padding: 180px 20px 30px;
   }
   #categorias_blog {
     max-width: 250px;
@@ -34,7 +34,7 @@
     }
   }
   &_list {
-    padding: 0 20px 90px !important;
+    padding: 0 20px !important;
     max-width: 100%;
     background-color: #fff;
     z-index: 2;

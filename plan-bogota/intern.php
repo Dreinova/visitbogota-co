@@ -37,10 +37,11 @@
             loading="lazy"
             src="https://picsum.photos/20/20"
             data-src="https://files.visitbogota.co<?=$plan->field_gal_1 ? $plan->field_gal_1 : $plan->field_gal_2?>"
-            alt="gallery"
+            alt="<?=$plan->{"field_gal_". $i . "_1"}?>"
             class="lazyload"
             id="principal_img"
           />
+          <span class="alt-text"><?=$plan->{"field_gal_". $i . "_1"}?></span>
           <ul class="gallery_dot">
             <?php for ($i=1; $i < 6; $i++) { if($plan->{"field_gal_". $i} != ""){ ?>
               <li class="active">
@@ -48,7 +49,7 @@
                   loading="lazy"
                   src="https://picsum.photos/20/20"
                   data-src="https://files.visitbogota.co<?=$plan->{"field_gal_". $i}?>"
-                  alt="gallery"
+                  alt="<?=$plan->{"field_gal_". $i . "_1"}?>"
                   class="lazyload"
                 />
               </li>

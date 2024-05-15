@@ -62,29 +62,6 @@ $points = $b->route_places_order($titles,$locations,$pictures,$descriptions,$lat
                     </div>
                 </div>
             </div>
-            <div class="container left bottom goldborder ">
-                <aside class="aux1"></aside>
-                <aside class="aux2"></aside>
-                <div class="content outter divider "></div>
-            </div>
-            <div class="container right bottom goldborder">
-                <aside class="aux1"></aside>
-                <aside class="aux2"></aside>
-                <div class="content outter bookings clear ">
-                    <div class="bigcolumn outter col1">
-                        <h1 class="uppercase "><?=$b->RLDgeneralInfo->field_rld_uiword7?></h1>
-                        <h2 class="bold"></h2>
-                        <a href="https://planbogota.bogotadc.travel/encuentra-tu-plan/716" target="_BLANK"
-                            class="orangebutton uppercase bold"><?=$b->RLDgeneralInfo->field_rld_uiword8?></a>
-                    </div>
-                    <div class="bigcolumn w_50 col2"></div>
-                </div>
-            </div>
-            <div class="container left bottom goldborder ">
-                <aside class="aux1"></aside>
-                <aside class="aux2"></aside>
-                <div class="content outter divider "></div>
-            </div>
         </section>
         <?php $singleRoute = 1; include "includes/rld_routes.php"; ?>
     </section>
