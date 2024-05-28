@@ -13,7 +13,11 @@
   background-color: #fff;
 
   main {
+    padding: 120px 20px 0;
     background-color: #fff;
+    @media only screen and (max-width: 768px) {
+      padding: 20px 0;
+    }
   }
   .banner {
     background-attachment: fixed;
@@ -109,6 +113,7 @@
   }
   .agendaInfo {
     padding: 50px 20px;
+    display: none;
     @media only screen and (max-width: 768px) {
       padding: 50px 20px 10px;
     }
@@ -167,6 +172,44 @@
           }
         }
       }
+    }
+  }
+  h2 {
+    font-size: clamp(32px, 3vw, 60px);
+    font-style: normal;
+    color: var(--gris-oscuro, #373737);
+    font-weight: 700;
+    line-height: clamp(32px, 3vw, 60px);
+    position: relative;
+    max-width: 1600px;
+    display: flex;
+    margin: 60px auto;
+    align-items: flex-end;
+    gap: 20px;
+    @media only screen and (max-width: 768px) {
+      margin: 20px auto 0;
+    }
+    &::after {
+      flex: 1;
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--Rojo, #35498e);
+      @media only screen and (max-width: 768px) {
+        content: none;
+      }
+    }
+    img {
+      width: 63px;
+    }
+    &::after {
+      flex: 1;
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--Rojo, #35498e);
     }
   }
   .events_list {
@@ -433,13 +476,11 @@
     &_grid {
       display: grid;
       gap: 30px;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 300px));
-      grid-auto-rows: 500px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 390px));
       width: 100%;
       justify-content: center;
       @media only screen and (max-width: 1024px) {
         padding: 70px 0;
-        max-width: 430px;
       }
       @media screen and (max-width: 1023px) {
         display: flex;
@@ -489,13 +530,12 @@
           width: 100%;
           position: relative;
           border-radius: 21px;
-          overflow: hidden;
-          border: 1px solid #e50728;
+          border: 1px solid #35498e;
           border-radius: 21px;
           height: 100%;
-          background: #fff;
           &_img {
             height: 166px;
+            border-radius: 21px 21px 0 0;
             overflow: hidden;
             position: relative;
             width: 100%;
@@ -504,12 +544,20 @@
               object-fit: contain;
               width: 100%;
             }
+            &::after {
+              content: "";
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              background-image: linear-gradient(transparent, transparent, #000);
+              left: 0;
+              z-index: 1;
+            }
           }
           .info {
-            background-color: #fff;
             display: flex;
-            padding: 10px;
-            gap: 10px;
+            padding: 0;
             flex-direction: column;
             @media only screen and (max-width: 1024px) {
               padding: 0;
@@ -519,19 +567,21 @@
               justify-content: center;
             }
             .btn.event-view {
-              font-size: 1.3rem;
-              border: 1px solid #03152b;
-              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-              color: #03152b;
-              padding: 11px 30px;
-              border-radius: 11px;
-              display: flex;
               align-items: center;
-              justify-content: center;
-              background-color: #fff;
-              width: 100%;
-              max-width: 180px;
               align-self: center;
+              background-color: #35498f;
+              border-radius: 25px;
+              border: 1px solid #35498f;
+              bottom: -18px;
+              color: #fff;
+              display: flex;
+              font-size: 1.3rem;
+              justify-content: center;
+              max-width: 180px;
+              padding: 11px 30px;
+              position: absolute;
+              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+              width: 100%;
               @media only screen and (max-width: 1024px) {
                 margin: 0 auto;
               }
@@ -539,33 +589,23 @@
             .txt {
               display: flex;
               flex: 1;
+              padding: 10px 20px 30px;
               flex-direction: column;
-            }
-            @media only screen and (max-width: 768px) {
-              .txt {
-                padding: 15px;
-              }
             }
           }
           &_date {
-            background-color: #e50728;
-            border-radius: 25px;
+            background-color: #35498e;
             color: #fff;
             display: flex;
             padding: 17px;
             gap: 10px;
             align-items: center;
-            justify-content: center;
-            width: 35%;
+            width: 100%;
             margin: 0 auto;
-            @media only screen and (max-width: 768px) {
-              padding: 10px;
-              align-items: center;
-              justify-content: center;
-              border-radius: 0;
-              width: 100%;
+            font-size: 16px;
+            img {
+              width: 20px;
             }
-         
             div {
               &:nth-child(2) {
                 position: relative;
@@ -597,21 +637,23 @@
             }
           }
           &_title {
-            color: #4d4d4d;
-            font-size: 1.6rem;
+            color: #fff;
+            font-size: clamp(12px, 1vw, 16px);
             margin: 10px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            @media only screen and (max-width: 1024px) {
-              text-align: center;
-            }
+            padding: 0 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            z-index: 2;
           }
           &_place {
-            color: #4d4d4d;
-            font-size: 1.4rem;
+            color: #35498e;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             @media only screen and (max-width: 1024px) {
               text-align: center;
             }
@@ -623,8 +665,8 @@
               }
             }
             .btn.event-view {
-              color: #fff;
-              background-color: #03152b;
+              color: #35498f;
+              background-color: #fff;
             }
           }
         }
@@ -737,7 +779,7 @@
 }
 
 .aclaracion {
-  background-color: #e50728;
+  background-color: #35498e;
   display: flex;
   align-items: center;
   margin: 50px 0;
@@ -765,7 +807,7 @@
   position: fixed;
   top: 120px;
   right: 30px;
-  background-color: #e50728;
+  background-color: #35498e;
   display: flex;
   align-items: center;
   justify-content: center;

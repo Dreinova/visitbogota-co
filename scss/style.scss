@@ -59,7 +59,7 @@
 }
 
 .title {
-  color: #e50728;
+  color: #35498e;
   display: block;
   font-family: "MuseoSans-700";
   font-size: 4.2rem;
@@ -86,7 +86,7 @@ label.error {
   max-width: 1200px;
   margin: 0 auto;
   h2 {
-    color: #e50728;
+    color: #35498e;
     display: block;
     font-family: "MuseoSans-700";
     font-size: 4.2rem;
@@ -219,7 +219,7 @@ label.error {
     text-align: center;
   }
   .bx-wrapper .bx-pager.bx-default-pager a {
-    background-color: #e50728;
+    background-color: #35498e;
   }
   .slick-prev.slick-arrow {
     left: 10px;
@@ -255,7 +255,7 @@ label.error {
     transform: translateX(-50%);
     li {
       border-radius: 50%;
-      border: 2px solid #e50728;
+      border: 2px solid #35498e;
       cursor: pointer;
       height: 15px;
       margin: 0 5px;
@@ -264,7 +264,7 @@ label.error {
       z-index: 2;
       &.slick-active,
       &:hover {
-        background-color: #e50728;
+        background-color: #35498e;
       }
       button {
         opacity: 0;

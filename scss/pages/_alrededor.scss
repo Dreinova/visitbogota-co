@@ -531,7 +531,7 @@
       }
     }
     .bx-wrapper .bx-pager.bx-default-pager a {
-      background-color: #e50728;
+      background-color: #35498e;
     }
     .slick-prev.slick-arrow {
       left: 0;
@@ -567,7 +567,7 @@
       transform: translateX(-50%);
       li {
         border-radius: 50%;
-        border: 2px solid #e50728;
+        border: 2px solid #35498e;
         cursor: pointer;
         height: 15px;
         margin: 0 5px;
@@ -576,7 +576,7 @@
         z-index: 2;
         &.slick-active,
         &:hover {
-          background-color: #e50728;
+          background-color: #35498e;
         }
         button {
           opacity: 0;

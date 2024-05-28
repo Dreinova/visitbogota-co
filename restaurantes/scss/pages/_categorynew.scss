@@ -15,7 +15,7 @@
 
 .title {
   font-size: 6.5em;
-  color: #e50728;
+  color: #35498e;
   padding: 60px 0;
 }
 .card-list {
@@ -80,13 +80,13 @@
       }
     }
     h3 {
-      color: #e50728;
+      color: #35498e;
       font-size: 1.8em;
       line-height: 1.3em;
       margin-bottom: 20px;
     }
     .filtergroup {
-      color: #e50728;
+      color: #35498e;
       max-height: 25px;
       margin-bottom: 30px;
       padding-left: 20px;
@@ -103,7 +103,7 @@
         }
 
         &::before {
-          border: 1px solid #e50728;
+          border: 1px solid #35498e;
           content: "";
           display: inline-block;
           height: 10px;
@@ -148,7 +148,7 @@
             /* display:block;*/
           }
           input {
-            border: 1px solid #e50728;
+            border: 1px solid #35498e;
             background: transparent;
             color: var(--maincolor);
             font-family: Arial;
@@ -221,7 +221,7 @@
   .cards {
     flex: 1;
     .noresults {
-      color: #e50728;
+      color: #35498e;
       font-size: 1.6em;
       padding: 40px 0;
       text-align: center;
@@ -269,7 +269,7 @@
         &:hover {
           h1 {
             a {
-              color: #e50728;
+              color: #35498e;
               transition: color 0.4s ease-in-out;
             }
           }
@@ -444,7 +444,7 @@
           }
           hr {
             border: 0 none;
-            border-top: 2px solid var(--Rojo, #e50728);
+            border-top: 2px solid var(--Rojo, #35498e);
             height: 1px;
             margin: 0;
             text-align: left;
@@ -452,7 +452,7 @@
             margin-bottom: 30px;
           }
           .dashed {
-            border-top: 2px dashed var(--Rojo, #e50728);
+            border-top: 2px dashed var(--Rojo, #35498e);
           }
         }
         p {
@@ -497,14 +497,14 @@
           display: flex;
           align-items: center;
           gap: 5px;
-          &:hover{
+          &:hover {
             opacity: 0.7;
           }
         }
         .active {
           color: #fff;
           border: 1px solid var(--blanco, #fff);
-          background: var(--Rojo, #e50728);
+          background: var(--Rojo, #35498e);
         }
       }
     }
@@ -541,7 +541,7 @@
         }
         button {
           display: none;
-          background: var(--Rojo, #e50728);
+          background: var(--Rojo, #35498e);
           border-radius: 20px;
           color: #fff;
           font-size: 1.2em;
@@ -575,7 +575,7 @@
             &:hover {
               color: #fff;
               border: 1px solid var(--blanco, #fff);
-              background: var(--Rojo, #e50728);
+              background: var(--Rojo, #35498e);
             }
             &::before {
               border: 1px solid var(--gris, #626262);
@@ -732,7 +732,7 @@
         flex-direction: column;
         width: 85%;
         hr {
-          border-top: 2px solid var(--Rojo, #e50728);
+          border-top: 2px solid var(--Rojo, #35498e);
           margin-bottom: 40px;
           max-width: 95%;
         }
@@ -763,7 +763,7 @@
             display: block;
             width: 100%;
             height: 2px;
-            background-color: var(--Rojo, #e50728);
+            background-color: var(--Rojo, #35498e);
           }
         }
         .content {

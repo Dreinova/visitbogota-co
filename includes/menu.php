@@ -26,6 +26,9 @@ $json_data = json_decode($json,true);
                         <a href="<?=$json_data["menuItems"][$i]["children"][$menuCount][$lang]["link"]?>" class="wait"><?=$json_data["menuItems"][$i]["children"][$menuCount][$lang]["title"]?></a>
                     </li>
                 <?php } ?>
+                <li><a href="/<?=$lang?>/banco-imagenes/" class="uppercase ms700"><?=$bancoMultimedia?></a></li>
+                <li><a href="/<?=$lang?>/ruta-leyenda-el-dorado/inicio" class="uppercase ms700">Ruta leyenda el dorado</a></li>
+                <li><a href="https://eldorado.aero" class="uppercase ms700" target="_blank"><?=$aeropuerto?></a></li>
             </ul>
         </div>
     <? }else{ ?>

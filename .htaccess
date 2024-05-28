@@ -4,6 +4,13 @@ RewriteEngine On
 RewriteBase /
 
 RewriteRule ^$ /es [R=301,L]
+
+# Redirección para rldvideos
+RewriteRule ^rldvideos/([^/]*)/$ rldvideos/$1.mp4 [L,QSA]
+# Redirección desde bogotadc.travel a visitbogota.co para rutas específicas
+RewriteCond %{HTTP_HOST} ^bogotadc\.travel$ [NC]
+RewriteRule ^ruta-leyenda-el-dorado/videos/([0-9]+)/?$ https://visitbogota.co/rldvideos/$1/ [R=301,L]
+
 RewriteRule ^([a-zA-Z0-9_-]+)/preguntas-frecuentes$ /$1/informacion-al-viajero [R=301,L]
 RewriteRule ^([a-zA-Z0-9_-]+)/restaurantes$ /$1/donde-comer [R=301,L]
 RewriteRule ^([a-zA-Z0-9_-]+)/hoteles$ /$1/donde-dormir [R=301,L]
@@ -44,6 +51,7 @@ RewriteRule ^([a-zA-Z0-9_-]+)/eventos/([a-zA-Z0-9_-]+)-([0-9]+)$ vacacional/even
 RewriteRule ^([a-zA-Z0-9_-]+)/evento/([a-zA-Z0-9_-]+)-([0-9]+)$ vacacional/intern_eventnew.php?lang=$1&id=$3&seo=$3 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/explora/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/portal.php?productID=$3&lang=$1&seo=$3&seoType=2 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/atractivo/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/atractivo.php?productname=$2&productID=$4&placeID=$5&lang=$1&seo=$5 [L,QSA]
+
 RewriteRule ^([a-zA-Z0-9_-]+)/blog/$ vacacional/blog.php?lang=$1&seo=4 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/blog$ vacacional/blog.php?lang=$1&seo=4 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/blog/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/intern_blog.php?lang=$1&productID=$4&blogID=$5&seo=$5 [L,QSA]
@@ -63,7 +71,7 @@ RewriteRule ^([a-zA-Z0-9_-]+)/cerca-de-mi$ vacacional/closetome.php?lang=$1&clea
 RewriteRule ^([a-zA-Z0-9_-]+)/cerca-de-mi/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/closetomeplace.php?lang=$1&placenearid=$3&clean=1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/vuelos$ vacacional/vuelos.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas$ vacacional/rutas.php?lang=$1 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/ruta_intern.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/ruta_intern.php?lang=$1&id=$3&seo=$3 [L,QSA]
 
 #RLD
 RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/videos/([a-zA-Z0-9_-]+)$ downloads/rld-videos/$1.mp4 [L,QSA]
@@ -133,9 +141,14 @@ RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/plan/([a-zA-Z0-9_-]+)-([0-
 RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/preguntas-frecuentes$ plan-bogota/faq.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/politica-tratamiento-datos-personales$ plan-bogota/politics.php?lang=$1 [L,QSA]
 
+RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/s/([^/]+)/?$ vacacional/set/$2.php?lang=$1 [L,QSA]
+RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/g/([^/]+)/?$ vacacional/get/$2.php?lang=$1 [L,QSA]
+RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/b/([^/]+)/?$ vacacional/boxes/$2.php?lang=$1 [L,QSA]
+
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php73” package as the default “PHP” programming language.
 <IfModule mime_module>
   AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
 </IfModule>
 # php -- END cPanel-generated handler, do not edit
+

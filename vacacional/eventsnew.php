@@ -66,6 +66,7 @@
         <?php } ?>
         <?php } ?>
     </section>
+    <h2><img src="images/eventos.svg" alt="descubre"><?=$eventos?></h2>
     <div class="events_list">
         <button type="button" id="toggleFiltersEvents"><svg width="38" height="42" viewBox="0 0 38 42" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 5.8335L36.3334 5.8335M1.66671 36.1668L8.16671 36.1668M1.66671 5.83349L10.3334 5.83349M16.8334 36.1668L36.3334 36.1668M29.8334 21.0002L36.3334 21.0002M1.66671 21.0002L21.1667 21.0002" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M10.3333 5.83333C10.3333 8.22657 12.2734 10.1667 14.6667 10.1667C17.0599 10.1667 19 8.22657 19 5.83333C19 3.4401 17.0599 1.5 14.6667 1.5C12.2734 1.5 10.3333 3.4401 10.3333 5.83333Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M21.1667 20.9998C21.1667 23.3931 23.1068 25.3332 25.5 25.3332C27.8933 25.3332 29.8334 23.3931 29.8334 20.9998C29.8334 18.6066 27.8933 16.6665 25.5 16.6665C23.1068 16.6665 21.1667 18.6066 21.1667 20.9998Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8.16671 36.1668C8.16671 38.5601 10.1068 40.5002 12.5 40.5002C14.8933 40.5002 16.8334 38.5601 16.8334 36.1668C16.8334 33.7736 14.8933 31.8335 12.5 31.8335C10.1068 31.8335 8.16671 33.7736 8.16671 36.1668Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button>
         <aside class="filters">

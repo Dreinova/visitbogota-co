@@ -1146,6 +1146,33 @@ function get_alias(str) {
   str = str.replace("&", "", str);
   str = str.replace("amp;", "", str);
 
+  // Crear un objeto para mapeo de caracteres con tildes a sin tildes
+  const accentsMap = {
+    á: "a",
+    é: "e",
+    í: "i",
+    ó: "o",
+    ú: "u",
+    Á: "A",
+    É: "E",
+    Í: "I",
+    Ó: "O",
+    Ú: "U",
+    ñ: "n",
+    Ñ: "N",
+    ü: "u",
+    Ü: "U",
+  };
+
+  // Normalizar la cadena para combinar caracteres base y tildes
+  str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  // Reemplazar caracteres con tildes por sus equivalentes sin tildes
+  str = str
+    .split("")
+    .map((char) => accentsMap[char] || char)
+    .join("");
+
   //Mayusculas
   str = str.toLowerCase();
 
@@ -2402,15 +2429,26 @@ function useFilters(cattype) {
       for (var i = 0; i < data.length; i++) {
         let event = data[i];
         var thumbnail = data[i].field_cover_image;
-        //Campo calificacion ->  data[i].field_calificacion
         const dateStart = new Date(event.field_date);
-        dateStart.setDate(dateStart.getDate());
-        const month = dateStart.toLocaleString("es-ES", {
+        const optionsdateStart = {
           month: "short",
-        });
-        const day = dateStart.getDate();
-        const year = dateStart.getFullYear();
-        const formattedDate = `<h3 className="uppercase">${month}</h3> <h4>${day}</h4> <h3>${year}</h3>`;
+          day: "numeric",
+          year: "numeric",
+        };
+        const dateFormatteddateStart = dateStart.toLocaleDateString(
+          "es-ES",
+          optionsdateStart
+        );
+        const dateEnd = new Date(event.field_end_date);
+        const optionsdateEnd = {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        };
+        const dateFormatteddateEnd = dateEnd.toLocaleDateString(
+          "es-ES",
+          optionsdateEnd
+        );
 
         if (thumbnail == "") {
           thumbnail =
@@ -2424,47 +2462,19 @@ function useFilters(cattype) {
                     <div class="single_event_img">
                         <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
                             alt="evento" class="lazyload">
-                    </div>
-                    <div class="info">
-                        <div class="single_event_date ${
-                          event.field_end_date != "" ? " big" : ""
-                        }">
-                            <div>
-                               ${formattedDate}
-                              
-                            </div>
-                            ${(function ifDateEnd() {
-                              if (event.field_end_date != "") {
-                                const dateEnd = new Date(event.field_end_date);
-                                dateEnd.setDate(dateEnd.getDate() + 1);
-                                const month = dateEnd.toLocaleString("es-ES", {
-                                  month: "short",
-                                });
-                                const day = dateEnd.getDate();
-                                const year = dateEnd.getFullYear();
-                                const formattedDate = `<h3 className="uppercase">${month}</h3> <h4>${day}</h4> <h3>${year}</h3>`;
-
-                                // Logueamos la fecha formateada para debug
-                                console.log({
-                                  event: event.title,
-                                  field_end_date: event.field_end_date,
-                                  formattedDate,
-                                });
-
-                                return `<div>${formattedDate}</div>`;
-                              } else {
-                                return "";
-                              }
-                            })()}
-                            
-                        </div>
-                        <div class="txt">
                             <h5 class="single_event_title ms700 uppercase">${
                               event.title
-                            }</h3>
-                                <h6 class="single_event_place ms500">${
+                            }</h5>
+                    </div>
+                    <div class="info">
+                        <div class="single_event_date">
+                        <img src="images/eventosIcono.svg" alt="tag">
+                        ${dateFormatteddateStart}  ${`- ${dateFormatteddateEnd}`}
+                        </div>
+                        <div class="txt">
+                                <h6 class="single_event_place ms700"><svg width="23" height="33" viewBox="0 0 23 33" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_35_2)"><path d="M22.61 8.62C20.94 2.29 14.48 -1.36 8.19999 0.48C3.45999 1.87 0.0799887 6.3 -1.13287e-05 11.24C-0.0300113 13 0.339989 14.68 0.919989 16.32C1.84999 18.95 3.19999 21.37 4.75999 23.67C6.63999 26.45 8.57999 29.19 10.5 31.94C10.69 32.22 10.98 32.42 11.23 32.66H11.74C11.99 32.42 12.26 32.21 12.47 31.94C12.82 31.5 13.12 31.02 13.44 30.55C15.2 28 17 25.47 18.71 22.88C20.18 20.65 21.42 18.29 22.24 15.73C22.99 13.39 23.24 11.02 22.6 8.61L22.61 8.62ZM20.39 15.26C19.57 17.76 18.32 20.06 16.86 22.23C15.14 24.8 13.35 27.32 11.58 29.86C11.56 29.89 11.53 29.92 11.47 29.99C10.38 28.45 9.30999 26.95 8.23999 25.43C6.55999 23.03 4.92999 20.59 3.65999 17.93C2.88999 16.32 2.28999 14.67 2.00999 12.89C1.35999 8.75 3.63999 4.5 7.44999 2.79C13.09 0.25 19.45 3.41 20.83 9.44C21.28 11.42 21.01 13.35 20.38 15.25L20.39 15.26Z" fill="#35498F"/><path d="M11.51 5.74C8.34002 5.73 5.75002 8.3 5.74002 11.45C5.73002 14.62 8.30002 17.21 11.45 17.22C14.62 17.23 17.21 14.66 17.22 11.51C17.23 8.34 14.67 5.75 11.51 5.74ZM11.47 15.31C9.38002 15.31 7.66002 13.58 7.66002 11.49C7.66002 9.38 9.38002 7.65 11.49 7.66C13.6 7.66 15.32 9.39 15.32 11.5C15.32 13.61 13.59 15.33 11.48 15.32L11.47 15.31Z" fill="#35498F"/></g><defs><clipPath id="clip0_35_2"><rect width="22.97" height="32.66" fill="white"/></clipPath></defs></svg>${
                                   event.field_place
-                                }</h4>
+                                }</h6>
                                     <div class="btn event-view uppercase ms900">${
                                       actualLang == "es"
                                         ? "Ver evento"

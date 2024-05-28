@@ -1,9 +1,5 @@
 <?php
-
 include 'head.php';
-include 'menu_mobile.php';
-include 'menu.php';
-
 if($lang == "es"){
   $restaurantes = "Restaurantes";
   $hospedajes = "Hospedajes";
@@ -19,7 +15,7 @@ if($lang == "es"){
   $restaurantes = "Restaurants";
   $hospedajes = "Accommodations";
   $blog_y_multimedia = "Blog";
-  $ver_rutas = "Ver rutas";
+  $ver_rutas = "View routes";
   $eventos = "Events";
   $turismoMICE = "MICE Tourism"; // MICE Tourism
   $bancoMultimedia = "Multimedia Bank"; // Multimedia Bank
@@ -27,7 +23,8 @@ if($lang == "es"){
   $ver_eventos = "View events";
   $ver_blog = "View blog";
 }
-
+include 'menu_mobile.php';
+include 'menu.php';
 ?>
 <script>
   const shareData = {
@@ -71,7 +68,7 @@ const shareWeb = async () => {
                     ?>
                       <li><a href="javascript:changeLang('<?=$json_data["enableTranslates"][$i]?>');" class="uppercase"><img src="<?=$include_level?>img/flag_<?=$json_data["enableTranslates"][$i]?>.svg" alt="<?=$json_data["enableTranslates"][$i]?>"> <?=$json_data["enableTranslates"][$i]?></a></li>
                     <?php } ?>
-                      <li><a href="/<?= $lang ?>/informacion-al-viajero#lsc">LSC</a></li>
+                      <!-- <li><a href="/<?= $lang ?>/informacion-al-viajero#lsc">LSC</a></li> -->
                   </ul>
                 </li>
               </ul>

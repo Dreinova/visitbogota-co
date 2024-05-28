@@ -22,7 +22,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
         <div class="right">
             <div class="grid-atractivos">
                 <?php 
-                $colors = ["#E50728","#E50728","#E50728"]
+                $colors = ["#35498e","#35498e","#35498e"]
                 ?>
                 <?php for ($i=0; $i < count($products); $i++) { $prod = $products[$i]; ?>
                     <a href="/<?=$lang?>/explora/<?=$b->get_alias($prod->title)?>/<?=$prod->nid?>" target="_blank" class="prod-item" style="background-color: <?=$colors[$i % 3]?>">

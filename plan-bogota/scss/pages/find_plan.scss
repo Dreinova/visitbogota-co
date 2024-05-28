@@ -12,7 +12,7 @@
     @media only screen and (max-width: 768px) {
       margin: 0 auto;
     }
-    .exp-content{
+    .exp-content {
       @media only screen and (max-width: 768px) {
         padding: 15px;
       }
@@ -236,7 +236,7 @@
           }
           & > small {
             align-items: center;
-            background: var(--Rojo, #e50728);
+            background: var(--Rojo, #35498e);
             border-radius: 50px;
             color: #fff;
             display: flex;
@@ -457,8 +457,8 @@
     z-index: 2;
     padding: 20px;
     border-radius: 20px;
-    background: rgba(255,255,255,.6);
-    box-shadow: 0px 0px 6.8px 0px rgba(0,0,0,.5);
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 0px 6.8px 0px rgba(0, 0, 0, 0.5);
     @media only screen and (max-width: 768px) {
       padding: 70px 20px;
       position: fixed;
@@ -481,7 +481,7 @@
       }
       &.active {
         top: 20px;
-        background-color: rgba(255,255,255);
+        background-color: rgba(255, 255, 255);
         &::before {
           content: "Filtros ▼";
           position: absolute;
@@ -493,11 +493,11 @@
         }
       }
     }
-   
-    #price-slider{
+
+    #price-slider {
       background: #373737;
     }
-    #amount{
+    #amount {
       color: #373737 !important;
     }
     .min-value,
@@ -617,7 +617,7 @@
           cursor: pointer;
           transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
           border-radius: 50px;
-          border: 1px solid #000;;
+          border: 1px solid #000;
           &:hover {
             opacity: 0.8;
           }
@@ -692,7 +692,7 @@
           small {
             opacity: 0;
             display: block;
-            color: #f00;
+            color: #35498f;
             width: 100%;
             flex: 1;
             position: absolute;
@@ -740,6 +740,6 @@
   }
 }
 
-#prices{
+#prices {
   display: none;
 }

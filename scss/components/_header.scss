@@ -362,7 +362,7 @@ header {
       display: block;
       width: 100%;
       height: 2px;
-      background-color: var(--Rojo, #e50728);
+      background-color: var(--Rojo, #35498e);
       @media only screen and (max-width: 768px) {
         content: none;
       }
@@ -490,7 +490,7 @@ header {
             }
             small {
               align-items: center;
-              background: var(--Rojo, #e50728);
+              background: var(--Rojo, #35498e);
               border-radius: 50px;
               color: #fff;
               display: flex;

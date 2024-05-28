@@ -137,11 +137,11 @@ async function getRecentEventos() {
           <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
         </div>
         <div class="desc">
+        <h2>${evento.title}</h2>
         <small class="tag">
         <img src="images/eventosIcono.svg" alt="tag"/>
         ${dateFormatteddateStart} -  ${dateFormatteddateEnd}
         </small>
-          <h2>${evento.title}</h2>
         </div>
       </a>`;
     eventosContainer.innerHTML += template;
@@ -295,7 +295,7 @@ const getBogotaBIImagesVideos = async () => {
   const bogotaContainer = document.querySelector(`#bi-images ul`);
   bogotaContainer.innerHTML = "";
 
-  const response = await fetch(`g/bi_imagesVideos/`);
+  const response = await fetch(`${actualLang}/g/bi_imagesVideos/`);
   const data = await response.json();
 
   const promises = data.map(async (images) => {
@@ -398,7 +398,7 @@ function absoluteURL(str) {
 }
 async function getRT() {
   if (document.querySelector(".listRT")) {
-    const resp = await fetch(`g/getRT/`);
+    const resp = await fetch(`${actualLang}/g/getRT/`);
     const rutas = await resp.json();
     const rutasAgrupadas = rutas.reduce((agrupado, ruta) => {
       // Extraer el campo por el que se va a agrupar
@@ -442,7 +442,7 @@ async function getRT() {
               <div class="desc">
                   <h3>${title}</h3>
                   <div class="shortdesc">${field_descripcion_corta}</div>
-                  <span class="btn">Ver más</span>
+                  <span class="btn">${pi_bogota[44]}</span>
               </div>
           </a>
       </article>`;
@@ -455,7 +455,7 @@ async function getRT() {
 }
 async function getRTRel(field_category) {
   if (field_category) {
-    const resp = await fetch(`g/getRT/`);
+    const resp = await fetch(`${actualLang}/g/getRT/`);
     const rutas = await resp.json();
     const rutasAgrupadas = rutas.reduce((agrupado, ruta) => {
       // Extraer el campo por el que se va a agrupar
@@ -475,9 +475,9 @@ async function getRTRel(field_category) {
     Object.keys(rutasAgrupadas).forEach((categoria) => {
       // Iterar sobre las rutas dentro de esta categoría
       // Mostrar el template
-      if(field_category == categoria){
+      if (field_category == categoria) {
         rutasAgrupadas[categoria].forEach((ruta) => {
-          if(document.querySelector("main").dataset.rutaid != ruta.nid){
+          if (document.querySelector("main").dataset.rutaid != ruta.nid) {
             let {
               nid,
               title,
@@ -486,11 +486,11 @@ async function getRTRel(field_category) {
               field_categor,
               field_categor_1,
             } = ruta;
-    
+
             let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(
               title
             )}-${nid}`;
-    
+
             // Crear el template para la ruta
             let template = `<article title="${title}">
               <a href="${urlRuta}">
@@ -500,24 +500,23 @@ async function getRTRel(field_category) {
                   <div class="desc">
                       <h3>${title}</h3>
                       <div class="shortdesc">${field_descripcion_corta}</div>
-                      <span class="btn">Ver más</span>
+                      <span class="btn">${pi_bogota[44]}</span>
                   </div>
               </a>
           </article>`;
-    
+
             // Mostrar el template
             document.querySelector(".listRTRel").innerHTML += template;
           }
         });
       }
-
     });
   }
 }
 
 async function getHomeRT() {
   if (document.querySelector(".grid-rutas")) {
-    const resp = await fetch(`g/getRT/`);
+    const resp = await fetch(`${actualLang}/g/getRT/`);
     const rutas = await resp.json();
     rutas.forEach((ruta) => {
       let {
@@ -535,7 +534,9 @@ async function getHomeRT() {
       <div class="image">
       <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
       </div>
-      <div class="desc"><h3>${title}</h3><div class="shortdesc">${field_descripcion_corta}</div><span class="btn">Ver más</span></div></a></article>`;
+      <div class="desc"><h3>${title}</h3><div class="shortdesc">${field_descripcion_corta}</div><span class="btn">${
+        pi_bogota[44]
+      }</span></div></a></article>`;
       document.querySelector(".grid-rutas").innerHTML += template;
     });
   }
@@ -551,12 +552,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   getRT();
   getHomeRT();
-  getRTRel(document.querySelector("main").dataset.cat)
+  getRTRel(document.querySelector("main").dataset.cat);
 });
 
 // GET ATRACTIVOS PORTAL
 async function filterPortal(termID = "all", termName = "") {
-  const response = await fetch(`g/getAtractivos/?termID=${termID}`);
+  const response = await fetch(
+    `${actualLang}/g/getAtractivos/?termID=${termID}`
+  );
   const atractivos = await response.json();
   for (let index = 0; index < atractivos.length; index++) {
     const place = atractivos[index];

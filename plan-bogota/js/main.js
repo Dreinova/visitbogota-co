@@ -233,11 +233,12 @@ if ($(".gallery_dot").length) {
     $(".gallery_dot li.active").removeClass("active");
     $(e.target).addClass("active");
     var src = $($(e.target).children("img")).data("src");
-    var alt = $($(e.target).children("img")).attr("alt");;
+    var alt = $($(e.target).children("img")).attr("alt");
     $(".gallery #principal_img").attr("src", src);
     $(".gallery #principal_img").attr("alt", alt);
-      document.querySelector('span.alt-text').textContent = document.querySelector(".gallery #principal_img").alt;
-    });
+    document.querySelector("span.alt-text").textContent =
+      document.querySelector(".gallery #principal_img").alt;
+  });
 }
 
 function getRandomNumberBetween200And1000() {
@@ -699,18 +700,20 @@ function validateForm(e) {
 if (document.querySelector(".texto")) {
   var texto = document.querySelector(".texto");
   var botonLeerMas = document.querySelector("button.leer-mas");
-  if (texto.textContent.length > 400) {
-    var texto = document.querySelector(".texto");
+  if (botonLeerMas) {
+    if (texto.textContent.length > 400) {
+      var texto = document.querySelector(".texto");
 
-    botonLeerMas.addEventListener("click", function () {
-      botonLeerMas.innerHTML = texto.classList.contains("leer-mas")
-        ? "Leer más"
-        : "Leer menos";
-      texto.classList.toggle("leer-mas");
-    });
-  } else {
-    texto.classList.add("leer-mas");
-    botonLeerMas.style.display = "none";
+      botonLeerMas.addEventListener("click", function () {
+        botonLeerMas.innerHTML = texto.classList.contains("leer-mas")
+          ? "Leer más"
+          : "Leer menos";
+        texto.classList.toggle("leer-mas");
+      });
+    } else {
+      texto.classList.add("leer-mas");
+      botonLeerMas.style.display = "none";
+    }
   }
 }
 

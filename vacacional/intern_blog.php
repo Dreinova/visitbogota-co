@@ -18,7 +18,11 @@ $blogsRel = $b->blogs("all", ($_GET['productID'] ? $_GET['productID'] : 'all'), 
 	</div>
 	<div class="content">
 		<div class="blog_content">
-			<?= $blog->body ?>
+			<?php
+				// Reemplazar las rutas de las imágenes
+				$body = preg_replace('/src="\/([^"]*)"/', 'src="https://bogotadc.travel/$1"', $blog->body);
+				echo $body;
+			  ?>
 		</div>
 	</div>
 	<?php if (count($blogsRel) > 0) { ?>

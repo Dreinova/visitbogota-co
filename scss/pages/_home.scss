@@ -209,7 +209,7 @@
           pointer-events: none;
           background-image: linear-gradient(
             to right,
-            #e50728,
+            #35498e,
             #00a7ce,
             #00b0bc,
             #16b6a2,
@@ -594,7 +594,7 @@
             #16b6a2,
             #00b0bc,
             #00a7ce,
-            #e50728
+            #35498e
           );
         }
         &:nth-of-type(5n) {
@@ -604,7 +604,7 @@
             #276fb0,
             #307dbc,
             #3a8cc8,
-            #e50728
+            #35498e
           );
         }
         &:nth-of-type(6n) {
@@ -682,7 +682,7 @@
       max-width: 300px;
     }
     .bx-wrapper .bx-pager.bx-default-pager a {
-      background-color: #e50728;
+      background-color: #35498e;
     }
     .slick-prev.slick-arrow {
       left: -35px;
@@ -718,7 +718,7 @@
       transform: translateX(-50%);
       li {
         border-radius: 50%;
-        border: 2px solid #e50728;
+        border: 2px solid #35498e;
         cursor: pointer;
         height: 20px;
         margin: 0 10px;
@@ -727,7 +727,7 @@
         z-index: 2;
         &.slick-active,
         &:hover {
-          background-color: #e50728;
+          background-color: #35498e;
         }
         button {
           opacity: 0;
@@ -1168,7 +1168,7 @@
     padding: 40px 0 10px;
   }
   h3 {
-    color: #e50728;
+    color: #35498e;
     font-family: "MuseoSans-900";
     font-size: 2.1rem;
     letter-spacing: 0.18em;
@@ -1340,7 +1340,7 @@
             #16b6a2,
             #00b0bc,
             #00a7ce,
-            #e50728
+            #35498e
           );
         }
       }
@@ -1395,10 +1395,10 @@
           background-image: linear-gradient(to right top, #1c548e, #2975cb);
         }
         &:nth-child(4) {
-          background-image: linear-gradient(to right top, #e50728, #5bb985);
+          background-image: linear-gradient(to right top, #35498e, #5bb985);
         }
         &:nth-child(5) {
-          background-image: linear-gradient(to right top, #e50728, #2060a4);
+          background-image: linear-gradient(to right top, #35498e, #2060a4);
         }
         &:nth-child(6) {
           background-image: linear-gradient(to right top, #1c548e, #2975cb);
@@ -1477,12 +1477,12 @@
     }
   }
   h2 {
-    color: #e50728;
+    color: #35498e;
     font-family: "MuseoSans-700";
     font-size: 4rem;
     margin-bottom: 20px;
     @media screen and (max-width: 1023px) {
-      color: #e50728;
+      color: #35498e;
       font-family: "MuseoSans-700";
       font-size: 2rem;
       margin: 30px 0;
@@ -1561,7 +1561,7 @@
       &.color3 {
         background-image: linear-gradient(
           to right top,
-          #e50728,
+          #35498e,
           #00a7ce,
           #00b0bc,
           #16b6a2,

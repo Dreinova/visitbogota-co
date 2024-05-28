@@ -9,6 +9,9 @@
     justify-content: flex-end;
     position: relative;
     padding: 300px 20px 30px;
+    @media only screen and (max-width: 768px) {
+      padding: 50px 20px 10px;
+    }
     &::after {
       content: "";
       background-color: rgba($color: #000000, $alpha: 0.5);
@@ -27,7 +30,7 @@
       z-index: 10;
       .tag {
         align-items: center;
-        background: var(--Rojo, #e50728);
+        background: var(--Rojo, #35498e);
         border-radius: 20px;
         color: var(--blanco, #fff);
         display: flex;
@@ -135,20 +138,6 @@
     @media screen and (max-width: 1023px) {
       background-color: transparent;
     }
-    &::after {
-      content: "";
-      background-size: contain;
-      background-position: center center;
-      background-repeat: no-repeat;
-      width: 55px;
-      position: absolute;
-      height: 55px;
-      left: -1px;
-    }
-    &::after {
-      bottom: -55px;
-      background-image: url(../img/curve_down_filters.svg);
-    }
     h3 {
       color: #777777;
       font-family: "MuseoSans-900";
@@ -175,12 +164,8 @@
         margin: 0 auto;
         padding: 0 0 80px;
         border-radius: 0 0 25px 0;
-        p,
-        ul {
-          padding: 0 40px;
-        }
       }
-      .image{
+      .image {
         position: relative;
         margin: 50px 0;
         @media screen and (max-width: 1023px) {
@@ -189,13 +174,13 @@
         img {
           width: 100%;
         }
-        span{
+        span {
           position: absolute;
           font-size: 12px;
           bottom: 10px;
           left: 0;
-          color: #FFF;
-          background-color: rgba($color: #000000, $alpha: .8);
+          color: #fff;
+          background-color: rgba($color: #000000, $alpha: 0.8);
           padding: 5px;
         }
       }
@@ -211,7 +196,7 @@
           font-size: 3.9rem;
         }
       }
-      
+
       p,
       ul {
         margin-bottom: 30px;
@@ -223,13 +208,13 @@
     z-index: 2;
     h2 {
       color: var(--gris, #626262);
-      font-size: calc(60px - var(--fontSizeReal));
+      font-size: clamp(24px, 4vw, 50px);
       font-style: normal;
       font-weight: 700;
-      line-height: 60px;
+      line-height: clamp(34px, 4vw, 60px);
       position: relative;
       display: flex;
-      margin-bottom: 60px;
+      margin-bottom: 20px;
       align-items: flex-end;
       gap: 20px;
     }
@@ -268,7 +253,7 @@
         .desc {
           small {
             align-items: center;
-            background: var(--Rojo, #e50728);
+            background: var(--Rojo, #35498e);
             border-radius: 20px;
             color: var(--blanco, #fff);
             display: flex;
@@ -401,13 +386,13 @@ body.dark.intern_blog {
       color: #fff;
     }
   }
-  .container_interest{
-    h2{
+  .container_interest {
+    h2 {
       color: #fff;
     }
-    .blog_rel{
-      .desc{
-        h2{
+    .blog_rel {
+      .desc {
+        h2 {
           color: #fff;
         }
       }

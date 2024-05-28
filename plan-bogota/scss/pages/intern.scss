@@ -83,7 +83,7 @@
         }
         &-total {
           align-items: center;
-          background: var(--Rojo, #e50728);
+          background: var(--Rojo, #35498e);
           border-radius: 50px;
           color: #fff;
           display: flex;
@@ -156,7 +156,7 @@
       }
       a {
         align-items: center;
-        background: var(--Rojo, #e50728);
+        background: var(--Rojo, #35498e);
         border-radius: 50px;
         color: #fff;
         display: flex;
@@ -228,13 +228,13 @@
             object-fit: cover;
             width: 100%;
           }
-          span{
+          span {
             position: absolute;
             font-size: 12px;
             bottom: 0;
             left: 0;
-            color: #FFF;
-            background-color: rgba($color: #000000, $alpha: .8);
+            color: #fff;
+            background-color: rgba($color: #000000, $alpha: 0.8);
             padding: 5px 20px;
           }
           &_dot {
@@ -284,7 +284,7 @@
           flex: 1;
           .categorie {
             align-items: center;
-            background: var(--Rojo, #e50728);
+            background: var(--Rojo, #35498e);
             border-radius: 20px;
             color: var(--blanco, #fff);
             display: flex;
@@ -317,12 +317,12 @@
               flex-direction: column;
               span.company {
                 display: flex;
-                color: #e50728;
+                color: #35498e;
                 font-size: 22px;
                 line-height: 24px;
               }
               small {
-                color: #e50728;
+                color: #35498e;
                 font-size: 12px;
                 line-height: 20px;
               }
@@ -442,7 +442,7 @@
           .reserva {
             font-size: 15px;
             line-height: 18px;
-            color: #e50728;
+            color: #35498e;
             margin-bottom: 15px;
           }
           .c-select {
@@ -604,7 +604,7 @@ button.leer-mas {
 
 .btn-reserva {
   align-items: center;
-  background: var(--Rojo, #e50728);
+  background: var(--Rojo, #35498e);
   border-radius: 50px;
   color: #fff;
   display: flex;
@@ -649,7 +649,7 @@ button.leer-mas {
       }
     }
     form {
-      h1{
+      h1 {
         margin: 0 20px 10px;
       }
       input {
@@ -660,13 +660,13 @@ button.leer-mas {
           color: #373737;
           font-size: 14px;
         }
-        &:focus{
+        &:focus {
           box-shadow: 0 0 0 0.5rem rgba(165, 163, 163, 0.7);
         }
       }
       button {
         align-items: center;
-        background: var(--Rojo, #e50728);
+        background: var(--Rojo, #35498e);
         border-radius: 50px;
         color: #fff;
         display: flex;

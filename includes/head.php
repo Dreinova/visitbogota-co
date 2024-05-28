@@ -21,7 +21,7 @@ $isMobile = $detect->isMobile();
     <head>
         <!-- SITIO WEB BOGOTA - idt bogotadc.travel -->
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-        <meta name="theme-color" content="#ff7c47">
+        <meta name="theme-color" content="#35498e">
         <base href="<?=$project_base?>">
         <?= $b->create_metas($_GET['seo'],$_GET['seoType']) ?>
         <link rel="stylesheet" href="<?=$include_level?>css/style.css?v=<?=time();?>">
@@ -42,7 +42,7 @@ $isMobile = $detect->isMobile();
         <head>
         <link rel="manifest" href="/manifest.webmanifest?v=<?=time();?>">
             <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-            <meta name="theme-color" content="#df2f4a">
+            <meta name="theme-color" content="#35498e">
             <meta name="google-site-verification" content="gmbhhlorLRNzSxm4RE99kBoX0x-W_gMvjxqRGWTeLS0" />
             <base href="<?=$project_base?>">
             <?= $b->create_metas($_GET['seo'],$_GET['seoType']) ?>
@@ -158,7 +158,7 @@ window.interdeal = {
             null
         ],
         "color": {
-            "main": "#e6051f",
+            "main": "#35498e",
             "second": "#ffffff"
         },
         "icon": {
@@ -220,3 +220,7 @@ window.interdeal = {
                 </div>
             <?php } ?>
         <?php } ?>
+
+        <script>
+            let pi_bogota = <?=json_encode($pi_bogota)?>;
+        </script>

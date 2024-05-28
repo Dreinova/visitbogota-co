@@ -117,8 +117,8 @@ if($lang == "es"){
 <? include 'includes/imports.php'?>
 
 <div id="dialog-content" style="display:none;max-width: 500px;background: #FFF !important;border-radius: 10px;padding: 50px 20px;">
-  <h2 style="text-align: center;margin-bottom: 15px;color:#e50728;">¡Oops!</h2>
+  <h2 style="text-align: center;margin-bottom: 15px;color:#35498e;">¡Oops!</h2>
   <p style="text-align: justify;margin-bottom: 15px;"><?=$errormessage?></p>
-  <button data-fancybox-close type="button" class="btn uppercase ms900" style="background-color: #e50728;color: #fff;font-size: 14px;display: flex;align-items: center;justify-content: center;border-radius: 8px;padding: 10px 30px;"><?=$errorButon?></button>
+  <button data-fancybox-close type="button" class="btn uppercase ms900" style="background-color: #35498e;color: #fff;font-size: 14px;display: flex;align-items: center;justify-content: center;border-radius: 8px;padding: 10px 30px;"><?=$errorButon?></button>
 
 </div>

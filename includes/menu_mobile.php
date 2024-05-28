@@ -35,6 +35,9 @@ $json_data = json_decode($json,true);
         </a>
         <? } ?>
         <?php }?>
+        <a href="/<?=$lang?>/banco-imagenes/" class="uppercase ms700"><?=$bancoMultimedia?></a>
+        <a href="/<?=$lang?>/ruta-leyenda-el-dorado/inicio" class="uppercase ms700">Ruta leyenda el dorado</a>
+        <a href="https://eldorado.aero" class="uppercase ms700" target="_blank"><?=$aeropuerto?></a>
     </div>
     <ul class="socials_mob">
         <li><a href="https://www.facebook.com/visitbogota.co/"><img src="<?=$include_level?>img/facebook_mob.svg" alt="facebook" width="30" height="30"></a></li>
