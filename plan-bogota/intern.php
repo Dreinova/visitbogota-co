@@ -1,6 +1,49 @@
 <?php $bodyClass="intern"; include "includes/head.php"; $plan = $pb->getPlans($_GET["planid"]); $company =  $pb->getCompany($plan->field_pb_oferta_empresa); 
 ?>
 <body class="intern">
+  <script>
+    const date = new Date();
+    function SendInfoHook(){
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      const raw = JSON.stringify({
+        "cod_rep": 0,
+        "serviceid_rep": <?=$plan->nid ?>,
+        "service_rep": "<?=$plan->title ?>",
+        "companyid_rep": <?=$plan->field_pb_oferta_empresa ?>,
+        "company_rep": "<?=$company->field_pb_empresa_titulo ?>",
+        "price_rep": <?=$plan->field_pd ?>,
+        "catid_rep": <?=$plan->field_segment ?>,
+        "cat_rep": "<?=$plan->field_segment_1 ?>",
+        "fec_crea": new Date().toLocaleDateString('en-GB'),
+        "fec_modif": new Date().toLocaleDateString('en-GB'),
+        "usu_acce": 5,
+        "reg_eli": 0
+      });
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
+
+      fetch("https://hook.us1.make.com/1vc7glalx2cu82m50ej38qvromsjbw4p", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          if(result.message){
+            gtag('event', 'form_start', {
+              'event_category': 'bookings', 
+              'event_label': '<?= $plan->nid ?>',
+              'value': <?= $plan->field_pd ?>,
+              'event_company':'<?=$company->field_pb_empresa_titulo?>',
+              'event_exp':'<?=$plan->title?>'
+            });
+              window.location.href = '/g/booklink/?url=<?= $company->field_pb_empresa_direccion ?>&id=<?= $_GET['planid'] ?>&price=<?= $plan->field_pd ?>';
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+  </script>
   <main>
     <img src="https://files.visitbogota.co<?=$plan->field_img != "" ? $plan->field_img : $plan->field_pb_oferta_img_listado?>" alt="Imagen Banner" id="mi-imagen" style="display:none;">
     <div
@@ -134,16 +177,7 @@
             </div>
           </div>
           <a href="javascript:void(0);" 
-            onclick="gtag('event', 'form_start', {
-                          'event_category': 'bookings', 
-                          'event_label': '<?= $plan->nid ?>',
-                          'value': <?= $plan->field_pd ?>,
-                          'event_company':'<?=$company->field_pb_empresa_titulo?>',
-                          'event_exp':'<?=$plan->title?>'
-                      });
-                      setTimeout(function() {
-                          window.location.href = '/g/booklink/?url=<?= $company->field_pb_empresa_direccion ?>&id=<?= $_GET['planid'] ?>&price=<?= $plan->field_pd ?>';
-                      }, 100);" 
+            onclick="SendInfoHook()" 
             class="btn btn-reserva ms900 uppercase"> 
             <?= $pb->pb_experiencias[27] ?>
           </a>
