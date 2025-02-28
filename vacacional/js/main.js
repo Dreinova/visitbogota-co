@@ -541,19 +541,6 @@ async function getHomeRT() {
     });
   }
 }
-document.addEventListener("DOMContentLoaded", async () => {
-  // Llamadas a la función unificada con los valores específicos
-  if (document.querySelector("#porcategoria")) {
-    await getFiltersExperienciasTuristicas(
-      "porcategoria",
-      "categorias_comerciales_pb"
-    );
-    await getFiltersExperienciasTuristicas("porzona", "test_zona");
-  }
-  getRT();
-  getHomeRT();
-  getRTRel(document.querySelector("main").dataset.cat);
-});
 
 // GET ATRACTIVOS PORTAL
 async function filterPortal(termID = "all", termName = "") {
@@ -653,3 +640,28 @@ if (document.querySelector(".blog_content")) {
     img.parentNode.replaceChild(imageContainer, img);
   });
 }
+
+const getRelContentAgenda = async () => {
+  if (document.querySelector(".eventsnew")) {
+    let agendaID = document.querySelector("main").dataset.agenda;
+    const response = await fetch(
+      `${actualLang}/g/getRelContentAgenda/?agenda=${agendaID}`
+    );
+    const data = await response.json();
+    console.log(data);
+  }
+};
+document.addEventListener("DOMContentLoaded", async () => {
+  // Llamadas a la función unificada con los valores específicos
+  if (document.querySelector("#porcategoria")) {
+    await getFiltersExperienciasTuristicas(
+      "porcategoria",
+      "categorias_comerciales_pb"
+    );
+    await getFiltersExperienciasTuristicas("porzona", "test_zona");
+  }
+  getRT();
+  getHomeRT();
+  getRTRel(document.querySelector("main").dataset.cat);
+  getRelContentAgenda();
+});

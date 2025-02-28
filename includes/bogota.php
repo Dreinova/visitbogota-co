@@ -294,7 +294,7 @@ class bogota
     function searchContent($search)
     {
         $result = $this->query("search/" . urlencode($search));
-        return $result;
+        return $this->unifyPlaces($result);
     }
     function searchVenues($search)
     {
@@ -407,6 +407,14 @@ class bogota
     }
     function getMenuTaxCategories($id="all"){
         $result = $this->query("categorias_atractivos/$id", "", true);
+        return $result;
+    }
+    function getTaxgastro($id="all"){
+        $result = $this->query("zonas_gastronomicas/$id", "", true);
+        return $result;
+    }
+    function getAgendaTax(){
+        $result = $this->query("agenda_tax", "", true);
         return $result;
     }
     function otherProducts($ID, $quantity = 5)
@@ -617,7 +625,7 @@ class bogota
            return $result[0];
            
         }else{
-           $thequery = "events/all/". $zones. "/" . $cats . "/" .  $agenda;
+            $thequery = "events/all/". $zones. "/" . $cats . "/" .  $agenda;
            $result = $this->query($thequery);
            return $result;
 
@@ -1085,6 +1093,15 @@ class bogota
         $String = str_replace("“", "", $String);
         $String = str_replace("”", "", $String);
         $String = str_replace("+", "", $String);
+        $String = str_replace("’", "", $String);
+        $String = str_replace("‘", "", $String);
+        $String = str_replace("'", "", $String);
+        $String = str_replace("?", "", $String);
+        $String = str_replace("¿", "", $String);
+        $String = str_replace("'", "", $String);
+        $String = str_replace("'", "", $String);
+        $String = str_replace("`", "", $String);
+        $String = str_replace("`", "", $String);
 
         //Mayusculas
         $String = strtolower($String);
@@ -1108,16 +1125,14 @@ class bogota
             $metas['words'] = $seo->field_seo_keys;
             $metas['title'] = $seo->field_seo_title;
             $metas['desc'] = $seo->field_seo_desc;
-            $metas['words'] = $seo->field_seo_keys;
-            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_seo_img;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_seo_img;
         }else if($type == 1){
             $seo = $this->query("agenda_taxseo/$seoId");
             $seo = $seo[0];
-            $metas['words'] = $seo->field_clave_seo;
+            $metas['words'] = $seo->field_seo_keys;
             $metas['title'] = $seo->field_titulo_seo;
             $metas['desc'] = $seo->field_descripcion_seo;
-            $metas['words'] = $seo->field_seo_keys;
-            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_imagen_seo;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
             
         }else if($type == 2){
             $seo = $this->query("categorias_atractivos/$seoId/","", true);
@@ -1125,8 +1140,23 @@ class bogota
             $metas['words'] = $seo->field_clave_seo;
             $metas['title'] = $seo->field_titulo_seo;
             $metas['desc'] = $seo->field_descripcion_seo;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
+
+        }else if($type == 3){
+            $seo = $this->query("restaurants/$seoId/all/all/all/all","", true);
+            $seo = $seo[0];
+            $metas['title'] = $seo->field_seo_title;
+            $metas['desc'] = $seo->field_seo_desc;
             $metas['words'] = $seo->field_seo_keys;
-            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_imagen_seo;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_seo_img;
+
+        }else if($type == 4){
+            $seo = $this->query("zonas_gastronomicas/$seoId/","", true);
+            $seo = $seo[0];
+            $metas['words'] = $seo->field_clave_seo;
+            $metas['title'] = $seo->field_titulo_seo;
+            $metas['desc'] = $seo->field_descripcion_seo;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
 
         }
        
@@ -1143,7 +1173,7 @@ class bogota
         $ret .= '<meta name="thumbnail" content="' . $metas['img'] . '">' . PHP_EOL;
         $ret .= '<meta name="language" content="spanish">' . PHP_EOL;
         $ret .= '<meta name="twitter:card" content="summary_large_image">' . PHP_EOL;
-        $ret .= '<meta name="twitter:site" content="@BogotaDCTravel">' . PHP_EOL;
+        $ret .= '<meta name="twitter:site" content="@visitbogotaco">' . PHP_EOL;
         $ret .= '<meta name="twitter:title" content="' . $metas['title'] . '">' . PHP_EOL;
         $ret .= '<meta name="twitter:description" content="' . $metas['desc'] . '">' . PHP_EOL;
         $ret .= '<meta name="twitter:image" content="' . $metas['img'] . '">' . PHP_EOL;
@@ -1391,6 +1421,10 @@ function campaignMonitorEmail($email,$subject="Tu reserva en Plan Bogotá te est
 }
 function getPalabrazInterfaz($id){
     $result = $this->query("palabras_interfaz/".$id, "", true);
+    return $result;
+}
+function getfichas_turisticas($id="all"){
+    $result = $this->query("fichas_turisticas/".$id, "", true);
     return $result;
 }
 

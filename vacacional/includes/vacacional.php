@@ -31,6 +31,11 @@ class vacacional extends bogota{
         $result = $this->query($querystr, "", true);        
         return $result;
     }
+    public function getRelContentAgenda($agenda){
+        $querystr = "agenda_rels/$agenda";
+        $result = $this->query($querystr, "", true);        
+        return $result;
+    }
     public function getZonas(){
         $querystr = "zonas_tax";
         $result = $this->query($querystr);        

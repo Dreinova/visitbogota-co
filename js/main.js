@@ -89,11 +89,20 @@ const getBogotaData = async (containerId, data) => {
   const bogotaContainer = document.querySelector(`#${containerId} ul`);
   bogotaContainer.innerHTML = "";
   const promises = data.map(async (item) => {
-    let urlImg = item.field_banner_prod
-      ? await getImageFromCacheOrFetch(
-          "https://files.visitbogota.co" + item.field_banner_prod
-        )
-      : "https://placehold.co/400x400.jpg?text=visitbogota";
+    let urlImg;
+
+    if (item.field_format_img) {
+      urlImg = await getImageFromCacheOrFetch(
+        "https://files.visitbogota.co" + item.field_format_img
+      );
+    } else if (item.field_banner_prod) {
+      urlImg = await getImageFromCacheOrFetch(
+        "https://files.visitbogota.co" + item.field_banner_prod
+      );
+    }
+
+    // Si ninguna imagen fue encontrada, usar una imagen por defecto.
+    urlImg = urlImg || "https://placehold.co/400x400.jpg?text=visitbogota";
     let urlSite = `/${actualLang}/explora/${get_alias(item.name)}/${item.tid}`;
     let template = `
       <li class="splide__slide">
@@ -102,14 +111,16 @@ const getBogotaData = async (containerId, data) => {
           <span>${item.name}</span>
         </a>
       </li>`;
-    bogotaContainer.innerHTML += template;
+    if (item.field_categor == "1") {
+      bogotaContainer.innerHTML += template;
+    }
   });
 
   await Promise.all(promises);
 
   new Splide(`#${containerId}`, {
     perPage: 5,
-    gap: 15,
+    gap: 0,
     type: "loop",
     pagination: false,
     lazyLoad: "nearby",
@@ -131,81 +142,65 @@ const getExploraBogota = async () => {
     id: prod.tid,
     title: prod.name,
     url: `/${actualLang}/explora/${get_alias(prod.name)}/${prod.tid}`,
+    field_categor: prod.field_categor,
   }));
+
   bogotaContainerFooter.innerHTML = "";
   bogotaContainerMenuMobile.innerHTML = "";
   document.querySelector("nav li.explora ul").innerHTML = "";
 
+  // Encuentra el producto con ID 216
+  const index = productos.findIndex((producto) => producto.id == 216);
+  if (index > -1) {
+    // Extrae el producto con ID 216 y lo coloca al inicio
+    const [productoEspecial] = productos.splice(index, 1);
+    productos.unshift(productoEspecial);
+  }
+
   productos.forEach((producto) => {
-    document.querySelector(
-      "nav li.explora ul"
-    ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
-    bogotaContainerFooter.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
-    bogotaContainerMenuMobile.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
-    if (document.querySelector("#categorias_blog select")) {
+    if (producto.field_categor == "1") {
       document.querySelector(
-        "#categorias_blog select"
-      ).innerHTML += `<option value="${producto.id}">${producto.title}</option>`;
+        "nav li.explora ul"
+      ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
+      bogotaContainerFooter.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
+      bogotaContainerMenuMobile.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
+      if (document.querySelector("#categorias_blog select")) {
+        document.querySelector(
+          "#categorias_blog select"
+        ).innerHTML += `<option value="${producto.id}">${producto.title}</option>`;
+      }
     }
   });
 
   if (document.querySelector("#bogota-natural")) {
     await getBogotaData("bogota-natural", data);
   }
-  if (document.querySelectorAll("#categorias_blog").length > 0) {
-    customSelect();
-  }
-  if (
-    document.querySelectorAll("#categorias_blog .select-items div").length > 0
-  ) {
-    document
-      .querySelectorAll("#categorias_blog .select-items div")
-      .forEach((el) => {
-        el.addEventListener("click", async () => {
-          await fetch(
-            `/g/allBlogs/?productID=${
-              document.querySelector("#categorias_blog select").value
-            }`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.add("loading");
-              document.querySelector(".blog_list .repeater").innerHTML = "";
-              data.forEach(async (blog) => {
-                let urlImg = await getImageFromCacheOrFetch(
-                  "https://files.visitbogota.co" + blog.field_image
-                );
-                let template = `
-                <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
-                  blog.nid
-                }" data-aos="flip-left blog_item" data-productid="88">
-                    <div class="img">
-                      <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
-                    </div>
-                    <div class="desc">
-                    <small class="tag">
-                    <img src="images/mdi_tag.svg" alt="tag"/>
-                    ${blog.field_prod_rel_1}
-                    </small>
-                      <h2 class="uppercase">${blog.title}</h2>
-                      <small class="date">${blog.field_date}</small>
-                    </div>
-                  </a>
-                  `;
-                document.querySelector(".blog_list .repeater").innerHTML +=
-                  template;
-              });
-            })
-            .finally(() => {
-              lazyImages();
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.remove("loading");
-            });
-        });
-      });
+};
+const getAgendaEventos = async () => {
+  const response = await fetch(`/g/getAgendaTax/?lang=${actualLang}`);
+  const data = await response.json();
+  let agendas = data.map((prod) => ({
+    id: prod.tid,
+    title: prod.name,
+    url: `/${actualLang}/eventos/${get_alias(prod.name)}-${prod.tid}`,
+  }));
+
+  const eventosListItem = document.querySelector("li.eventosList");
+  const subMenu = document.querySelector("nav li.eventosList ul");
+
+  // Limpiar el contenido actual
+  eventosListItem.innerHTML = "Eventos"; // Restaura el texto inicial
+  subMenu.innerHTML = "";
+
+  if (agendas.length === 1) {
+    // Si solo hay un elemento, hacer que el <li> principal sea un enlace
+    const singleAgenda = agendas[0];
+    eventosListItem.innerHTML = `<a href="${singleAgenda.url}" class="wait ms700">Eventos</a>`;
+  } else if (agendas.length > 1) {
+    // Si hay más de un elemento, crear un submenú
+    agendas.forEach((agenda) => {
+      subMenu.innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
+    });
   }
 };
 
@@ -213,6 +208,9 @@ const getExploraBogota = async () => {
 document.addEventListener("DOMContentLoaded", async function () {
   if (document.querySelector("nav li.explora")) {
     await getExploraBogota();
+  }
+  if (document.querySelector("nav li.eventosList")) {
+    await getAgendaEventos();
   }
   if (window.location.hash) {
     // Obtén el ID del fragmento de la URL (el valor después de '#')
@@ -309,7 +307,7 @@ if (document.querySelector(".slide_explora_item")) {
           product.nid
         }" class="mini_item wait ${exploraCount}"><div class="icon"><img loading="lazy" class="lazyload" data-src="${icon}" src="https://picsum.photos/20/20" alt="${
           product.title
-        }"></div> <h3 class="uppercase">${
+        }"></div> <h3 class="">${
           product.title
         }</h3><img src="img/curve_mini.png" alt="curve_mini" class="curve_mini"></a>`;
         container.innerHTML += template;
@@ -1007,144 +1005,152 @@ function slidersUtil() {
   }
 }
 function get_alias(str) {
-  str = str.replace(/¡/g, "", str); //Signo de exclamación abierta.&iexcl;
-  str = str.replace(/'/g, "", str); //Signo de exclamación abierta.&iexcl;
-  str = str.replace(/!/g, "", str); //Signo de exclamación abierta.&iexcl;
-  str = str.replace(/¢/g, "-", str); //Signo de centavo.&cent;
-  str = str.replace(/£/g, "-", str); //Signo de libra esterlina.&pound;
-  str = str.replace(/¤/g, "-", str); //Signo monetario.&curren;
-  str = str.replace(/¥/g, "-", str); //Signo del yen.&yen;
-  str = str.replace(/¦/g, "-", str); //Barra vertical partida.&brvbar;
-  str = str.replace(/§/g, "-", str); //Signo de sección.&sect;
-  str = str.replace(/¨/g, "-", str); //Diéresis.&uml;
-  str = str.replace(/©/g, "-", str); //Signo de derecho de copia.&copy;
-  str = str.replace(/ª/g, "-", str); //Indicador ordinal femenino.&ordf;
-  str = str.replace(/«/g, "-", str); //Signo de comillas francesas de apertura.&laquo;
-  str = str.replace(/¬/g, "-", str); //Signo de negación.&not;
-  str = str.replace(/®/g, "-", str); //Signo de marca registrada.&reg;
-  str = str.replace(/¯/g, "&-", str); //Macrón.&macr;
-  str = str.replace(/°/g, "-", str); //Signo de grado.&deg;
-  str = str.replace(/±/g, "-", str); //Signo de más-menos.&plusmn;
-  str = str.replace(/²/g, "-", str); //Superíndice dos.&sup2;
-  str = str.replace(/³/g, "-", str); //Superíndice tres.&sup3;
-  str = str.replace(/´/g, "-", str); //Acento agudo.&acute;
-  str = str.replace(/µ/g, "-", str); //Signo de micro.&micro;
-  str = str.replace(/¶/g, "-", str); //Signo de calderón.&para;
-  str = str.replace(/·/g, "-", str); //Punto centrado.&middot;
-  str = str.replace(/¸/g, "-", str); //Cedilla.&cedil;
-  str = str.replace(/¹/g, "-", str); //Superíndice 1.&sup1;
-  str = str.replace(/º/g, "-", str); //Indicador ordinal masculino.&ordm;
-  str = str.replace(/»/g, "-", str); //Signo de comillas francesas de cierre.&raquo;
-  str = str.replace(/¼/g, "-", str); //Fracción vulgar de un cuarto.&frac14;
-  str = str.replace(/½/g, "-", str); //Fracción vulgar de un medio.&frac12;
-  str = str.replace(/¾/g, "-", str); //Fracción vulgar de tres cuartos.&frac34;
-  str = str.replace(/¿/g, "-", str); //Signo de interrogación abierta.&iquest;
-  str = str.replace(/×/g, "-", str); //Signo de multiplicación.&times;
-  str = str.replace(/÷/g, "-", str); //Signo de división.&divide;
-  str = str.replace(/À/g, "a", str); //A mayúscula con acento grave.&Agrave;
-  str = str.replace(/Á/g, "a", str); //A mayúscula con acento agudo.&Aacute;
-  str = str.replace(/Â/g, "a", str); //A mayúscula con circunflejo.&Acirc;
-  str = str.replace(/Ã/g, "a", str); //A mayúscula con tilde.&Atilde;
-  str = str.replace(/Ä/g, "a", str); //A mayúscula con diéresis.&Auml;
-  str = str.replace(/Å/g, "a", str); //A mayúscula con círculo encima.&Aring;
-  str = str.replace(/Æ/g, "a", str); //AE mayúscula.&AElig;
-  str = str.replace(/Ç/g, "c", str); //C mayúscula con cedilla.&Ccedil;
-  str = str.replace(/È/g, "e", str); //E mayúscula con acento grave.&Egrave;
-  str = str.replace(/É/g, "e", str); //E mayúscula con acento agudo.&Eacute;
-  str = str.replace(/Ê/g, "e", str); //E mayúscula con circunflejo.&Ecirc;
-  str = str.replace(/Ë/g, "e", str); //E mayúscula con diéresis.&Euml;
-  str = str.replace(/Ì/g, "i", str); //I mayúscula con acento grave.&Igrave;
-  str = str.replace(/Í/g, "i", str); //I mayúscula con acento agudo.&Iacute;
-  str = str.replace(/Î/g, "i", str); //I mayúscula con circunflejo.&Icirc;
-  str = str.replace(/Ï/g, "i", str); //I mayúscula con diéresis.&Iuml;
-  str = str.replace(/Ð/g, "d", str); //ETH mayúscula.&ETH;
-  str = str.replace(/Ñ/g, "n", str); //N mayúscula con tilde.&Ntilde;
-  str = str.replace(/Ò/g, "o", str); //O mayúscula con acento grave.&Ograve;
-  str = str.replace(/Ó/g, "o", str); //O mayúscula con acento agudo.&Oacute;
-  str = str.replace(/Ô/g, "o", str); //O mayúscula con circunflejo.&Ocirc;
-  str = str.replace(/Õ/g, "o", str); //O mayúscula con tilde.&Otilde;
-  str = str.replace(/Ö/g, "o", str); //O mayúscula con diéresis.&Ouml;
-  str = str.replace(/Ø/g, "o", str); //O mayúscula con barra inclinada.&Oslash;
-  str = str.replace(/Ù/g, "u", str); //U mayúscula con acento grave.&Ugrave;
-  str = str.replace(/Ú/g, "u", str); //U mayúscula con acento agudo.&Uacute;
-  str = str.replace(/Û/g, "u", str); //U mayúscula con circunflejo.&Ucirc;
-  str = str.replace(/Ü/g, "u", str); //U mayúscula con diéresis.&Uuml;
-  str = str.replace(/Ý/g, "y", str); //Y mayúscula con acento agudo.&Yacute;
-  str = str.replace(/Þ/g, "b", str); //Thorn mayúscula.&THORN;
-  str = str.replace(/ß/g, "b", str); //S aguda alemana.&szlig;
-  str = str.replace(/à/g, "a", str); //a minúscula con acento grave.&agrave;
-  str = str.replace(/á/g, "a", str); //a minúscula con acento agudo.&aacute;
-  str = str.replace(/â/g, "a", str); //a minúscula con circunflejo.&acirc;
-  str = str.replace(/ã/g, "a", str); //a minúscula con tilde.&atilde;
-  str = str.replace(/ä/g, "a", str); //a minúscula con diéresis.&auml;
-  str = str.replace(/å/g, "a", str); //a minúscula con círculo encima.&aring;
-  str = str.replace(/æ/g, "a", str); //ae minúscula.&aelig;
-  str = str.replace(/ç/g, "a", str); //c minúscula con cedilla.&ccedil;
-  str = str.replace(/è/g, "e", str); //e minúscula con acento grave.&egrave;
-  str = str.replace(/é/g, "e", str); //e minúscula con acento agudo.&eacute;
-  str = str.replace(/ê/g, "e", str); //e minúscula con circunflejo.&ecirc;
-  str = str.replace(/ë/g, "e", str); //e minúscula con diéresis.&euml;
-  str = str.replace(/ì/g, "i", str); //i minúscula con acento grave.&igrave;
-  str = str.replace(/í/g, "i", str); //i minúscula con acento agudo.&iacute;
-  str = str.replace(/î/g, "i", str); //i minúscula con circunflejo.&icirc;
-  str = str.replace(/ï/g, "i", str); //i minúscula con diéresis.&iuml;
-  str = str.replace(/ð/g, "i", str); //eth minúscula.&eth;
-  str = str.replace(/ñ/g, "n", str); //n minúscula con tilde.&ntilde;
-  str = str.replace(/ò/g, "o", str); //o minúscula con acento grave.&ograve;
-  str = str.replace(/ó/g, "o", str); //o minúscula con acento agudo.&oacute;
-  str = str.replace(/ô/g, "o", str); //o minúscula con circunflejo.&ocirc;
-  str = str.replace(/õ/g, "o", str); //o minúscula con tilde.&otilde;
-  str = str.replace(/ö/g, "o", str); //o minúscula con diéresis.&ouml;
-  str = str.replace(/ø/g, "o", str); //o minúscula con barra inclinada.&oslash;
-  str = str.replace(/ù/g, "o", str); //u minúscula con acento grave.&ugrave;
-  str = str.replace(/ú/g, "u", str); //u minúscula con acento agudo.&uacute;
-  str = str.replace(/û/g, "u", str); //u minúscula con circunflejo.&ucirc;
-  str = str.replace(/ü/g, "u", str); //u minúscula con diéresis.&uuml;
-  str = str.replace(/ý/g, "y", str); //y minúscula con acento agudo.&yacute;
-  str = str.replace(/þ/g, "b", str); //thorn minúscula.&thorn;
-  str = str.replace(/ÿ/g, "y", str); //y minúscula con diéresis.&yuml;
-  str = str.replace(/Œ/g, "d", str); //OE Mayúscula.&OElig;
-  str = str.replace(/œ/g, "-", str); //oe minúscula.&oelig;
-  str = str.replace(/Ÿ/g, "-", str); //Y mayúscula con diéresis.&Yuml;
-  str = str.replace(/ˆ/g, "", str); //Acento circunflejo.&circ;
-  str = str.replace(/˜/g, "", str); //Tilde.&tilde;
-  str = str.replace(/–/g, "", str); //Guiún corto.&ndash;
-  str = str.replace(/—/g, "", str); //Guiún largo.&mdash;
-  str = str.replace(/'/g, "", str); //Comilla simple izquierda.&lsquo;
-  str = str.replace(/'/g, "", str); //Comilla simple derecha.&rsquo;
-  str = str.replace(/,/g, "", str); //Comilla simple inferior.&sbquo;
-  str = str.replace(/"/g, "", str); //Comillas doble derecha.&rdquo;
-  str = str.replace(/"/g, "", str); //Comillas doble inferior.&bdquo;
-  str = str.replace(/†/g, "-", str); //Daga.&dagger;
-  str = str.replace(/‡/g, "-", str); //Daga doble.&Dagger;
-  str = str.replace(/…/g, "-", str); //Elipsis horizontal.&hellip;
-  str = str.replace(/‰/g, "-", str); //Signo de por mil.&permil;
-  str = str.replace(/‹/g, "-", str); //Signo izquierdo de una cita.&lsaquo;
-  str = str.replace(/›/g, "-", str); //Signo derecho de una cita.&rsaquo;
-  str = str.replace(/€/g, "-", str); //Euro.&euro;
-  str = str.replace(/™/g, "-", str); //Marca registrada.&trade;
-  str = str.replace(/ & /g, "-", str); //Marca registrada.&trade;
-  str = str.replace(/\(/g, "-", str);
-  str = str.replace(/\)/g, "-", str);
-  str = str.replace(/�/g, "-", str);
-  str = str.replace(/\//g, "-", str);
-  str = str.replace(":", "", str);
-  str = str.replace(/ de /g, "-", str); //Espacios
-  str = str.replace(/ y /g, "-", str); //Espacios
-  str = str.replace(/ a /g, "-", str); //Espacios
-  str = str.replace(/ DE /g, "-", str); //Espacios
-  str = str.replace(/ A /g, "-", str); //Espacios
-  str = str.replace(/ Y /g, "-", str); //Espacios
-  str = str.replace(/ /g, "-", str); //Espacios
-  str = str.replace(/  /g, "-", str); //Espacios
-  str = str.replace(/\./g, "", str); //Punto
-  str = str.replace("’", "", str);
-  str = str.replace("‘", "", str);
-  str = str.replace("“", "", str);
-  str = str.replace("”", "", str);
-  str = str.replace("+", "", str);
-  str = str.replace("&", "", str);
-  str = str.replace("amp;", "", str);
+  str = str.replaceAll(/¡/g, "", str); //Signo de exclamación abierta.&iexcl;
+  str = str.replaceAll(/'/g, "", str); //Signo de exclamación abierta.&iexcl;
+  str = str.replaceAll(/!/g, "", str); //Signo de exclamación abierta.&iexcl;
+  str = str.replaceAll(/¢/g, "-", str); //Signo de centavo.&cent;
+  str = str.replaceAll(/£/g, "-", str); //Signo de libra esterlina.&pound;
+  str = str.replaceAll(/¤/g, "-", str); //Signo monetario.&curren;
+  str = str.replaceAll(/¥/g, "-", str); //Signo del yen.&yen;
+  str = str.replaceAll(/¦/g, "-", str); //Barra vertical partida.&brvbar;
+  str = str.replaceAll(/§/g, "-", str); //Signo de sección.&sect;
+  str = str.replaceAll(/¨/g, "-", str); //Diéresis.&uml;
+  str = str.replaceAll(/©/g, "-", str); //Signo de derecho de copia.&copy;
+  str = str.replaceAll(/ª/g, "-", str); //Indicador ordinal femenino.&ordf;
+  str = str.replaceAll(/«/g, "-", str); //Signo de comillas francesas de apertura.&laquo;
+  str = str.replaceAll(/¬/g, "-", str); //Signo de negación.&not;
+  str = str.replaceAll(/®/g, "-", str); //Signo de marca registrada.&reg;
+  str = str.replaceAll(/¯/g, "&-", str); //Macrón.&macr;
+  str = str.replaceAll(/°/g, "-", str); //Signo de grado.&deg;
+  str = str.replaceAll(/±/g, "-", str); //Signo de más-menos.&plusmn;
+  str = str.replaceAll(/²/g, "-", str); //Superíndice dos.&sup2;
+  str = str.replaceAll(/³/g, "-", str); //Superíndice tres.&sup3;
+  str = str.replaceAll(/´/g, "-", str); //Acento agudo.&acute;
+  str = str.replaceAll(/µ/g, "-", str); //Signo de micro.&micro;
+  str = str.replaceAll(/¶/g, "-", str); //Signo de calderón.&para;
+  str = str.replaceAll(/·/g, "-", str); //Punto centrado.&middot;
+  str = str.replaceAll(/¸/g, "-", str); //Cedilla.&cedil;
+  str = str.replaceAll(/¹/g, "-", str); //Superíndice 1.&sup1;
+  str = str.replaceAll(/º/g, "-", str); //Indicador ordinal masculino.&ordm;
+  str = str.replaceAll(/»/g, "-", str); //Signo de comillas francesas de cierre.&raquo;
+  str = str.replaceAll(/¼/g, "-", str); //Fracción vulgar de un cuarto.&frac14;
+  str = str.replaceAll(/½/g, "-", str); //Fracción vulgar de un medio.&frac12;
+  str = str.replaceAll(/¾/g, "-", str); //Fracción vulgar de tres cuartos.&frac34;
+  str = str.replaceAll(/¿/g, "-", str); //Signo de interrogación abierta.&iquest;
+  str = str.replaceAll(/×/g, "-", str); //Signo de multiplicación.&times;
+  str = str.replaceAll(/÷/g, "-", str); //Signo de división.&divide;
+  str = str.replaceAll(/À/g, "a", str); //A mayúscula con acento grave.&Agrave;
+  str = str.replaceAll(/Á/g, "a", str); //A mayúscula con acento agudo.&Aacute;
+  str = str.replaceAll(/Â/g, "a", str); //A mayúscula con circunflejo.&Acirc;
+  str = str.replaceAll(/Ã/g, "a", str); //A mayúscula con tilde.&Atilde;
+  str = str.replaceAll(/Ä/g, "a", str); //A mayúscula con diéresis.&Auml;
+  str = str.replaceAll(/Å/g, "a", str); //A mayúscula con círculo encima.&Aring;
+  str = str.replaceAll(/Æ/g, "a", str); //AE mayúscula.&AElig;
+  str = str.replaceAll(/Ç/g, "c", str); //C mayúscula con cedilla.&Ccedil;
+  str = str.replaceAll(/È/g, "e", str); //E mayúscula con acento grave.&Egrave;
+  str = str.replaceAll(/É/g, "e", str); //E mayúscula con acento agudo.&Eacute;
+  str = str.replaceAll(/Ê/g, "e", str); //E mayúscula con circunflejo.&Ecirc;
+  str = str.replaceAll(/Ë/g, "e", str); //E mayúscula con diéresis.&Euml;
+  str = str.replaceAll(/Ì/g, "i", str); //I mayúscula con acento grave.&Igrave;
+  str = str.replaceAll(/Í/g, "i", str); //I mayúscula con acento agudo.&Iacute;
+  str = str.replaceAll(/Î/g, "i", str); //I mayúscula con circunflejo.&Icirc;
+  str = str.replaceAll(/Ï/g, "i", str); //I mayúscula con diéresis.&Iuml;
+  str = str.replaceAll(/Ð/g, "d", str); //ETH mayúscula.&ETH;
+  str = str.replaceAll(/Ñ/g, "n", str); //N mayúscula con tilde.&Ntilde;
+  str = str.replaceAll(/Ò/g, "o", str); //O mayúscula con acento grave.&Ograve;
+  str = str.replaceAll(/Ó/g, "o", str); //O mayúscula con acento agudo.&Oacute;
+  str = str.replaceAll(/Ô/g, "o", str); //O mayúscula con circunflejo.&Ocirc;
+  str = str.replaceAll(/Õ/g, "o", str); //O mayúscula con tilde.&Otilde;
+  str = str.replaceAll(/Ö/g, "o", str); //O mayúscula con diéresis.&Ouml;
+  str = str.replaceAll(/Ø/g, "o", str); //O mayúscula con barra inclinada.&Oslash;
+  str = str.replaceAll(/Ù/g, "u", str); //U mayúscula con acento grave.&Ugrave;
+  str = str.replaceAll(/Ú/g, "u", str); //U mayúscula con acento agudo.&Uacute;
+  str = str.replaceAll(/Û/g, "u", str); //U mayúscula con circunflejo.&Ucirc;
+  str = str.replaceAll(/Ü/g, "u", str); //U mayúscula con diéresis.&Uuml;
+  str = str.replaceAll(/Ý/g, "y", str); //Y mayúscula con acento agudo.&Yacute;
+  str = str.replaceAll(/Þ/g, "b", str); //Thorn mayúscula.&THORN;
+  str = str.replaceAll(/ß/g, "b", str); //S aguda alemana.&szlig;
+  str = str.replaceAll(/à/g, "a", str); //a minúscula con acento grave.&agrave;
+  str = str.replaceAll(/á/g, "a", str); //a minúscula con acento agudo.&aacute;
+  str = str.replaceAll(/â/g, "a", str); //a minúscula con circunflejo.&acirc;
+  str = str.replaceAll(/ã/g, "a", str); //a minúscula con tilde.&atilde;
+  str = str.replaceAll(/ä/g, "a", str); //a minúscula con diéresis.&auml;
+  str = str.replaceAll(/å/g, "a", str); //a minúscula con círculo encima.&aring;
+  str = str.replaceAll(/æ/g, "a", str); //ae minúscula.&aelig;
+  str = str.replaceAll(/ç/g, "a", str); //c minúscula con cedilla.&ccedil;
+  str = str.replaceAll(/è/g, "e", str); //e minúscula con acento grave.&egrave;
+  str = str.replaceAll(/é/g, "e", str); //e minúscula con acento agudo.&eacute;
+  str = str.replaceAll(/ê/g, "e", str); //e minúscula con circunflejo.&ecirc;
+  str = str.replaceAll(/ë/g, "e", str); //e minúscula con diéresis.&euml;
+  str = str.replaceAll(/ì/g, "i", str); //i minúscula con acento grave.&igrave;
+  str = str.replaceAll(/í/g, "i", str); //i minúscula con acento agudo.&iacute;
+  str = str.replaceAll(/î/g, "i", str); //i minúscula con circunflejo.&icirc;
+  str = str.replaceAll(/ï/g, "i", str); //i minúscula con diéresis.&iuml;
+  str = str.replaceAll(/ð/g, "i", str); //eth minúscula.&eth;
+  str = str.replaceAll(/ñ/g, "n", str); //n minúscula con tilde.&ntilde;
+  str = str.replaceAll(/ò/g, "o", str); //o minúscula con acento grave.&ograve;
+  str = str.replaceAll(/ó/g, "o", str); //o minúscula con acento agudo.&oacute;
+  str = str.replaceAll(/ô/g, "o", str); //o minúscula con circunflejo.&ocirc;
+  str = str.replaceAll(/õ/g, "o", str); //o minúscula con tilde.&otilde;
+  str = str.replaceAll(/ö/g, "o", str); //o minúscula con diéresis.&ouml;
+  str = str.replaceAll(/ø/g, "o", str); //o minúscula con barra inclinada.&oslash;
+  str = str.replaceAll(/ù/g, "o", str); //u minúscula con acento grave.&ugrave;
+  str = str.replaceAll(/ú/g, "u", str); //u minúscula con acento agudo.&uacute;
+  str = str.replaceAll(/û/g, "u", str); //u minúscula con circunflejo.&ucirc;
+  str = str.replaceAll(/ü/g, "u", str); //u minúscula con diéresis.&uuml;
+  str = str.replaceAll(/ý/g, "y", str); //y minúscula con acento agudo.&yacute;
+  str = str.replaceAll(/þ/g, "b", str); //thorn minúscula.&thorn;
+  str = str.replaceAll(/ÿ/g, "y", str); //y minúscula con diéresis.&yuml;
+  str = str.replaceAll(/Œ/g, "d", str); //OE Mayúscula.&OElig;
+  str = str.replaceAll(/œ/g, "-", str); //oe minúscula.&oelig;
+  str = str.replaceAll(/Ÿ/g, "-", str); //Y mayúscula con diéresis.&Yuml;
+  str = str.replaceAll(/ˆ/g, "", str); //Acento circunflejo.&circ;
+  str = str.replaceAll(/˜/g, "", str); //Tilde.&tilde;
+  str = str.replaceAll(/–/g, "", str); //Guiún corto.&ndash;
+  str = str.replaceAll(/—/g, "", str); //Guiún largo.&mdash;
+  str = str.replaceAll(/'/g, "", str); //Comilla simple izquierda.&lsquo;
+  str = str.replaceAll(/'/g, "", str); //Comilla simple derecha.&rsquo;
+  str = str.replaceAll(/,/g, "", str); //Comilla simple inferior.&sbquo;
+  str = str.replaceAll(/"/g, "", str); //Comillas doble derecha.&rdquo;
+  str = str.replaceAll(/"/g, "", str); //Comillas doble inferior.&bdquo;
+  str = str.replaceAll(/†/g, "-", str); //Daga.&dagger;
+  str = str.replaceAll(/‡/g, "-", str); //Daga doble.&Dagger;
+  str = str.replaceAll(/…/g, "-", str); //Elipsis horizontal.&hellip;
+  str = str.replaceAll(/‰/g, "-", str); //Signo de por mil.&permil;
+  str = str.replaceAll(/‹/g, "-", str); //Signo izquierdo de una cita.&lsaquo;
+  str = str.replaceAll(/›/g, "-", str); //Signo derecho de una cita.&rsaquo;
+  str = str.replaceAll(/€/g, "-", str); //Euro.&euro;
+  str = str.replaceAll(/™/g, "-", str); //Marca registrada.&trade;
+  str = str.replaceAll(/ & /g, "-", str); //Marca registrada.&trade;
+  str = str.replaceAll(/\(/g, "-", str);
+  str = str.replaceAll(/\)/g, "-", str);
+  str = str.replaceAll(/�/g, "-", str);
+  str = str.replaceAll(/\//g, "-", str);
+  str = str.replaceAll(":", "", str);
+  str = str.replaceAll(/ de /g, "-", str); //Espacios
+  str = str.replaceAll(/ y /g, "-", str); //Espacios
+  str = str.replaceAll(/ a /g, "-", str); //Espacios
+  str = str.replaceAll(/ DE /g, "-", str); //Espacios
+  str = str.replaceAll(/ A /g, "-", str); //Espacios
+  str = str.replaceAll(/ Y /g, "-", str); //Espacios
+  str = str.replaceAll(/ /g, "-", str); //Espacios
+  str = str.replaceAll(/  /g, "-", str); //Espacios
+  str = str.replaceAll(/\./g, "", str); //Punto
+  str = str.replaceAll("’", "", str);
+  str = str.replaceAll("‘", "", str);
+  str = str.replaceAll("“", "", str);
+  str = str.replaceAll("”", "", str);
+  str = str.replaceAll("+", "", str);
+  str = str.replaceAll("&", "", str);
+  str = str.replaceAll("amp;", "", str);
+  str = str.replaceAll("?", "", str);
+  str = str.replaceAll("¿", "", str);
+  str = str.replaceAll("'", "", str);
+  str = str.replaceAll("`", "", str);
+  str = str.replaceAll("`", "", str);
+  str = str.replaceAll("`", "", str);
+  str = str.replaceAll("+", "", str);
+  str = str.replaceAll("#039;", "", str);
 
   // Crear un objeto para mapeo de caracteres con tildes a sin tildes
   const accentsMap = {
@@ -1278,7 +1284,7 @@ function createNearbyHome(nearbyData) {
         get_alias(nearbyTitle) +
         "/" +
         nearbyPlace.nid +
-        '" class="content wait"><h3 class="uppercase">' +
+        '" class="content wait"><h3 class="">' +
         nearbyTitle +
         "</h3></a></div>";
       nearbyPlacesContainer.innerHTML += template;
@@ -1851,7 +1857,7 @@ if (document.querySelector("body.mas_alla")) {
           nearbyPlace.field_cover_image
             ? nearbyPlace.field_cover_image
             : "/img/noimg.png"
-        }" src="https://picsum.photos/20/20" alt="Bogotá"></div><h2 class="name uppercase">${nearbyTitle}</h2></a></li>`;
+        }" src="https://picsum.photos/20/20" alt="Bogotá"></div><h2 class="name ">${nearbyTitle}</h2></a></li>`;
         nearbyPlacesContainer.innerHTML += template;
       }
     })
@@ -1884,7 +1890,7 @@ if (document.querySelector("body.informacion_util")) {
               if (document.querySelector(".faqs-container .faq")) {
                 document.querySelector(
                   ".faqs-container .faq"
-                ).innerHTML += `<h3 class="uppercase cat-${cat.tid}">${cat.name}</h3>`;
+                ).innerHTML += `<h3 class=" cat-${cat.tid}">${cat.name}</h3>`;
                 var accorddion = document.createElement("div");
                 accorddion.classList.add("accordion");
                 accorddion.classList.add(classColor[i]);
@@ -1892,7 +1898,7 @@ if (document.querySelector("body.informacion_util")) {
                   document
                     .querySelector(".faqs-container .faq")
                     .appendChild(accorddion);
-                  var templateCat = `<h4 class="uppercase">${qa.title}</h4><div>${qa.body}</div>`;
+                  var templateCat = `<h4 class="">${qa.title}</h4><div>${qa.body}</div>`;
                   accorddion.innerHTML += templateCat;
                 });
               }
@@ -1998,7 +2004,7 @@ function getMoreReadBlogs() {
             } else {
               title = el.title;
             }
-            var template = `<li class="uppercase"><a href="${el.url}">${title}</a></li>`;
+            var template = `<li class=""><a href="${el.url}">${title}</a></li>`;
             document.querySelector(".lomasleido ol").innerHTML += template;
           }
         });
@@ -2269,11 +2275,6 @@ if (document.querySelector(".intern_event")) {
 var filtersoptions = [];
 var sliderobjects = [];
 
-$(document).ready(function () {
-  if ($(".events_list_grid").length > 0) {
-    setCategory("events");
-  }
-});
 function setCategory(cattype) {
   if ($(window).width() <= 768) {
     $(".filtergroup").removeClass("open");
@@ -2361,7 +2362,26 @@ function setCategory(cattype) {
     );
   });
 }
+function setMidnight(dateString) {
+  const date = new Date(dateString);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+function compararFechas(a, b) {
+  // Si el evento no tiene fecha de finalización, usar la fecha de inicio
+  const endDateA = a.field_end_date
+    ? a.field_end_date.length === 10
+      ? setMidnight(a.field_end_date)
+      : new Date(a.field_end_date)
+    : setMidnight(a.field_date);
+  const endDateB = b.field_end_date
+    ? b.field_end_date.length === 10
+      ? setMidnight(b.field_end_date)
+      : new Date(b.field_end_date)
+    : setMidnight(b.field_date);
 
+  return endDateA - endDateB;
+}
 function useFilters(cattype) {
   $(".filters").removeClass("open");
   var firstterm = true;
@@ -2409,51 +2429,111 @@ function useFilters(cattype) {
   $(".events_list_grid").addClass("loading");
   var itscontent = $(".events_list_grid");
   itscontent.html("");
-  let urlPost;
-  if (cattype == "events") {
-    urlPost = `/g/${cattype}/?agenda=${
-      document.querySelector("main").dataset.agenda
-    }&lang=${actualLang}`;
-  } else {
-    urlPost = `/g/${cattype}/?lang=${actualLang}`;
-  }
-  $.post(urlPost, { filters: completefilters }, function (data) {
-    // Función de comparación para ordenar por fecha
-    function compararFechas(a, b) {
-      return new Date(a.field_date) - new Date(b.field_date);
-    }
+  let urlPost = `/g/${cattype}/?lang=${actualLang}`;
 
-    // Ordenar el arreglo por fecha
+  $.post(urlPost, { filters: completefilters }, function (data) {
+    // Ordenar el arreglo por fecha de finalización
     data.sort(compararFechas);
     if (data.length > 0) {
       for (var i = 0; i < data.length; i++) {
         let event = data[i];
         var thumbnail = data[i].field_cover_image;
-        const dateStart = new Date(event.field_date);
-        const optionsdateStart = {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        };
-        const dateFormatteddateStart = dateStart.toLocaleDateString(
-          "es-ES",
-          optionsdateStart
-        );
-        const dateEnd = new Date(event.field_end_date);
-        const optionsdateEnd = {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        };
-        const dateFormatteddateEnd = dateEnd.toLocaleDateString(
-          "es-ES",
-          optionsdateEnd
-        );
-
         if (thumbnail == "") {
           thumbnail =
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
         }
+
+        // Asegurarse de que las fechas se interpretan correctamente
+        const dateStart = setMidnight(event.field_date);
+
+        // Manejar la fecha de fin de manera diferente si no incluye una hora
+        let dateEnd;
+        if (event.field_end_date.length === 10) {
+          // Verificar si el formato es solo de fecha (YYYY-MM-DD)
+          dateEnd = setMidnight(event.field_end_date);
+          dateEnd.setDate(dateEnd.getDate() + 1); // Mover la fecha de fin al día siguiente
+        } else {
+          dateEnd = setMidnight(event.field_end_date);
+        }
+
+        const options = {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        };
+
+        // Obtener la fecha actual
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let dateText = "";
+
+        if (actualLang === "es") {
+          const dateFormattedStart = dateStart.toLocaleDateString(
+            "es-ES",
+            options
+          );
+          const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
+          console.log("🚀 ~ dateFormattedEnd:", dateFormattedEnd);
+          const alText = "al";
+          const hastaElText = "Hasta el";
+
+          // Condicionales para construir el texto de fecha en español
+          if (!event.field_end_date) {
+            // 1. No tiene fecha final -> Tomar la fecha de inicio.
+            dateText = dateFormattedStart;
+          } else if (dateStart.getTime() === dateEnd.getTime()) {
+            // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+            dateText = dateFormattedEnd;
+          } else if (dateStart < today) {
+            // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
+            dateText = `${hastaElText} ${dateFormattedEnd}`;
+          } else {
+            // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
+            dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
+          }
+        } else if (actualLang === "en") {
+          const dateFormattedStart = dateStart.toLocaleDateString(
+            "en-US",
+            options
+          );
+          const dateFormattedEnd = dateEnd.toLocaleDateString("en-US", options);
+          console.log(dateEnd);
+
+          // Condicionales para construir el texto de fecha en inglés
+          if (!event.field_end_date) {
+            // 1. No tiene fecha final -> Tomar la fecha de inicio.
+            dateText = dateFormattedStart;
+          } else if (dateStart.getTime() === dateEnd.getTime()) {
+            // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+            dateText = dateFormattedEnd;
+          } else if (dateStart < today) {
+            // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Until".
+            dateText = `Until ${dateFormattedEnd}`;
+          } else if (dateStart.toDateString() === dateEnd.toDateString()) {
+            // 4. Si las fechas son el mismo día, mostrar solo una fecha.
+            dateText = dateFormattedStart;
+          } else if (dateStart.getFullYear() === dateEnd.getFullYear()) {
+            // 5. Si las fechas están en el mismo año
+            if (dateStart.getMonth() === dateEnd.getMonth()) {
+              // 5.1 Si están en el mismo mes
+              dateText = `${dateFormattedStart.split(" ")[1]}-${
+                dateFormattedEnd.split(" ")[1]
+              } ${dateFormattedStart.split(" ")[0]} ${dateStart.getFullYear()}`;
+            } else {
+              // 5.2 Si están en meses diferentes
+              dateText = `${dateFormattedStart.split(" ")[0]} ${
+                dateFormattedStart.split(" ")[1]
+              } to ${dateFormattedEnd.split(" ")[0]} ${
+                dateFormattedEnd.split(" ")[1]
+              } ${dateStart.getFullYear()}`;
+            }
+          } else {
+            // 6. Fechas en años diferentes
+            dateText = `${dateFormattedStart} to ${dateFormattedEnd}`;
+          }
+        }
+
         var strtemplate = `
           <li class="events_list_grid_item">
                 <a href="/${actualLang}/evento/${get_alias(event.title)}-${
@@ -2462,20 +2542,19 @@ function useFilters(cattype) {
                     <div class="single_event_img">
                         <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
                             alt="evento" class="lazyload">
-                            <h5 class="single_event_title ms700 uppercase">${
+                            <h5 class="single_event_title ms700 ">${
                               event.title
                             }</h5>
                     </div>
                     <div class="info">
                         <div class="single_event_date">
-                        <img src="images/eventosIcono.svg" alt="tag">
-                        ${dateFormatteddateStart}  ${`- ${dateFormatteddateEnd}`}
+                        ${dateText}
                         </div>
                         <div class="txt">
                                 <h6 class="single_event_place ms700"><svg width="23" height="33" viewBox="0 0 23 33" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_35_2)"><path d="M22.61 8.62C20.94 2.29 14.48 -1.36 8.19999 0.48C3.45999 1.87 0.0799887 6.3 -1.13287e-05 11.24C-0.0300113 13 0.339989 14.68 0.919989 16.32C1.84999 18.95 3.19999 21.37 4.75999 23.67C6.63999 26.45 8.57999 29.19 10.5 31.94C10.69 32.22 10.98 32.42 11.23 32.66H11.74C11.99 32.42 12.26 32.21 12.47 31.94C12.82 31.5 13.12 31.02 13.44 30.55C15.2 28 17 25.47 18.71 22.88C20.18 20.65 21.42 18.29 22.24 15.73C22.99 13.39 23.24 11.02 22.6 8.61L22.61 8.62ZM20.39 15.26C19.57 17.76 18.32 20.06 16.86 22.23C15.14 24.8 13.35 27.32 11.58 29.86C11.56 29.89 11.53 29.92 11.47 29.99C10.38 28.45 9.30999 26.95 8.23999 25.43C6.55999 23.03 4.92999 20.59 3.65999 17.93C2.88999 16.32 2.28999 14.67 2.00999 12.89C1.35999 8.75 3.63999 4.5 7.44999 2.79C13.09 0.25 19.45 3.41 20.83 9.44C21.28 11.42 21.01 13.35 20.38 15.25L20.39 15.26Z" fill="#35498F"/><path d="M11.51 5.74C8.34002 5.73 5.75002 8.3 5.74002 11.45C5.73002 14.62 8.30002 17.21 11.45 17.22C14.62 17.23 17.21 14.66 17.22 11.51C17.23 8.34 14.67 5.75 11.51 5.74ZM11.47 15.31C9.38002 15.31 7.66002 13.58 7.66002 11.49C7.66002 9.38 9.38002 7.65 11.49 7.66C13.6 7.66 15.32 9.39 15.32 11.5C15.32 13.61 13.59 15.33 11.48 15.32L11.47 15.31Z" fill="#35498F"/></g><defs><clipPath id="clip0_35_2"><rect width="22.97" height="32.66" fill="white"/></clipPath></defs></svg>${
                                   event.field_place
                                 }</h6>
-                                    <div class="btn event-view uppercase ms900">${
+                                    <div class="btn event-view  ms900">${
                                       actualLang == "es"
                                         ? "Ver evento"
                                         : "View EVENT"
@@ -2614,7 +2693,7 @@ async function getOfertasRel(atractivo, localidad, zona, alojamiento) {
                 </div>
                 <strong class="ms900">${plan.title}</strong>
                 <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
-                <small class="link ms900 uppercase">Ver oferta</small>
+                <small class="link ms900 ">Ver oferta</small>
               </div>
             </a>`;
           ofertasRelgrid.innerHTML += template;
@@ -2666,13 +2745,461 @@ function addExternalLinkIcon() {
 
 document.addEventListener("DOMContentLoaded", addExternalLinkIcon);
 
-if (document.querySelector("#toggleFiltersEvents")) {
-  document
-    .querySelector("#toggleFiltersEvents")
-    .addEventListener("click", () => {
-      document.querySelector(".filters").classList.toggle("active");
-    });
-  document.querySelector("#closeFilters").addEventListener("click", () => {
-    document.querySelector(".filters").classList.toggle("active");
+document.querySelector("#formBtn").addEventListener("click", () => {
+  document.querySelectorAll(".search_form").forEach((el) => {
+    el.classList.toggle("active");
   });
+});
+
+function formatDates(event, dateStart, dateEnd, actualLang, options) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Establecemos la hora de la fecha actual a medianoche para comparaciones
+
+  let dateText = "";
+
+  if (actualLang === "es") {
+    const dateFormattedStart = dateStart.toLocaleDateString("es-ES", options);
+    const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
+    const alText = "al";
+    const hastaElText = "Hasta el";
+
+    // Condicionales para construir el texto de fecha en español
+    if (!event.field_end_date) {
+      // 1. No tiene fecha final -> Tomar la fecha de inicio.
+      dateText = dateFormattedStart;
+    } else if (dateStart.getTime() === dateEnd.getTime()) {
+      // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+      dateText = dateFormattedEnd;
+    } else if (dateStart < today) {
+      // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
+      dateText = `${hastaElText} ${dateFormattedEnd}`;
+    } else {
+      // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
+      dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
+    }
+  } else if (actualLang === "en") {
+    const dateFormattedStart = dateStart.toLocaleDateString("en-US", options);
+    const dateFormattedEnd = dateEnd.toLocaleDateString("en-US", options);
+
+    // Condicionales para construir el texto de fecha en inglés
+    if (!event.field_end_date) {
+      // 1. No tiene fecha final -> Tomar la fecha de inicio.
+      dateText = dateFormattedStart;
+    } else if (dateStart.getTime() === dateEnd.getTime()) {
+      // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+      dateText = dateFormattedEnd;
+    } else if (dateStart < today) {
+      // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Until".
+      dateText = `Until ${dateFormattedEnd}`;
+    } else if (dateStart.toDateString() === dateEnd.toDateString()) {
+      // 4. Si las fechas son el mismo día, mostrar solo una fecha.
+      dateText = dateFormattedStart;
+    } else if (dateStart.getFullYear() === dateEnd.getFullYear()) {
+      // 5. Si las fechas están en el mismo año
+      if (dateStart.getMonth() === dateEnd.getMonth()) {
+        // 5.1 Si están en el mismo mes
+        dateText = `${dateFormattedStart.split(" ")[1]}-${
+          dateFormattedEnd.split(" ")[1]
+        } ${dateFormattedStart.split(" ")[0]} ${dateStart.getFullYear()}`;
+      } else {
+        // 5.2 Si están en meses diferentes
+        dateText = `${dateFormattedStart.split(" ")[0]} ${
+          dateFormattedStart.split(" ")[1]
+        } to ${dateFormattedEnd.split(" ")[0]} ${
+          dateFormattedEnd.split(" ")[1]
+        } ${dateStart.getFullYear()}`;
+      }
+    } else {
+      // 6. Fechas en años diferentes
+      dateText = `${dateFormattedStart} to ${dateFormattedEnd}`;
+    }
+  }
+
+  return dateText;
+}
+
+function useFiltersNew(cattype) {
+  const completefilters = { selects: [] };
+
+  // Recorremos cada grupo de filtros con selects
+  document.querySelectorAll(".filtergroup.selects").forEach((group) => {
+    const filterid = group.dataset.filterid;
+    const values = [];
+    const select = group.querySelector("select");
+
+    // Si el valor seleccionado es diferente de "all", lo añadimos a los valores
+    if (select && select.value !== "all") {
+      values.push(select.value);
+    }
+
+    const filterGroup = {
+      filter: filterid,
+      value: values.length > 0 ? values : ["all"], // Si no hay valores, añadimos "all"
+    };
+
+    completefilters.selects.push(filterGroup);
+  });
+
+  const eventsListGrid = document.querySelector(".events_list_grid");
+  eventsListGrid.classList.add("loading");
+  eventsListGrid.innerHTML = "";
+
+  // Construcción del URL para la consulta
+  let urlPost = `/g/${cattype}/?agenda=${
+    document.querySelector("main").dataset.agenda
+  }&lang=${actualLang}`;
+
+  // Hacer la consulta con Fetch, enviando los filtros como JSON
+  fetch(urlPost, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ filters: completefilters }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Ordenar los resultados por la fecha de finalización
+      data.sort(compararFechas);
+
+      if (data.length > 0) {
+        data.forEach((event) => {
+          const thumbnail =
+            event.field_cover_image ||
+            "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
+          const dateStart = setMidnight(event.field_date);
+
+          const dateEnd = event.field_end_date
+            ? setMidnight(`${event.field_end_date}T20:00:02`)
+            : dateStart;
+          console.log(`${event.field_end_date}T20:00:02`);
+          // Formatear las fechas según el idioma
+          const options = { month: "long", day: "numeric", year: "numeric" };
+          const dateText = formatDates(
+            event,
+            dateStart,
+            dateEnd,
+            actualLang,
+            options
+          );
+
+          // Crear un objeto Date
+          const date = new Date(dateStart);
+
+          // Obtener una fecha en formato legible (DD/MM/YYYY o como prefieras)
+          const day = date.getDate();
+          const month = date.getMonth() + 1; // Los meses empiezan en 0, así que sumamos 1
+          const year = date.getFullYear();
+
+          // Formatear la fecha a "DD/MM/YYYY"
+          const formattedDate = `${year}-${month}-${day}`;
+
+          // Crear un objeto Date
+          const dateEndN = new Date(dateEnd);
+          // Obtener una fecha en formato legible (DD/MM/YYYY o como prefieras)
+          const dayEnd = dateEndN.getDate();
+          const monthEnd = dateEndN.getMonth() + 1; // Los meses empiezan en 0, así que sumamos 1
+          const yearEnd = dateEndN.getFullYear();
+
+          // Formatear la fecha a "DD/MM/YYYY"
+          const formattedDateEnd = `${yearEnd}-${monthEnd}-${dayEnd}`;
+
+          const strtemplate = `
+            <li class="events_list_grid_item" data-date="${formattedDate}" data-dateEnd="${formattedDateEnd}" data-category="${
+            event.field_categoria_evento
+          }" data-zone="${event.field_zona_relacionada}">
+              <a href="/${actualLang}/evento/${get_alias(event.title)}-${
+            event.nid
+          }" class="single_event">
+                <div class="single_event_img">
+                  <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
+                    alt="evento" class="lazyload">
+                  <h5 class="single_event_title ms700">${event.title}</h5>
+                </div>
+                <div class="info">
+                  <div class="single_event_date">${dateText}</div>
+                  <div class="txt">
+                    <h6 class="single_event_place ms700">
+                      <svg width="23" height="33" viewBox="0 0 23 33" fill="none">
+                        <g clip-path="url(#clip0_35_2)">
+                          <path d="M22.61 8.62C20.94 2.29 14.48 -1.36 8.19999 0.48C3.45999 1.87 0.0799887 6.3 -1.13287e-05 11.24C-0.0300113 13 0.339989 14.68 0.919989 16.32C1.84999 18.95 3.19999 21.37 4.75999 23.67C6.63999 26.45 8.57999 29.19 10.5 31.94C10.69 32.22 10.98 32.42 11.23 32.66H11.74C11.99 32.42 12.26 32.21 12.47 31.94C12.82 31.5 13.12 31.02 13.44 30.55C15.2 28 17 25.47 18.71 22.88C20.18 20.65 21.42 18.29 22.24 15.73C22.99 13.39 23.24 11.02 22.6 8.61L22.61 8.62ZM20.39 15.26C19.57 17.76 18.32 20.06 16.86 22.23C15.14 24.8 13.35 27.32 11.58 29.86C11.56 29.89 11.53 29.92 11.47 29.99C10.38 28.45 9.30999 26.95 8.23999 25.43C6.55999 23.03 4.92999 20.59 3.65999 17.93C2.88999 16.32 2.28999 14.67 2.00999 12.89C1.35999 8.75 3.63999 4.5 7.44999 2.79C13.09 0.25 19.45 3.41 20.83 9.44C21.28 11.42 21.01 13.35 20.38 15.25L20.39 15.26Z" fill="#35498F"/>
+                          <path d="M11.51 5.74C8.34002 5.73 5.75002 8.3 5.74002 11.45C5.73002 14.62 8.30002 17.21 11.45 17.22C14.62 17.23 17.21 14.66 17.22 11.51C17.23 8.34 14.67 5.75 11.51 5.74ZM11.47 15.31C9.38002 15.31 7.66002 13.58 7.66002 11.49C7.66002 9.38 9.38002 7.65 11.49 7.66C13.6 7.66 15.32 9.39 15.32 11.5C15.32 13.61 13.59 15.33 11.48 15.32L11.47 15.31Z" fill="#35498F"/>
+                        </g>
+                      </svg>${event.field_place}
+                    </h6>
+                    <div class="btn event-view ms900">${
+                      actualLang == "es" ? "Ver evento" : "View EVENT"
+                    }</div>
+                  </div>
+                </div>
+              </a>
+            </li>`;
+          eventsListGrid.insertAdjacentHTML("beforeend", strtemplate);
+        });
+      } else {
+        eventsListGrid.innerHTML =
+          '<p class="noresults">No hemos encontrado resultados</p>';
+      }
+
+      eventsListGrid.classList.remove("loading");
+
+      // Asigna eventos para lazy loading de imágenes, si es necesario
+      lazyImages();
+    });
+}
+
+function normalizeDate(dateString) {
+  let dateParts = dateString.split("-");
+  let year = dateParts[0];
+  let month = dateParts[1].padStart(2, "0");
+  let day = dateParts[2].padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function updateSelectOptions(selectElement, validValues) {
+  let options = selectElement.querySelectorAll("option");
+  options.forEach((option) => {
+    if (option.value === "" || validValues.includes(option.value)) {
+      option.disabled = false; // Mostrar opción si es válida o es la opción por defecto
+    } else {
+      option.disabled = true; // Ocultar opción si no hay eventos visibles que coincidan
+    }
+  });
+}
+
+function filterEvents() {
+  let searchQuery = document.getElementById("searchEvents").value.toLowerCase();
+  let selectedDateStart = document.getElementById("dateStart").value;
+  let selectedDateEnd = document.getElementById("dateEnd").value; // Nueva fecha de finalización
+  let selectedCategory = document.querySelector(
+    'select[name="categorias_eventos"]'
+  ).value;
+  let selectedZone = document.querySelector('select[name="test_zona"]').value;
+
+  let events = document.querySelectorAll(".events_list_grid_item");
+  let visibleCategories = new Set();
+  let visibleZones = new Set();
+
+  events.forEach(function (blogItem) {
+    let eventTitle = blogItem
+      .querySelector(".single_event_title")
+      .textContent.toLowerCase();
+    let eventDate = normalizeDate(
+      blogItem.getAttribute("data-date").replace(/\//g, "-")
+    );
+    let eventDateEnd = normalizeDate(
+      blogItem.getAttribute("data-dateend").replace(/\//g, "-")
+    );
+
+    let eventCategory = blogItem.getAttribute("data-category");
+    let eventZone = blogItem.getAttribute("data-zone");
+
+    // Condición de visibilidad: título, fechas (rango), categoría y zona
+    let matchesTitle = eventTitle.includes(searchQuery);
+
+    let matchesDate =
+      (!selectedDateStart ||
+        new Date(eventDate) >= new Date(selectedDateStart)) &&
+      (!selectedDateEnd || new Date(eventDateEnd) <= new Date(selectedDateEnd));
+
+    let matchesCategory =
+      !selectedCategory || eventCategory === selectedCategory;
+    let matchesZone = !selectedZone || eventZone === selectedZone;
+
+    if (matchesTitle && matchesDate && matchesCategory && matchesZone) {
+      console.log(blogItem);
+
+      blogItem.style.display = ""; // Mostrar si cumple las condiciones
+      visibleCategories.add(eventCategory); // Añadir categoría visible
+      visibleZones.add(eventZone); // Añadir zona visible
+    } else {
+      blogItem.style.display = "none"; // Ocultar si no cumple las condiciones
+    }
+  });
+
+  // Actualizar opciones en los selects de categorías y zonas
+  updateSelectOptions(
+    document.querySelector('select[name="categorias_eventos"]'),
+    Array.from(visibleCategories)
+  );
+  updateSelectOptions(
+    document.querySelector('select[name="test_zona"]'),
+    Array.from(visibleZones)
+  );
+}
+
+if (document.querySelector(".eventsnew")) {
+  document.querySelectorAll(".filtergroup").forEach((group) => {
+    const itscontent = group.querySelector(".content");
+    const filterid = group.dataset.filterid;
+
+    console.log(filterid);
+
+    // Hacer la consulta para obtener los valores del filtro
+    fetch(`/hoteles/g/filter/?lang=${actualLang}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ filter: filterid }),
+    })
+      .then((response) => response.json())
+      .then((filterData) => {
+        // Si no hay datos para este filtro, no continuar
+        if (!filterData || filterData.length === 0) {
+          console.log(
+            `El filtro con ID ${filterid} no tiene datos, no se mostrará.`
+          );
+          return; // Salir de la ejecución si no hay valores
+        }
+
+        // Hacer la consulta de eventos
+        fetch(`/g/events/?lang=${actualLang}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            filters: {
+              selects: [
+                { filter: filterid, value: filterData.map((item) => item.tid) },
+              ],
+            },
+          }),
+        })
+          .then((response) => response.json())
+          .then((eventsData) => {
+            // Crear los dos arreglos separados
+            const categorias = eventsData.map(
+              (event) => event.field_categoria_evento
+            );
+            const zonas = eventsData.map(
+              (event) => event.field_zona_relacionada
+            );
+
+            // Si quieres obtener los valores únicos en cada uno de los arreglos
+            const categoriasUnicas = [...new Set(categorias)];
+            const zonasUnicas = [...new Set(zonas)];
+
+            const selectElement = document.createElement("select");
+            selectElement.name = filterid;
+            selectElement.classList.add("filterselect", "fw500");
+
+            // Agregar opción vacía al principio
+            const emptyOption = document.createElement("option");
+            emptyOption.value = ""; // Valor vacío
+            emptyOption.innerHTML =
+              actualLang === "es"
+                ? "Selecciona una opción"
+                : "Select an option";
+            selectElement.appendChild(emptyOption);
+
+            filterData.forEach((item) => {
+              if (
+                categoriasUnicas.some((el) => el == item.tid) ||
+                zonasUnicas.some((el) => el == item.tid)
+              ) {
+                const optionElement = document.createElement("option");
+                optionElement.value = item.tid;
+                optionElement.innerHTML = item.name;
+                if (group.classList.contains("color")) {
+                  optionElement.style.backgroundColor = `#${item.field_color}`;
+                }
+
+                selectElement.appendChild(optionElement);
+              }
+            });
+
+            itscontent.appendChild(selectElement);
+            selectElement.addEventListener("change", filterEvents);
+            // Asignar los eventos de entrada y cambio a los filtros
+            document
+              .getElementById("searchEvents")
+              .addEventListener("input", filterEvents);
+            document
+              .getElementById("dateStart")
+              .addEventListener("change", filterEvents);
+            document
+              .getElementById("dateEnd")
+              .addEventListener("change", filterEvents);
+          })
+          .catch((error) =>
+            console.error("Error fetching events data:", error)
+          );
+      })
+      .catch((error) => console.error("Error fetching filter data:", error))
+      .finally(() => {
+        group.classList.remove("loading");
+      });
+  });
+  useFiltersNew("events");
+}
+function filterBlogs() {
+  let searchQuery = document.getElementById("searchEvents").value.toLowerCase();
+  let selectedDateStart = document.getElementById("dateStart").value;
+  let selectedDateEnd = document.getElementById("dateEnd").value; // Nueva fecha de finalización
+  let selectedCategory = document.querySelector("select").value;
+
+  let blogs = document.querySelectorAll(".blog_list .repeater .blog_item");
+  let visibleCategories = new Set();
+
+  blogs.forEach(function (eventItem) {
+    let blogtitle = eventItem
+      .querySelector(".desc h2")
+      .textContent.toLowerCase();
+    let blogDate = normalizeDate(
+      eventItem.getAttribute("data-date").replace(/\//g, "-")
+    );
+    let blogDateEnd = normalizeDate(
+      eventItem.getAttribute("data-date").replace(/\//g, "-")
+    );
+    const soloFecha = blogDate.split("T")[0];
+
+    let blogCategory = eventItem.getAttribute("data-productid");
+
+    // Condición de visibilidad: título, fechas (rango), categoría y zona
+    let matchesTitle = blogtitle.includes(searchQuery);
+
+    let matchesDate =
+      (!selectedDateStart && !selectedDateEnd) || // Sin rango de fechas
+      (selectedDateStart &&
+        !selectedDateEnd &&
+        new Date(soloFecha) >= new Date(selectedDateStart)) || // Solo fecha inicial
+      (!selectedDateStart &&
+        selectedDateEnd &&
+        new Date(soloFecha) <= new Date(selectedDateEnd)) || // Solo fecha final
+      (selectedDateStart &&
+        selectedDateEnd && // Ambas fechas
+        new Date(soloFecha) >= new Date(selectedDateStart) &&
+        new Date(soloFecha) <= new Date(selectedDateEnd));
+
+    let matchesCategory =
+      !selectedCategory || blogCategory === selectedCategory;
+
+    if (matchesTitle && matchesDate && matchesCategory) {
+      eventItem.style.display = ""; // Mostrar si cumple las condiciones
+      visibleCategories.add(blogCategory); // Añadir categoría visible
+    } else {
+      eventItem.style.display = "none"; // Ocultar si no cumple las condiciones
+    }
+  });
+
+  // // Actualizar opciones en los selects de categorías y zonas
+  updateSelectOptions(
+    document.querySelector('select[name="categorias_blog"]'),
+    Array.from(visibleCategories)
+  );
+}
+
+if (document.querySelector(".blog")) {
+  // Asignar los eventos de entrada y cambio a los filtros
+  document
+    .getElementById("searchEvents")
+    .addEventListener("input", filterBlogs);
+  document.getElementById("dateStart").addEventListener("change", filterBlogs);
+  document.getElementById("dateEnd").addEventListener("change", filterBlogs);
+  document
+    .querySelector(`select[name="categorias_blog"]`)
+    .addEventListener("change", filterBlogs);
 }
